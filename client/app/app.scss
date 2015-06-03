@@ -1,0 +1,31 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$fa-font-path: "/bower_components/font-awesome/fonts";
+
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap';
+@import 'font-awesome/scss/font-awesome';
+
+$blue: #3498DB;
+$dark-blue: #2980B9;
+$darker-blue: #2C3E50;
+$red: #E74C3C;
+$white: #ECF0F1;
+
+/**
+ * App-wide Styles
+ */
+.browsehappy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10000;
+  background: #ccc;
+  color: #000;
+  padding-top: 20px;
+}
+
+// Component styles are injected through grunt
+// injector
+@import 'main/main.scss';
+// endinjector

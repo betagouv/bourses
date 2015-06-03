@@ -1,0 +1,27 @@
+.jumbotron {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 0;
+  background-color: $dark-blue;
+
+  h1 {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    text-shadow: 3px 4px rgba(0, 0, 0, 0.71);
+  }
+
+  ul.logos {
+    list-style: none;
+    margin: 0;
+  }
+
+  ul.logos li {
+    margin-right: 15px;
+    float: left;
+  }
+}
+
+.filler {
+  min-height: 1000px;
+}

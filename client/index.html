@@ -1,0 +1,73 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>Demande de bourses en ligne</title>
+    <meta name="description" content="Demande de bourses en ligne">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+    <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <!-- endinjector -->
+    <!-- endbuild -->
+  </head>
+  <body ng-app="boursesApp">
+    <!--[if lt IE 10]>
+    <div class="browsehappy text-center">
+      Vous utilisez un navigateur web obsolète et donc <strong>non sécurisé</strong>.
+      <br>Cette application ne fonctionne pas sur celui-ci.
+      <br><a href="http://browsehappy.com/">Mettez à jour votre navigateur</a> pour l'utiliser.
+      <br>Si vous utilisez un poste fourni par votre employeur, demandez à votre administrateur d'installer une version récente de <a href="https://www.mozilla.org/fr/firefox/new/">Mozilla Firefox</a> ou <a href="http://www.google.com/chrome/">Google Chrome</a>.
+      <br>Si vous êtes sous Windows XP (SP2), Vista, 7 ou supérieur, l'installation de Chrome peut être réalisée de manière autonome
+      <br>sans droits d'administration sur votre poste,
+      <a href="https://www.google.com/chrome/browser/index.html?standalone=1">faites-le vous-même</a> !
+    </div>
+    <![endif]-->
+
+    <div ui-view=""></div>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js({.tmp,client}) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-aria/angular-aria.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/lodash/lodash.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/ngstorage/ngStorage.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
+      <!-- endbower -->
+    <!-- endbuild -->
+
+    <script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
+    <script src="bower_components/moment/locale/fr.js"></script>
+
+    <!-- build:js({.tmp,client}) app/app.js -->
+    <script src="app/app.js"></script>
+      <!-- injector:js -->
+      <script src="app/main/main.js"></script>
+      <script src="components/auth/auth.service.js"></script>
+      <script src="components/auth/user.service.js"></script>
+      <!-- endinjector -->
+    <!-- endbuild -->
+</body>
+</html>
