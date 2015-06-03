@@ -31,6 +31,30 @@
     </div>
   </div>
 
+  <div class="form-group required"
+    ng-class="{
+      'has-error': infoForm.dateDeNaissance.$invalid && infoForm.$submitted
+    }">
+    <label class="control-label" for="date-de-naissance">
+      Date de naissance <span class="small">au format jour/mois/année</span>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      name="dateDeNaissance"
+      id="date-de-naissance"
+      required
+      ng-model="identite.dateNaissance"
+      input-date
+      date-autocomplete
+      placeholder="JJ/MM/AAAA"
+      aria-describedby="help-date-de-naissance">
+    <div ng-messages="infoForm.dateDeNaissance.$error" ng-if="infoForm.$submitted">
+      <p class="help-block" id="help-date-de-naissance" ng-message='inputDate'>Veuillez utiliser le format JJ/MM/AAAA. Par exemple : 14/09/1989.</p>
+      <p class="help-block" id="help-date-de-naissance" ng-message='required'>Ce champ est obligatoire.</p>
+    </div>
+  </div>
+
   <button type="submit" name="submit" alt="Valider" class="btn btn-success">
       Valider
   </button>
