@@ -27,5 +27,6 @@ $white: #ECF0F1;
 
 // Component styles are injected through grunt
 // injector
+@import 'demande/demande.scss';
 @import 'main/main.scss';
 // endinjector

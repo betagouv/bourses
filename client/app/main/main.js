@@ -5,6 +5,7 @@ angular.module('boursesApp')
     $stateProvider
       .state('main', {
         url: '/',
-        templateUrl: 'app/main/main.html'
+        templateUrl: 'app/main/main.html',
+        abstract: true
       });
   });
