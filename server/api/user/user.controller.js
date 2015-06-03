@@ -24,20 +24,6 @@ exports.index = function(req, res) {
 };
 
 /**
- * Creates a new user
- */
-exports.create = function (req, res, next) {
-  var newUser = new User(req.body);
-  newUser.provider = 'local';
-  newUser.unconfirmed = true;
-  newUser.save(function(err, user) {
-    if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
-  });
-};
-
-/**
  * Get a single user
  */
 exports.show = function (req, res, next) {
@@ -47,41 +33,6 @@ exports.show = function (req, res, next) {
     if (err) return next(err);
     if (!user) return res.send(401);
     res.json(user.profile);
-  });
-};
-
-/**
- * Deletes a user
- * restriction: 'admin'
- */
-exports.destroy = function(req, res) {
-  User.findById(req.params.id, function(err, user) {
-    if(err) return handleError(req, res, err);
-    if (user) {
-      user.remove();
-    }
-    return res.send(204);
-  });
-};
-
-/**
- * Change a users password
- */
-exports.changePassword = function(req, res, next) {
-  var userId = req.user._id;
-  var oldPass = String(req.body.oldPassword);
-  var newPass = String(req.body.newPassword);
-
-  User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
-      user.password = newPass;
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.send(200);
-      });
-    } else {
-      res.send(403);
-    }
   });
 };
 
@@ -108,20 +59,6 @@ exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
 
-exports.resetPassword = function(req, res) {
-  User.findById(req.params.id, '+newPasswordToken', function(err, user) {
-    if (err) return handleError(req, res, err);
-    if (!user) return res.sendStatus(404);
-    if (!req.params.secret) return res.sendStatus(400);
-    if (req.params.secret !== user.newPasswordToken) return res.sendStatus(400);
-    user.password = req.body.newPassword;
-    user.newPasswordToken = '';
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      return res.sendStatus(200);
-    })
-  })
-};
 
 function handleError(req, res, err) {
   req.log.error(err);

@@ -6,5 +6,8 @@ module.exports = {
   // MongoDB connection options
   mongo: {
     uri: 'mongodb://localhost/bourses-dev'
-  }
+  },
+
+  // Should we populate the DB with sample data?
+  seedDB: true
 };

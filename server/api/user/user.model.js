@@ -100,16 +100,6 @@ UserSchema
       next();
   });
 
-
-/**
- * Pre-delete hook
- */
-UserSchema
-  .pre('remove', function(next) {
-    Request.remove({user: this}).exec();
-    next();
-  });
-
 /**
  * Methods
  */
