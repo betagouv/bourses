@@ -5,6 +5,7 @@ public
 .idea
 client/bower_components
 dist
+ecosystem.json
 server/config/local.env.js
 
 #OSX
