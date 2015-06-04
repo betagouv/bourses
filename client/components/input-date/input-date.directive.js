@@ -10,7 +10,7 @@ angular.module('boursesApp').directive('inputDate', function() {
           return '';
         }
 
-        var result = moment(viewValue, 'DD/MM/YYYY', true);
+        var result = moment(viewValue, ['DD/MM/YYYY', 'D/MM/YYYY', 'D/M/YYYY', 'DD/M/YYYY'], true);
 
         var isValid = result.isValid();
         ctrl.$setValidity('inputDate', isValid);
