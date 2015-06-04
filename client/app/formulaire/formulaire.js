@@ -17,7 +17,7 @@ angular.module('boursesApp')
       .state('main.formulaire.connection', {
         url: '',
         templateUrl: 'app/formulaire/connection/connection.html',
-        controller: function() {}
+        controller: 'ConnectionCtrl'
       })
       .state('main.formulaire.modifications', {
         url: '',

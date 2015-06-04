@@ -17,7 +17,7 @@
     "font-awesome": "4.3.0",
     "lodash": "3.9.3",
     "angular-ui-router": "0.2.15",
-    "ngstorage": "0.3.4",
-    "moment": "2.10.3"
+    "moment": "2.10.3",
+    "a0-angular-storage": "~0.0.11"
   }
 }

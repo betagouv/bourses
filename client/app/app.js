@@ -6,7 +6,7 @@ angular.module('boursesApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ngStorage',
+  'angular-storage',
   'ngMessages'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $urlMatcherFactoryProvider) {

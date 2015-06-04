@@ -1,1 +1,28 @@
 <h1>Connection</h1>
+
+<form name="connectionForm" ng-submit="submit(connectionForm)" novalidate>
+
+  <div class="form-group required" ng-class="{'has-error': connectionForm.numeroFiscal.$invalid && connectionForm.$submitted}">
+    <label for="numeroFiscal" class="control-label">Numéro fiscal</label>
+    <input id="numeroFiscal" type="text" name="numeroFiscal" class="form-control" ng-model="credentials.numeroFiscal" required>
+    <div ng-messages="connectionForm.numeroFiscal.$error" ng-if="connectionForm.$submitted">
+      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
+    </div>
+  </div>
+
+  <div class="form-group required" ng-class="{'has-error': connectionForm.referenceAvis.$invalid && connectionForm.$submitted}">
+    <label for="referenceAvis" class="control-label">Référence de votre avis</label>
+    <input id="referenceAvis" type="text" name="referenceAvis" class="form-control" ng-model="credentials.referenceAvis" required>
+    <div ng-messages="connectionForm.referenceAvis.$error" ng-if="connectionForm.$submitted">
+      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
+    </div>
+  </div>
+
+
+  <div ng-if="error">
+    <p class="text-danger">{{error}}</p>
+  </div>
+
+  <button type="submit" name="submit" alt="Valider" class="btn btn-success">
+      Valider
+  </button>

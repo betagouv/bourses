@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q, $sessionStorage) {
+  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
       currentUser = User.get();
@@ -46,7 +46,7 @@ angular.module('boursesApp')
        */
       logout: function() {
         $cookieStore.remove('token');
-        $sessionStorage.$reset();
+
         currentUser = {};
       },
 
