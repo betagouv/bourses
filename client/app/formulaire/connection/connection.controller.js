@@ -6,12 +6,10 @@ angular.module('boursesApp')
     var steps = store.get('steps');
 
     $scope.submit = function(form) {
-      $scope.btnText = 'En cours...';
+      $scope.loading = true;
       store.set('credentials', $scope.credentials);
-      steps.connection = form.$valid;
 
       if (form.$valid) {
-        store.set('steps', steps);
         $http.get('/api/connection/svair', {params: $scope.credentials})
         .success(function(data) {
           store.set('svair-data', data);
@@ -22,6 +20,8 @@ angular.module('boursesApp')
         })
         .finally(function() {
           $scope.loading = false;
+          steps.connection = form.$valid;
+          store.set('steps', steps);
         });
       }
     };
