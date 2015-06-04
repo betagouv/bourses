@@ -17,7 +17,7 @@ var passport = require('passport');
 var bunyan = require('bunyan');
 
 var logger = bunyan.createLogger({
-  name: 'impact-dev',
+  name: 'bourses',
   streams: [
     { stream: process.stdout }
   ],
