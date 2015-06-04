@@ -1,0 +1,34 @@
+#status-buttons {
+  a {
+    color: black;
+    display:inline-block;
+    font-size: 12px;
+    margin-right: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration:none;
+    }
+
+    &.active span {
+      background: $red;
+      color: white;
+    }
+  }
+  span {
+    background: $white;
+    display: block;
+    height: 30px;
+    margin: 0 auto 10px;
+    padding-top: 5px;
+    width: 30px;
+    border-radius: 50%;
+  }
+}
+
+
+/* we will style the span as the circled number */
+
+/* active buttons turn light green-blue*/
