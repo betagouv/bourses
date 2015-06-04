@@ -1,17 +1,16 @@
 <!-- Jumbotron -->
 <div class="jumbotron">
+  <div class="container">
+    <div id="logos-container">
+      <ul class="logos">
+        <li><img src="assets/images/sgmap-horiz.png"></li>
+        <li ng-if="isLoggedIn()"><a ui-sref="main.admin" title="Adninistration"><img src="assets/images/men-horiz.png"></li></a>
+        <li ng-if="!isLoggedIn()"><a ui-sref="main.login" title="Se connecter"><img src="assets/images/men-horiz.png"></li></a>
+      </ul>
+    </div>
 
-  <div class="pull-right">
-    <ul class="logos">
-      <li><img src="assets/images/sgmap-horiz.png"></li>
-      <li ng-if="isLoggedIn()"><a ui-sref="main.admin" title="Adninistration"><img src="assets/images/men-horiz.png"></li></a>
-      <li ng-if="!isLoggedIn()"><a ui-sref="main.login" title="Se connecter"><img src="assets/images/men-horiz.png"></li></a>
-    </ul>
+    <h1>Demande de bourse de collège</h1>
   </div>
-
-  <div class="clearfix"></div>
-
-  <h1>Demande de bourse de collège en ligne</h1>
 </div>
 <!-- End Jumbotron -->
 

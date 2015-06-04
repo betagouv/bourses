@@ -1,24 +1,31 @@
 .jumbotron {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 10px;
   margin-bottom: 0;
   background-color: $dark-blue;
+  background-image: url('/assets/images/garden.jpg');
+  background-position: center left;
 
   h1 {
-    font-size: 50px;
+    font-size: 45px;
     color: white;
-    text-align: center;
-    text-shadow: 3px 4px rgba(0, 0, 0, 0.71);
+    text-align: left;
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);
   }
 
   ul.logos {
+    display: inline-block;
     list-style: none;
+    padding: 0;
     margin: 0;
+
+    li {
+      float: left;
+    }
   }
 
-  ul.logos li {
-    margin-right: 15px;
-    float: left;
+  #logos-container {
+    line-height: 0;
+    margin-bottom: 100px;
   }
 }
 
@@ -40,4 +47,8 @@ fieldset {
     padding-left: 5px;
     padding-right: 25px;
   }
+}
+
+h1 {
+  font-size: 30px;
 }
