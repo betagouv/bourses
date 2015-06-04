@@ -21,7 +21,8 @@
     "mongoose": "^4.0.4",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
-    "serve-favicon": "^2.2.1"
+    "serve-favicon": "^2.2.1",
+    "svair-api": "^1.0.0"
   },
   "devDependencies": {
     "connect-livereload": "0.5.3",
