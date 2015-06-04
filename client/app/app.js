@@ -7,7 +7,8 @@ angular.module('boursesApp', [
   'ui.router',
   'ui.bootstrap',
   'angular-storage',
-  'ngMessages'
+  'ngMessages',
+  'angular-ladda'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $urlMatcherFactoryProvider) {
     moment.locale('fr');

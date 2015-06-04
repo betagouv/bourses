@@ -26,4 +26,13 @@
     width: 30px;
     border-radius: 50%;
   }
+
+  .muted {
+    color: #DEDEDE;
+    cursor: default;
+
+    span {
+      background: whitesmoke;
+    }
+  }
 }

@@ -6,7 +6,7 @@ angular.module('boursesApp')
       .state('main.formulaire', {
         url: '',
         templateUrl: 'app/formulaire/layout.html',
-        controller: function() {},
+        controller: 'LayoutCtrl',
         abstract: true
       })
       .state('main.formulaire.identite-enfant', {
@@ -15,13 +15,13 @@ angular.module('boursesApp')
         controller: 'IdentiteEnfantCtrl'
       })
       .state('main.formulaire.connection', {
-        url: '',
+        url: 'connection',
         templateUrl: 'app/formulaire/connection/connection.html',
         controller: 'ConnectionCtrl'
       })
       .state('main.formulaire.modifications', {
-        url: '',
+        url: 'modifications',
         templateUrl: 'app/formulaire/modifications/modifications.html',
-        controller: function() {}
+        controller: 'ModificationsCtrl'
       });
   });

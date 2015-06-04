@@ -3,8 +3,12 @@
 
         <div id="status-buttons" class="text-center">
             <a ui-sref-active="active" ui-sref="main.formulaire.identite-enfant"><span>1</span> Identité de l'enfant</a>
-            <a ui-sref-active="active" ui-sref="main.formulaire.connection"><span>2</span> Connection</a>
-            <a ui-sref-active="active" ui-sref="main.formulaire.modifications"><span>3</span> Modifications</a>
+
+            <a class="muted" ng-if="!steps.identiteEnfant"><span>2</span> Connection</a>
+            <a ui-sref-active="active" ng-if="steps.identiteEnfant" ui-sref="main.formulaire.connection"><span>2</span> Connection</a>
+
+            <a class="muted" ng-if="!steps.connection"><span>3</span> Modifications</a>
+            <a ui-sref-active="active" ng-if="steps.connection" ui-sref="main.formulaire.modifications"><span>3</span> Modifications</a>
         </div>
     </div>
 
