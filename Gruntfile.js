@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         client: 'client',
         dist: 'dist'
       },
-      port: process.env.PORT || 9000
+      port: process.env.PORT || 5000
     }
   };
 

@@ -39,6 +39,11 @@ var all = {
         safe: true
       }
     }
+  },
+
+  fc: {
+    clientId: process.env.FC_CLIENT_ID || 'fc-clientId',
+    clientSecret: process.env.FC_CLIENT_SECRET || 'fc-clientSecret'
   }
 
 };

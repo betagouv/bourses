@@ -11,8 +11,5 @@ module.exports = {
   // Should we populate the DB with sample data?
   seedDB: true,
 
-  fc: {
-    clientId: process.env.FC_CLIENT_ID,
-    clientSecret: process.env.FC_CLIENT_SECRET
-  }
+  port: 5000
 };
