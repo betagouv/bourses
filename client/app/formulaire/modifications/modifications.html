@@ -70,7 +70,7 @@
       class="form-control"
       required
       ng-disabled="!cities.length"
-      ng-options="city.nomCommune for city in cities"
+      ng-options="city.nomCommune for city in cities track by city.codeInsee"
       ng-model="identite.ville">
     </select>
   </div>

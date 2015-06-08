@@ -4,12 +4,15 @@ angular.module('boursesApp')
   .controller('ModificationsCtrl', function($scope, $http, $state, store) {
     $scope.data = store.get('svair-data');
     $scope.identite = store.get('identite-adulte');
+    $scope.cities = [$scope.identite.ville];
 
-    function refreshCities() {
+    function refreshCities(changeSelection) {
       $http.get('/api/communes/' + $scope.identite.codePostal)
         .then(function(result) {
           $scope.cities = result.data;
-          $scope.identite.ville = $scope.cities[0];
+          if (changeSelection) {
+            $scope.identite.ville = $scope.cities[0];
+          }
         }, console.error.bind(console)
         ).finally(function() {
           $scope.retrievingCities = false;
@@ -21,8 +24,8 @@ angular.module('boursesApp')
     }
 
     $scope.updateCities = function updateCities() {
-        $scope.retrievingCities = true;
-        refreshCities();
+      $scope.retrievingCities = true;
+      refreshCities(true);
     };
 
     $scope.submit = function() {
