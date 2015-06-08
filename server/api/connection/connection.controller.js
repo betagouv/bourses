@@ -25,3 +25,19 @@ exports.svair = function (req, res, next) {
       });
   }
 };
+
+exports.fc = function (req, res) {
+  if (!req.user) {
+    return res.status(404).send({
+      code: 404,
+      message: 'Utilisateur non authentifié'
+    });
+  }
+  if (!req.user.avis_ir) {
+    return res.status(404).send({
+      code: 404,
+      message: 'Données non trouvées'
+    });
+  }
+  res.send(req.user);
+};

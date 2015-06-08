@@ -15,6 +15,9 @@ var path = require('path');
 var config = require('./environment');
 var passport = require('passport');
 var bunyan = require('bunyan');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var mongoose = require('mongoose');
 
 var logger = bunyan.createLogger({
   name: 'bourses',
@@ -33,7 +36,14 @@ module.exports = function(app) {
   app.use(compression());
   app.use(methodOverride());
   app.use(cookieParser());
+  app.use(session({
+    secret: 'foobar',
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    })
+  }));
   app.use(passport.initialize());
+  app.use(passport.session());
   app.use(bodyParser.json({limit: '20mb'}));
   app.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
 
