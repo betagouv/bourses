@@ -1,4 +1,4 @@
-Bourses
+Bourse
 ======
 
-Projet de simplification des demandes de bourses
+Projet de simplification des demandes de bourse
