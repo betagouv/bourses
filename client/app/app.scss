@@ -25,6 +25,12 @@ $white: #ECF0F1;
   padding-top: 20px;
 }
 
+.help-block {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.scss';
