@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 var crypto = require('crypto');
 
 var DemandeSchema = new Schema({
-  createdAt:      { type: Date },
+  createdAt:      { type: Date, default: Date.now },
   data:           { type: String }
 });
 

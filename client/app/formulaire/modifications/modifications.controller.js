@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('ModificationsCtrl', function($scope, $http, $state, $timeout, store) {
+  .controller('ModificationsCtrl', function($scope, $http, $state, store, DemandeService) {
     $scope.data = store.get('svair-data');
     $scope.identite = store.get('identite-adulte');
-    $scope.cities = [$scope.identite.ville];
 
     function updateFormValidity(form) {
       if ($scope.cities.length === 0 && form) {
@@ -30,8 +29,9 @@ angular.module('boursesApp')
         });
     }
 
-    if ($scope.identite.codePostal) {
+    if ($scope.identite) {
       refreshCities();
+      $scope.cities = [$scope.identite.ville];
     }
 
     $scope.updateCities = function updateCities() {
@@ -42,12 +42,19 @@ angular.module('boursesApp')
     $scope.submit = function(form) {
       if ($scope.cities.length === 0 && form) {
         form.codePostal.$setValidity('notFound', false);
+      } else {
+        store.set('identite-adulte', $scope.identite);
+        $scope.loading = true;
+
+        var demande = {
+          identiteEnfant: store.get('identite-enfant'),
+          identiteAdulte: store.get('identite-enfant'),
+          data: store.get('svair-data')
+        };
+
+        DemandeService.save(demande).then(function() {
+          $state.go('main.merci');
+        });
       }
-      store.set('identite-adulte', $scope.identite);
-      $scope.loading = true;
-      $timeout(function() {
-        $scope.loading = false;
-        $state.go('main.merci');
-      }, 600);
     };
   });

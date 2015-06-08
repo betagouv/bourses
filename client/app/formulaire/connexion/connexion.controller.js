@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('ConnectionCtrl', function($scope, $http, $state, store) {
+  .controller('ConnexionCtrl', function($scope, $http, $state, store) {
     $scope.credentials = store.get('credentials');
     var steps = store.get('steps');
 
@@ -20,7 +20,7 @@ angular.module('boursesApp')
         })
         .finally(function() {
           $scope.loading = false;
-          steps.connection = form.$valid;
+          steps.connexion = form.$valid;
           store.set('steps', steps);
         });
       }

@@ -11,7 +11,7 @@ angular.module('boursesApp')
 
       if (form.$valid) {
         store.set('steps', steps);
-        $state.go('main.formulaire.connection');
+        $state.go('main.formulaire.connexion');
       }
     };
   });

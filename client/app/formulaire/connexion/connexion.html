@@ -1,19 +1,19 @@
 <h1>Connexion</h1>
 
-<form name="connectionForm" ng-submit="submit(connectionForm)" novalidate>
+<form name="connexionForm" ng-submit="submit(connexionForm)" novalidate>
 
-  <div class="form-group required" ng-class="{'has-error': connectionForm.numeroFiscal.$invalid && connectionForm.$submitted}">
+  <div class="form-group required" ng-class="{'has-error': connexionForm.numeroFiscal.$invalid && connexionForm.$submitted}">
     <label for="numeroFiscal" class="control-label">Numéro fiscal</label>
     <input id="numeroFiscal" type="text" name="numeroFiscal" class="form-control" ng-model="credentials.numeroFiscal" required>
-    <div ng-messages="connectionForm.numeroFiscal.$error" ng-if="connectionForm.$submitted">
+    <div ng-messages="connexionForm.numeroFiscal.$error" ng-if="connexionForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
     </div>
   </div>
 
-  <div class="form-group required" ng-class="{'has-error': connectionForm.referenceAvis.$invalid && connectionForm.$submitted}">
+  <div class="form-group required" ng-class="{'has-error': connexionForm.referenceAvis.$invalid && connexionForm.$submitted}">
     <label for="referenceAvis" class="control-label">Référence de votre avis</label>
     <input id="referenceAvis" type="text" name="referenceAvis" class="form-control" ng-model="credentials.referenceAvis" required>
-    <div ng-messages="connectionForm.referenceAvis.$error" ng-if="connectionForm.$submitted">
+    <div ng-messages="connexionForm.referenceAvis.$error" ng-if="connexionForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
     </div>
   </div>

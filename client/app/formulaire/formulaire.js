@@ -14,10 +14,10 @@ angular.module('boursesApp')
         templateUrl: 'app/formulaire/identite-enfant/identite-enfant.html',
         controller: 'IdentiteEnfantCtrl'
       })
-      .state('main.formulaire.connection', {
-        url: 'connection',
-        templateUrl: 'app/formulaire/connection/connection.html',
-        controller: 'ConnectionCtrl'
+      .state('main.formulaire.connexion', {
+        url: 'connexion',
+        templateUrl: 'app/formulaire/connexion/connexion.html',
+        controller: 'ConnexionCtrl'
       })
       .state('main.formulaire.modifications', {
         url: 'modifications',
