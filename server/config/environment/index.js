@@ -24,9 +24,9 @@ var all = {
   // Should we populate the DB with sample data?
   seedDB: false,
 
-  // Secret for session, you will want to change this and make it an environment variable
+  // Secret for session
   secrets: {
-    session: 'bourses-secret'
+    session: process.env.SESSION_SECRET || 'bourses-secret'
   },
 
   // List of user roles
