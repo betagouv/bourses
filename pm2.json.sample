@@ -1,0 +1,10 @@
+{
+  "apps" : [
+    {
+      "name"      : "bourses",
+      "script"    : "server/app.js",
+      "instances"  : 4,
+      "exec_mode"  : "cluster_mode"
+    }
+  ]
+}
