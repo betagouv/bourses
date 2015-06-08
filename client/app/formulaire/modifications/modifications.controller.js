@@ -6,12 +6,17 @@ angular.module('boursesApp')
     $scope.identite = store.get('identite-adulte');
     $scope.cities = [$scope.identite.ville];
 
-    function refreshCities(changeSelection) {
+    function refreshCities(changeSelection, form) {
       $http.get('/api/communes/' + $scope.identite.codePostal)
         .then(function(result) {
           $scope.cities = result.data;
           if (changeSelection) {
             $scope.identite.ville = $scope.cities[0];
+          }
+          if ($scope.cities.length === 0 && form) {
+            form.codePostal.$setValidity('notFound', false);
+          } else {
+            form.codePostal.$setValidity('notFound', true);
           }
         }, console.error.bind(console)
         ).finally(function() {
@@ -28,7 +33,10 @@ angular.module('boursesApp')
       refreshCities(true);
     };
 
-    $scope.submit = function() {
+    $scope.submit = function(form) {
+      if ($scope.cities.length === 0 && form) {
+        form.codePostal.$setValidity('notFound', false);
+      }
       store.set('identite-adulte', $scope.identite);
     };
   });
