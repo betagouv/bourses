@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('ModificationsCtrl', function($scope, $http, $state, store) {
+  .controller('ModificationsCtrl', function($scope, $http, $state, $timeout, store) {
     $scope.data = store.get('svair-data');
     $scope.identite = store.get('identite-adulte');
     $scope.cities = [$scope.identite.ville];
@@ -44,5 +44,10 @@ angular.module('boursesApp')
         form.codePostal.$setValidity('notFound', false);
       }
       store.set('identite-adulte', $scope.identite);
+      $scope.loading = true;
+      $timeout(function() {
+        $scope.loading = false;
+        $state.go('main.merci');
+      }, 600);
     };
   });
