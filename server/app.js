@@ -14,9 +14,6 @@ var config = require('./config/environment');
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
-// Populate DB with sample data
-if(config.seedDB) { require('./config/seed'); }
-
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
@@ -26,12 +23,6 @@ require('./routes')(app);
 // Start server
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-});
-
-app.use(function (err, req, res) {
-  if (err.name === 'UnauthorizedError') {
-    res.status(401).send('invalid token...');
-  }
 });
 
 // Expose app

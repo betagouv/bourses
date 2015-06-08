@@ -2,7 +2,7 @@ var passport = require('passport');
 var OAuth2Strategy = require('passport-oauth2').Strategy;
 var request = require('superagent');
 
-exports.setup = function (User, config) {
+exports.setup = function (config) {
   var strategy = new OAuth2Strategy({
       authorizationURL: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize',
       tokenURL: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/token',

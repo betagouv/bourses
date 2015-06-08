@@ -21,9 +21,6 @@ var all = {
   // Server port
   port: process.env.PORT || 9000,
 
-  // Should we populate the DB with sample data?
-  seedDB: false,
-
   // Secret for session
   secrets: {
     session: process.env.SESSION_SECRET || 'bourses-secret'

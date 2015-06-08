@@ -8,8 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/bourses-dev'
   },
 
-  // Should we populate the DB with sample data?
-  seedDB: true,
-
   port: 5000
 };

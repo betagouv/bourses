@@ -6,9 +6,6 @@ angular.module('boursesApp')
       .state('main', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: function($scope, Auth) {
-          $scope.isLoggedIn = Auth.isLoggedIn;
-        },
         abstract: true
       });
   });
