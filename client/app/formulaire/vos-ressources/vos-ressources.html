@@ -1,19 +1,19 @@
-<h1>Connexion</h1>
+<h1>Vos ressources</h1>
 
-<form name="connexionForm" ng-submit="submit(connexionForm)" novalidate>
+<form name="svairForm" ng-submit="submit(svairForm)" novalidate>
 
-  <div class="form-group required" ng-class="{'has-error': connexionForm.numeroFiscal.$invalid && connexionForm.$submitted}">
+  <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
     <label for="numeroFiscal" class="control-label">Numéro fiscal</label>
     <input id="numeroFiscal" type="text" name="numeroFiscal" class="form-control" ng-model="credentials.numeroFiscal" required>
-    <div ng-messages="connexionForm.numeroFiscal.$error" ng-if="connexionForm.$submitted">
+    <div ng-messages="svairForm.numeroFiscal.$error" ng-if="svairForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
     </div>
   </div>
 
-  <div class="form-group required" ng-class="{'has-error': connexionForm.referenceAvis.$invalid && connexionForm.$submitted}">
+  <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted}">
     <label for="referenceAvis" class="control-label">Référence de votre avis</label>
     <input id="referenceAvis" type="text" name="referenceAvis" class="form-control" ng-model="credentials.referenceAvis" required>
-    <div ng-messages="connexionForm.referenceAvis.$error" ng-if="connexionForm.$submitted">
+    <div ng-messages="svairForm.referenceAvis.$error" ng-if="svairForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
     </div>
   </div>
@@ -21,6 +21,10 @@
   <div ng-if="error">
     <p class="text-danger">{{error}}</p>
   </div>
+
+  <p>
+    <small>Une copie de votre avis d’imposition sera automatiquement transmise à votre académie pour l’instruction de votre demande</small>
+  </p>
 
   <div class="text-right">
     <button type="submit" ladda="loading" data-style="expand-right" name="submit" alt="Valider" class="btn btn-lg btn-primary">

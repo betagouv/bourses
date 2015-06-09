@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('ModificationsCtrl', function($scope, $http, $state, store, DemandeService) {
+  .controller('VosRenseignementsCtrl', function($scope, $http, $state, store, DemandeService) {
     $scope.data = store.get('svair-data');
     $scope.identite = store.get('identite-adulte');
 
@@ -56,7 +56,7 @@ angular.module('boursesApp')
 
         var demande = {
           identiteEnfant: store.get('identite-enfant'),
-          identiteAdulte: store.get('identite-enfant'),
+          identiteAdulte: store.get('identite-adulte'),
           data: store.get('svair-data')
         };
 

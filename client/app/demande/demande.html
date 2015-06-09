@@ -1,0 +1,53 @@
+<div class="page-header">
+  <h1>Demande de {{demande.identiteAdulte.prenom}} {{demande.identiteAdulte.nom}}</h1>
+  <small>Passée le {{demande.createdAt | date}}</small>
+
+  <div class="text-right">
+    <a class="btn btn-primary btn-lg" href="/api/demandes/{{id}}/{{key}}/download" target="_blank" download="{{demande.identiteAdulte.prenom}}_{{demande.identiteAdulte.nom}}.pdf">
+      Télécharger
+    </a>
+  </div>
+</div>
+
+<h2>Identité de l'enfant</h2>
+
+<div class="info-label">Nom</div>
+<p class="info">{{demande.identiteEnfant.nom}}</p>
+
+<div class="info-label">Prénom</div>
+<p class="info">{{demande.identiteEnfant.prenom}}</p>
+
+<div class="info-label">Sexe</div>
+<p class="info">{{demande.identiteEnfant.sexe | sexe}}</p>
+
+<div class="info-label">Date de naissance</div>
+<p class="info">{{demande.identiteEnfant.dateNaissance | date}}</p>
+
+<div class="info-label">Régime</div>
+<p class="info">{{demande.identiteEnfant.regime | regime}}</p>
+
+<h2>Identité de l'adulte</h2>
+
+<div class="info-label">Nom</div>
+<p class="info">{{demande.identiteAdulte.nom}}</p>
+
+<div class="info-label">Prénom</div>
+<p class="info">{{demande.identiteAdulte.prenom}}</p>
+
+<div class="info-label">Lien avec l'enfant</div>
+<p class="info">{{demande.identiteAdulte.lien | lien}}</p>
+
+<div class="info-label">Adresse</div>
+<p class="info">{{demande.identiteAdulte.adresse}}</p>
+
+<div class="info-label">Code postal</div>
+<p class="info">{{demande.identiteAdulte.codePostal}}</p>
+
+<div class="info-label">Ville</div>
+<p class="info">{{demande.identiteAdulte.ville.nomCommune}}</p>
+
+<div class="info-label">E-mail</div>
+<p class="info">{{demande.identiteAdulte.email}}</p>
+
+<pre>{{demande | json}}</pre>
+

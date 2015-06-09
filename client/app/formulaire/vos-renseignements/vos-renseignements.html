@@ -1,3 +1,5 @@
+<h1>Vos renseignements</h1>
+
 <div class="panel panel-default" ng-if="data.declarant1.nom || data.declarant2.nom">
   <div class="panel-heading">
     Pré-remplir avec vos identités fiscales
@@ -15,8 +17,6 @@
     </button>
   </div>
 </div>
-
-<h1>Vos renseignements</h1>
 
 <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
 
@@ -121,8 +121,8 @@
   </div>
 
   <div class="text-right">
-    <button type="submit" ladda="loading" data-style="expand-right" name="submit" alt="Valider" class="btn btn-lg btn-primary">
-        Suivant
+    <button type="submit" ladda="loading" data-style="expand-right" name="submit" alt="Valider" class="btn btn-lg btn-success">
+        Envoyer votre demande
     </button>
   </div>
 </form>

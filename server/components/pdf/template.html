@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <style>
+      .small {
+        font-size: 12px;
+        color: #333;
+      }
+
+      .info-label {
+        color: #333;
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      p.info {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1;
+        margin: 4px 0 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <img src="http://{{path}}/assets/images/sgmap-horiz.png"></img>
+    <img src="http://{{path}}/assets/images/men-horiz.png"></img>
+
+    <h1>Demande de {{identiteAdulte.prenom}} {{identiteAdulte.nom}}</h1>
+    <div class="small">Passée le {{createdAt}}</div>
+    <hr>
+
+    <h2>Identité de l'enfant</h2>
+
+    <div class="info-label">Nom</div>
+    <p class="info">{{identiteEnfant.nom}}</p>
+
+    <div class="info-label">Prénom</div>
+    <p class="info">{{identiteEnfant.prenom}}</p>
+
+    <div class="info-label">Sexe</div>
+    <p class="info">{{identiteEnfant.sexe}}</p>
+
+    <div class="info-label">Date de naissance</div>
+    <p class="info">{{identiteEnfant.dateNaissance}}</p>
+
+    <div class="info-label">Régime</div>
+    <p class="info">{{identiteEnfant.regime}}</p>
+
+    <h2>Identité de l'adulte</h2>
+
+    <div class="info-label">Nom</div>
+    <p class="info">{{identiteAdulte.nom}}</p>
+
+    <div class="info-label">Prénom</div>
+    <p class="info">{{identiteAdulte.prenom}}</p>
+
+    <div class="info-label">Lien avec l'enfant</div>
+    <p class="info">{{identiteAdulte.lien}}</p>
+
+    <div class="info-label">Adresse</div>
+    <p class="info">{{identiteAdulte.adresse}}</p>
+
+    <div class="info-label">Code postal</div>
+    <p class="info">{{identiteAdulte.codePostal}}</p>
+
+    <div class="info-label">Ville</div>
+    <p class="info">{{identiteAdulte.ville.nomCommune}}</p>
+
+    <div class="info-label">E-mail</div>
+    <p class="info">{{identiteAdulte.email}}</p>
+
+  </body>
+</html>

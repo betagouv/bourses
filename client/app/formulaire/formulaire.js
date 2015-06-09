@@ -14,14 +14,14 @@ angular.module('boursesApp')
         templateUrl: 'app/formulaire/identite-enfant/identite-enfant.html',
         controller: 'IdentiteEnfantCtrl'
       })
-      .state('main.formulaire.connexion', {
-        url: 'connexion',
-        templateUrl: 'app/formulaire/connexion/connexion.html',
-        controller: 'ConnexionCtrl'
+      .state('main.formulaire.vos-ressources', {
+        url: 'vos-ressources',
+        templateUrl: 'app/formulaire/vos-ressources/vos-ressources.html',
+        controller: 'VosRessourcesCtrl'
       })
-      .state('main.formulaire.modifications', {
-        url: 'modifications',
-        templateUrl: 'app/formulaire/modifications/modifications.html',
-        controller: 'ModificationsCtrl'
+      .state('main.formulaire.vos-renseignements', {
+        url: 'vos-renseignements',
+        templateUrl: 'app/formulaire/vos-renseignements/vos-renseignements.html',
+        controller: 'VosRenseignementsCtrl'
       });
   });

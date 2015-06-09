@@ -7,5 +7,6 @@ var router = express.Router();
 
 router.post('/', controller.create);
 router.get('/:id/:key', controller.show);
+router.get('/:id/:key/download', controller.download);
 
 module.exports = router;

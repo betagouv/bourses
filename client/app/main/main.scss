@@ -27,6 +27,14 @@
     line-height: 0;
     margin-bottom: 100px;
   }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .form-group.required .control-label:after {

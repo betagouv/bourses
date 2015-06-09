@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('ConnexionCtrl', function($scope, $http, $state, $timeout, store) {
+  .controller('VosRessourcesCtrl', function($scope, $http, $state, $timeout, store) {
     $scope.credentials = store.get('credentials');
     var steps = store.get('steps');
     $scope.submit = function(form) {
@@ -22,7 +22,7 @@ angular.module('boursesApp')
 
           $timeout(function() {
             $scope.loading = false;
-            $state.go('main.formulaire.modifications');
+            $state.go('main.formulaire.vos-renseignements');
           }, 600);
         });
       }
