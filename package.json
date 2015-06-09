@@ -24,7 +24,7 @@
     "passport-oauth2": "^1.1.2",
     "serve-favicon": "^2.2.1",
     "superagent": "^1.2.0",
-    "svair-api": "^1.0.0",
+    "svair-api": "^0.1.1",
     "mustache": "^2.0.0",
     "wkhtmltopdf": "^0.1.5"
   },
