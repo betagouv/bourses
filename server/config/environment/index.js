@@ -26,6 +26,8 @@ var all = {
     session: process.env.SESSION_SECRET || 'bourses-secret'
   },
 
+  domain: process.env.DOMAIN || 'http://localhost:5000',
+
   // List of user roles
   userRoles: ['user', 'admin'],
 

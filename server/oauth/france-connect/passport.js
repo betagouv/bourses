@@ -8,7 +8,7 @@ exports.setup = function (config) {
       tokenURL: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/token',
       clientID: config.fc.clientId,
       clientSecret: config.fc.clientSecret,
-      callbackURL: 'http://localhost:5000/oauth/fc/callback',
+      callbackURL: config.domain + '/oauth/fc/callback',
       scope: ['openid', 'profile', 'email', 'address', 'phone', 'dgfip_avis_ir'],
       state: 'foobar'
     },
