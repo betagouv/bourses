@@ -24,6 +24,7 @@ module.exports = function(config) {
       'client/bower_components/lodash/lodash.js',
       'client/bower_components/a0-angular-storage/dist/angular-storage.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'client/bower_components/angular-capitalize-filter/capitalize.js',
       'client/bower_components/spin.js/spin.js',
       'client/bower_components/ladda/dist/ladda.min.js',
       'client/bower_components/angular-ladda/dist/angular-ladda.min.js',
