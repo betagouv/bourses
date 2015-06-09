@@ -1,14 +1,14 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-if="data.declarant1.nom || data.declarant2.nom">
   <div class="panel-heading">
     Pré-remplir avec vos identités fiscales
   </div>
   <div class="panel-body">
-    <button ng-class="{'active': identite.selected === 1}" class="btn btn-default" ng-click="selectDeclarant(1, data.declarant1)">
+    <button ng-if="data.declarant1.nom" ng-class="{'active': identite.selected === 1}" class="btn btn-default" ng-click="selectDeclarant(1, data.declarant1)">
       {{data.declarant1.prenoms | capitalize:'first'}} {{data.declarant1.nom | capitalize:'first'}}
       <br>
       <small>Né(e) le {{data.declarant1.dateNaissance}}</small>
     </button>
-    <button ng-class="{'active': identite.selected === 2}" class="btn btn-default" ng-click="selectDeclarant(2, data.declarant2)">
+    <buttonn ng-if="data.declarant2.nom" ng-class="{'active': identite.selected === 2}" class="btn btn-default" ng-click="selectDeclarant(2, data.declarant2)">
       {{data.declarant2.prenoms | capitalize:'first'}} {{data.declarant2.nom | capitalize:'first'}}
       <br>
       <small>Né(e) le {{data.declarant2.dateNaissance}}</small>
