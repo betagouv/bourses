@@ -6,10 +6,8 @@ angular.module('boursesApp')
     $scope.identite = store.get('identite-adulte');
 
     function updateFormValidity(form) {
-      if ($scope.cities.length === 0 && form) {
-        form.codePostal.$setValidity('notFound', false);
-      } else{
-        form.codePostal.$setValidity('notFound', true);
+      if (form) {
+        form.codePostal.$setValidity('notFound', $scope.cities.length > 0);
       }
     }
 
@@ -37,6 +35,16 @@ angular.module('boursesApp')
     $scope.updateCities = function updateCities() {
       $scope.retrievingCities = true;
       refreshCities(true);
+    };
+
+    $scope.selectDeclarant = function(index, declarant) {
+      if ($scope.identite.selected === index) {
+        $scope.identite.selected = null;
+      } else {
+        $scope.identite.selected = index;
+        $scope.identite.nom = declarant.nom;
+        $scope.identite.prenom = declarant.prenoms;
+      }
     };
 
     $scope.submit = function(form) {

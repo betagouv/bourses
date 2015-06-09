@@ -9,7 +9,8 @@ angular
     'ui.bootstrap',
     'angular-storage',
     'ngMessages',
-    'angular-ladda'
+    'angular-ladda',
+    'angular-capitalize-filter'
   ])
   .config(function ($urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider) {
     moment.locale('fr');
