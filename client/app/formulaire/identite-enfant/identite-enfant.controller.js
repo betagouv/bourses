@@ -1,7 +1,12 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('IdentiteEnfantCtrl', function($scope, $state, store) {
+  .controller('IdentiteEnfantCtrl', function($scope, $state, $http, store) {
+    $scope.etablissements = [];
+    $http.get('/api/etablissements').then(function(result) {
+      $scope.etablissements = result.data;
+    });
+
     $scope.identite = store.get('identite-enfant');
     var steps = store.get('steps');
 
