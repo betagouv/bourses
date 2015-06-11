@@ -2,8 +2,8 @@
 
 angular.module('boursesApp')
   .controller('VosRenseignementsCtrl', function($scope, $http, $state, store, DemandeService) {
-    $scope.data = store.get('svair-data');
-    $scope.identite = store.get('identite-adulte');
+    $scope.data = store.get('svair-data') || {};
+    $scope.identite = store.get('identite-adulte') || {};
 
     function updateFormValidity(form) {
       if (form) {
