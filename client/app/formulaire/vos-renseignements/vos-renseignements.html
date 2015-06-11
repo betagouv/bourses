@@ -4,16 +4,23 @@
   <h2>
     Pré-remplir avec vos identités fiscales
   </h2>
-  <button ng-if="data.declarant1.nom" ng-class="{'active': identite.selected === 1}" class="btn btn-default" ng-click="selectDeclarant(1, data.declarant1)">
-    {{data.declarant1.prenoms | capitalize:'first'}} {{data.declarant1.nom | capitalize:'first'}}
-    <br>
-    <small>Né(e) le {{data.declarant1.dateNaissance}}</small>
-  </button>
-  <button ng-if="data.declarant2.nom" ng-class="{'active': identite.selected === 2}" class="btn btn-default" ng-click="selectDeclarant(2, data.declarant2)">
-    {{data.declarant2.prenoms | capitalize:'first'}} {{data.declarant2.nom | capitalize:'first'}}
-    <br>
-    <small>Né(e) le {{data.declarant2.dateNaissance}}</small>
-  </button>
+  <div class="select-identites">
+    <button ng-if="data.declarant1.nom" class="btn btn-default" ng-click="selectDeclarant(1, data.declarant1)">
+      <i class="fa" ng-class="{'fa-check-square': identite.selected === 1, 'fa-square-o': identite.selected !== 1}"></i>
+      <span class="identite">
+        <span>{{data.declarant1.prenoms | capitalize:'first'}} {{data.declarant1.nom | capitalize:'first'}}</span>
+        <small>Né(e) le {{data.declarant1.dateNaissance}}</small>
+      </span>
+
+    </button>
+    <button ng-if="data.declarant2.nom" class="btn btn-default" ng-click="selectDeclarant(2, data.declarant2)">
+      <i class="fa" ng-class="{'fa-check-square': identite.selected === 2, 'fa-square-o': identite.selected !== 2}"></i>
+      <span class="identite">
+        <span>{{data.declarant2.prenoms | capitalize:'first'}} {{data.declarant2.nom | capitalize:'first'}}</span>
+        <small>Né(e) le {{data.declarant2.dateNaissance}}</small>
+      </span>
+    </button>
+  </div>
 </div>
 
 <form name="infoForm" ng-submit="submit(infoForm)" novalidate>

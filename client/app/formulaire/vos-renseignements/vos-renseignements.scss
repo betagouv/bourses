@@ -1,11 +1,38 @@
 .identite-declarants {
+
   h2 {
     margin: 0 0 10px 0;
     padding: 0;
     font-size: 15px;
   }
 
+  .select-identites {
+    display: flex;
+  }
+
   button {
     margin-right: 10px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    &:focus {
+      background-color: whitesmoke;
+    }
+
+    .fa {
+      font-size: 30px;
+      color: #DDDDDD;
+      margin-right: 10px;
+    }
+
+    .fa-check-square {
+      color: green;
+    }
+
+    .identite {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
