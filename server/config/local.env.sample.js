@@ -8,6 +8,11 @@
 module.exports = {
   DOMAIN:                 'http://localhost:9000',
   SESSION_SECRET:         'bourses-secret',
-  API_KEY:                'mailjet-api-key',
-  SECRET_KEY:             'mailjet-secret-key'
+
+  FC_CLIENT_ID:           'fc-client-if',
+  FC_CLIENT_SECRET:       'fc-client-secret',
+
+  SMTP_USER:              'toto',
+  SMTP_PASS:              'password',
+  SMTP_HOST:              'localhost'
 };

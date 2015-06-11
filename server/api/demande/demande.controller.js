@@ -6,6 +6,7 @@ var wkhtmltopdf = require('wkhtmltopdf');
 
 var Demande = require('./demande.model');
 var Generator = require('../../components/pdf/generator');
+var SendMail = require('../../components/mail/send-mail')
 
 // Creates a new demande in the DB.
 exports.create = function(req, res) {
