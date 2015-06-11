@@ -43,7 +43,10 @@ var all = {
   fc: {
     clientId: process.env.FC_CLIENT_ID || 'fc-clientId',
     clientSecret: process.env.FC_CLIENT_SECRET || 'fc-clientSecret'
-  }
+  },
+
+  smtpUser: process.env.SMTP_USER || 'toto',
+  smtpPass: process.env.SMTP_PASS || 'password'
 
 };
 

@@ -6,8 +6,8 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var config = require('../../config/environment');
 
 var Sender = function() {
-  this._user = process.env.SMTP_USER || config.SMTP_USER;
-  this._pass = process.env.SMTP_PASS || config.SMTP_PASS;
+  this._user = config.smptUser;
+  this._pass = config.smtpPass;
 };
 
 Sender.prototype = {};
