@@ -7,7 +7,7 @@ angular.module('boursesApp')
       $scope.etablissements = result.data;
     });
 
-    $scope.identite = store.get('identite-enfant');
+    $scope.identite = store.get('identite-enfant') || {};
     var steps = store.get('steps');
 
     $scope.submit = function(form) {

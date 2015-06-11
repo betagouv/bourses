@@ -6,8 +6,8 @@
     <fieldset>
       <legend class="control-label">Votre collège</legend>
       <span ng-repeat="college in etablissements">
-        <input type="radio" name="college" id="college-{{college.nom}}" ng-model="identite.college" ng-required="!identite.college" value="{{college._id}}">
-        <label class="radio-inline" for="college-{{college.nom}}">{{college.nom}}</label>
+        <input type="radio" name="college" id="college-{{college._id}}" ng-model="identite.college" ng-required="!identite.college" value="{{college._id}}">
+        <label class="radio-inline" for="college-{{college._id}}">{{college.nom}}</label>
       </span>
     </fieldset>
     <div ng-if="!identite.college && infoForm.$submitted">
