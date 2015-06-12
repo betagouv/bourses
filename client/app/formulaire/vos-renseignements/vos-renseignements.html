@@ -40,9 +40,20 @@
     </div>
   </div>
 
+  <div class="form-group required" ng-class="{'has-error': infoForm.nombreEnfantsACharge.$invalid && infoForm.$submitted}">
+    <label for="nombreEnfantsACharge" class="control-label">Nombre d'enfants à charge</label>
+    <select ng-model="identite.nombreEnfantsACharge" required id="nombreEnfantsACharge" class="form-control"
+      ng-options="nombre for nombre in listeNombreEnfantsACharge">
+      <option>0</option>
+    </select>
+    <div ng-messages="infoForm.enfants.$error" ng-if="infoForm.$submitted">
+      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
+    </div>
+  </div>
+
   <div class="form-group required" ng-class="{'has-error': infoForm.nom.$invalid && infoForm.$submitted}">
     <label for="nom" class="control-label">Nom</label>
-    <input id="nom" type="text" name="nom" class="form-control" ng-model="identite.nom" required>
+    <input ng-disabled="identite.selected > 0"  id="nom" type="text" name="nom" class="form-control" ng-model="identite.nom" required>
     <div ng-messages="infoForm.nom.$error" ng-if="infoForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
     </div>
@@ -50,7 +61,7 @@
 
   <div class="form-group required" ng-class="{'has-error': infoForm.prenom.$invalid && infoForm.$submitted}">
     <label for="prenom" class="control-label">Prénom(s)</label>
-    <input id="prenom" type="text" name="prenom" class="form-control" ng-model="identite.prenom" required>
+    <input ng-disabled="identite.selected > 0" id="prenom" type="text" name="prenom" class="form-control" ng-model="identite.prenom" required>
     <div ng-messages="infoForm.prenom.$error" ng-if="infoForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
     </div>

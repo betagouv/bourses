@@ -5,6 +5,12 @@ angular.module('boursesApp')
     $scope.data = store.get('svair-data') || {};
     $scope.identite = store.get('identite-adulte') || {};
 
+    // Initialisation du nb d'enfants a charge, on prend par defaut le nb de personnes
+    $scope.listeNombreEnfantsACharge = _.range($scope.data.nombrePersonnesCharge + 1);
+    if (!$scope.identite.nombreEnfantsACharge) {
+      $scope.identite.nombreEnfantsACharge = $scope.data.nombrePersonnesCharge
+    }
+
     function updateFormValidity(form) {
       if (form) {
         form.codePostal.$setValidity('notFound', $scope.cities.length > 0);
