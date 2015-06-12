@@ -2,7 +2,7 @@
 
 <div class="well identite-declarants" ng-if="data.declarant1.nom || data.declarant2.nom">
   <h2>
-    Pré-remplir avec vos identités fiscales
+    Vos identités fiscales
   </h2>
   <div class="select-identites">
     <button ng-if="data.declarant1.nom" class="btn btn-default" ng-click="selectDeclarant(1, data.declarant1)">
@@ -47,22 +47,6 @@
       <option>0</option>
     </select>
     <div ng-messages="infoForm.enfants.$error" ng-if="infoForm.$submitted">
-      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
-    </div>
-  </div>
-
-  <div class="form-group required" ng-class="{'has-error': infoForm.nom.$invalid && infoForm.$submitted}">
-    <label for="nom" class="control-label">Nom</label>
-    <input ng-disabled="identite.selected > 0"  id="nom" type="text" name="nom" class="form-control" ng-model="identite.nom" required>
-    <div ng-messages="infoForm.nom.$error" ng-if="infoForm.$submitted">
-      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
-    </div>
-  </div>
-
-  <div class="form-group required" ng-class="{'has-error': infoForm.prenom.$invalid && infoForm.$submitted}">
-    <label for="prenom" class="control-label">Prénom(s)</label>
-    <input ng-disabled="identite.selected > 0" id="prenom" type="text" name="prenom" class="form-control" ng-model="identite.prenom" required>
-    <div ng-messages="infoForm.prenom.$error" ng-if="infoForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
     </div>
   </div>

@@ -5,10 +5,19 @@ angular.module('boursesApp')
     $scope.data = store.get('svair-data') || {};
     $scope.identite = store.get('identite-adulte') || {};
 
+    if (!$scope.identite.selected) {
+      selectDeclarant(1, $scope.data.declarant1);
+    }
+
     // Initialisation du nb d'enfants a charge, on prend par defaut le nb de personnes
     $scope.listeNombreEnfantsACharge = _.range($scope.data.nombrePersonnesCharge + 1);
     if (!$scope.identite.nombreEnfantsACharge) {
       $scope.identite.nombreEnfantsACharge = $scope.data.nombrePersonnesCharge
+    }
+
+    refreshCities();
+    if (!$scope.cities) {
+      $scope.cities = [$scope.identite.ville];
     }
 
     function updateFormValidity(form) {
@@ -33,9 +42,12 @@ angular.module('boursesApp')
         });
     }
 
-    if ($scope.identite) {
-      refreshCities();
-      $scope.cities = [$scope.identite.ville];
+    function selectDeclarant(index, declarant) {
+      if ($scope.identite.selected !== index) {
+        $scope.identite.selected = index;
+        $scope.identite.nom = declarant.nom;
+        $scope.identite.prenom = declarant.prenoms;
+      }
     }
 
     $scope.updateCities = function updateCities() {
@@ -43,23 +55,19 @@ angular.module('boursesApp')
       refreshCities(true);
     };
 
-    $scope.selectDeclarant = function(index, declarant) {
-      if ($scope.identite.selected === index) {
-        $scope.identite.selected = null;
-      } else {
-        $scope.identite.selected = index;
-        $scope.identite.nom = declarant.nom;
-        $scope.identite.prenom = declarant.prenoms;
-      }
-    };
+    $scope.selectDeclarant = selectDeclarant;
 
     $scope.submit = function(form) {
       if ($scope.cities.length === 0 && form) {
         form.codePostal.$setValidity('notFound', false);
       } else {
         store.set('identite-adulte', $scope.identite);
-        $scope.loading = true;
 
+        if (!form.isValid) {
+          return;
+        }
+
+        $scope.loading = true;
         var demande = {
           identiteEnfant: store.get('identite-enfant'),
           identiteAdulte: store.get('identite-adulte'),
