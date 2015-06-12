@@ -111,6 +111,17 @@
     </div>
   </div>
 
+  <div class="form-group required" ng-class="{'has-error': infoForm.iban.$invalid && infoForm.$submitted}">
+    <label for="iban" class="control-label">IBAN</label>
+    <input type="text" class="form-control" name="iban" ng-model="identite.iban" ng-iban="FR" required/>
+    <div ng-messages="infoForm.iban.$error" ng-if="infoForm.$submitted">
+      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
+      <p class="help-block" ng-message='iban'>L'IBAN saisi est incorrect.</p>
+    </div>
+  </div>
+
+  <pre>{{infoForm.iban | json}}</pre>
+
   <div class="form-group required" ng-class="{'has-error': !identite.signature && infoForm.$submitted}">
     <div class="checkbox">
       <label>

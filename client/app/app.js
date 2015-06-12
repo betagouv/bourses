@@ -10,7 +10,8 @@ angular
     'angular-storage',
     'ngMessages',
     'angular-ladda',
-    'angular-capitalize-filter'
+    'angular-capitalize-filter',
+    'mm.iban'
   ])
   .config(function ($urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider) {
     moment.locale('fr');
