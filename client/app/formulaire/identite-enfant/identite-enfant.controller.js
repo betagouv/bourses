@@ -1,10 +1,18 @@
 'use strict';
 
+
 angular.module('boursesApp')
   .controller('IdentiteEnfantCtrl', function($scope, $state, $http, store) {
     $scope.etablissements = [];
     $http.get('/api/etablissements').then(function(result) {
-      $scope.etablissements = result.data;
+      var data = result.data;
+      _.map(data, function(etablissement) {
+        if (etablissement.ville) {
+          etablissement.ville.label = label(etablissement.ville);
+        }
+      });
+
+      $scope.etablissements = data;
     });
 
     $scope.identite = store.get('identite-enfant') || {};
@@ -19,4 +27,8 @@ angular.module('boursesApp')
         $state.go('main.formulaire.vos-ressources');
       }
     };
+
+    var label = function(city) {
+      return city.nom + ', ' + city.codePostal;
+    }
   });

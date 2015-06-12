@@ -3,13 +3,11 @@
 <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
 
   <div class="form-group required" ng-class="{'has-error': !identite.college && infoForm.$submitted}">
-    <fieldset>
-      <legend class="control-label">Votre collège</legend>
-      <span ng-repeat="college in etablissements">
-        <input type="radio" name="college" id="college-{{college._id}}" ng-model="identite.college" ng-required="!identite.college" value="{{college._id}}">
-        <label class="radio-inline" for="college-{{college._id}}">{{college.nom}}</label>
-      </span>
-    </fieldset>
+    <label for="college" class="control-label">Collège</label>
+    <select ng-model="identite.college" required id="college" class="form-control"
+      ng-options="college._id as college.nom group by college.ville.label for college in etablissements">
+      <option>--</option>
+    </select>
     <div ng-if="!identite.college && infoForm.$submitted">
       <p class="help-block">Ce champ est obligatoire.</p>
     </div>
