@@ -1,24 +1,44 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRenseignementsCtrl', function($scope, $http, $state, store, DemandeService) {
+  .controller('VosRenseignementsCtrl', function($scope, $http, $state, $timeout, store, DemandeService) {
     $scope.data = store.get('svair-data') || {};
     $scope.identite = store.get('identite-adulte') || {};
 
-    if (!$scope.identite.selected) {
-      selectDeclarant(1, $scope.data.declarant1);
-    }
+    $scope.setTitulaire = setTitulaire;
+    $scope.selectDeclarant = selectDeclarant;
+    $scope.updateCities = updateCities;
 
-    // Initialisation du nb d'enfants a charge, on prend par defaut le nb de personnes
-    $scope.listeNombreEnfantsACharge = _.range($scope.data.nombrePersonnesCharge + 1);
-    if (!$scope.identite.nombreEnfantsACharge) {
-      $scope.identite.nombreEnfantsACharge = $scope.data.nombrePersonnesCharge
-    }
+    $timeout(function() {
+      refreshCities();
+      if (!$scope.cities) {
+        $scope.cities = [$scope.identite.ville];
+      }
+    });
 
-    refreshCities();
-    if (!$scope.cities) {
-      $scope.cities = [$scope.identite.ville];
-    }
+
+    $scope.submit = function(form) {
+      if ($scope.cities.length === 0 && form) {
+        form.codePostal.$setValidity('notFound', false);
+      } else {
+        store.set('identite-adulte', $scope.identite);
+
+        if (!form.isValid) {
+          return;
+        }
+
+        $scope.loading = true;
+        var demande = {
+          identiteEnfant: store.get('identite-enfant'),
+          identiteAdulte: store.get('identite-adulte'),
+          data: store.get('svair-data')
+        };
+
+        DemandeService.save(demande).then(function() {
+          $state.go('main.merci');
+        });
+      }
+    };
 
     function updateFormValidity(form) {
       if (form) {
@@ -50,33 +70,12 @@ angular.module('boursesApp')
       }
     }
 
-    $scope.updateCities = function updateCities() {
+    function updateCities() {
       $scope.retrievingCities = true;
       refreshCities(true);
     };
 
-    $scope.selectDeclarant = selectDeclarant;
-
-    $scope.submit = function(form) {
-      if ($scope.cities.length === 0 && form) {
-        form.codePostal.$setValidity('notFound', false);
-      } else {
-        store.set('identite-adulte', $scope.identite);
-
-        if (!form.isValid) {
-          return;
-        }
-
-        $scope.loading = true;
-        var demande = {
-          identiteEnfant: store.get('identite-enfant'),
-          identiteAdulte: store.get('identite-adulte'),
-          data: store.get('svair-data')
-        };
-
-        DemandeService.save(demande).then(function() {
-          $state.go('main.merci');
-        });
-      }
-    };
+    function setTitulaire(declarant, identite) {
+      identite.titutlaire = declarant.prenoms + ' ' + declarant.nom;
+    }
   });

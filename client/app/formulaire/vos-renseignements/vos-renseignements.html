@@ -1,55 +1,6 @@
 <h1>Vos renseignements</h1>
 
-<div class="well identite-declarants" ng-if="data.declarant1.nom || data.declarant2.nom">
-  <h2>
-    Vos identités fiscales
-  </h2>
-  <div class="select-identites">
-    <button ng-if="data.declarant1.nom" class="btn btn-default" ng-click="selectDeclarant(1, data.declarant1)">
-      <i class="fa" ng-class="{'fa-check-square': identite.selected === 1, 'fa-square-o': identite.selected !== 1}"></i>
-      <span class="identite">
-        <span>{{data.declarant1.prenoms | capitalize:'first'}} {{data.declarant1.nom | capitalize:'first'}}</span>
-        <small>Né(e) le {{data.declarant1.dateNaissance}}</small>
-      </span>
-
-    </button>
-    <button ng-if="data.declarant2.nom" class="btn btn-default" ng-click="selectDeclarant(2, data.declarant2)">
-      <i class="fa" ng-class="{'fa-check-square': identite.selected === 2, 'fa-square-o': identite.selected !== 2}"></i>
-      <span class="identite">
-        <span>{{data.declarant2.prenoms | capitalize:'first'}} {{data.declarant2.nom | capitalize:'first'}}</span>
-        <small>Né(e) le {{data.declarant2.dateNaissance}}</small>
-      </span>
-    </button>
-  </div>
-</div>
-
 <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
-
-  <div class="form-group required" ng-class="{'has-error': !identite.lien && infoForm.$submitted}">
-    <fieldset>
-      <legend class="control-label">Vous êtes</legend>
-      <input type="radio" name="lien" id="lien-pere" ng-model="identite.lien" ng-required="!identite.lien" value="pere">
-      <label class="radio-inline" for="lien-pere">Le père</label>
-      <input type="radio" name="lien" id="lien-mere" ng-model="identite.lien" ng-required="!identite.lien" value="mere">
-      <label class="radio-inline" for="lien-mere">La mère</label>
-      <input type="radio" name="lien" id="lien-responsable" ng-model="identite.lien" ng-required="!identite.lien" value="responsable">
-      <label class="radio-inline" for="lien-responsable">Le représentant légal</label>
-    </fieldset>
-    <div ng-if="!identite.lien && infoForm.$submitted">
-      <p class="help-block">Ce champ est obligatoire.</p>
-    </div>
-  </div>
-
-  <div class="form-group required" ng-class="{'has-error': infoForm.nombreEnfantsACharge.$invalid && infoForm.$submitted}">
-    <label for="nombreEnfantsACharge" class="control-label">Nombre d'enfants à charge</label>
-    <select ng-model="identite.nombreEnfantsACharge" required id="nombreEnfantsACharge" class="form-control"
-      ng-options="nombre for nombre in listeNombreEnfantsACharge">
-      <option>0</option>
-    </select>
-    <div ng-messages="infoForm.enfants.$error" ng-if="infoForm.$submitted">
-      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
-    </div>
-  </div>
 
   <div class="form-group required" ng-class="{'has-error': infoForm.adresse.$invalid && infoForm.$submitted}">
     <label for="adresse" class="control-label">Adresse</label>
@@ -99,15 +50,19 @@
     </div>
   </div>
 
-  <div class="form-group required" ng-class="{'has-error': infoForm.email.$invalid && infoForm.$submitted}">
-    <label for="email" class="control-label">Email</label>
-    <div class="input-group">
-      <input id="email" type="email" name="email" class="form-control" ng-model="identite.email" required>
-      <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+  <hr>
+  <h4>Vos informations bancaires</h4>
+  <div class="form-group required" ng-class="{'has-error': infoForm.titulaire.$invalid && infoForm.$submitted}">
+    <label for="titulaire" class="control-label">Titulaire</label>
+    <input type="text" class="form-control" name="titulaire" ng-model="identite.titutlaire" placeholder="Pré-remplir avec les déclarants" required/>
+    <div class="">
+      <a class="label label-primary" ng-if="declarant" ng-repeat="declarant in data.identites" ng-click="setTitulaire(declarant, identite)"
+        title="{{'Sélectionner ' + declarant.prenoms + ' ' + declarant.nom}}">
+        {{declarant.prenoms}} {{declarant.nom}}
+      </a>
     </div>
-    <div ng-messages="infoForm.email.$error" ng-if="infoForm.$submitted">
+    <div ng-messages="infoForm.titulaire.$error" ng-if="infoForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
-      <p class="help-block" ng-message='email'>L'adresse email saisie est incorrecte.</p>
     </div>
   </div>
 
@@ -117,6 +72,37 @@
     <div ng-messages="infoForm.iban.$error" ng-if="infoForm.$submitted">
       <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
       <p class="help-block" ng-message='iban'>L'IBAN saisi est incorrect.</p>
+    </div>
+  </div>
+
+  <div class="form-group required" ng-class="{'has-error': infoForm.bic.$invalid && infoForm.$submitted}">
+    <label for="bic" class="control-label">BIC</label>
+    <input type="text" class="form-control" ng-model="identite.bic" required/>
+    <div ng-messages="infoForm.bic.$error" ng-if="infoForm.$submitted">
+      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
+      <p class="help-block" ng-message='bic'>Le BIC saisi est incorrect.</p>
+    </div>
+  </div>
+
+  <hr>
+  <h4>Pour vous tenir informés de l'avancement de votre demande</h4>
+  <div class="form-group required" ng-class="{'has-error': infoForm.email.$invalid && infoForm.$submitted}">
+    <label for="email" class="control-label">Email</label>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+      <input id="email" type="email" name="email" class="form-control" ng-model="identite.email" required>
+    </div>
+    <div ng-messages="infoForm.email.$error" ng-if="infoForm.$submitted">
+      <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
+      <p class="help-block" ng-message='email'>L'adresse email saisie est incorrecte.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="phone" class="control-label">Telephone</label>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+      <input id="phone" type="phone" name="phone" class="form-control" ng-model="identite.phone" required>
     </div>
   </div>
 

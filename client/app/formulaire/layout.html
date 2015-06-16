@@ -3,8 +3,8 @@
     <div id="status-buttons" class="text-center">
         <a ui-sref-active="active" ui-sref="main.formulaire.identite-enfant"><span>1</span> Identité de l'enfant</a>
 
-        <a class="muted" ng-if="!steps.identiteEnfant"><span>2</span> Connexion</a>
-        <a ui-sref-active="active" ng-if="steps.identiteEnfant" ui-sref="main.formulaire.vos-ressources"><span>2</span> Vos ressources</a>
+        <a class="muted" ng-if="!steps.identiteEnfant"><span>2</span> Votre foyer</a>
+        <a ui-sref-active="active" ng-if="steps.identiteEnfant" ui-sref="main.formulaire.vos-ressources"><span>2</span> Votre foyer</a>
 
         <a class="muted" ng-if="!steps.connexion"><span>3</span> Vos renseignements</a>
         <a ui-sref-active="active" ng-if="steps.connexion" ui-sref="main.formulaire.vos-renseignements"><span>3</span> Vos renseignements</a>

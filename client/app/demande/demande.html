@@ -1,12 +1,6 @@
 <div class="page-header">
   <h1>Demande de {{demande.identiteAdulte.prenom}} {{demande.identiteAdulte.nom}}</h1>
   <small>Passée le {{demande.createdAt | date}}</small>
-
-  <div class="text-right">
-    <a class="btn btn-primary btn-lg" href="/api/demandes/{{id}}/{{key}}/download" target="_blank" download="{{demande.identiteAdulte.prenom}}_{{demande.identiteAdulte.nom}}.pdf">
-      Télécharger
-    </a>
-  </div>
 </div>
 
 <h2>Identité de l'enfant</h2>
@@ -49,5 +43,14 @@
 <div class="info-label">E-mail</div>
 <p class="info">{{demande.identiteAdulte.email}}</p>
 
-<pre>{{demande | json}}</pre>
+<h1>Vos observations</h1>
 
+<textarea class="form-control" rows="5">
+
+</textarea>
+
+<h1>Transmission de la notification</h1>
+
+<a class="btn btn-primary btn-lg" href="/api/demandes/{{id}}/{{key}}/download" target="_blank" download="{{demande.identiteAdulte.nom}}_{{demande.identiteAdulte.prenom}}.pdf">
+  Télécharger le pdf de SIECLE et l'envoyer par mail à l'utilisateur
+</a>
