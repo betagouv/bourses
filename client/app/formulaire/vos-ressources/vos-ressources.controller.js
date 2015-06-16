@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRessourcesCtrl', function($scope, $http, $state, $timeout, store) {
+  .controller('VosRessourcesCtrl', function($scope, $http, $state, $timeout, $modal, store) {
     $scope.credentials = store.get('credentials') || {};
     $scope.data = store.get('svair-data') || {};
     $scope.identite = store.get('identite-adulte') || {garde: 'non'};
@@ -47,7 +47,24 @@ angular.module('boursesApp')
     };
 
     $scope.next = function(form) {
-      if (form.$valid && $scope.status === 'success') {
+      if (form.$valid) {
+        if ($scope.status !== 'success') {
+          $modal.open({
+            animation: true,
+            template: '<div class="modal-body"><h1>Vous n\'avez pas rempli ou validé vos informations fiscales.</h1></div>' +
+            '<div class="modal-footer">' +
+                '<button class="btn btn-primary" ng-click="ok()">OK</button>' +
+            '</div>',
+            controller: function($scope, $modalInstance) {
+              $scope.ok = function() {
+                $modalInstance.dismiss();
+              };
+            }
+          });
+
+          return;
+        }
+
         var steps = store.get('steps');
         steps.connexion = form.$valid;
         store.set('steps', steps);
