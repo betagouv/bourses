@@ -1,0 +1,37 @@
+section {
+  padding: 80px 0;
+}
+
+section#nouvelle_demande {
+  p {
+    font-size: 1.3em;
+    font-weight: 200;
+  }
+
+  p.lead {
+    font-size: 1.6em;
+  }
+
+  .action {
+    font-size: 1.7em;
+
+    a {
+      border-radius: 5px;
+      padding: 10px;
+      color: $red;
+
+      &:hover {
+        color: white;
+        text-decoration: none;
+        background-color: $red;
+      }
+    }
+  }
+
+}
+
+section#simulation {
+  color: $white;
+  background-color: $dark-blue;
+}
+

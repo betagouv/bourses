@@ -1,0 +1,123 @@
+<h1>Vos renseignements</h1>
+
+<form name="infoForm" ng-submit="submit(infoForm)" novalidate>
+  <div class="form-section">
+    <h2>Votre adresse</h2>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.adresse.$invalid && infoForm.$submitted}">
+      <label for="adresse" class="control-label-flat">Adresse</label>
+      <textarea id="adresse" rows="2" name="adresse" class="form-control-flat" ng-model="identite.adresse" required></textarea>
+      <div ng-messages="infoForm.adresse.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div
+      class="form-group required"
+      ng-class="{'has-error': infoForm.$submitted && infoForm.codePostal.$invalid}">
+      <label class="control-label-flat" for="postal-code">Code postal</label>
+      <input
+        type="text"
+        inputmode="numeric"
+        minlength="5"
+        maxlength="5"
+        pattern="[0-9]{5}"
+        title="Cinq chiffres"
+        class="form-control-flat"
+        id="postal-code"
+        name="codePostal"
+        required
+        ng-model="identite.codePostal"
+        ng-change="updateCities(infoForm)">
+      <div ng-messages="infoForm.codePostal.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='notFound'><i class="fa fa-warning"></i> Ce code postal est invalide</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.ville.$invalid && infoForm.$submitted}">
+      <label class="control-label-flat" for="postal-code-ville">Ville</label>
+      <p class="form-control-flat-static" ng-if="retrievingCities"><i class="fa fa-spinner fa-spin"></i></p>
+      <select
+        name="ville"
+        id="postal-code-ville"
+        class="form-control-flat"
+        required
+        ng-disabled="!cities.length"
+        ng-options="city.nomCommune for city in cities track by city.codeInsee"
+        ng-model="identite.ville">
+      </select>
+      <div ng-messages="infoForm.ville.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Vos informations bancaires</h2>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.titulaire.$invalid && infoForm.$submitted}">
+      <label for="titulaire" class="control-label-flat">Titulaire</label>
+      <select ng-model="identite.titulaire" required id="titulaire" class="form-control-flat"
+        ng-options="declarant as getLabel(declarant) for declarant in data.identites">
+        <option>--</option>
+      </select>
+      <div ng-if="!identite.titulaire && infoForm.$submitted">
+        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.iban.$invalid && infoForm.$submitted}">
+      <label for="iban" class="control-label-flat">IBAN</label>
+      <input type="text" class="form-control-flat" name="iban" ng-model="identite.iban" ng-iban="FR" required/>
+      <div ng-messages="infoForm.iban.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='iban'><i class="fa fa-warning"></i> L'IBAN saisi est incorrect.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.bic.$invalid && infoForm.$submitted}">
+      <label for="bic" class="control-label-flat">BIC</label>
+      <input type="text" class="form-control-flat" minlength="11" maxlength="11" name="bic" ng-model="identite.bic" required/>
+      <div ng-messages="infoForm.bic.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='minlength maxlength'><i class="fa fa-warning"></i> Le BIC saisi est incorrect, il doit faire exactement 11 caractères.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Pour vous tenir informés de l'avancement de votre demande</h2>
+    <div class="form-group required" ng-class="{'has-error': infoForm.email.$invalid && infoForm.$submitted}">
+      <label for="email" class="control-label-flat">Email</label>
+      <input id="email" type="email" name="email" class="form-control-flat" ng-model="identite.email" required>
+      <div ng-messages="infoForm.email.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='email'><i class="fa fa-warning"></i> L'adresse email saisie est incorrecte.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone" class="control-label-flat">Telephone</label>
+      <input id="phone" type="phone" name="phone" class="form-control-flat" ng-model="identite.phone">
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-group required" ng-class="{'has-error': !identite.signature && infoForm.$submitted}">
+      <div class="checkbox">
+        <label>
+          <input required id="check-signature" ng-model="identite.signature" type="checkbox"> Je certifie sur l’honneur que les renseignements portés sur cette déclaration sont exacts
+        </label>
+      </div>
+      <p class="help-block" ng-if="!identite.signature && infoForm.$submitted"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+    </div>
+  </div>
+
+  <div class="text-right">
+    <button type="submit" ladda="loading" data-style="expand-right" name="submit" alt="Valider" class="btn btn-lg btn-success">
+        Envoyer votre demande
+    </button>
+  </div>
+</form>
+

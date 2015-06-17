@@ -5,8 +5,7 @@ angular.module('boursesApp')
     $scope.data = store.get('svair-data') || {};
     $scope.identite = store.get('identite-adulte') || {};
 
-    $scope.setTitulaire = setTitulaire;
-    $scope.selectDeclarant = selectDeclarant;
+    $scope.getLabel = getLabel;
     $scope.updateCities = updateCities;
 
     $timeout(function() {
@@ -18,12 +17,13 @@ angular.module('boursesApp')
 
 
     $scope.submit = function(form) {
+        debugger;
       if ($scope.cities.length === 0 && form) {
         form.codePostal.$setValidity('notFound', false);
       } else {
         store.set('identite-adulte', $scope.identite);
 
-        if (!form.isValid) {
+        if (!form.$valid) {
           return;
         }
 
@@ -35,7 +35,7 @@ angular.module('boursesApp')
         };
 
         DemandeService.save(demande).then(function() {
-          $state.go('main.merci');
+          $state.go('layout.merci');
         });
       }
     };
@@ -62,20 +62,12 @@ angular.module('boursesApp')
         });
     }
 
-    function selectDeclarant(index, declarant) {
-      if ($scope.identite.selected !== index) {
-        $scope.identite.selected = index;
-        $scope.identite.nom = declarant.nom;
-        $scope.identite.prenom = declarant.prenoms;
-      }
-    }
-
     function updateCities() {
       $scope.retrievingCities = true;
       refreshCities(true);
     };
 
-    function setTitulaire(declarant, identite) {
-      identite.titutlaire = declarant.prenoms + ' ' + declarant.nom;
+    function getLabel(declarant) {
+      return declarant.prenoms + ' ' + declarant.nom;
     }
   });

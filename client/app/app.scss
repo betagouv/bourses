@@ -6,7 +6,7 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 
 $blue: #3498DB;
 $dark-blue: #2980B9;
-$darker-blue: #2C3E50;
+$darker-blue: #425466;
 $red: #E74C3C;
 $white: #ECF0F1;
 
@@ -31,10 +31,142 @@ $white: #ECF0F1;
   padding: 0;
 }
 
+.form-control-flat {
+  background-color: $blue;
+  border: none;
+  font-size: 1.4em;
+  padding: 5px 10px;
+  width: 100%;
+  color: $white;
+  border-radius: 4px;
+
+  &:focus {
+    background-color: lighten($blue, 2%);
+  }
+
+  &:hover {
+    background-color: lighten($blue, 2%);
+  }
+
+  :first-child {
+    font-size: 1em;
+  }
+}
+
+.has-error
+.checkbox {
+  color: white;
+}
+
+.has-error
+.form-control-flat {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.has-error
+.help-block {
+  color: white;
+  background-color: rgba(52, 152, 219, 0.31);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 4px;
+  padding-left: 10px;
+}
+
+.btn-action-container {
+  padding-top: 20px;
+}
+
+.btn-action {
+  background-color: $white;
+  color: $darker-blue;
+  box-shadow: 0 2px darken($dark-blue, 15%);
+
+  &:hover {
+    background-color: $darker-blue;
+    color: $white;
+  }
+
+  &:focus {
+    background-color: $darker-blue;
+    color: $white;
+  }
+}
+
+.btn-group > .btn-select.active {
+  z-index: 1;
+}
+
+.btn-select {
+  color: #333;
+  padding: 10px 20px;
+  background-color: $white;
+  border-radius: 5px;
+  border: none;
+  z-index: 2;
+  // box-shadow: 0 3px darken($dark-blue, 15%);
+
+  &.active {
+    background-color: $darker-blue;
+    color: white;
+    // box-shadow: 0 1px darken($dark-blue, 15%);
+    // transform: translateY(2px);
+  }
+
+  &:hover {
+    background-color: darken($darker-blue, 5%);
+    color: white;
+  }
+
+  &:active {
+    background-color: darken($darker-blue, 5%);
+    color: white;
+    // box-shadow: 0 1px darken($dark-blue, 15%);
+    // transform: translateY(2px);
+  }
+
+  &:focus {
+    background-color: darken($darker-blue, 5%);
+    color: white;
+  }
+}
+
+.form-group.required .control-label-flat:after {
+  content:" *";
+  color: $red;
+}
+
+.control-label-flat {
+  font-weight: 200;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-size: 1em;
+  border-bottom: none;
+  color: white;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: $white;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: $white;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: $white;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color: $white;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'demande/demande.scss';
-@import 'formulaire/formulaire.scss';
-@import 'formulaire/layout.scss';
-@import 'main/main.scss';
+@import 'home/home.scss';
+@import 'layout/layout.scss';
+@import 'nouvelle_demande/form_layout.scss';
+@import 'nouvelle_demande/nouvelle_demande.scss';
+@import 'nouvelle_demande/vos-ressources/vos-ressources.scss';
 // endinjector

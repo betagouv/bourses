@@ -16,6 +16,7 @@
       color: white;
     }
   }
+
   span {
     background: $white;
     display: block;
@@ -36,6 +37,21 @@
   }
 }
 
-#form-container {
-  margin-bottom: 100px;
+.nav-buttons {
+  text-align: center;
+  padding: 30px 0;
+}
+
+#form-views {
+  color: white;
+  padding: 40px 0 100px 0;
+  background-color: $dark-blue;
+}
+
+.form-section {
+  margin-bottom: 60px;
+
+  h2 {
+    font-size: 1.3em;
+  }
 }

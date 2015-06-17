@@ -24,7 +24,7 @@ angular.module('boursesApp')
 
       if (form.$valid) {
         store.set('steps', steps);
-        $state.go('main.formulaire.vos-ressources');
+        $state.go('layout.nouvelle_demande.vos-ressources');
       }
     };
 

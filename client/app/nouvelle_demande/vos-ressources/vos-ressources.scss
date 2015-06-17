@@ -1,0 +1,32 @@
+.alert > p.info-lead {
+  margin-bottom: 8px;
+}
+
+.well-svair {
+  background-color: $blue;
+  border-radius: 4px;
+  padding: 20px;
+
+  .form-control-flat {
+    background-color: lighten($blue, 10%);
+  }
+
+  .btn-action:hover,
+  .btn-action:focus {
+    background-color: $white;
+    color: $darker-blue;
+  }
+
+  .action-cancel {
+    color: $white;
+    margin-right: 10px;
+    margin-top: 2px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.edit-svair {
+  color: $red;
+}

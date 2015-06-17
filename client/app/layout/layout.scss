@@ -1,4 +1,4 @@
-.jumbotron {
+header {
   padding: 10px;
   margin-bottom: 0;
   background-color: $dark-blue;
@@ -9,7 +9,7 @@
     font-size: 45px;
     color: white;
     text-align: left;
-    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
   }
 
   ul.logos {
@@ -35,11 +35,6 @@
       text-decoration: none;
     }
   }
-}
-
-.form-group.required .control-label:after {
-  content:" *";
-  color:red;
 }
 
 fieldset {

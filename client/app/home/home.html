@@ -1,0 +1,47 @@
+<section id="nouvelle_demande">
+  <div class="container">
+    <p>
+      A la rentrée, votre collège lance un service en ligne pour faciliter vos demandes de bourse
+    </p>
+    <p class="lead">
+      Plus besoin de photocopies et de pièces justificatives
+    </p>
+    <div class="text-right">
+      <span class="action">
+        Simple, rapide, sécurisé,
+        <a ui-sref="layout.nouvelle_demande.identite-enfant">
+          déposez votre demande maintenant !
+        </a>
+      </span>
+    </div>
+  </div>
+</section>
+
+<section id="simulation">
+  <div class="container">
+    <h2>Ai-je droit à une bourse ?</h2>
+    <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
+      <div class="form-group">
+        <label for="rfr" class="control-label-flat">Revenu fiscal de référence de l’année 2013</label>
+        <input id="rfr" type="text" name="rfr" class="form-control-flat">
+      </div>
+      <div class="form-group">
+        <label for="enfants" class="control-label-flat">
+          Nombre d'enfants mineurs ou handicapés
+        </label>
+        <input id="enfants" type="number" min="0" value="1" name="enfants" class="form-control-flat">
+      </div>
+      <div class="form-group">
+        <label for="adultes" class="control-label-flat">
+          Nombre d'enfants majeurs célibataires
+        </label>
+        <input id="adultes" type="number" min="0" value="0" name="adultes" class="form-control-flat">
+      </div>
+      <div class="btn-action-container">
+        <button class="btn btn-lg btn-action">
+          Simuler votre droit à la bourse
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

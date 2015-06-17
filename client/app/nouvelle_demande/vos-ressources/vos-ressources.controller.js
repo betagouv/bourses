@@ -69,7 +69,7 @@ angular.module('boursesApp')
         steps.connexion = form.$valid;
         store.set('steps', steps);
         store.set('identite-adulte', $scope.identite);
-        $state.go('main.formulaire.vos-renseignements');
+        $state.go('layout.nouvelle_demande.vos-renseignements');
       }
     };
 

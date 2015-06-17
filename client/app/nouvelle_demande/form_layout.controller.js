@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('LayoutCtrl', function($scope, store) {
+  .controller('FormLayoutCtrl', function($scope, store) {
     if (store.get('steps') === null) {
       store.set('steps', {});
     }
