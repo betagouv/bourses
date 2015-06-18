@@ -18,7 +18,7 @@
       </div>
 
       <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted}">
-        <label for="referenceAvis" class="control-label-flat">Référence de votre dernier avis d'imposition</label>
+        <label for="referenceAvis" class="control-label-flat">Référence de votre avis d'imposition</label>
         <input id="referenceAvis" type="text" name="referenceAvis" class="form-control-flat" ng-model="newCredentials.referenceAvis" required>
         <div ng-messages="svairForm.referenceAvis.$error" ng-if="svairForm.$submitted">
           <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="text-right">
-      <a class="btn btn-action" ng-click="edit()">Modifier</a>
+      <a class="btn btn-action" ng-click="edit()">Changer mes identifiants</a>
     </div>
   </div>
 </div>
