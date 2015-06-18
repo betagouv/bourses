@@ -19,13 +19,20 @@ angular.module('boursesApp')
         templateUrl: 'app/nouvelle_demande/vos-ressources/vos-ressources.html',
         controller: 'VosRessourcesCtrl',
         resolve: {
-          fc: function($stateParams, $http) {
-            if ($stateParams.login && $stateParams.login === 'fc') {
-              return $http.get('/api/connection/fc').then(function(result) {
-                return result.data;
+          isLoggedIn: function(fc, svair) {
+            return fc || svair;
+          },
+          svair: function(store) {
+            return store.get('svair') || null;
+          },
+          fc: function($http) {
+            return $http.get('/api/connection/fc').then(
+              function(result) {
+                return result;
+              },
+              function() {
+                return null;
               });
-            }
-            return null;
           }
         }
       })

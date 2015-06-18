@@ -1,22 +1,28 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $timeout, $modal, store, fc) {
-    $scope.credentials = store.get('credentials') || {};
-    $scope.data = store.get('svair-data') || {};
+  .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $timeout, $modal, store, fc, svair, isLoggedIn) {
+
+    if (isLoggedIn) {
+      $scope.status = 'success';
+
+      if (fc) {
+        $scope.fc = fc;
+      } else {
+        $scope.svair = svair;
+      }
+    }
+
+    $scope.newCredentials = (svair && svair.credentials) ? _.cloneDeep(svair.credentials) : {};
     $scope.identite = store.get('identite-adulte') || {garde: 'non'};
 
     var currentYear = new Date().getFullYear();
     $scope.nMinus1 = currentYear - 1;
     $scope.nMinus2 = currentYear - 2;
 
-    $scope.newCredentials = _.cloneDeep($scope.credentials);
-    $scope.status = $scope.credentials.status;
-
     $scope.validateSvair = function(form) {
       if (form.$valid) {
         $scope.loading = true;
-
         $http.get('/api/connection/svair', {params: $scope.newCredentials})
         .success(function(data) {
           data.identites = [];
@@ -27,8 +33,8 @@ angular.module('boursesApp')
             data.identites.push(data.declarant2);
           }
 
-          store.set('svair-data', data);
-          $scope.data = data;
+          store.set('svair', data);
+          $scope.svair = data;
           saveCredentials('success');
         })
         .error(function(err) {
@@ -84,11 +90,18 @@ angular.module('boursesApp')
     }
 
     function saveCredentials(status) {
-      $scope.credentials = $scope.newCredentials;
-      $scope.status = $scope.credentials.status = status;
-      store.set('credentials', $scope.credentials);
+      $scope.svair.credentials = $scope.newCredentials;
+      $scope.status = status;
+      store.set('svair', $scope.svair);
     }
 
+    function logout() {
+      $http.get('/api/connection/fc/logout').then(function(err) {
+        console.log(err);
+      });
+    }
+
+    $scope.logout = logout;
     $scope.saveAndConnect = saveAndConnect;
     $scope.cancelCredentials = cancelCredentials;
   });

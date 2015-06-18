@@ -8,7 +8,7 @@ var router = express.Router();
 router.get('/', passport.authenticate('france-connect'));
 
 router.get('/callback', passport.authenticate('france-connect', { failureRedirect: '/' }), function (req, res) {
-  res.redirect('/nouvelle_demande/vos-ressources?login=fc');
+  res.redirect('/nouvelle_demande/vos-ressources');
 });
 
 module.exports = router;

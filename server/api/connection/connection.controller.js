@@ -62,9 +62,26 @@ exports.fc = function (req, res, next) {
   }
 
   fetchData(req.user.accessToken, 2013, function (err, result) {
-    if (err) return next(err);
+    if (err) {
+      req.log.error(err);
+      return res.status(401).send({
+        code: 401,
+        message: 'Utilisateur non authentifié'
+      });
+    };
     res.send({ response: result });
   });
+};
+
+exports.logout = function (req, res, next) {
+  if (!req.user || !req.user.accessToken) {
+    return res.status(200).send();
+  }
+
+  request
+    .get('https://fcp.integ01.dev-franceconnect.fr/api/v1/logout')
+    .set('Authorization', 'Bearer ' + req.user.accessToken)
+    .end(next);
 };
 
 exports.fetchData = fetchData;
