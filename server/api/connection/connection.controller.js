@@ -44,7 +44,7 @@ exports.svair = function (req, res, next) {
 function fetchData(accessToken, year, done) {
   request.get(config.dgfip.baseUrl + '/' + year)
     .set('Authorization', 'Bearer ' + accessToken)
-    .redirect(0)
+    .redirects(0)
     .agent(boris)
     .buffer()
     .end(function (err, resp) {
