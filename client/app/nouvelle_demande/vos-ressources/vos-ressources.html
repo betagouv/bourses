@@ -1,194 +1,210 @@
-<h1>Vos renseignements fiscaux</h1>
+<div class="form-section">
+  <h1>Votre foyer</h1>
+  <form name="foyerForm" ng-submit="next(foyerForm)" novalidate>
+    <div class="form-group required" ng-class="{'has-error': !identite.lien && foyerForm.$submitted}">
+      <fieldset>
+        <legend class="control-label-flat">
+          Vous êtes
+        </legend>
+        <div class="btn-group">
+          <label class="btn btn-select" ng-model="identite.lien" btn-radio="'pere'">Le père</label>
+          <label class="btn btn-select" ng-model="identite.lien" btn-radio="'mere'">La mère</label>
+          <label class="btn btn-select" ng-model="identite.lien" btn-radio="'responsable'">Le représentant légal</label>
+        </div>
+      </fieldset>
 
-<div class="alert alert-info" role="alert">
-  <p>
-    <i class="fa fa-info-circle"></i> Nous avons besoin des informations de votre avis d'imposition de l'année <strong>{{nMinus2}}</strong> afin d'en transmettre une copie à votre académie.
-  </p>
+      <div ng-if="!identite.lien && foyerForm.$submitted">
+        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': !identite.garde && foyerForm.$submitted}">
+      <fieldset>
+        <legend class="control-label-flat">Votre enfant est-il en garde alternée ?</legend>
+        <div class="btn-group">
+          <label class="btn btn-select" ng-model="identite.garde" btn-radio="'oui'">Oui</label>
+          <label class="btn btn-select" ng-model="identite.garde" btn-radio="'non'">Non</label>
+        </div>
+      </fieldset>
+
+      <div ng-if="!identite.garde && foyerForm.$submitted">
+        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': foyerForm.nombreEnfantsACharge.$invalid && foyerForm.$submitted}">
+      <label for="nombreEnfantsACharge" class="control-label-flat">
+        Nombre d'enfants mineurs ou handicapés
+        <br>
+        <small>(tel que mentionné sur l'avis d'imposition)</small>
+      </label>
+      <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsACharge" ng-model="identite.nombreEnfantsACharge">
+      <div ng-messages="foyerForm.enfants.$error" ng-if="foyerForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': foyerForm.nombreEnfantsAdultes.$invalid && foyerForm.$submitted}">
+      <label for="nombreEnfantsAdultes" class="control-label-flat">
+        Nombre d'enfants majeurs célibataires
+        <br>
+        <small>(tel que mentionné sur l'avis d'imposition)</small>
+      </label>
+      <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsAdultes" ng-model="identite.nombreEnfantsAdultes">
+      <div ng-messages="foyerForm.nombreEnfantsAdultes.$error" ng-if="foyerForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
+      </div>
+    </div>
+
+    <!-- <div ng-if="identite.garde === 'oui'">
+      <div class="well">
+
+        <p class="info-lead">
+          <i class="fa fa-info-circle"></i>
+          Nous avons également besoin de la déclaration de la deuxieme personne ayant la charge. <br>
+          Si vous n'etes pas en mesure de fournir ces elements, vous pouvez passer cette etape. Cette personne devra produire cette piece plus tard.
+        </p>
+
+        <div ng-if="statusConjoint !== 'success'">
+          <form name="svairFormConjoint" ng-submit="validateSvair(svairFormConjoint)" novalidate>
+            <div class="form-group required" ng-class="{'has-error': svairFormConjoint.numeroFiscal.$invalid && svairFormConjoint.$submitted}">
+              <label for="numeroFiscal" class="control-label-flat">Votre numéro fiscal</label>
+              <input id="numeroFiscal" type="text" name="numeroFiscal" class="form-control-flat" ng-model="newCredentials.numeroFiscal" required>
+              <div ng-messages="svairFormConjoint.numeroFiscal.$error" ng-if="svairFormConjoint.$submitted">
+                <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
+              </div>
+            </div>
+
+            <div class="form-group required" ng-class="{'has-error': svairFormConjoint.referenceAvis.$invalid && svairFormConjoint.$submitted}">
+              <label for="referenceAvis" class="control-label-flat">Référence de votre dernier avis d'imposition</label>
+              <input id="referenceAvis" type="text" name="referenceAvis" class="form-control-flat" ng-model="newCredentials.referenceAvis" required>
+              <div ng-messages="svairFormConjoint.referenceAvis.$error" ng-if="svairFormConjoint.$submitted">
+                <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
+              </div>
+            </div>
+
+            <div ng-if="statusConjoint === 'error' && error">
+              <p class="text-danger">{{error}}</p>
+            </div>
+
+            <div class="text-right">
+              <a ng-if="statusConjoint" ng-click="cancelCredentials()" alt="Annuler" class="btn btn-lg btn-default">
+                  Annuler
+              </a>
+              <button type="submit" ladda="loading" data-style="expand-right" name="submit" alt="Valider" class="btn btn-lg btn-primary">
+                  Valider
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="select-identites" ng-if="statusConjoint === 'success'">
+          <div class="form-group">
+            <label class="control-label-flat">Vos identités fiscales</label><a class="edit-svair" ng-click="edit()">Modifier</a>
+            <div class="identites">
+              <div class="identite" ng-if="data.declarant1.nom">
+                <span>{{data.declarant1.prenoms | capitalize:'first'}} {{data.declarant1.nom | capitalize:'first'}}</span>
+                <small>Né(e) le {{data.declarant1.dateNaissance}}</small>
+              </div>
+
+              <div class="identite" ng-if="data.declarant1.nom">
+                <span>{{data.declarant2.prenoms | capitalize:'first'}} {{data.declarant2.nom | capitalize:'first'}}</span>
+                <small>Né(e) le {{data.declarant2.dateNaissance}}</small>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label-flat">Votre situation familiale</label>
+            <div class="identite" ng-if="data.declarant1.nom">
+              <span>{{data.situationFamille}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+  </form>
 </div>
 
-<div class="well-svair">
-  <div ng-if="status !== 'success'">
-    <form name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
-      <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
-        <label for="numeroFiscal" class="control-label-flat">Votre numéro fiscal</label>
-        <input id="numeroFiscal" type="text" name="numeroFiscal" class="form-control-flat" ng-model="newCredentials.numeroFiscal" required>
-        <div ng-messages="svairForm.numeroFiscal.$error" ng-if="svairForm.$submitted">
-          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+<div class="form-section">
+  <h1>Vos renseignements fiscaux</h1>
+
+  <div class="alert alert-info" role="alert">
+    <p>
+      <i class="fa fa-info-circle"></i> Nous avons besoin des informations de votre avis d'imposition de l'année <strong>{{nMinus2}}</strong> afin d'en transmettre une copie à votre académie.
+    </p>
+  </div>
+
+  <div class="well-connect">
+    <div ng-if="status !== 'success'">
+      <div class="choices-connect">
+        <div class="connect-fc">
+          <h2>Vous avez un compte impots.gouv.fr</h2>
+          <div class="connect-fc-img">
+            <img src="assets/images/franceconnect.png">
+          </div>
+        </div>
+        <div class="connect-svair">
+          <h2>Vous n'avez pas de compte impots.gouv.fr</h2>
+          <form name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
+            <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
+              <label for="numeroFiscal" class="control-label-flat">Votre numéro fiscal</label>
+              <input id="numeroFiscal" type="text" name="numeroFiscal" class="form-control-flat" ng-model="newCredentials.numeroFiscal" required>
+              <div ng-messages="svairForm.numeroFiscal.$error" ng-if="svairForm.$submitted">
+                <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+              </div>
+            </div>
+
+            <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted}">
+              <label for="referenceAvis" class="control-label-flat">Référence de votre avis d'imposition</label>
+              <input id="referenceAvis" type="text" name="referenceAvis" class="form-control-flat" ng-model="newCredentials.referenceAvis" required>
+              <div ng-messages="svairForm.referenceAvis.$error" ng-if="svairForm.$submitted">
+                <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+              </div>
+            </div>
+
+            <div ng-if="status === 'error' && error">
+              <p class="text-danger">{{error}}</p>
+            </div>
+
+            <div class="text-right">
+              <a ng-if="status" class="action-cancel" ng-click="cancelCredentials()">Annuler</a>
+              <button type="submit" ladda="loading" data-style="expand-right" data-color="white" name="submit" alt="Valider" class="btn btn-action">
+                  Valider
+              </button>
+            </div>
+          </form>
         </div>
       </div>
+    </div>
 
-      <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted}">
-        <label for="referenceAvis" class="control-label-flat">Référence de votre avis d'imposition</label>
-        <input id="referenceAvis" type="text" name="referenceAvis" class="form-control-flat" ng-model="newCredentials.referenceAvis" required>
-        <div ng-messages="svairForm.referenceAvis.$error" ng-if="svairForm.$submitted">
-          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+    <div class="select-identites" ng-if="status === 'success'">
+      <div class="form-group">
+        <label class="control-label-flat">Vos identités fiscales</label>
+        <div class="form-control-flat">
+          <div class="identite" ng-if="declarant.nom" ng-repeat="declarant in data.identites">
+            <span>{{declarant.prenoms | capitalize:'first'}} {{declarant.nom | capitalize:'first'}}</span>
+            <small>Né(e) le {{declarant.dateNaissance}}</small>
+          </div>
         </div>
       </div>
-
-      <div ng-if="status === 'error' && error">
-        <p class="text-danger">{{error}}</p>
+      <div class="form-group">
+        <label class="control-label-flat">Votre situation familiale</label>
+        <div class="form-control-flat" ng-if="data.declarant1.nom">
+          <span>{{data.situationFamille}}</span>
+        </div>
       </div>
-
       <div class="text-right">
-        <a ng-if="status" class="action-cancel" ng-click="cancelCredentials()">Annuler</a>
-        <button type="submit" ladda="loading" data-style="expand-right" data-color="white" name="submit" alt="Valider" class="btn btn-action">
-            Valider
-        </button>
+        <a class="btn btn-action" ng-click="edit()">Changer mes identifiants</a>
       </div>
-    </form>
-  </div>
-
-  <div class="select-identites" ng-if="status === 'success'">
-    <div class="form-group">
-      <label class="control-label-flat">Vos identités fiscales</label>
-      <div class="form-control-flat">
-        <div class="identite" ng-if="declarant.nom" ng-repeat="declarant in data.identites">
-          <span>{{declarant.prenoms | capitalize:'first'}} {{declarant.nom | capitalize:'first'}}</span>
-          <small>Né(e) le {{declarant.dateNaissance}}</small>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label-flat">Votre situation familiale</label>
-      <div class="form-control-flat" ng-if="data.declarant1.nom">
-        <span>{{data.situationFamille}}</span>
-      </div>
-    </div>
-    <div class="text-right">
-      <a class="btn btn-action" ng-click="edit()">Changer mes identifiants</a>
     </div>
   </div>
 </div>
 
-<h1>Votre foyer</h1>
-<form name="foyerForm" ng-submit="next(foyerForm)" novalidate>
-  <div class="form-group required" ng-class="{'has-error': !identite.lien && foyerForm.$submitted}">
-    <fieldset>
-      <legend class="control-label-flat">
-        Vous êtes
-      </legend>
-      <div class="btn-group">
-        <label class="btn btn-select" ng-model="identite.lien" btn-radio="'pere'">Le père</label>
-        <label class="btn btn-select" ng-model="identite.lien" btn-radio="'mere'">La mère</label>
-        <label class="btn btn-select" ng-model="identite.lien" btn-radio="'responsable'">Le représentant légal</label>
-      </div>
-    </fieldset>
-
-    <div ng-if="!identite.lien && foyerForm.$submitted">
-      <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-    </div>
-  </div>
-
-  <div class="form-group required" ng-class="{'has-error': !identite.garde && foyerForm.$submitted}">
-    <fieldset>
-      <legend class="control-label-flat">Votre enfant est-il en garde alternée ?</legend>
-      <div class="btn-group">
-        <label class="btn btn-select" ng-model="identite.garde" btn-radio="'oui'">Oui</label>
-        <label class="btn btn-select" ng-model="identite.garde" btn-radio="'non'">Non</label>
-      </div>
-    </fieldset>
-
-    <div ng-if="!identite.garde && foyerForm.$submitted">
-      <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-    </div>
-  </div>
-
-  <div class="form-group required" ng-class="{'has-error': foyerForm.nombreEnfantsACharge.$invalid && foyerForm.$submitted}">
-    <label for="nombreEnfantsACharge" class="control-label-flat">
-      Nombre d'enfants mineurs ou handicapés
-      <br>
-      <small>(tel que mentionné sur l'avis d'imposition)</small>
-    </label>
-    <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsACharge" ng-model="identite.nombreEnfantsACharge">
-    <div ng-messages="foyerForm.enfants.$error" ng-if="foyerForm.$submitted">
-      <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
-    </div>
-  </div>
-
-  <div class="form-group required" ng-class="{'has-error': foyerForm.nombreEnfantsAdultes.$invalid && foyerForm.$submitted}">
-    <label for="nombreEnfantsAdultes" class="control-label-flat">
-      Nombre d'enfants majeurs célibataires
-      <br>
-      <small>(tel que mentionné sur l'avis d'imposition)</small>
-    </label>
-    <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsAdultes" ng-model="identite.nombreEnfantsAdultes">
-    <div ng-messages="foyerForm.nombreEnfantsAdultes.$error" ng-if="foyerForm.$submitted">
-      <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
-    </div>
-  </div>
-
-  <!-- <div ng-if="identite.garde === 'oui'">
-    <div class="well">
-
-      <p class="info-lead">
-        <i class="fa fa-info-circle"></i>
-        Nous avons également besoin de la déclaration de la deuxieme personne ayant la charge. <br>
-        Si vous n'etes pas en mesure de fournir ces elements, vous pouvez passer cette etape. Cette personne devra produire cette piece plus tard.
-      </p>
-
-      <div ng-if="statusConjoint !== 'success'">
-        <form name="svairFormConjoint" ng-submit="validateSvair(svairFormConjoint)" novalidate>
-          <div class="form-group required" ng-class="{'has-error': svairFormConjoint.numeroFiscal.$invalid && svairFormConjoint.$submitted}">
-            <label for="numeroFiscal" class="control-label-flat">Votre numéro fiscal</label>
-            <input id="numeroFiscal" type="text" name="numeroFiscal" class="form-control-flat" ng-model="newCredentials.numeroFiscal" required>
-            <div ng-messages="svairFormConjoint.numeroFiscal.$error" ng-if="svairFormConjoint.$submitted">
-              <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
-            </div>
-          </div>
-
-          <div class="form-group required" ng-class="{'has-error': svairFormConjoint.referenceAvis.$invalid && svairFormConjoint.$submitted}">
-            <label for="referenceAvis" class="control-label-flat">Référence de votre dernier avis d'imposition</label>
-            <input id="referenceAvis" type="text" name="referenceAvis" class="form-control-flat" ng-model="newCredentials.referenceAvis" required>
-            <div ng-messages="svairFormConjoint.referenceAvis.$error" ng-if="svairFormConjoint.$submitted">
-              <p class="help-block" ng-message='required'>Ce champ est obligatoire.</p>
-            </div>
-          </div>
-
-          <div ng-if="statusConjoint === 'error' && error">
-            <p class="text-danger">{{error}}</p>
-          </div>
-
-          <div class="text-right">
-            <a ng-if="statusConjoint" ng-click="cancelCredentials()" alt="Annuler" class="btn btn-lg btn-default">
-                Annuler
-            </a>
-            <button type="submit" ladda="loading" data-style="expand-right" name="submit" alt="Valider" class="btn btn-lg btn-primary">
-                Valider
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div class="select-identites" ng-if="statusConjoint === 'success'">
-        <div class="form-group">
-          <label class="control-label-flat">Vos identités fiscales</label><a class="edit-svair" ng-click="edit()">Modifier</a>
-          <div class="identites">
-            <div class="identite" ng-if="data.declarant1.nom">
-              <span>{{data.declarant1.prenoms | capitalize:'first'}} {{data.declarant1.nom | capitalize:'first'}}</span>
-              <small>Né(e) le {{data.declarant1.dateNaissance}}</small>
-            </div>
-
-            <div class="identite" ng-if="data.declarant1.nom">
-              <span>{{data.declarant2.prenoms | capitalize:'first'}} {{data.declarant2.nom | capitalize:'first'}}</span>
-              <small>Né(e) le {{data.declarant2.dateNaissance}}</small>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label-flat">Votre situation familiale</label>
-          <div class="identite" ng-if="data.declarant1.nom">
-            <span>{{data.situationFamille}}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <div class="text-right">
-    <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action">
-        Étape suivante <i class="fa fa-long-arrow-right"></i>
-    </button>
-  </div>
-</form>
+<div class="text-right">
+  <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action">
+      Étape suivante <i class="fa fa-long-arrow-right"></i>
+  </button>
+</div>

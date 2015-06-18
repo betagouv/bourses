@@ -2,7 +2,7 @@
   margin-bottom: 8px;
 }
 
-.well-svair {
+.well-connect {
   background-color: $blue;
   border-radius: 4px;
   padding: 20px;
@@ -25,8 +25,42 @@
       cursor: pointer;
     }
   }
+
+  h2 {
+    font-weight: 200;
+    text-align: center;
+    font-size: 18px;
+  }
 }
 
 .edit-svair {
   color: $red;
+}
+
+.choices-connect {
+  display: flex;
+}
+
+@media(max-width: 767px) {
+  .choices-connect {
+    flex-direction: column;
+    .connect-fc {
+      width: 100%;
+    }
+  }
+}
+
+.connect-fc {
+  width: 50%;
+  border-radius: 4px;
+
+  .connect-fc-img {
+    text-align: center;
+    padding: 25px;
+  }
+
+  img {
+    max-width: 400px;
+    width: 100%;
+  }
 }
