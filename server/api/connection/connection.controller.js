@@ -61,7 +61,7 @@ exports.fc = function (req, res, next) {
     });
   }
 
-  fetchData(accessToken, 2013, function (err, result) {
+  fetchData(req.user.accessToken, 2013, function (err, result) {
     if (err) return next(err);
     res.send({ response: result });
   });
