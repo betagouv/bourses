@@ -30,5 +30,5 @@ angular.module('boursesApp')
 
     var label = function(city) {
       return city.nom + ', ' + city.codePostal;
-    }
+    };
   });

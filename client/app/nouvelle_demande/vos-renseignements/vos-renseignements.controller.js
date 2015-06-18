@@ -5,9 +5,6 @@ angular.module('boursesApp')
     $scope.data = store.get('svair-data') || {};
     $scope.identite = store.get('identite-adulte') || {};
 
-    $scope.getLabel = getLabel;
-    $scope.updateCities = updateCities;
-
     $timeout(function() {
       refreshCities();
       if (!$scope.cities) {
@@ -15,9 +12,7 @@ angular.module('boursesApp')
       }
     });
 
-
     $scope.submit = function(form) {
-        debugger;
       if ($scope.cities.length === 0 && form) {
         form.codePostal.$setValidity('notFound', false);
       } else {
@@ -65,9 +60,12 @@ angular.module('boursesApp')
     function updateCities() {
       $scope.retrievingCities = true;
       refreshCities(true);
-    };
+    }
 
     function getLabel(declarant) {
       return declarant.prenoms + ' ' + declarant.nom;
     }
+
+    $scope.getLabel = getLabel;
+    $scope.updateCities = updateCities;
   });

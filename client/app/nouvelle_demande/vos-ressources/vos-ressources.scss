@@ -47,6 +47,9 @@
     .connect-fc {
       width: 100%;
     }
+    .connect-svair {
+      width: 100%;
+    }
   }
 }
 
@@ -57,10 +60,23 @@
   .connect-fc-img {
     text-align: center;
     padding: 25px;
+    align-items: center;
   }
 
   img {
     max-width: 400px;
     width: 100%;
+  }
+}
+
+.vertical-hr {
+  border-left: 1px solid darken($blue, 5%);
+}
+
+.connect-svair {
+  width: 50%;
+
+  form {
+    padding: 25px;
   }
 }

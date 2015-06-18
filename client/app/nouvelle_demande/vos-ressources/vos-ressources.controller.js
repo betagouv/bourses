@@ -12,7 +12,6 @@ angular.module('boursesApp')
 
     $scope.newCredentials = _.cloneDeep($scope.credentials);
     $scope.status = $scope.credentials.status;
-    $scope.cancelCredentials = cancelCredentials;
 
     $scope.validateSvair = function(form) {
       if (form.$valid) {
@@ -83,4 +82,6 @@ angular.module('boursesApp')
       $scope.status = $scope.credentials.status = status;
       store.set('credentials', $scope.credentials);
     }
+
+    $scope.cancelCredentials = cancelCredentials;
   });
