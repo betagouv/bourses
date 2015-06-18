@@ -9,7 +9,7 @@ exports.setup = function (config) {
       clientID: config.fc.clientId,
       clientSecret: config.fc.clientSecret,
       callbackURL: config.domain + '/oauth/fc/callback',
-      scope: ['openid', 'profile', 'email', 'address', 'phone', 'dgfip_avis_ir'],
+      scope: ['openid', 'profile', 'email', 'address', 'phone', 'dgfip_rfr', 'dgfip_nbpac', 'dgfip_sitfam', 'dgfip_nbpart'],
       state: 'foobar'
     },
     function(accessToken, refreshToken, profile, done) {

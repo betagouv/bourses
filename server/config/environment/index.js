@@ -45,6 +45,13 @@ var all = {
     clientSecret: process.env.FC_CLIENT_SECRET || 'fc-clientSecret'
   },
 
+  dgfip: {
+    host: process.env.DGFIP_HOST,
+    baseUrl: process.env.DGFIP_BASE_URL,
+    cert: process.env.DGFIP_CERT_LOCATION,
+    key: process.env.DGFIP_KEY_LOCATION
+  },
+
   smtpUser: process.env.SMTP_USER || 'toto',
   smtpPass: process.env.SMTP_PASS || 'password'
 
