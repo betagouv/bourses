@@ -48,7 +48,7 @@ function fetchData(accessToken, year, done) {
     .agent(boris)
     .buffer()
     .end(function (err, resp) {
-      if (err) return done(err);
+      if (err && !err.status) return done(err);
       done(null, resp.text);
     });
 }
