@@ -15,9 +15,19 @@ angular.module('boursesApp')
         controller: 'IdentiteEnfantCtrl'
       })
       .state('layout.nouvelle_demande.vos-ressources', {
-        url: '/vos-ressources',
+        url: '/vos-ressources?:login',
         templateUrl: 'app/nouvelle_demande/vos-ressources/vos-ressources.html',
-        controller: 'VosRessourcesCtrl'
+        controller: 'VosRessourcesCtrl',
+        resolve: {
+          fc: function($stateParams, $http) {
+            if ($stateParams.login && $stateParams.login === 'fc') {
+              return $http.get('/api/connection/fc').then(function(result) {
+                return result.data;
+              });
+            }
+            return null;
+          }
+        }
       })
       .state('layout.nouvelle_demande.vos-renseignements', {
         url: '/vos-renseignements',

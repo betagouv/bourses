@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRessourcesCtrl', function($scope, $http, $state, $timeout, $modal, store) {
+  .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $timeout, $modal, store, fc) {
     $scope.credentials = store.get('credentials') || {};
     $scope.data = store.get('svair-data') || {};
     $scope.identite = store.get('identite-adulte') || {garde: 'non'};
@@ -72,6 +72,12 @@ angular.module('boursesApp')
       }
     };
 
+    function saveAndConnect(event) {
+      event.preventDefault();
+      store.set('identite-adulte', $scope.identite);
+      $window.open('/oauth/fc', '_self');
+    }
+
     function cancelCredentials() {
       $scope.newCredentials = _.cloneDeep($scope.credentials);
       $scope.status = $scope.credentials.status;
@@ -83,5 +89,6 @@ angular.module('boursesApp')
       store.set('credentials', $scope.credentials);
     }
 
+    $scope.saveAndConnect = saveAndConnect;
     $scope.cancelCredentials = cancelCredentials;
   });

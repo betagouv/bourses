@@ -143,7 +143,7 @@
         <div class="connect-fc">
           <h2>Vous avez un compte impots.gouv.fr</h2>
           <div class="connect-fc-img">
-            <a href="/oauth/fc" target="_blank" title="Se connecter avec son compte impots.gouv.fr">
+            <a href="/oauth/fc" ng-click="saveAndConnect($event)" target="" title="Se connecter avec son compte impots.gouv.fr">
               <img src="assets/images/franceconnect.png" alt="Se connecter avec son compte impots.gouv.fr">
             </a>
           </div>
@@ -175,7 +175,7 @@
             <div class="text-right">
               <a ng-if="status" class="action-cancel" ng-click="cancelCredentials()">Annuler</a>
               <button type="submit" ladda="loading" data-style="expand-right" data-color="white" name="submit" alt="Valider" class="btn btn-action">
-                  Valider
+                Valider
               </button>
             </div>
           </form>
