@@ -53,20 +53,18 @@ function fetchData(accessToken, year, done) {
     });
 }
 
-exports.fc = function (req, res) {
-  if (!req.user) {
+exports.fc = function (req, res, next) {
+  if (!req.user || !req.user.accessToken) {
     return res.status(401).send({
       code: 401,
       message: 'Utilisateur non authentifié'
     });
   }
-  if (!req.user.avis_ir) {
-    return res.status(404).send({
-      code: 404,
-      message: 'Données non trouvées'
-    });
-  }
-  res.send(req.user);
+
+  fetchData(accessToken, 2013, function (err, result) {
+    if (err) return next(err);
+    res.send({ response: result });
+  });
 };
 
 exports.fetchData = fetchData;

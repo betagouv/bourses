@@ -14,6 +14,7 @@ exports.setup = function (config) {
     },
     function(accessToken, refreshToken, profile, done) {
       var user = profile;
+      user.accessToken = accessToken;
       user.avis_ir = {
        dateRecouvrement: '31/07/2014',
        dateEtablissement: '10/07/2014',
