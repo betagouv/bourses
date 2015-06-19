@@ -46,6 +46,7 @@ function fetchData(accessToken, year, done) {
     .set('Authorization', 'Bearer ' + accessToken)
     .redirects(0)
     .agent(boris)
+    .parse(request.parse.text)
     .buffer()
     .end(function (err, resp) {
       if (err && !err.status) return done(err);
