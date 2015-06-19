@@ -81,7 +81,7 @@
           <div class="vertical-hr"></div>
           <div class="connect-svair">
             <h2>Vous n'avez pas de compte impots.gouv.fr</h2>
-            <ng-form name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
+            <ng-form class="svair-form" name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
               <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
                 <label for="numeroFiscal" class="control-label-flat">Votre numéro fiscal</label>
                 <input id="numeroFiscal" type="text" name="numeroFiscal" class="form-control-flat" ng-model="credentials.numeroFiscal" required>
