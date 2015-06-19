@@ -15,17 +15,6 @@ exports.setup = function (config) {
     function(accessToken, refreshToken, profile, done) {
       var user = profile;
       user.accessToken = accessToken;
-      user.avis_ir = {
-       dateRecouvrement: '31/07/2014',
-       dateEtablissement: '10/07/2014',
-       situationFamille: 'Pacsé(e)s',
-       nombrePersonnesCharge: 0,
-       revenuBrutGlobal: 40000,
-       revenuImposable: 40000,
-       impotRevenuNetAvantCorrections: 4000,
-       montantImpot: 4000,
-       revenuFiscalReference: 40000
-      };
       done(null, user);
     }
   );
