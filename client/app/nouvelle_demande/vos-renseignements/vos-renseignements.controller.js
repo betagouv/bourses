@@ -2,7 +2,7 @@
 
 angular.module('boursesApp')
   .controller('VosRenseignementsCtrl', function($scope, $http, $state, $timeout, store, DemandeService) {
-    $scope.data = store.get('svair-data') || {};
+    $scope.data = store.get('svair') || {};
     $scope.identite = store.get('identite-adulte') || {};
 
     $timeout(function() {
@@ -26,7 +26,7 @@ angular.module('boursesApp')
         var demande = {
           identiteEnfant: store.get('identite-enfant'),
           identiteAdulte: store.get('identite-adulte'),
-          data: store.get('svair-data')
+          data: store.get('svair')
         };
 
         DemandeService.save(demande).then(function() {
