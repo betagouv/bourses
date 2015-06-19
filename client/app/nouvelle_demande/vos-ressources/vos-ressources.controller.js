@@ -3,6 +3,8 @@
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $timeout, $modal, store, fc, svair, isLoggedIn) {
 
+    var oldStatus = null;
+
     if (isLoggedIn) {
       $scope.status = 'success';
 
@@ -13,7 +15,7 @@ angular.module('boursesApp')
       }
     }
 
-    $scope.newCredentials = (svair && svair.credentials) ? _.cloneDeep(svair.credentials) : {};
+    $scope.credentials = (svair && svair.credentials) ? _.cloneDeep(svair.credentials) : {};
     $scope.identite = store.get('identite-adulte') || {garde: 'non'};
 
     var currentYear = new Date().getFullYear();
@@ -23,7 +25,7 @@ angular.module('boursesApp')
     $scope.validateSvair = function(form) {
       if (form.$valid) {
         $scope.loading = true;
-        $http.get('/api/connection/svair', {params: $scope.newCredentials})
+        $http.get('/api/connection/svair', {params: $scope.credentials})
         .success(function(data) {
           data.identites = [];
           if (data.declarant1) {
@@ -48,6 +50,7 @@ angular.module('boursesApp')
     };
 
     $scope.edit = function() {
+      oldStatus = $scope.status;
       $scope.status = 'pending';
     };
 
@@ -56,10 +59,7 @@ angular.module('boursesApp')
         if ($scope.status !== 'success') {
           $modal.open({
             animation: true,
-            template: '<div class="modal-body"><h1>Vous n\'avez pas rempli ou validé vos informations fiscales.</h1></div>' +
-            '<div class="modal-footer">' +
-                '<button class="btn btn-primary" ng-click="ok()">OK</button>' +
-            '</div>',
+            templateUrl: 'app/nouvelle_demande/vos-ressources/error.html',
             controller: function($scope, $modalInstance) {
               $scope.ok = function() {
                 $modalInstance.dismiss();
@@ -85,13 +85,13 @@ angular.module('boursesApp')
     }
 
     function cancelCredentials() {
-      $scope.newCredentials = _.cloneDeep($scope.credentials);
-      $scope.status = $scope.credentials.status;
+      $scope.credentials = _.cloneDeep($scope.credentials);
+      $scope.status = oldStatus;
     }
 
     function saveCredentials(status) {
-      $scope.svair.credentials = $scope.newCredentials;
-      $scope.status = status;
+      $scope.svair.credentials = $scope.credentials;
+      oldStatus = $scope.status = status;
       store.set('svair', $scope.svair);
     }
 

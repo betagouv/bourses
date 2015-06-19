@@ -80,3 +80,13 @@
     padding: 25px;
   }
 }
+
+.modal-body {
+  background-color: $blue;
+  color: white;
+}
+
+.modal-footer {
+  background-color: $dark-blue;
+  border-top: 1px solid $darker-blue;
+}
