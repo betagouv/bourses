@@ -56,7 +56,7 @@
   <div class="form-section">
     <h2>Vos informations bancaires</h2>
 
-    <div class="form-group required" ng-class="{'has-error': infoForm.titulaire.$invalid && infoForm.$submitted}">
+    <div class="form-group required" ng-class="{'has-error': !identite.titulaire && infoForm.$submitted}">
       <label for="titulaire" class="control-label-flat">Titulaire</label>
       <select ng-model="identite.titulaire" required id="titulaire" class="form-control-flat"
         ng-options="declarant as getLabel(declarant) for declarant in data.identites">
