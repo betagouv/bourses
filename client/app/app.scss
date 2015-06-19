@@ -66,8 +66,8 @@ $white: #ECF0F1;
 
 .has-error
 .help-block {
-  color: white;
-  background-color: rgba(52, 152, 219, 0.31);
+  color: $red;
+  background-color: $white;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   padding: 4px;
