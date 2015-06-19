@@ -68,15 +68,4 @@ exports.fc = function (req, res, next) {
   });
 };
 
-exports.logout = function (req, res, next) {
-  if (!req.user || !req.user.accessToken) {
-    return res.status(200).send();
-  }
-
-  request
-    .get('https://fcp.integ01.dev-franceconnect.fr/api/v1/logout')
-    .set('Authorization', 'Bearer ' + req.user.accessToken)
-    .end(next);
-};
-
 exports.fetchData = fetchData;
