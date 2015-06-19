@@ -6,6 +6,7 @@ public
 client/bower_components
 dist
 ecosystem.json
+processes.json
 server/config/local.env.js
 
 #OSX
