@@ -95,13 +95,6 @@ angular.module('boursesApp')
       store.set('svair', $scope.svair);
     }
 
-    function logout() {
-      $http.get('/api/connection/fc/logout').then(function(err) {
-        console.log(err);
-      });
-    }
-
-    $scope.logout = logout;
     $scope.saveAndConnect = saveAndConnect;
     $scope.cancelCredentials = cancelCredentials;
   });
