@@ -11,4 +11,9 @@ router.get('/callback', passport.authenticate('france-connect', { failureRedirec
   res.redirect('/nouvelle_demande/vos-ressources');
 });
 
+router.get('/logout', function (req, res) {
+	req.logout();
+	res.redirect('https://fcp.integ01.dev-franceconnect.fr/api/v1/logout');
+});
+
 module.exports = router;
