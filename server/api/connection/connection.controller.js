@@ -62,13 +62,7 @@ exports.fc = function (req, res, next) {
   }
 
   fetchData(req.user.accessToken, 2013, function (err, result) {
-    if (err) {
-      req.log.error(err);
-      return res.status(401).send({
-        code: 401,
-        message: 'Utilisateur non authentifié'
-      });
-    };
+    if (err) return next(err);
     res.send({ response: result });
   });
 };
