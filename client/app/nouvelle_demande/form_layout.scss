@@ -55,3 +55,12 @@
     font-size: 1.3em;
   }
 }
+
+@media(max-width: 767px) {
+  #status-buttons {
+    a {
+      margin: 0 20px;
+      font-size: 12px;
+    }
+  }
+}
