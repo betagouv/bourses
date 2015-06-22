@@ -33,5 +33,52 @@ section#nouvelle_demande {
 section#simulation {
   color: $white;
   background-color: $dark-blue;
+
+  .simulation {
+    display: flex;
+  }
+
+  .form {
+    width: 50%;
+  }
+
+  .result {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    p.maxi {
+      font-size: 4em;
+      font-weight: 500;
+      text-align: center;
+
+      &.text-muted {
+        color: $blue;
+      }
+    }
+  }
+
+  .vertical-hr {
+    margin: 0 15px;
+  }
+
+  @media(max-width: 767px) {
+    flex-direction: column;
+    .form {
+      width: 100%;
+    }
+    .result {
+      width: 100%;
+    }
+  }
 }
+
 

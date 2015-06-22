@@ -161,6 +161,10 @@ $white: #ECF0F1;
    color: $white;
 }
 
+.vertical-hr {
+  border-left: 1px solid darken($blue, 5%);
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'demande/demande.scss';

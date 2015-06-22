@@ -19,29 +19,55 @@
 
 <section id="simulation">
   <div class="container">
-    <h2>Ai-je droit à une bourse ?</h2>
-    <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
-      <div class="form-group">
-        <label for="rfr" class="control-label-flat">Revenu fiscal de référence de l’année 2013</label>
-        <input id="rfr" type="text" name="rfr" class="form-control-flat">
+    <div class="simulation">
+      <div class="form">
+        <h2>Ai-je droit à une bourse ?</h2>
+        <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
+          <div class="form-group">
+            <label for="rfr" class="control-label-flat">Revenu fiscal de référence de l’année 2013</label>
+            <input id="rfr" type="number" placeholder="0" min="0" name="rfr" ng-model="rfr" ng-model-options="{ debounce: 1000 }"
+              required class="form-control-flat" ng-change="submit(infoForm)">
+          </div>
+          <div class="form-group">
+            <label for="enfants" class="control-label-flat">
+              Nombre d'enfants mineurs ou handicapés
+            </label>
+            <input id="enfants" type="number" min="0" ng-model="enfants"
+              required name="enfants" class="form-control-flat" ng-change="submit(infoForm)">
+          </div>
+          <div class="form-group">
+            <label for="adultes" class="control-label-flat">
+              Nombre d'enfants majeurs célibataires
+            </label>
+            <input id="adultes" type="number" min="0" ng-model="adultes"
+              required name="adultes" class="form-control-flat" ng-change="submit(infoForm)">
+          </div>
+          <div class="btn-action-container text-right">
+            <button class="btn btn-lg btn-action">
+              Simuler votre droit à la bourse
+            </button>
+          </div>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="enfants" class="control-label-flat">
-          Nombre d'enfants mineurs ou handicapés
-        </label>
-        <input id="enfants" type="number" min="0" value="1" name="enfants" class="form-control-flat">
+      <div class="vertical-hr"></div>
+      <div class="result">
+        <h3>Résultat de votre simulation</h3>
+        <p ng-if="computing" class="maxi text-muted">
+            <i class="fa fa-spin fa-cog"></i> en cours
+        </p>
+        <p ng-if="!computing" class="maxi" ng-class="{'text-muted': montant === null}">
+            {{montant === null ? 'Pas de résultat' : montant + ' €'}}
+        </p>
       </div>
-      <div class="form-group">
-        <label for="adultes" class="control-label-flat">
-          Nombre d'enfants majeurs célibataires
-        </label>
-        <input id="adultes" type="number" min="0" value="0" name="adultes" class="form-control-flat">
-      </div>
-      <div class="btn-action-container">
-        <button class="btn btn-lg btn-action">
-          Simuler votre droit à la bourse
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </section>
+
+<!-- <div class="alert alert-info">
+  <p>La bourse des collèges est une aide destinée à favoriser la scolarité des collégiens. Elle est versée sous conditions de ressources.</p><p>Vous devez déposer votre dossier de demande entre la rentrée scolaire et la fin du mois de septembre.</p>
+  <div class="text-right">
+    <a target="_blank" href="http://vosdroits.service-public.fr/particuliers/F984.xhtml" title="Plus de détails">
+      <i class="fa fa-external-link"></i> Plus de détails
+    </a>
+  </div>
+</div> -->
