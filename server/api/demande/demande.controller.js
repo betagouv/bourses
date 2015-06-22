@@ -56,7 +56,7 @@ exports.download = function(req, res) {
     var decoded = new Buffer(demande.data, 'base64').toString();
     var demandeObj = JSON.parse(decoded);
     demandeObj.createdAt = demande.createdAt;
-
+    demandeObj.observations = demande.observations;
     Generator.toHtml(demandeObj, host, function(html) {
       wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
     });
