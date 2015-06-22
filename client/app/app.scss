@@ -165,6 +165,16 @@ $white: #ECF0F1;
   border-left: 1px solid darken($blue, 5%);
 }
 
+@media(max-width: 767px) {
+  .btn-select {
+    padding: 5px 10px;
+  }
+
+  .btn-lg {
+    padding: 6px 11px;
+  }
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'demande/demande.scss';

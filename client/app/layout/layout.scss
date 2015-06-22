@@ -55,3 +55,22 @@ fieldset {
 h1 {
   font-size: 30px;
 }
+
+@media(max-width: 767px) {
+  header {
+    h1 {
+      text-align: center;
+      font-size: 2em;
+    }
+
+    #logos-container {
+      margin: 0;
+      text-align: right;
+    }
+
+    img {
+      margin: 5px;
+      width: 80px;
+    }
+  }
+}
