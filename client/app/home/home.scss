@@ -33,13 +33,17 @@ section#nouvelle_demande {
 section#simulation {
   color: $white;
   background-color: $dark-blue;
+}
 
-  .simulation {
-    display: flex;
-  }
+.simulation {
+  display: flex;
 
   .form {
     width: 50%;
+  }
+
+  .btn-action-container {
+    text-align: right;
   }
 
   .result {
@@ -67,18 +71,29 @@ section#simulation {
   }
 
   .vertical-hr {
-    margin: 0 15px;
-  }
-
-  @media(max-width: 767px) {
-    flex-direction: column;
-    .form {
-      width: 100%;
-    }
-    .result {
-      width: 100%;
-    }
+    margin: 0 60px;
   }
 }
 
+@media(max-width: 767px) {
+  .simulation {
+    flex-direction: column;
 
+    .btn-action-container {
+      text-align: center;
+    }
+
+    .form {
+      width: 100%;
+    }
+
+    .result {
+      padding-top: 20px;
+      width: 100%;
+
+      p.maxi {
+        font-size: 3em;
+      }
+    }
+  }
+}
