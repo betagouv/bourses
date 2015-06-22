@@ -3,7 +3,7 @@
 angular.module('boursesApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('main.demande', {
+      .state('layout.demande', {
         url: 'demande/:id/:key',
         templateUrl: 'app/demande/demande.html',
         controller: 'DemandeCtrl',
@@ -17,7 +17,7 @@ angular.module('boursesApp')
           demande: function($http, $state, id, key) {
             return $http.get('/api/demandes/' + id + '/' + key)
               .error(function() {
-                $state.go('main.formulaire.identite-enfant');
+                $state.go('layout.formulaire.identite-enfant');
               })
               .then(function(result) {
                 return result.data;

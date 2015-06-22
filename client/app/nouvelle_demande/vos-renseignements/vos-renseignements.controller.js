@@ -35,21 +35,12 @@ angular.module('boursesApp')
       }
     };
 
-    function updateFormValidity(form) {
-      if (form) {
-        form.codePostal.$setValidity('notFound', $scope.cities.length > 0);
-      }
-    }
-
-    function refreshCities(changeSelection, form) {
+    function refreshCities(changeSelection) {
       $http.get('/api/communes/' + $scope.identite.codePostal)
         .then(function(result) {
           $scope.cities = result.data;
           if (changeSelection) {
             $scope.identite.ville = $scope.cities[0];
-          }
-          if (form) {
-            updateFormValidity(form);
           }
         }, console.error.bind(console)
         ).finally(function() {

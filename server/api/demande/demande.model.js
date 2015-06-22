@@ -6,6 +6,7 @@ var crypto = require('crypto');
 
 var DemandeSchema = new Schema({
   createdAt:      { type: Date, default: Date.now },
+  observations:   { type: String },
   data:           { type: String }
 });
 

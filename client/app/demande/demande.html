@@ -1,56 +1,118 @@
-<div class="page-header">
-  <h1>Demande de {{demande.identiteAdulte.prenom}} {{demande.identiteAdulte.nom}}</h1>
-  <small>Passée le {{demande.createdAt | date}}</small>
+<div class="container">
+  <div class="page-header">
+    <h2>Résumé de la demande <br><small>Passée le {{demande.createdAt | date}}</small></h2>
+
+    <div class="info-label">Identité du demandeur</div>
+    <p class="info">{{demande.identiteAdulte.titulaire.prenoms}} {{demande.identiteAdulte.titulaire.nom}} pour {{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</p>
+
+    <div class="info-label">Revenu fiscal de référence</div>
+    <p class="info">{{demande.data.revenuFiscalReference}} €</p>
+
+    <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
+    <p class="info">{{demande.identiteAdulte.nombreEnfantsACharge}}</p>
+
+    <div class="info-label">Nombre d'enfants majeurs célibataires</div>
+    <p class="info">{{demande.identiteAdulte.nombreEnfantsAdultes}}</p>
+
+    <div class="text-right">
+      <a class="btn btn-primary btn-lg" href="/api/demandes/{{id}}/{{key}}/download" target="_blank" download="{{demande.identiteAdulte.titulaire.nom}}_{{demande.identiteAdulte.titulaire.prenoms}}.pdf">
+        Télécharger
+      </a>
+    </div>
+  </div>
+  <h2>Identité de l'enfant</h2>
+
+  <div class="info-label">Nom</div>
+  <p class="info">{{demande.identiteEnfant.nom}}</p>
+
+  <div class="info-label">Prénom</div>
+  <p class="info">{{demande.identiteEnfant.prenom}}</p>
+
+  <div class="info-label">Sexe</div>
+  <p class="info">{{demande.identiteEnfant.sexe | sexe}}</p>
+
+  <div class="info-label">Date de naissance</div>
+  <p class="info">{{demande.identiteEnfant.dateNaissance | date}}</p>
+
+  <div class="info-label">Régime</div>
+  <p class="info">{{demande.identiteEnfant.regime | regime}}</p>
+
+  <h2>Identité de l'adulte</h2>
+
+  <div class="info-label">Nom</div>
+  <p class="info">{{demande.identiteAdulte.titulaire.nom}}</p>
+
+  <div class="info-label">Prénom</div>
+  <p class="info">{{demande.identiteAdulte.titulaire.prenoms}}</p>
+
+  <div class="info-label">Lien avec l'enfant</div>
+  <p class="info">{{demande.identiteAdulte.lien | lien}}</p>
+
+  <h2>Renseignements du foyer</h2>
+
+  <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
+  <p class="info">{{demande.identiteAdulte.nombreEnfantsACharge}}</p>
+
+  <div class="info-label">Nombre d'enfants majeurs célibataires</div>
+  <p class="info">{{demande.identiteAdulte.nombreEnfantsAdultes}}</p>
+
+  <div class="info-label">Garde alternée</div>
+  <p class="info">{{demande.identiteAdulte.garde}}</p>
+
+  <h2>Renseignements de contact</h2>
+
+  <div class="info-label">Adresse</div>
+  <p class="info">{{demande.identiteAdulte.adresse}}</p>
+
+  <div class="info-label">Code postal</div>
+  <p class="info">{{demande.identiteAdulte.codePostal}}</p>
+
+  <div class="info-label">Ville</div>
+  <p class="info">{{demande.identiteAdulte.ville.nomCommune}}</p>
+
+  <div class="info-label">E-mail</div>
+  <p class="info">{{demande.identiteAdulte.email}}</p>
+
+  <h2>Renseignements bancaires</h2>
+
+  <div class="info-label">IBAN</div>
+  <p class="info">{{demande.identiteAdulte.iban}}</p>
+
+  <div class="info-label">BIC</div>
+  <p class="info">{{demande.identiteAdulte.bic}}</p>
+
+  <h2>Renseignements issus de la déclaration d'impôt</h2>
+
+  <div class="info-label">Revenu fiscal de référence</div>
+  <p class="info">{{demande.data.revenuFiscalReference}} €</p>
+
+  <div class="info-label">Situation familiale</div>
+  <p class="info">{{demande.data.situationFamille}}</p>
+
+  <h1>Vos observations</h1>
+
+  <div ng-switch="saving">
+    <p ng-switch-when="pending"><i class="fa fa-spin fa-cog"></i> Sauvegarde en cours</p>
+    <p ng-switch-when="success" class="text-success"><i class="fa fa-check"></i> Sauvegarde effectuée</p>
+    <p ng-switch-default>Pas de modifications</p>
+  </div>
+
+  <div class="form-group">
+    <textarea
+      class="form-control"
+      ng-model-options="{ debounce: 200 }"
+      ng-change="save()"
+      ng-model="demande.observations"
+      rows="5"></textarea>
+
+  </div>
+
+<!--
+  <h1>Transmission de la notification</h1>
+
+  <a class="btn btn-primary btn-lg" href="/api/demandes/{{id}}/{{key}}/download" target="_blank" download="{{demande.identiteAdulte.titulaire.nom}}_{{demande.identiteAdulte.titulaire.prenoms}}.pdf">
+    Télécharger le pdf de SIECLE et l'envoyer par mail à l'utilisateur
+  </a>
+
+  <pre>{{demande | json}}</pre> -->
 </div>
-
-<h2>Identité de l'enfant</h2>
-
-<div class="info-label">Nom</div>
-<p class="info">{{demande.identiteEnfant.nom}}</p>
-
-<div class="info-label">Prénom</div>
-<p class="info">{{demande.identiteEnfant.prenom}}</p>
-
-<div class="info-label">Sexe</div>
-<p class="info">{{demande.identiteEnfant.sexe | sexe}}</p>
-
-<div class="info-label">Date de naissance</div>
-<p class="info">{{demande.identiteEnfant.dateNaissance | date}}</p>
-
-<div class="info-label">Régime</div>
-<p class="info">{{demande.identiteEnfant.regime | regime}}</p>
-
-<h2>Identité de l'adulte</h2>
-
-<div class="info-label">Nom</div>
-<p class="info">{{demande.identiteAdulte.nom}}</p>
-
-<div class="info-label">Prénom</div>
-<p class="info">{{demande.identiteAdulte.prenom}}</p>
-
-<div class="info-label">Lien avec l'enfant</div>
-<p class="info">{{demande.identiteAdulte.lien | lien}}</p>
-
-<div class="info-label">Adresse</div>
-<p class="info">{{demande.identiteAdulte.adresse}}</p>
-
-<div class="info-label">Code postal</div>
-<p class="info">{{demande.identiteAdulte.codePostal}}</p>
-
-<div class="info-label">Ville</div>
-<p class="info">{{demande.identiteAdulte.ville.nomCommune}}</p>
-
-<div class="info-label">E-mail</div>
-<p class="info">{{demande.identiteAdulte.email}}</p>
-
-<h1>Vos observations</h1>
-
-<textarea class="form-control" rows="5">
-
-</textarea>
-
-<h1>Transmission de la notification</h1>
-
-<a class="btn btn-primary btn-lg" href="/api/demandes/{{id}}/{{key}}/download" target="_blank" download="{{demande.identiteAdulte.nom}}_{{demande.identiteAdulte.prenom}}.pdf">
-  Télécharger le pdf de SIECLE et l'envoyer par mail à l'utilisateur
-</a>
