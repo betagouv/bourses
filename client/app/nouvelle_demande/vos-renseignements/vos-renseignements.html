@@ -78,10 +78,10 @@
 
     <div class="form-group required" ng-class="{'has-error': infoForm.bic.$invalid && infoForm.$submitted}">
       <label for="bic" class="control-label-flat">BIC</label>
-      <input type="text" class="form-control-flat" minlength="11" maxlength="11" name="bic" ng-model="identite.bic" required/>
+      <input type="text" class="form-control-flat" minlength="8" maxlength="11" name="bic" ng-model="identite.bic" required/>
       <div ng-messages="infoForm.bic.$error" ng-if="infoForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        <p class="help-block" ng-message='minlength maxlength'><i class="fa fa-warning"></i> Le BIC saisi est incorrect, il doit faire exactement 11 caractères.</p>
+        <p class="help-block" ng-message='minlength maxlength'><i class="fa fa-warning"></i> Le BIC saisi est incorrect, il doit être de 8 ou 11 caractères.</p>
       </div>
     </div>
   </div>
