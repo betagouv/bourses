@@ -11,13 +11,13 @@
       text-decoration:none;
     }
 
-    &.active span {
+    &.active span.round {
       background: $red;
       color: white;
     }
   }
 
-  span {
+  span.round {
     background: $white;
     display: block;
     height: 30px;
