@@ -70,7 +70,7 @@
           d'imposition afin d'en transmettre une copie à votre académie.
         </p>
       </div>
-      <div connection connection-id="'demandeur'" on-success="saveIdentite"></div>
+      <div connection connection-id="'demandeur'" status="statusDemandeur" on-success="saveIdentite"></div>
     </div>
   </div>
 
@@ -88,8 +88,8 @@
     </div>
 
     <div class="well-connect">
-      <div id="disabled-overlay" ng-if="identite.garde !== 'oui' && identite.concubinage !== 'oui'"></div>
-      <div connection connection-id="'conjoint'" on-success="saveIdentite"></div>
+      <div id="disabled-overlay" ng-if="isOtherParentDisabled()"></div>
+      <div connection connection-id="'conjoint'" status="statusConjoint" on-success="saveIdentite"></div>
     </div>
   </div>
 

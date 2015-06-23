@@ -4,7 +4,8 @@ angular.module('boursesApp').directive('connection', function ($http, store) {
   return {
     scope: {
       connectionId: '=',
-      onSuccess: '='
+      onSuccess: '=',
+      status: '='
     },
     templateUrl: 'components/connection/connection.html',
     restrict: 'EA',
