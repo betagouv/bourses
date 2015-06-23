@@ -17,24 +17,7 @@ angular.module('boursesApp')
       .state('layout.nouvelle_demande.vos-ressources', {
         url: '/vos-ressources?:login',
         templateUrl: 'app/nouvelle_demande/vos-ressources/vos-ressources.html',
-        controller: 'VosRessourcesCtrl',
-        resolve: {
-          isLoggedIn: function(fc, svair) {
-            return fc || svair;
-          },
-          svair: function(store) {
-            return store.get('svair') || null;
-          },
-          fc: function($http) {
-            return $http.get('/api/connection/fc').then(
-              function(result) {
-                return result;
-              },
-              function() {
-                return null;
-              });
-          }
-        }
+        controller: 'VosRessourcesCtrl'
       })
       .state('layout.nouvelle_demande.vos-renseignements', {
         url: '/vos-renseignements',
