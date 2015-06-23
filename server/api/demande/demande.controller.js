@@ -10,10 +10,12 @@ var SendMail = require('../../components/mail/send-mail')
 
 // Creates a new demande in the DB.
 exports.create = function(req, res) {
+
   var str = JSON.stringify(req.body);
   var encoded = new Buffer(str).toString('base64');
 
   Demande.create({
+    college: req.params.college,
     data: encoded
   }, function(err, demande) {
     if (err) { return handleError(req, res, err); }

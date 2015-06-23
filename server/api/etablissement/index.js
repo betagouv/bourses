@@ -2,10 +2,13 @@
 
 var express = require('express');
 var controller = require('./etablissement.controller');
+var auth = require('../../oauth/auth.service');
 
 var router = express.Router();
 
-router.get('/:id/:key', controller.show);
+router.get('/:id', auth.hasRole('admin'), controller.show);
+router.put('/:id', auth.hasRole('admin'), controller.update);
+router.get('/:id/demandes', auth.isAuthenticated(), controller.demandes);
 router.get('/', controller.query);
 
 module.exports = router;

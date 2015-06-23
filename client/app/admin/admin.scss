@@ -2,11 +2,14 @@
   color: white;
   padding: 100px 0;
   background-color: $dark-blue;
-  height: 100%;
 
   .list-group-item {
     background-color: $blue;
     border-color: darken($blue, 5%);
+
+    &:hover {
+      background-color: lighten($blue, 2%);
+    }
   }
 
   .text-muted {
@@ -19,6 +22,18 @@
     &:hover {
       color: lighten($blue, 15%);
       cursor: pointer;
+    }
+  }
+
+  a {
+    color: white;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:focus {
+      text-decoration: none;
     }
   }
 }
