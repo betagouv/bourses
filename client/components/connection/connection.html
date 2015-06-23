@@ -1,0 +1,84 @@
+<div ng-if="status !== 'success'">
+  <div class="choices-connect">
+    <div class="connect-fc">
+      <h2>Vous avez un compte impots.gouv.fr</h2>
+      <div class="connect-fc-img">
+        <a href="/oauth/fc" ng-click="saveAndConnect($event)" target="" title="Se connecter avec son compte impots.gouv.fr">
+          <img src="assets/images/franceconnect.png" alt="Se connecter avec son compte impots.gouv.fr">
+        </a>
+      </div>
+    </div>
+    <div class="vertical-hr"></div>
+    <div class="connect-svair">
+      <h2>Vous n'avez pas de compte impots.gouv.fr</h2>
+      <ng-form class="svair-form" name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
+        <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
+
+          <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Votre numéro fiscal</label>
+          <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Numéro fiscal de l'autre parent</label>
+
+          <input id="numeroFiscal_{{connectionId}}" type="text" name="numeroFiscal" class="form-control-flat" ng-model="credentials.numeroFiscal" required>
+          <div ng-messages="svairForm.numeroFiscal.$error" ng-if="svairForm.$submitted">
+            <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+          </div>
+        </div>
+
+        <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted}">
+
+          <label for="referenceAvis_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Référence de votre avis d'imposition {{nMinus2}}</label>
+          <label for="referenceAvis_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Référence de l'avis d'imposition {{nMinus2}} de l'autre parent</label>
+
+          <input id="referenceAvis_{{connectionId}}" type="text" name="referenceAvis" class="form-control-flat" ng-model="credentials.referenceAvis" required>
+          <div ng-messages="svairForm.referenceAvis.$error" ng-if="svairForm.$submitted">
+            <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+          </div>
+        </div>
+
+        <div ng-if="status === 'error' && error">
+          <p class="text-danger">{{error}}</p>
+        </div>
+
+        <div class="text-right">
+          <a ng-if="status" class="action-cancel" ng-click="cancelCredentials()">Annuler</a>
+          <button ladda="loading" ng-click="validateSvair(svairForm)" data-style="expand-right" data-color="white" name="submit" alt="Valider" class="btn btn-action">
+            Valider
+          </button>
+        </div>
+      </ng-form>
+    </div>
+  </div>
+</div>
+
+<div ng-if="status === 'success'">
+  <div ng-if="!fc">
+    <div class="form-group">
+      <label class="control-label-flat" ng-if="connectionId === 'demandeur'">Vos identités fiscales</label>
+      <label class="control-label-flat" ng-if="connectionId !== 'demandeur'">Identités fiscales de l'autre parent</label>
+
+      <div class="form-control-flat">
+        <div class="identite" ng-if="declarant.nom" ng-repeat="declarant in svair.identites">
+          <span>{{declarant.prenoms | capitalize:'first'}} {{declarant.nom | capitalize:'first'}}</span>
+          <small>Né(e) le {{declarant.dateNaissance}}</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label-flat" ng-if="connectionId === 'demandeur'">Votre situation familiale</label>
+      <label class="control-label-flat" ng-if="connectionId !== 'demandeur'">Situation familiale de l'autre parent</label>
+      <div class="form-control-flat">
+        <span>{{svair.situationFamille}}</span>
+      </div>
+    </div>
+    <div class="text-right">
+      <a class="btn btn-action" ng-click="edit()" ng-if="connectionId === 'demandeur'">Changer mes identifiants</a>
+      <a class="btn btn-action" ng-click="edit()" ng-if="connectionId !== 'demandeur'">Changer ces identifiants</a>
+    </div>
+  </div>
+  <div ng-if="fc">
+    {{fc.data.response}}
+
+    <div class="text-right">
+      <a class="btn btn-action" href="/oauth/fc/logout" target="_self" title="Se déconnecter">Se déconnecter</a>
+    </div>
+  </div>
+</div>
