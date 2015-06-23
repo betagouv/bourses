@@ -4,7 +4,7 @@ angular.module('boursesApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('layout.nouvelle_demande', {
-        url: 'nouvelle_demande',
+        url: '/nouvelle_demande',
         templateUrl: 'app/nouvelle_demande/form_layout.html',
         controller: 'FormLayoutCtrl',
         abstract: true

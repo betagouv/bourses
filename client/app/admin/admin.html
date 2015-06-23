@@ -1,0 +1,21 @@
+<div id="admin">
+  <div class="container">
+    <h1>Utilisateurs</h1>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="user in users">
+        <strong>{{user.name}}</strong><br>
+        <span class="text-muted">{{user.email}}</span>
+        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+      </li>
+    </ul>
+
+    <h1>Établissements</h1>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="etablissement in etablissements">
+        <strong>{{etablissement.nom}}</strong> / {{etablissement.contact}}<br>
+        <span class="text-muted">{{etablissement.ville.nom}}, {{etablissement.ville.codePostal}}</span>
+      </li>
+    </ul>
+
+  </div>
+</div>

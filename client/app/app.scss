@@ -177,9 +177,11 @@ $white: #ECF0F1;
 
 // Component styles are injected through grunt
 // injector
+@import 'admin/admin.scss';
 @import 'demande/demande.scss';
 @import 'home/home.scss';
 @import 'layout/layout.scss';
+@import 'login/login.scss';
 @import 'nouvelle_demande/form_layout.scss';
 @import 'nouvelle_demande/nouvelle_demande.scss';
 @import 'nouvelle_demande/vos-ressources/vos-ressources.scss';

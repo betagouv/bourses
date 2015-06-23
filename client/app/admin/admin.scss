@@ -1,0 +1,24 @@
+#admin {
+  color: white;
+  padding: 100px 0;
+  background-color: $dark-blue;
+  height: 100%;
+
+  .list-group-item {
+    background-color: $blue;
+    border-color: darken($blue, 5%);
+  }
+
+  .text-muted {
+    color: lighten($blue, 15%);
+  }
+
+  .trash {
+    color: white;
+
+    &:hover {
+      color: lighten($blue, 15%);
+      cursor: pointer;
+    }
+  }
+}

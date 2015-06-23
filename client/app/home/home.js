@@ -4,7 +4,7 @@ angular.module('boursesApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('layout.home', {
-        url: '',
+        url: '/',
         templateUrl: 'app/home/home.html',
         controller: function($scope, $timeout, simulation) {
           $scope.adultes = 0;

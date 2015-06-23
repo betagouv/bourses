@@ -13,7 +13,6 @@ exports.show = function(req, res) {
 
   Etablissement
     .findById(id)
-    .select('-contact')
     .exec(function (err, etablissement) {
       if (err) { return handleError(req, res, err); }
       if(!etablissement) { return res.sendStatus(404); }
@@ -25,7 +24,6 @@ exports.show = function(req, res) {
 exports.query = function(req, res) {
   Etablissement
     .find()
-    .select('-contact')
     .exec(function (err, etablissements) {
       if (err) { return handleError(req, res, err); }
       if(!etablissements) { return res.sendStatus(404); }

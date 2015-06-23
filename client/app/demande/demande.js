@@ -4,7 +4,7 @@ angular.module('boursesApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('layout.demande', {
-        url: 'demande/:id/:key',
+        url: '/demande/:id/:key',
         templateUrl: 'app/demande/demande.html',
         controller: 'DemandeCtrl',
         resolve: {
