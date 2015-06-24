@@ -19,7 +19,6 @@ angular.module('boursesApp')
       login: function(user, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
-        debugger;
         $http.post('/oauth/local', {
           email: user.email,
           password: user.password
