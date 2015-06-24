@@ -3,7 +3,7 @@
 angular.module('boursesApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
-    if($cookieStore.get('token')) {
+    if($cookieStore.get('loginToken')) {
       currentUser = User.get();
     }
 
@@ -25,7 +25,7 @@ angular.module('boursesApp')
           password: user.password
         }).
         success(function(data) {
-          $cookieStore.put('token', data.token);
+          $cookieStore.put('loginToken', data.token);
           currentUser = User.get();
           deferred.resolve(data);
           return cb();
@@ -45,7 +45,7 @@ angular.module('boursesApp')
        * @param  {Function}
        */
       logout: function() {
-        $cookieStore.remove('token');
+        $cookieStore.remove('loginToken');
         currentUser = {};
       },
 
@@ -61,7 +61,7 @@ angular.module('boursesApp')
 
         return User.save(user,
           function(data) {
-            $cookieStore.put('token', data.token);
+            $cookieStore.put('loginToken', data.token);
             currentUser = User.get();
             return cb(user);
           },
@@ -119,7 +119,7 @@ angular.module('boursesApp')
        * Get auth token
        */
       getToken: function() {
-        return $cookieStore.get('token');
+        return $cookieStore.get('loginToken');
       }
     };
   });
