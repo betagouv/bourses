@@ -71,9 +71,15 @@ angular.module('boursesApp').directive('connection', function ($http, store) {
         scope.status = 'pending';
       }
 
+      function saveAndConnect(event) {
+        event.preventDefault();
+        $window.open('/oauth/fc', '_self');
+      }
+
       scope.edit = edit;
       scope.validateSvair = validateSvair;
       scope.cancelCredentials = cancelCredentials;
+      $scope.saveAndConnect = saveAndConnect;
     }
   };
 });

@@ -33,12 +33,6 @@ angular.module('boursesApp')
       $state.go('layout.nouvelle_demande.vos-renseignements');
     };
 
-    function saveAndConnect(event) {
-      event.preventDefault();
-      saveIdentite();
-      $window.open('/oauth/fc', '_self');
-    }
-
     function saveIdentite() {
       store.set('identite-adulte', $scope.identite);
     }
@@ -61,5 +55,4 @@ angular.module('boursesApp')
 
     $scope.isOtherParentDisabled = isOtherParentDisabled;
     $scope.saveIdentite = saveIdentite;
-    $scope.saveAndConnect = saveAndConnect;
   });
