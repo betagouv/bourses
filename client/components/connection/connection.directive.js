@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('boursesApp').directive('connection', function ($http, store) {
+angular.module('boursesApp').directive('connection', function ($http, $window, store) {
   return {
     scope: {
       connectionId: '=',
@@ -79,7 +79,7 @@ angular.module('boursesApp').directive('connection', function ($http, store) {
       scope.edit = edit;
       scope.validateSvair = validateSvair;
       scope.cancelCredentials = cancelCredentials;
-      $scope.saveAndConnect = saveAndConnect;
+      scope.saveAndConnect = saveAndConnect;
     }
   };
 });
