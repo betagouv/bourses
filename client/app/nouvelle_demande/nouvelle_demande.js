@@ -15,7 +15,7 @@ angular.module('boursesApp')
         controller: 'IdentiteEnfantCtrl'
       })
       .state('layout.nouvelle_demande.vos-ressources', {
-        url: '/vos-ressources?:login',
+        url: '/vos-ressources',
         templateUrl: 'app/nouvelle_demande/vos-ressources/vos-ressources.html',
         controller: 'VosRessourcesCtrl'
       })
