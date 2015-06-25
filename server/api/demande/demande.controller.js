@@ -34,6 +34,13 @@ exports.show = function(req, res) {
     .exec(function (err, demande) {
       if (err) { return handleError(req, res, err); }
       if(!demande) { return res.sendStatus(404); }
+
+      if (demande.status === 'new') {
+        demande
+          .set('status', 'pending')
+          .save();
+      }
+
       var decoded = new Buffer(demande.data, 'base64').toString();
       var demandeObj = JSON.parse(decoded);
       demandeObj.createdAt = demande.createdAt;

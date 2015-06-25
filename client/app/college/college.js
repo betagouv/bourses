@@ -17,10 +17,7 @@ angular.module('boursesApp')
         url: '/demandes',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
-        controller: function($scope, $state, Etablissement, id) {
-          $scope.college = Etablissement.get({id: id});
-          $scope.demandes = Etablissement.queryDemandes({id: id});
-        }
+        controller: 'DemandeListCtrl'
       })
       .state('layout.college.demandes.edit', {
         url: '/:demandeId',

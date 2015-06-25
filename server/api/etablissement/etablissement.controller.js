@@ -49,7 +49,7 @@ exports.demandes = function(req, res) {
       if(!etablissement) { return res.sendStatus(404); }
 
       Demande
-        .find({college: etablissement})
+        .find({college: etablissement, status: req.query.status})
         .exec(function (err, demandes) {
         if (err) { return handleError(req, res, err); }
         if(!demandes) { return res.sendStatus(404); }

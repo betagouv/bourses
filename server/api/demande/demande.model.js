@@ -9,6 +9,7 @@ var DemandeSchema = new Schema({
   observations:   { type: String },
   data:           { type: String },
   college:        { type: Schema.Types.ObjectId, ref: 'College' },
+  status:         { type: String, enum: ['new', 'pending', 'done'], default: 'new' }
 });
 
 module.exports = mongoose.model('Demande', DemandeSchema);
