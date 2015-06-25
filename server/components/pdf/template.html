@@ -37,16 +37,16 @@
     <h2>Résumé de la demande <br><small>Passée le {{createdAt}}</small></h2>
 
     <div class="info-label">Identité du demandeur</div>
-    <p class="info">{{identiteAdulte.titulaire.prenoms}} {{identiteAdulte.titulaire.nom}} pour {{identiteEnfant.prenom}} {{identiteEnfant.nom}}</p>
+    <p class="info">{{identiteAdulte.demandeur.prenoms}} {{identiteAdulte.demandeur.nom}} pour {{identiteEnfant.prenom}} {{identiteEnfant.nom}}</p>
 
     <div class="info-label">Revenu fiscal de référence</div>
     <p class="info">{{data.revenuFiscalReference}} €</p>
 
     <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
-    <p class="info">{{identiteAdulte.nombreEnfantsACharge}}</p>
+    <p class="info">{{foyer.nombreEnfantsACharge}}</p>
 
     <div class="info-label">Nombre d'enfants majeurs célibataires</div>
-    <p class="info">{{identiteAdulte.nombreEnfantsAdultes}}</p>
+    <p class="info">{{foyer.nombreEnfantsAdultes}}</p>
 
     <h2>Identité de l'enfant</h2>
 
@@ -68,10 +68,10 @@
     <h2>Identité de l'adulte</h2>
 
     <div class="info-label">Nom</div>
-    <p class="info">{{identiteAdulte.titulaire.nom}}</p>
+    <p class="info">{{identiteAdulte.demandeur.nom}}</p>
 
     <div class="info-label">Prénom</div>
-    <p class="info">{{identiteAdulte.titulaire.prenoms}}</p>
+    <p class="info">{{identiteAdulte.demandeur.prenoms}}</p>
 
     <div class="info-label">Lien avec l'enfant</div>
     <p class="info">{{identiteAdulte.lien}}</p>
@@ -79,13 +79,13 @@
     <h2>Renseignements du foyer</h2>
 
     <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
-    <p class="info">{{identiteAdulte.nombreEnfantsACharge}}</p>
+    <p class="info">{{foyer.nombreEnfantsACharge}}</p>
 
     <div class="info-label">Nombre d'enfants majeurs célibataires</div>
-    <p class="info">{{identiteAdulte.nombreEnfantsAdultes}}</p>
+    <p class="info">{{foyer.nombreEnfantsAdultes}}</p>
 
     <div class="info-label">Garde alternée</div>
-    <p class="info">{{identiteAdulte.garde}}</p>
+    <p class="info">{{foyer.garde}}</p>
 
     <h2>Renseignements de contact</h2>
 
