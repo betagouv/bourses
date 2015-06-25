@@ -58,14 +58,14 @@
           </strong>
         </p>
       </div>
-      <div connection connection-id="'demandeur'" status="statusDemandeur" on-success="savefoyer"></div>
+      <div connection connection-id="'demandeur'" status="statusDemandeur" on-success="saveFoyer"></div>
     </div>
   </div>
 
-  <div class="form-section">
+  <div class="form-section" ng-if="showOtherParent()">
     <h1>Renseignements sur l'autre parent</h1>
 
-    <div class="form-group required" ng-if="svair.situationFamille === 'Pacsé(e)s'">
+    <div class="form-group required" ng-if="showConcubinage()">
       <fieldset>
         <legend class="control-label-flat">Êtes-vous en concubinage avec l'autre parent de l'enfant ?</legend>
         <div class="btn-group">
@@ -75,9 +75,8 @@
       </fieldset>
     </div>
 
-    <div class="well-connect">
-      <div id="disabled-overlay" ng-if="isOtherParentDisabled()"></div>
-      <div connection connection-id="'conjoint'" status="statusConjoint" on-success="savefoyer"></div>
+    <div class="well-connect" ng-if="showOtherParentSvair()">
+      <div connection connection-id="'conjoint'" status="statusConjoint" on-success="saveFoyer"></div>
     </div>
   </div>
 

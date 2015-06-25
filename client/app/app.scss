@@ -54,7 +54,12 @@ select.form-control-flat {
   font-size: 1.2em;
   height: 2em;
   border-radius: 0;
+
+  &:disabled {
+    background-color: darken($white, 10%);
+  }
 }
+
 
 .has-error
 .form-control-flat {

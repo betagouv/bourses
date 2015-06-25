@@ -34,7 +34,7 @@ angular.module('boursesApp')
           data: store.get('svair_demandeur')
         };
 
-        $http.post('/api/demandes', demande).then(function() {
+        $http.post('/api/demandes/' + demande.identiteEnfant.college, demande).then(function() {
           $state.go('layout.merci');
         });
       }

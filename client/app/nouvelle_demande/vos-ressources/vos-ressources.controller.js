@@ -2,7 +2,7 @@
 
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $timeout, $modal, store) {
-
+    $scope.dataDemandeur = store.get('svair_demandeur');
     $scope.foyer = store.get('foyer') || {garde: 'non', concubinage: 'non'};
     $scope.statusDemandeur = null;
     $scope.statusConjoint = null;
@@ -42,17 +42,35 @@ angular.module('boursesApp')
         return false;
       }
 
-      if (!isOtherParentDisabled() && $scope.statusConjoint !== 'success') {
+      if (showOtherParentSvair() && $scope.statusConjoint !== 'success') {
         return false;
       }
 
       return true;
     }
 
-    function isOtherParentDisabled() {
-      return $scope.foyer.garde !== 'oui' && $scope.foyer.concubinage !== 'oui';
+    function showOtherParentSvair() {
+      return isGardeAlternee() || isConcubinage();
     }
 
-    $scope.isOtherParentDisabled = isOtherParentDisabled;
+    function showOtherParent() {
+      return isGardeAlternee() || isCelibataire();
+    }
+
+    function isConcubinage() {
+      return $scope.foyer.concubinage === 'oui';
+    }
+
+    function isCelibataire() {
+      return $scope.dataDemandeur && $scope.dataDemandeur.situationFamille === 'Célibataire';
+    }
+
+    function isGardeAlternee() {
+      return  $scope.foyer.garde === 'oui';
+    }
+
+    $scope.showOtherParentSvair = showOtherParentSvair;
+    $scope.isCelibataire = isCelibataire;
+    $scope.showOtherParent = showOtherParent;
     $scope.saveFoyer = saveFoyer;
   });
