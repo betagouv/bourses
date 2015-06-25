@@ -32,21 +32,13 @@ $white: #ECF0F1;
 }
 
 .form-control-flat {
-  background-color: $blue;
+  background-color: $white;
   border: none;
   font-size: 1.4em;
   padding: 5px 10px;
   width: 100%;
-  color: $white;
+  color: $darker-blue;
   border-radius: 4px;
-
-  &:focus {
-    background-color: lighten($blue, 2%);
-  }
-
-  &:hover {
-    background-color: lighten($blue, 2%);
-  }
 
   :first-child {
     font-size: 1em;
@@ -56,6 +48,11 @@ $white: #ECF0F1;
 .has-error
 .checkbox {
   color: white;
+}
+
+select.form-control-flat {
+  font-size: 1.2em;
+  height: 2em;
 }
 
 .has-error
