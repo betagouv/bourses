@@ -92,6 +92,7 @@
   <h1>Vos observations</h1>
 
   <div ng-switch="saving">
+    <p ng-switch-when="waiting"><i class="fa fa-spin fa-cog"></i> En attente</p>
     <p ng-switch-when="pending"><i class="fa fa-spin fa-cog"></i> Sauvegarde en cours</p>
     <p ng-switch-when="success" class="text-success"><i class="fa fa-check"></i> Sauvegarde effectuée</p>
   </div>
@@ -99,8 +100,9 @@
   <div class="form-group">
     <textarea
       class="form-control"
-      ng-model-options="{ debounce: 200 }"
+      ng-model-options="{ debounce: 1000 }"
       ng-change="save()"
+      ng-keydown="saving = 'waiting'"
       ng-model="demande.observations"
       rows="5"></textarea>
 

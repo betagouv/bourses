@@ -83,9 +83,9 @@ exports.save = function(req, res) {
       if (err) { return handleError(req, res, err); }
       if(!demande) { return res.sendStatus(404); }
 
-      demande.set('observations', observations).save(function(err) {
+      demande.set('observations', observations).save(function(err, result) {
         if (err) { return handleError(req, res, err); }
-        res.sendStatus(200);
+        res.status(200).send(result);
       })
     });
 
