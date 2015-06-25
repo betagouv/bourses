@@ -3,7 +3,7 @@
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $timeout, $modal, store) {
 
-    $scope.identite = store.get('identite-adulte') || {garde: 'non', concubinage: 'non'};
+    $scope.foyer = store.get('foyer') || {garde: 'non', concubinage: 'non'};
     $scope.statusDemandeur = null;
     $scope.statusConjoint = null;
 
@@ -29,12 +29,12 @@ angular.module('boursesApp')
       var steps = store.get('steps');
       steps.connexion = true;
       store.set('steps', steps);
-      saveIdentite();
+      saveFoyer();
       $state.go('layout.nouvelle_demande.vos-renseignements');
     };
 
-    function saveIdentite() {
-      store.set('identite-adulte', $scope.identite);
+    function saveFoyer() {
+      store.set('foyer', $scope.foyer);
     }
 
     function isDataValid() {
@@ -50,9 +50,9 @@ angular.module('boursesApp')
     }
 
     function isOtherParentDisabled() {
-      return $scope.identite.garde !== 'oui' && $scope.identite.concubinage !== 'oui';
+      return $scope.foyer.garde !== 'oui' && $scope.foyer.concubinage !== 'oui';
     }
 
     $scope.isOtherParentDisabled = isOtherParentDisabled;
-    $scope.saveIdentite = saveIdentite;
+    $scope.saveFoyer = saveFoyer;
   });

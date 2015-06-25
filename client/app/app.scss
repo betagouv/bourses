@@ -53,22 +53,29 @@ $white: #ECF0F1;
 select.form-control-flat {
   font-size: 1.2em;
   height: 2em;
+  border-radius: 0;
 }
 
 .has-error
 .form-control-flat {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+
+.help-block {
+  color: $darker-blue;
+  background-color: whitesmoke;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 4px;
+  padding-left: 10px;
 }
 
 .has-error
 .help-block {
   color: $red;
-  background-color: $white;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  padding: 4px;
-  padding-left: 10px;
 }
 
 .btn-action-container {

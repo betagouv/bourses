@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRenseignementsCtrl', function($scope, $http, $state, $timeout, store, DemandeService) {
+  .controller('VosRenseignementsCtrl', function($scope, $http, $state, $timeout, store) {
     $scope.dataDemandeur = store.get('svair_demandeur') || {};
     $scope.identite = store.get('identite-adulte') || {};
+    $scope.identiteEnfant = store.get('identite-enfant');
 
     $timeout(function() {
       refreshCities();
@@ -11,6 +12,10 @@ angular.module('boursesApp')
         $scope.cities = [$scope.identite.ville];
       }
     });
+
+    if ($scope.dataDemandeur && !$scope.identite.demandeur) {
+      $scope.identite.demandeur = $scope.dataDemandeur.identites[0];
+    }
 
     $scope.submit = function(form) {
       if ($scope.cities.length === 0 && form) {
@@ -29,7 +34,7 @@ angular.module('boursesApp')
           data: store.get('svair_demandeur')
         };
 
-        DemandeService.save(demande).then(function() {
+        $http.post('/api/demandes', demande).then(function() {
           $state.go('layout.merci');
         });
       }

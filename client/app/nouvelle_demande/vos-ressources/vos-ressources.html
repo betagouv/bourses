@@ -2,33 +2,16 @@
   <div class="form-section">
     <h1>Votre foyer</h1>
 
-    <div class="form-group required" ng-class="{'has-error': !identite.lien && foyerForm.$submitted}">
-      <fieldset>
-        <legend class="control-label-flat">
-          Vous êtes
-        </legend>
-        <div class="btn-group">
-          <label class="btn btn-select" ng-model="identite.lien" btn-radio="'pere'">Le père</label>
-          <label class="btn btn-select" ng-model="identite.lien" btn-radio="'mere'">La mère</label>
-          <label class="btn btn-select" ng-model="identite.lien" btn-radio="'responsable'">Le représentant légal</label>
-        </div>
-      </fieldset>
-
-      <div ng-if="!identite.lien && foyerForm.$submitted">
-        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      </div>
-    </div>
-
-    <div class="form-group required" ng-class="{'has-error': !identite.garde && foyerForm.$submitted}">
+    <div class="form-group required" ng-class="{'has-error': !foyer.garde && foyerForm.$submitted}">
       <fieldset>
         <legend class="control-label-flat">Votre enfant est-il en garde alternée ?</legend>
         <div class="btn-group">
-          <label class="btn btn-select" ng-model="identite.garde" btn-radio="'oui'">Oui</label>
-          <label class="btn btn-select" ng-model="identite.garde" btn-radio="'non'">Non</label>
+          <label class="btn btn-select" ng-model="foyer.garde" btn-radio="'oui'">Oui</label>
+          <label class="btn btn-select" ng-model="foyer.garde" btn-radio="'non'">Non</label>
         </div>
       </fieldset>
 
-      <div ng-if="!identite.garde && foyerForm.$submitted">
+      <div ng-if="!foyer.garde && foyerForm.$submitted">
         <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
@@ -39,7 +22,7 @@
         <br>
         <small>(tel que mentionné sur l'avis d'imposition)</small>
       </label>
-      <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsACharge" ng-model="identite.nombreEnfantsACharge">
+      <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsACharge" ng-model="foyer.nombreEnfantsACharge">
       <div ng-messages="foyerForm.enfants.$error" ng-if="foyerForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
@@ -52,7 +35,7 @@
         <br>
         <small>(tel que mentionné sur l'avis d'imposition)</small>
       </label>
-      <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsAdultes" ng-model="identite.nombreEnfantsAdultes">
+      <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsAdultes" ng-model="foyer.nombreEnfantsAdultes">
       <div ng-messages="foyerForm.nombreEnfantsAdultes.$error" ng-if="foyerForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
@@ -75,7 +58,7 @@
           </strong>
         </p>
       </div>
-      <div connection connection-id="'demandeur'" status="statusDemandeur" on-success="saveIdentite"></div>
+      <div connection connection-id="'demandeur'" status="statusDemandeur" on-success="savefoyer"></div>
     </div>
   </div>
 
@@ -86,15 +69,15 @@
       <fieldset>
         <legend class="control-label-flat">Êtes-vous en concubinage avec l'autre parent de l'enfant ?</legend>
         <div class="btn-group">
-          <label class="btn btn-select" ng-model="identite.concubinage" btn-radio="'oui'">Oui</label>
-          <label class="btn btn-select" ng-model="identite.concubinage" btn-radio="'non'">Non</label>
+          <label class="btn btn-select" ng-model="foyer.concubinage" btn-radio="'oui'">Oui</label>
+          <label class="btn btn-select" ng-model="foyer.concubinage" btn-radio="'non'">Non</label>
         </div>
       </fieldset>
     </div>
 
     <div class="well-connect">
       <div id="disabled-overlay" ng-if="isOtherParentDisabled()"></div>
-      <div connection connection-id="'conjoint'" status="statusConjoint" on-success="saveIdentite"></div>
+      <div connection connection-id="'conjoint'" status="statusConjoint" on-success="savefoyer"></div>
     </div>
   </div>
 
