@@ -9,7 +9,9 @@ angular.module('boursesApp').factory('Etablissement', function ($resource) {
     },
     queryDemandes: {
       method: 'GET',
-      controller: 'demandes',
+      params: {
+        controller: 'demandes'
+      },
       isArray: true
     }
   });

@@ -4,6 +4,7 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 
 var Etablissement = require('./etablissement.model');
+var Demande = require('../demande/demande.model');
 
 exports.show = function(req, res) {
   Etablissement
@@ -27,14 +28,34 @@ exports.query = function(req, res) {
   });
 };
 
+function decode(demandes) {
+  return _.map(demandes, function(demande) {
+    var decoded = new Buffer(demande.data, 'base64').toString();
+    var decodedObj = JSON.parse(decoded);
+
+    decodedObj.createdAt = demande.createdAt;
+    decodedObj._id = demande._id;
+    decodedObj.observations = demande.observations;
+
+    return decodedObj;
+  });
+}
+
 exports.demandes = function(req, res) {
   Etablissement
-    .find()
-    .exec(function (err, etablissements) {
+    .findOne({human_id: req.params.id})
+    .exec(function (err, etablissement) {
       if (err) { return handleError(req, res, err); }
-      if(!etablissements) { return res.sendStatus(404); }
+      if(!etablissement) { return res.sendStatus(404); }
 
-      return res.json(etablissements);
+      Demande
+        .find({college: etablissement})
+        .exec(function (err, demandes) {
+        if (err) { return handleError(req, res, err); }
+        if(!demandes) { return res.sendStatus(404); }
+
+        return res.json(decode(demandes));
+      });
   });
 };
 

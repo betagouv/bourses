@@ -1,0 +1,12 @@
+<ui-view>
+  <h1>Liste des demandes</h1>
+  <ul class="list-group">
+    <a ui-sref="layout.college.demandes.edit({demandeId: demande._id})" ng-repeat="demande in demandes">
+      <li class="list-group-item">
+        <strong>Demande de {{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</strong> pour
+        {{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}<br>
+        <span class="text-muted">Passée le {{demande.createdAt | date}}</span>
+      </li>
+    </a>
+  </ul>
+</ui-view>

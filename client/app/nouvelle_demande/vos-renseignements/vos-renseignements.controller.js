@@ -31,6 +31,7 @@ angular.module('boursesApp')
         var demande = {
           identiteEnfant: store.get('identite-enfant'),
           identiteAdulte: store.get('identite-adulte'),
+          foyer: store.get('foyer'),
           data: store.get('svair_demandeur')
         };
 
