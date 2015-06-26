@@ -1,48 +1,46 @@
-<div id="college">
-  <div class="container">
-    <form name="form" ng-submit="submit(form)" novalidate>
-      <div class="form-group required" ng-class="{'has-error': infoForm.nom.$invalid && infoForm.$submitted}">
-        <label for="nom" class="control-label-flat">Nom</label>
-        <input id="nom" type="text" name="nom" class="form-control-flat" ng-model="college.nom" required>
-        <div ng-messages="infoForm.nom.$error" ng-if="infoForm.$submitted">
-          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        </div>
+<div id="college-form">
+  <form name="form" ng-submit="submit(form)" novalidate>
+    <div class="form-group required" ng-class="{'has-error': infoForm.nom.$invalid && infoForm.$submitted}">
+      <label for="nom" class="control-label-flat">Nom</label>
+      <input id="nom" type="text" name="nom" class="form-control-flat" ng-model="college.nom" required>
+      <div ng-messages="infoForm.nom.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
+    </div>
 
-      <div class="form-group required" ng-class="{'has-error': infoForm.contact.$invalid && infoForm.$submitted}">
-        <label for="contact" class="control-label-flat">Contact</label>
-        <input id="contact" type="text" name="contact" class="form-control-flat" ng-model="college.contact" required>
-        <div ng-messages="infoForm.contact.$error" ng-if="infoForm.$submitted">
-          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        </div>
+    <div class="form-group required" ng-class="{'has-error': infoForm.contact.$invalid && infoForm.$submitted}">
+      <label for="contact" class="control-label-flat">Contact</label>
+      <input id="contact" type="text" name="contact" class="form-control-flat" ng-model="college.contact" required>
+      <div ng-messages="infoForm.contact.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
+    </div>
 
-      <div class="form-group required" ng-class="{'has-error': infoForm.nomVille.$invalid && infoForm.$submitted}">
-        <label for="nomVille" class="control-label-flat">Ville</label>
-        <input id="nomVille" type="text" name="nomVille" class="form-control-flat" ng-model="college.ville.nom" required>
-        <div ng-messages="infoForm.nomVille.$error" ng-if="infoForm.$submitted">
-          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        </div>
+    <div class="form-group required" ng-class="{'has-error': infoForm.nomVille.$invalid && infoForm.$submitted}">
+      <label for="nomVille" class="control-label-flat">Ville</label>
+      <input id="nomVille" type="text" name="nomVille" class="form-control-flat" ng-model="college.ville.nom" required>
+      <div ng-messages="infoForm.nomVille.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
+    </div>
 
-      <div class="form-group required" ng-class="{'has-error': infoForm.codePostal.$invalid && infoForm.$submitted}">
-        <label for="codePostal" class="control-label-flat">Code postal</label>
-        <input id="codePostal" type="text" name="codePostal" class="form-control-flat" ng-model="college.ville.codePostal" required>
-        <div ng-messages="infoForm.codePostal.$error" ng-if="infoForm.$submitted">
-          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        </div>
+    <div class="form-group required" ng-class="{'has-error': infoForm.codePostal.$invalid && infoForm.$submitted}">
+      <label for="codePostal" class="control-label-flat">Code postal</label>
+      <input id="codePostal" type="text" name="codePostal" class="form-control-flat" ng-model="college.ville.codePostal" required>
+      <div ng-messages="infoForm.codePostal.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label class="control-label-flat">Identifiant</label>
-        <p class="form-control-flat">{{college.human_id}}</p>
-      </div>
+    <div class="form-group">
+      <label class="control-label-flat">Identifiant</label>
+      <p class="form-control-flat">{{college.human_id}}</p>
+    </div>
 
-      <div class="text-right">
-        <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action">
-            Valider
-        </button>
-      </div>
-    </form>
-  </div>
+    <div class="text-right">
+      <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action">
+          Valider
+      </button>
+    </div>
+  </form>
 </div>

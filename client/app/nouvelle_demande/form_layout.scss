@@ -1,4 +1,8 @@
-#status-buttons {
+ul#status-buttons {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+
   a {
     color: black;
     display:inline-block;

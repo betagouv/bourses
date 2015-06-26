@@ -1,23 +1,29 @@
 <div class="container" id="form-container">
-  <div id="status-buttons" class="nav-buttons">
-    <a ui-sref-active="active" ui-sref="layout.nouvelle_demande.identite-enfant">
-      <span class="round">1</span> <span class="hidden-xs">Identité de l'enfant</span>
-    </a>
-
-    <a class="muted" ng-if="!steps.identiteEnfant">
-      <span class="round">2</span> <span class="hidden-xs">Votre foyer</span>
-    </a>
-    <a ui-sref-active="active" ng-if="steps.identiteEnfant" ui-sref="layout.nouvelle_demande.vos-ressources">
-      <span class="round">2</span> <span class="hidden-xs">Votre foyer</span>
-    </a>
-
-    <a class="muted" ng-if="!steps.connexion">
-      <span class="round">3</span> <span class="hidden-xs">Vos renseignements</span>
-    </a>
-    <a ui-sref-active="active" ng-if="steps.connexion" ui-sref="layout.nouvelle_demande.vos-renseignements">
-      <span class="round">3</span> <span class="hidden-xs">Vos renseignements</span>
-    </a>
-  </div>
+  <nav>
+    <ul id="status-buttons" class="nav-buttons">
+      <li>
+        <a ui-sref-active="active" ui-sref="layout.nouvelle_demande.identite-enfant">
+          <span class="round">1</span> <span class="hidden-xs">Identité de l'enfant</span>
+        </a>
+      </li>
+      <li>
+        <a class="muted" ng-if="!steps.identiteEnfant">
+          <span class="round">2</span> <span class="hidden-xs">Votre foyer</span>
+        </a>
+        <a ui-sref-active="active" ng-if="steps.identiteEnfant" ui-sref="layout.nouvelle_demande.vos-ressources">
+          <span class="round">2</span> <span class="hidden-xs">Votre foyer</span>
+        </a>
+      </li>
+      <li>
+        <a class="muted" ng-if="!steps.connexion">
+          <span class="round">3</span> <span class="hidden-xs">Vos renseignements</span>
+        </a>
+        <a ui-sref-active="active" ng-if="steps.connexion" ui-sref="layout.nouvelle_demande.vos-renseignements">
+          <span class="round">3</span> <span class="hidden-xs">Vos renseignements</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
 <div id="form-views">
