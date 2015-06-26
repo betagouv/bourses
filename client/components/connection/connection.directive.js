@@ -20,7 +20,7 @@ angular.module('boursesApp').directive('connection', function ($http, $window, $
         .then(
           function(result) {
             scope.fc = result.data.response;
-            if (typeof scope.fc === 'string') {
+            if (typeof scope.fc === 'string' && scope.fc.startsWith('{')) {
               scope.fc = JSON.parse(scope.fc);
             }
             scope.status = 'success';
