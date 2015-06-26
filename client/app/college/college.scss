@@ -15,11 +15,12 @@
   }
 
   .content {
-    background-color: $blue;
+    background-color: $white;
     padding: 10px;
+    color: $darker-blue;
   }
 }
 
 .list-group-item {
-  color: $darker-blue;
+  background-color: white;
 }
