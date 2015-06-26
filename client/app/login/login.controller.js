@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location) {
+  .controller('LoginCtrl', function ($scope, $rootScope, $state, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -14,8 +14,11 @@ angular.module('boursesApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to home
-          $location.path('/');
+          if ($rootScope.returnToState) {
+            $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
+          } else {
+            $location.path('/');
+          }
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

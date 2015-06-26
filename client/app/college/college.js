@@ -6,9 +6,20 @@ angular.module('boursesApp')
       .state('layout.college', {
         url: '/college/:id',
         templateUrl: 'app/college/college.html',
+        controller: function($scope, $state, Auth, college) {
+          $scope.college = college;
+
+          $scope.logout = function() {
+            Auth.logout();
+            $state.go('layout.login');
+          };
+        },
         resolve: {
           id: function($stateParams) {
             return $stateParams.id;
+          },
+          college: function(Etablissement, id) {
+            return Etablissement.get({id: id}).$promise;
           }
         },
         abstract: true
@@ -38,8 +49,8 @@ angular.module('boursesApp')
         url: '/edit',
         templateUrl: 'app/college/edit.html',
         authenticate: true,
-        controller: function($scope, $state, Etablissement, id) {
-          $scope.college = Etablissement.get({id: id});
+        controller: function($scope, $state, college) {
+          $scope.college = college;
           $scope.submit = function(form) {
             if (!form.$valid) {
               return;
