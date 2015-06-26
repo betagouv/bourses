@@ -54,6 +54,13 @@ function fetchData(accessToken, year, done) {
     });
 }
 
+exports.mockData = function(req, res) {
+  res.json({
+    identites: [{nom: 'DUPONT',prenoms: 'MARCEL'}],
+    "rfr": 0,sitFam:"C",nbPart:"1.0","pac":{"nbPac":"0"}
+  });
+}
+
 exports.fc = function (req, res, next) {
   if (!req.user || !req.user.accessToken) {
     return res.status(401).send({

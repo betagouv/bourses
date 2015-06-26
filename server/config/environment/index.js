@@ -47,7 +47,7 @@ var all = {
 
   dgfip: {
     host: process.env.DGFIP_HOST,
-    baseUrl: process.env.DGFIP_BASE_URL,
+    baseUrl: process.env.DGFIP_BASE_URL || 'http://localhost:5000/api/connection/mock',
     cert: process.env.DGFIP_CERT_LOCATION,
     key: process.env.DGFIP_KEY_LOCATION
   },

@@ -2,7 +2,7 @@
 
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $timeout, $modal, store) {
-    $scope.dataDemandeur = store.get('svair_demandeur');
+    $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur');
     $scope.foyer = store.get('foyer') || {garde: 'non', concubinage: 'non'};
     $scope.statusDemandeur = null;
     $scope.statusConjoint = null;
@@ -42,14 +42,14 @@ angular.module('boursesApp')
         return false;
       }
 
-      if (showOtherParentSvair() && $scope.statusConjoint !== 'success') {
+      if (showOtherParentConnection() && $scope.statusConjoint !== 'success') {
         return false;
       }
 
       return true;
     }
 
-    function showOtherParentSvair() {
+    function showOtherParentConnection() {
       return isGardeAlternee() || isConcubinage();
     }
 
@@ -62,14 +62,16 @@ angular.module('boursesApp')
     }
 
     function isCelibataire() {
-      return $scope.dataDemandeur && $scope.dataDemandeur.situationFamille === 'Célibataire';
+      return $scope.dataDemandeur &&
+        // SVAIR || FC
+        ($scope.dataDemandeur.situationFamille === 'Célibataire' || $scope.dataDemandeur.sitFam === 'C');
     }
 
     function isGardeAlternee() {
       return  $scope.foyer.garde === 'oui';
     }
 
-    $scope.showOtherParentSvair = showOtherParentSvair;
+    $scope.showOtherParentConnection = showOtherParentConnection;
     $scope.isCelibataire = isCelibataire;
     $scope.showOtherParent = showOtherParent;
     $scope.saveFoyer = saveFoyer;

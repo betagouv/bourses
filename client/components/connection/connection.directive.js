@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('boursesApp').directive('connection', function ($http, $window, store) {
+angular.module('boursesApp').directive('connection', function ($http, $window, $location, $timeout, store) {
   return {
     scope: {
       connectionId: '=',
@@ -19,12 +19,15 @@ angular.module('boursesApp').directive('connection', function ($http, $window, s
         .get('/api/connection/fc')
         .then(
           function(result) {
-            scope.fc = result.data;
-            if (scope.fc) {
-              scope.status = 'success';
+            scope.fc = result.data.response;
+            if (typeof scope.fc === 'string') {
+              scope.fc = JSON.parse(scope.fc);
             }
+            scope.status = 'success';
+            store.set('fc_' + scope.connectionId, scope.fc);
           },
           function() {
+            store.set('fc_' + scope.connectionId, null);
             return null;
           });
 
@@ -73,6 +76,7 @@ angular.module('boursesApp').directive('connection', function ($http, $window, s
 
       function saveAndConnect(event) {
         event.preventDefault();
+        scope.onSuccess();
         $window.open('/oauth/fc', '_self');
       }
 
