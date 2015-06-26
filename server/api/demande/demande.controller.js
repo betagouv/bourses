@@ -15,7 +15,7 @@ exports.create = function(req, res) {
   var encoded = new Buffer(str).toString('base64');
 
   Demande.create({
-    college: req.params.college,
+    etablissement: req.params.college,
     data: encoded
   }, function(err, demande) {
     if (err) { return handleError(req, res, err); }

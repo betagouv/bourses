@@ -1,7 +1,23 @@
 #college {
   color: white;
-  padding: 30px 0;
+  padding: 30px 0 250px 0;
   background-color: $dark-blue;
+
+  .college-body {
+    box-shadow: 0px 2px 17px rgba(0, 0, 0, 0.44);
+  }
+
+  .page-header {
+    padding: 10px;
+    background-color: lighten($darker-blue, 5%);
+    margin-bottom: 0;
+    border-color: #333;
+  }
+
+  .content {
+    background-color: $blue;
+    padding: 10px;
+  }
 }
 
 .list-group-item {

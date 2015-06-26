@@ -12,6 +12,7 @@ var UserSchema = new Schema({
     default: 'user'
   },
   hashedPassword: String,
+  etablissement: { type: Schema.Types.ObjectId, ref: 'Etablissement' },
   provider: String,
   salt: String
 });

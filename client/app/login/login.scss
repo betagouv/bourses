@@ -3,4 +3,9 @@
   padding: 100px 0;
   background-color: $dark-blue;
   height: 100%;
+
+  form {
+    max-width: 640px;
+    margin: auto;
+  }
 }

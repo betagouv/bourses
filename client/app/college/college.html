@@ -1,15 +1,19 @@
 <div id="college">
   <div class="container">
-    <div class="page-header">
-      <h1>{{college.nom}}</h1>
-      <span>{{college.contact}}</span>
-      <div class="pull-right">
-        <a href="" class="btn btn-action" ng-click="logout()">
-          Se déconnecter
-        </a>
+    <div class="college-body">
+      <div class="page-header">
+        <h1>{{college.nom}}</h1>
+        <span>{{college.contact}}</span>
+        <div class="pull-right">
+          <a href="" class="btn btn-action" ng-click="logout()">
+            Se déconnecter
+          </a>
+        </div>
+        <div class="clearfix"></div>
       </div>
-      <div class="clearfix"></div>
+      <div class="content">
+        <ui-view></ui-view>
+      </div>
     </div>
-    <ui-view></ui-view>
   </div>
 </div>
