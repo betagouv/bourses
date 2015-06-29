@@ -3,7 +3,10 @@
     <h2>Résumé de la demande <br><small>Passée le {{demande.createdAt | date}}</small></h2>
 
     <div class="info-label">Identité du demandeur</div>
-    <p class="info">{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}} pour {{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</p>
+    <p class="info">{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</p>
+
+    <div class="info-label">Identité de l'enfant</div>
+    <p class="info">{{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</p>
 
     <div class="info-label">Revenu fiscal de référence</div>
     <p class="info">{{demande.data.revenuFiscalReference}} €</p>
@@ -20,93 +23,109 @@
       </a>
     </div>
   </div>
-  <h2>Identité de l'enfant</h2>
 
-  <div class="info-label">Nom</div>
-  <p class="info">{{demande.identiteEnfant.nom}}</p>
+  <section>
+    <h2>Identité de l'enfant</h2>
 
-  <div class="info-label">Prénom</div>
-  <p class="info">{{demande.identiteEnfant.prenom}}</p>
+    <div class="info-label">Nom</div>
+    <p class="info">{{demande.identiteEnfant.nom}}</p>
 
-  <div class="info-label">Sexe</div>
-  <p class="info">{{demande.identiteEnfant.sexe | sexe}}</p>
+    <div class="info-label">Prénom</div>
+    <p class="info">{{demande.identiteEnfant.prenom}}</p>
 
-  <div class="info-label">Date de naissance</div>
-  <p class="info">{{demande.identiteEnfant.dateNaissance | date}}</p>
+    <div class="info-label">Sexe</div>
+    <p class="info">{{demande.identiteEnfant.sexe | sexe}}</p>
 
-  <div class="info-label">Régime</div>
-  <p class="info">{{demande.identiteEnfant.regime | regime}}</p>
+    <div class="info-label">Date de naissance</div>
+    <p class="info">{{demande.identiteEnfant.dateNaissance | date}}</p>
 
-  <h2>Identité de l'adulte</h2>
+    <div class="info-label">Régime</div>
+    <p class="info">{{demande.identiteEnfant.regime | regime}}</p>
+  </section>
 
-  <div class="info-label">Nom</div>
-  <p class="info">{{demande.identiteAdulte.demandeur.nom}}</p>
+  <section>
+    <h2>Identité de l'adulte</h2>
 
-  <div class="info-label">Prénom</div>
-  <p class="info">{{demande.identiteAdulte.demandeur.prenoms}}</p>
+    <div class="info-label">Nom</div>
+    <p class="info">{{demande.identiteAdulte.demandeur.nom}}</p>
 
-  <div class="info-label">Lien avec l'enfant</div>
-  <p class="info">{{demande.identiteAdulte.lien | lien}}</p>
+    <div class="info-label">Prénom</div>
+    <p class="info">{{demande.identiteAdulte.demandeur.prenoms}}</p>
 
-  <h2>Renseignements du foyer</h2>
+    <div class="info-label">Lien avec l'enfant</div>
+    <p class="info">{{demande.identiteAdulte.lien | lien}}</p>
 
-  <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
-  <p class="info">{{demande.foyer.nombreEnfantsACharge}}</p>
+  </section>
 
-  <div class="info-label">Nombre d'enfants majeurs célibataires</div>
-  <p class="info">{{demande.foyer.nombreEnfantsAdultes}}</p>
+  <section>
+    <h2>Renseignements du foyer</h2>
 
-  <div class="info-label">Garde alternée</div>
-  <p class="info">{{demande.foyer.garde}}</p>
+    <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
+    <p class="info">{{demande.foyer.nombreEnfantsACharge}}</p>
 
-  <h2>Renseignements de contact</h2>
+    <div class="info-label">Nombre d'enfants majeurs célibataires</div>
+    <p class="info">{{demande.foyer.nombreEnfantsAdultes}}</p>
 
-  <div class="info-label">Adresse</div>
-  <p class="info">{{demande.identiteAdulte.adresse}}</p>
+    <div class="info-label">Garde alternée</div>
+    <p class="info">{{demande.foyer.garde}}</p>
+  </section>
 
-  <div class="info-label">Code postal</div>
-  <p class="info">{{demande.identiteAdulte.codePostal}}</p>
+  <section>
+    <h2>Renseignements de contact</h2>
 
-  <div class="info-label">Ville</div>
-  <p class="info">{{demande.identiteAdulte.ville.nomCommune}}</p>
+    <div class="info-label">Adresse</div>
+    <p class="info">{{demande.identiteAdulte.adresse}}</p>
 
-  <div class="info-label">E-mail</div>
-  <p class="info">{{demande.identiteAdulte.email}}</p>
+    <div class="info-label">Code postal</div>
+    <p class="info">{{demande.identiteAdulte.codePostal}}</p>
 
-  <h2>Renseignements bancaires</h2>
+    <div class="info-label">Ville</div>
+    <p class="info">{{demande.identiteAdulte.ville.nomCommune}}</p>
 
-  <div class="info-label">IBAN</div>
-  <p class="info">{{demande.identiteAdulte.iban}}</p>
+    <div class="info-label">E-mail</div>
+    <p class="info">{{demande.identiteAdulte.email}}</p>
+  </section>
 
-  <div class="info-label">BIC</div>
-  <p class="info">{{demande.identiteAdulte.bic}}</p>
+  <section>
+    <h2>Renseignements bancaires</h2>
 
-  <h2>Renseignements issus de la déclaration d'impôt</h2>
+    <div class="info-label">IBAN</div>
+    <p class="info">{{demande.identiteAdulte.iban}}</p>
 
-  <div class="info-label">Revenu fiscal de référence</div>
-  <p class="info">{{demande.data.revenuFiscalReference}} €</p>
+    <div class="info-label">BIC</div>
+    <p class="info">{{demande.identiteAdulte.bic}}</p>
+  </section>
 
-  <div class="info-label">Situation familiale</div>
-  <p class="info">{{demande.data.situationFamille}}</p>
+  <section>
+    <h2>Renseignements issus de la déclaration d'impôt</h2>
 
-  <h1>Vos observations</h1>
+    <div class="info-label">Revenu fiscal de référence</div>
+    <p class="info">{{demande.data.revenuFiscalReference}} €</p>
 
-  <div ng-switch="saving">
-    <p ng-switch-when="waiting"><i class="fa fa-spin fa-cog"></i> En attente</p>
-    <p ng-switch-when="pending"><i class="fa fa-spin fa-cog"></i> Sauvegarde en cours</p>
-    <p ng-switch-when="success" class="text-success"><i class="fa fa-check"></i> Sauvegarde effectuée</p>
-  </div>
+    <div class="info-label">Situation familiale</div>
+    <p class="info">{{demande.data.situationFamille}}</p>
+  </section>
 
-  <div class="form-group">
-    <textarea
-      class="form-control"
-      ng-model-options="{ debounce: 1000 }"
-      ng-change="save()"
-      ng-keydown="saving = 'waiting'"
-      ng-model="demande.observations"
-      rows="5"></textarea>
+  <section>
+    <h2>Vos observations</h2>
 
-  </div>
+    <div ng-switch="saving">
+      <p ng-switch-when="waiting"><i class="fa fa-spin fa-cog"></i> En attente</p>
+      <p ng-switch-when="pending"><i class="fa fa-spin fa-cog"></i> Sauvegarde en cours</p>
+      <p ng-switch-when="success" class="text-success"><i class="fa fa-check"></i> Sauvegarde effectuée</p>
+    </div>
+
+    <div class="form-group">
+      <textarea
+        class="form-control"
+        ng-model-options="{ debounce: 1000 }"
+        ng-change="save()"
+        ng-keydown="saving = 'waiting'"
+        ng-model="demande.observations"
+        rows="5"></textarea>
+
+    </div>
+  </section>
 
 <!--
   <h1>Transmission de la notification</h1>

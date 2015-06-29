@@ -1,7 +1,4 @@
 #edition-demande {
-  background-color: white;
-  padding: 20px;
-  border-radius: 4px;
   color: #333;
 
   .info-label {
@@ -9,10 +6,30 @@
     line-height: 1;
   }
 
+  h2:after {
+    border-bottom: 1px solid $white;
+    display: block;
+    content: " ";
+  }
+
   p.info {
     font-size: 16px;
     font-weight: 500;
     line-height: 1;
+  }
+
+  .page-header {
+    background-color: white;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 0;
+  }
+
+  section {
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 4px;
+    padding: 20px;
   }
 
 }
