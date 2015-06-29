@@ -2,7 +2,7 @@
 
 
 angular.module('boursesApp')
-  .controller('IdentiteEnfantCtrl', function($scope, $state, $http, store) {
+  .controller('IdentiteEnfantCtrl', function($scope, $state, $http, $timeout, store, college) {
     $scope.etablissements = [];
     $http.get('/api/etablissements').then(function(result) {
       var data = result.data;
@@ -13,6 +13,11 @@ angular.module('boursesApp')
       });
 
       $scope.etablissements = data;
+
+      if (college && !$scope.identite.college) {
+        var etablissement = _.find(data, {human_id: college});
+        $scope.identite.college = etablissement._id;
+      }
     });
 
     $scope.identite = store.get('identite-enfant') || {};

@@ -4,10 +4,18 @@ angular.module('boursesApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('layout.nouvelle_demande', {
-        url: '/nouvelle_demande',
+        url: '/nouvelle_demande?college',
         templateUrl: 'app/nouvelle_demande/form_layout.html',
         controller: 'FormLayoutCtrl',
-        abstract: true
+        abstract: true,
+        resolve: {
+          college: function($stateParams) {
+            if ($stateParams) {
+              return $stateParams.college;
+            }
+            return null;
+          }
+        }
       })
       .state('layout.nouvelle_demande.identite-enfant', {
         url: '',
