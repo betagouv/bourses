@@ -20,8 +20,8 @@
     <fieldset>
       <legend class="control-label-flat">Sexe</legend>
       <div class="btn-group">
-        <button type="button" class="btn btn-select" ng-model="identite.sexe" btn-radio="'feminin'">Fille</button>
-        <button type="button" class="btn btn-select" ng-model="identite.sexe" btn-radio="'masculin'">Garçon</button>
+        <button type="button" class="btn btn-select" role="radio" ng-model="identite.sexe" btn-radio="'feminin'">Fille</button>
+        <button type="button" class="btn btn-select" role="radio" ng-model="identite.sexe" btn-radio="'masculin'">Garçon</button>
       </div>
     </fieldset>
     <div ng-if="!identite.sexe && infoForm.$submitted">
@@ -68,9 +68,9 @@
     <fieldset>
       <legend class="control-label-flat">Est-t-il</legend>
       <div class="btn-group">
-        <button type="button" class="btn btn-select" ng-model="identite.regime" btn-radio="'externe'">Externe</button>
-        <button type="button" class="btn btn-select" ng-model="identite.regime" btn-radio="'demi-pensionnaire'">Demi-pensionnaire</button>
-        <button type="button" class="btn btn-select" ng-model="identite.regime" btn-radio="'interne'">Interne</button>
+        <button type="button" class="btn btn-select" role="radio" ng-model="identite.regime" btn-radio="'externe'">Externe</button>
+        <button type="button" class="btn btn-select" role="radio" ng-model="identite.regime" btn-radio="'demi-pensionnaire'">Demi-pensionnaire</button>
+        <button type="button" class="btn btn-select" role="radio" ng-model="identite.regime" btn-radio="'interne'">Interne</button>
       </div>
     </fieldset>
     <div ng-if="!identite.regime && infoForm.$submitted">

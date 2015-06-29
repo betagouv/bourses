@@ -6,12 +6,12 @@ angular
     'ngResource',
     'ngSanitize',
     'ui.router',
-    'ui.bootstrap',
     'angular-storage',
     'ngMessages',
     'angular-ladda',
     'angular-capitalize-filter',
-    'mm.iban'
+    'mm.iban',
+    'a11yBootstrap'
   ])
   .config(function ($urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider, $httpProvider) {
     moment.locale('fr');
