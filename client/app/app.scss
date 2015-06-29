@@ -29,6 +29,10 @@ $white: #ECF0F1;
   font-size: 12px;
   margin: 0;
   padding: 0;
+
+  &.help-block-danger {
+    color: $red;
+  }
 }
 
 .form-control-flat {
