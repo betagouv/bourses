@@ -22,7 +22,8 @@ describe('Controller: partenaire', function () {
     inject(function($controller){
       $controller('IdentiteEnfantCtrl', {
         $scope: scope,
-        store: store
+        store: store,
+        college: null
       });
     });
 
