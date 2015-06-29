@@ -13,5 +13,5 @@ angular.module('boursesApp')
           $scope.saving = '';
         }, 500);
       });
-    }
+    };
   });

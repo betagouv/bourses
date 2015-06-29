@@ -59,7 +59,7 @@ angular.module('boursesApp')
             $scope.college.$update(function() {
               $state.go('layout.admin');
             });
-          }
+          };
         }
       });
   });

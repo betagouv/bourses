@@ -13,5 +13,5 @@ angular.module('boursesApp')
         $scope.new.splice(idx, 1);
         $scope.pending.unshift(demande);
       }, 200);
-    }
+    };
   });

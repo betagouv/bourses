@@ -62,7 +62,7 @@ angular.module('boursesApp').directive('connection', function ($http, $window, $
         .finally(function() {
           scope.loading = false;
         });
-      };
+      }
 
       function cancelCredentials() {
         scope.credentials = _.cloneDeep(scope.svair.credentials);

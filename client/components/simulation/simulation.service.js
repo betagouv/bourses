@@ -21,5 +21,5 @@ angular.module('boursesApp').factory('simulation', function(definitions) {
     var eligibleTaux1 = !(eligibleTaux2 || eligibleTaux3) && rfr < plafondTaux1;
 
     return calcMontant(eligibleTaux1, eligibleTaux2, eligibleTaux3);
-  }
+  };
 });

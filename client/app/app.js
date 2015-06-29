@@ -21,7 +21,7 @@ angular
     $httpProvider.interceptors.push('authInterceptor');
   })
 
-  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
+  .factory('authInterceptor', function ($rootScope, $q, $cookieStore) {
     return {
       // Add authorization token to headers
       request: function (config) {
@@ -35,7 +35,6 @@ angular
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if(response.status === 401 && response.message) {
-          // $location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('loginToken');
           return $q.reject(response);

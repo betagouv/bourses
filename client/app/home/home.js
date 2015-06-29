@@ -22,7 +22,7 @@ angular.module('boursesApp')
             } else {
               $scope.montant = null;
             }
-          }
+          };
         }
       });
   });

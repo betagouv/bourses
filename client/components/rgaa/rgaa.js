@@ -21,7 +21,6 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE.
  */
-/*global angular:false */
 'use strict';
 
 angular.module('a11yBootstrap', ['ui.bootstrap'])
@@ -89,7 +88,7 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
     scope: {
       param : '@keyboardRotate',
     },
-    link: function($scope, iElm, iAttrs, controller) {
+    link: function($scope, iElm) {
       var recursion = $scope.param;
       $timeout(function(){
         function KeyTrap (evt) {
@@ -133,7 +132,7 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
   };
 }])
 
-.directive('btnRadio', [function(btnRadioProvider){
+.directive('btnRadio', [function(){
   return {
     require: ['btnRadio', 'ngModel'],
     priority: 200, //Make sure watches are fired after any other directives that affect the ngModel value
@@ -155,7 +154,7 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
   };
 }])
 
-.directive('btnCheckbox', [function(btnRadioProvider){
+.directive('btnCheckbox', [function(){
   return {
     require: ['btnCheckbox', 'ngModel'],
     priority: 200, //Make sure watches are fired after any other directives that affect the ngModel value
@@ -180,18 +179,18 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
 
     }
   };
-}])
+}]);
 
 //Templates
-angular.module("template/modal/window.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("template/modal/window.html",
-    "<div>\n" +
-    " <div enforce-focus tabindex=\"-1\" modal-render=\"{{$isRendered}}\" tabindex=\"-1\" role=\"dialog\" class=\"modal\"\n" +
-    "     modal-animation-class=\"fade\"\n" +
-    "  ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" +
-    "     <div class=\"modal-dialog\" ng-class=\"size ? 'modal-' + size : ''\"><div class=\"modal-content\" modal-transclude></div></div>\n" +
-    " </div>\n" +
-    " <div tabindex=\"0\"></div>\n" +
-    "</div>\n" +
-    "");
+angular.module('template/modal/window.html', []).run(['$templateCache', function($templateCache) {
+  $templateCache.put('template/modal/window.html',
+    '<div>\n' +
+    ' <div enforce-focus tabindex="-1" modal-render="{{$isRendered}}" tabindex="-1" role="dialog" class="modal"\n' +
+    '     modal-animation-class="fade"\n' +
+    '  ng-class="{in: animate}" ng-style="{\'z-index\': 1050 + index*10, display: \'block\'}" ng-click="close($event)">\n' +
+    '     <div class="modal-dialog" ng-class="size ? \'modal-\' + size : \'\'"><div class="modal-content" modal-transclude></div></div>\n' +
+    ' </div>\n' +
+    ' <div tabindex="0"></div>\n' +
+    '</div>\n' +
+    '');
 }]);
