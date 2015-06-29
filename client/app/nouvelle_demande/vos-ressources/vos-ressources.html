@@ -17,12 +17,12 @@
     </div>
 
     <div class="form-group required" ng-class="{'has-error': foyerForm.nombreEnfantsACharge.$invalid && foyerForm.$submitted}">
-      <label for="nombreEnfantsACharge" class="control-label-flat">
+      <label for="nombre-enfants-a-charge" class="control-label-flat">
         Nombre d'enfants mineurs ou handicapés
         <br>
         <small>(tel que mentionné sur l'avis d'imposition)</small>
       </label>
-      <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsACharge" ng-model="foyer.nombreEnfantsACharge">
+      <input type="number" min="0" class="form-control-flat" required id="nombre-enfants-a-charge" name="nombreEnfantsACharge" ng-model="foyer.nombreEnfantsACharge">
       <div ng-messages="foyerForm.enfants.$error" ng-if="foyerForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
@@ -30,12 +30,12 @@
     </div>
 
     <div class="form-group required" ng-class="{'has-error': foyerForm.nombreEnfantsAdultes.$invalid && foyerForm.$submitted}">
-      <label for="nombreEnfantsAdultes" class="control-label-flat">
+      <label for="nombre-enfants-majeurs" class="control-label-flat">
         Nombre d'enfants majeurs célibataires
         <br>
         <small>(tel que mentionné sur l'avis d'imposition)</small>
       </label>
-      <input type="number" min="0" class="form-control-flat" required name="nombreEnfantsAdultes" ng-model="foyer.nombreEnfantsAdultes">
+      <input type="number" min="0" class="form-control-flat" required id="nombre-enfants-majeurs" name="nombreEnfantsAdultes" ng-model="foyer.nombreEnfantsAdultes">
       <div ng-messages="foyerForm.nombreEnfantsAdultes.$error" ng-if="foyerForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>

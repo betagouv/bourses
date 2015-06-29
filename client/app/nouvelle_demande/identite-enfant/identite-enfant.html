@@ -54,8 +54,8 @@
   </div>
 
   <div class="form-group required" ng-class="{'has-error': !identite.college && infoForm.$submitted}">
-    <label for="college" class="control-label-flat">Dans quel collège est-il inscrit</label>
-    <select ng-model="identite.college" required name="college" class="form-control-flat"
+    <label for="select-college" class="control-label-flat">Dans quel collège est-il inscrit</label>
+    <select ng-model="identite.college" required name="college" id="select-college" class="form-control-flat"
       ng-options="college._id as college.nom group by college.ville.label for college in etablissements">
       <option>--</option>
     </select>

@@ -8,6 +8,7 @@ $blue: #3498DB;
 $dark-blue: #2980B9;
 $darker-blue: #425466;
 $red: #E74C3C;
+$dark-red: #D24436;
 $white: #ECF0F1;
 
 /**
@@ -31,7 +32,7 @@ $white: #ECF0F1;
   padding: 0;
 
   &.help-block-danger {
-    color: $red;
+    color: $dark-red;
   }
 }
 
@@ -84,7 +85,7 @@ select.form-control-flat {
 
 .has-error
 .help-block {
-  color: $red;
+  color: $dark-red;
 }
 
 .btn-action-container {
@@ -147,7 +148,7 @@ select.form-control-flat {
 
 .form-group.required .control-label-flat:after {
   content:" *";
-  color: $red;
+  color: $dark-red;
 }
 
 .control-label-flat {

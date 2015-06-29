@@ -23,6 +23,17 @@ angular.module('boursesApp')
       }
     };
   })
+  .filter('deductibilite', function () {
+    return function (input) {
+      switch (input) {
+        case 'externe':
+          return 'Non';
+        case 'interne':
+        default:
+          return 'Oui';
+      }
+    };
+  })
   .filter('lien', function () {
     return function (input) {
       switch (input) {
