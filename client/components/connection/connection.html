@@ -25,8 +25,8 @@
 
         <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted}">
 
-          <label for="referenceAvis_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Référence de votre avis d'imposition {{nMinus2}}</label>
-          <label for="referenceAvis_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Référence de l'avis d'imposition {{nMinus2}} de l'autre parent</label>
+          <label for="referenceAvis_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Référence de votre avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}}</label>
+          <label for="referenceAvis_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Référence de l'avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}} de l'autre parent</label>
 
           <input id="referenceAvis_{{connectionId}}" type="text" name="referenceAvis" class="form-control-flat" ng-model="credentials.referenceAvis" required>
           <div ng-messages="svairForm.referenceAvis.$error" ng-if="svairForm.$submitted">
