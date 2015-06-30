@@ -3,6 +3,7 @@ section {
 }
 
 section#nouvelle_demande {
+  background-color: white;
   p {
     font-size: 1.3em;
     font-weight: 200;
@@ -14,17 +15,9 @@ section#nouvelle_demande {
 
   .action {
     font-size: 1.7em;
-
     a {
-      border-radius: 5px;
+      @include primary-action;
       padding: 10px;
-      color: $red;
-
-      &:hover {
-        color: white;
-        text-decoration: none;
-        background-color: $red;
-      }
     }
   }
 
@@ -32,7 +25,6 @@ section#nouvelle_demande {
 
 section#simulation {
   color: $white;
-  background-color: $dark-blue;
 }
 
 .simulation {

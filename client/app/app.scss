@@ -200,6 +200,16 @@ select.form-control-flat {
   border-top: 1px solid $darker-blue;
 }
 
+@mixin primary-action {
+  border-radius: 5px;
+  color: $red;
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+    background-color: $red;
+  }
+}
 
 // Component styles are injected through grunt
 // injector
@@ -209,6 +219,7 @@ select.form-control-flat {
 @import 'home/home.scss';
 @import 'layout/layout.scss';
 @import 'login/login.scss';
+@import 'merci/merci.scss';
 @import 'nouvelle_demande/form_layout.scss';
 @import 'nouvelle_demande/nouvelle_demande.scss';
 @import 'nouvelle_demande/vos-ressources/vos-ressources.scss';

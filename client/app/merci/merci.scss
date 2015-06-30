@@ -1,0 +1,10 @@
+section#merci {
+  background-color: white;
+  padding: 20px 0;
+
+  a {
+    @include primary-action;
+    font-size: 1.7em;
+    padding: 10px;
+  }
+}

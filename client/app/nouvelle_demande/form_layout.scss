@@ -1,3 +1,7 @@
+#form-container {
+  background-color: white;
+}
+
 ul#status-buttons {
   list-style-type: none;
   display: flex;
@@ -22,7 +26,7 @@ ul#status-buttons {
   }
 
   span.round {
-    background: $white;
+    background: darken($white, 5%);
     display: block;
     height: 30px;
     margin: 0 auto 10px;
@@ -37,6 +41,9 @@ ul#status-buttons {
 
     span {
       background: whitesmoke;
+      &.hidden-xs {
+        background: white;
+      }
     }
   }
 }
