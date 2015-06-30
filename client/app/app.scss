@@ -211,6 +211,10 @@ select.form-control-flat {
   }
 }
 
+h1 {
+  font-size: 30px;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.scss';

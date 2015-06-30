@@ -1,5 +1,11 @@
+.navbar {
+  margin-bottom: 0;
+  padding-top: 8px;
+  padding-bottom: 7px;
+}
+
 header {
-  padding: 10px;
+  padding: 40px 0;
   margin-bottom: 0;
   background-color: $dark-blue;
   background-image: url('/assets/images/garden.jpg');
@@ -7,37 +13,26 @@ header {
 
   h1 {
     font-size: 45px;
-    color: white;
-    text-align: left;
     text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
-  }
 
-  ul.logos {
-    display: inline-block;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      float: left;
-    }
-  }
-
-  #logos-container {
-    line-height: 0;
-    margin-bottom: 100px;
-  }
-
-  a {
-    text-decoration: none;
-
-    &:focus {
+    a {
       text-decoration: none;
-    }
+      color: white;
 
-    &:hover {
-      text-decoration: none;
+      &:focus {
+        color: $white;
+        text-decoration: none;
+      }
+
+      &:hover {
+        color: $white;
+        text-decoration: none;
+      }
     }
+  }
+
+  img {
+    vertical-align: none;
   }
 }
 
@@ -56,26 +51,20 @@ fieldset {
   }
 }
 
-h1 {
-  font-size: 30px;
-}
-
 @media(max-width: 767px) {
   header {
     h1 {
       text-align: center;
       font-size: 2em;
     }
+  }
 
-    #logos-container {
-      margin: 0;
-      text-align: right;
-    }
+  ul#logo-list {
+    text-align: center;
+  }
 
-    img {
-      margin: 5px;
-      width: 80px;
-    }
+  .nav > li.logo {
+    display: inline;
   }
 }
 
