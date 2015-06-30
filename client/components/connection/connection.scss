@@ -1,0 +1,16 @@
+a.action {
+  .fa {
+    font-size: 1.2em;
+    color: white;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.modal-body {
+  img {
+    margin-bottom: 20px;
+  }
+}

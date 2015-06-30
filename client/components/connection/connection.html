@@ -14,8 +14,12 @@
       <ng-form class="svair-form" name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
         <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
 
-          <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Votre numéro fiscal</label>
-          <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Numéro fiscal de l'autre parent</label>
+          <a class="action" ng-click="detailNumeroFiscal()">
+            <i class="fa fa-question-circle"></i>
+
+            <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Votre numéro fiscal</label>
+            <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Numéro fiscal de l'autre parent</label>
+          </a>
 
           <input id="numeroFiscal_{{connectionId}}" type="text" name="numeroFiscal" class="form-control-flat" ng-model="credentials.numeroFiscal" required>
           <div ng-messages="svairForm.numeroFiscal.$error" ng-if="svairForm.$submitted">
@@ -25,8 +29,12 @@
 
         <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted}">
 
-          <label for="referenceAvis_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Référence de votre avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}}</label>
-          <label for="referenceAvis_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Référence de l'avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}} de l'autre parent</label>
+          <a class="action" ng-click="detailNumeroAvis()">
+            <i class="fa fa-question-circle"></i>
+
+            <label for="referenceAvis_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Référence de votre avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}}</label>
+            <label for="referenceAvis_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Référence de l'avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}} de l'autre parent</label>
+          </a>
 
           <input id="referenceAvis_{{connectionId}}" type="text" name="referenceAvis" class="form-control-flat" ng-model="credentials.referenceAvis" required>
           <div ng-messages="svairForm.referenceAvis.$error" ng-if="svairForm.$submitted">

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('boursesApp').directive('connection', function ($http, $window, $location, $timeout, store) {
+angular.module('boursesApp').directive('connection', function ($http, $window, $location, $timeout, $modal, store) {
   return {
     scope: {
       connectionId: '=',
@@ -74,6 +74,30 @@ angular.module('boursesApp').directive('connection', function ($http, $window, $
         scope.status = 'pending';
       }
 
+      function detailNumeroFiscal() {
+        $modal.open({
+          animation: true,
+          templateUrl: 'components/connection/numerofiscal.html',
+          controller: function($scope, $modalInstance) {
+            $scope.ok = function() {
+              $modalInstance.dismiss();
+            };
+          }
+        });
+      }
+
+      function detailNumeroAvis() {
+        $modal.open({
+          animation: true,
+          templateUrl: 'components/connection/numeroavis.html',
+          controller: function($scope, $modalInstance) {
+            $scope.ok = function() {
+              $modalInstance.dismiss();
+            };
+          }
+        });
+      }
+
       function saveAndConnect(event) {
         event.preventDefault();
         scope.onSuccess();
@@ -84,6 +108,8 @@ angular.module('boursesApp').directive('connection', function ($http, $window, $
       scope.validateSvair = validateSvair;
       scope.cancelCredentials = cancelCredentials;
       scope.saveAndConnect = saveAndConnect;
+      scope.detailNumeroFiscal = detailNumeroFiscal;
+      scope.detailNumeroAvis = detailNumeroAvis;
     }
   };
 });

@@ -189,6 +189,18 @@ select.form-control-flat {
   }
 }
 
+.modal-body {
+  background-color: whitesmoke;
+  color: #333;
+  padding-top: 30px;
+}
+
+.modal-footer {
+  background-color: $dark-blue;
+  border-top: 1px solid $darker-blue;
+}
+
+
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.scss';
@@ -200,4 +212,5 @@ select.form-control-flat {
 @import 'nouvelle_demande/form_layout.scss';
 @import 'nouvelle_demande/nouvelle_demande.scss';
 @import 'nouvelle_demande/vos-ressources/vos-ressources.scss';
+@import 'connection/connection.scss';
 // endinjector
