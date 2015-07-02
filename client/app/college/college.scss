@@ -1,32 +1,33 @@
 #college {
   color: white;
-  padding: 30px 0 250px 0;
+  padding: 0 0 250px 0;
   background-color: $dark-blue;
-
-  .college-body {
-    box-shadow: 0px 2px 17px rgba(0, 0, 0, 0.44);
-  }
-
-  .page-header-blue {
-    padding: 10px;
-    background-color: lighten($darker-blue, 5%);
-    margin-bottom: 0;
-    border-color: #333;
-  }
-
-  .content {
-    background-color: $white;
-    padding: 10px;
-    color: $darker-blue;
-  }
 
   #college-form {
     background-color: $blue;
     padding: 20px;
     border-radius: 4px;
   }
+
+  .content-box {
+    background-color: $white;
+    padding: 10px;
+    color: $darker-blue;
+  }
+
 }
 
 .list-group-item {
   background-color: white;
+}
+
+.page-header-blue {
+  padding: 10px;
+  background-color: lighten($darker-blue, 5%);
+  margin-bottom: 0;
+  border-color: #333;
+}
+
+.small-box-shadow {
+  box-shadow: 0px 2px 17px rgba(0, 0, 0, 0.20);
 }

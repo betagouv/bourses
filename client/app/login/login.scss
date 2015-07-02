@@ -1,11 +1,28 @@
 #login {
   color: white;
-  padding: 100px 0;
   background-color: $dark-blue;
   height: 100%;
+  margin-bottom: 250px;
 
   form {
     max-width: 640px;
     margin: auto;
+
+    .control-label-flat {
+      color: $darker-blue;
+    }
+
+    .form-control-flat {
+      border: 1px solid $darker-blue;
+      background-color: white;
+    }
+
+  }
+
+  .content-box {
+    background-color: $white;
+    padding: 30px;
+    color: $darker-blue;
   }
 }
+
