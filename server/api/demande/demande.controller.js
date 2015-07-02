@@ -4,9 +4,42 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var wkhtmltopdf = require('wkhtmltopdf');
 
+var config = require('../../config/environment');
 var Demande = require('./demande.model');
+var Etablissement = require('../etablissement/etablissement.model');
 var Generator = require('../../components/pdf/generator');
-var SendMail = require('../../components/mail/send-mail')
+var SendMail = require('../../components/mail/send-mail').sendMail;
+
+function sendConfirmationToUser(email, req) {
+  var subject = 'Confirmation de l\'envoi de votre demande';
+  var body = 'Merci d\'avoir passé votre demande avec notre service.';
+
+  SendMail(email, subject, body);
+  req.log.info('Notification sent to: ' + email);
+}
+
+function sendNotificationToAgent(identite, college, req) {
+  Etablissement
+    .findById(college)
+    .exec(function(err, etablissement) {
+      if (err) {
+        req.log.error(err);
+      } else if (!etablissement) {
+        req.log.error('Etablissement not found: ' + college);
+      } else {
+        var email = etablissement.contact;
+        var subject = 'Nouvelle demande - ' + identite.demandeur.prenoms + ' ' + identite.demandeur.nom;
+        var dashboard = config.domain + '/college/' + etablissement.human_id + '/demandes';
+
+        var body = 'Vous avez une nouvelle demande de bourse.\n' +
+          '<h3><a href="' + dashboard + '">Cliquez ici pour voir la liste des demandes passées</a></h3>\n' +
+          'Si le lien ne marche pas, vous pouvez copier/coller cette adresse dans votre navigateur:\n' + dashboard;
+
+        SendMail(email, subject, body);
+        req.log.info('Notification sent to: ' + etablissement.contact);
+      }
+    });
+}
 
 // Creates a new demande in the DB.
 exports.create = function(req, res) {
@@ -19,6 +52,10 @@ exports.create = function(req, res) {
     data: encoded
   }, function(err, demande) {
     if (err) { return handleError(req, res, err); }
+
+    sendConfirmationToUser(req.body.identiteAdulte.email, req);
+    sendNotificationToAgent(req.body.identiteAdulte, req.params.college, req);
+
     return res.status(201).json(demande);
   });
 };

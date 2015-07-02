@@ -52,9 +52,11 @@ var all = {
     key: process.env.DGFIP_KEY_LOCATION
   },
 
-  smtpUser: process.env.SMTP_USER || 'toto',
-  smtpPass: process.env.SMTP_PASS || 'password'
-
+  smtp: {
+    host: process.env.SMTP_HOST || 'http://localhost:5000',
+    user: process.env.SMTP_USER || 'toto',
+    pass: process.env.SMTP_PASS || 'password'
+  }
 };
 
 // Export the config object based on the NODE_ENV

@@ -9,7 +9,11 @@
         "PORT": 5000,
         "FC_CLIENT_ID": "abcdef",
         "FC_CLIENT_SECRET": "123456",
-        "SESSION_SECRET": "foobar"
+        "SESSION_SECRET": "foobar",
+
+        "SMTP_USER": "abc@yourdomain.com",
+        "SMTP_PASS": "pass",
+        "SMTP_HOST": "yourdomain.com"
       }
     }
   ]

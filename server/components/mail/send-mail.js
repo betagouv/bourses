@@ -3,30 +3,24 @@
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
-var config = require('../../config/environment');
+var config = require('../../config/environment').smtp;
 
-var Sender = function() {
-  this._user = config.smptUser;
-  this._pass = config.smtpPass;
-};
-
-Sender.prototype = {};
-
-Sender.prototype.sendContent = function(from, to, subject, body, attachments, done) {
+exports.sendMail = function(to, subject, body, attachments, done) {
   var transporter = nodemailer.createTransport(
     smtpTransport({
-      port: 465,
-      host: process.env.SMTP_HOST || config.SMTP_HOST,
-      secure: true,
+      port: 587,
+      host: config.host,
+      secure: false,
+      requireTLS: true,
       auth: {
-        user: this._user,
-        pass: this._pass
+        user: config.user,
+        pass: config.pass
       }
     })
   );
 
   var mailOptions = {
-    from: from,
+    from: config.user,
     to: to,
     subject: subject,
     html: body
@@ -37,13 +31,4 @@ Sender.prototype.sendContent = function(from, to, subject, body, attachments, do
   }
 
   transporter.sendMail(mailOptions, done);
-};
-
-exports.sendMail = function(mail, title, body, attachements) {
-  return Sender.sendContent(
-    mail,
-    'Demande de bourses simplifiées - ' + title,
-    body,
-    attachements
-  );
-};
+}
