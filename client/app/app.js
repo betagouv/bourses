@@ -46,7 +46,7 @@ angular
     };
   })
 
-  .run(function ($rootScope, $state, Auth) {
+  .run(function ($rootScope, $state, $window, $location, Auth) {
     $rootScope.$on('$stateChangeSuccess', function(){
       if ($window._paq) {
         $window._paq.push(['setCustomUrl', $location.path()]);
