@@ -47,6 +47,13 @@ angular
   })
 
   .run(function ($rootScope, $state, Auth) {
+    $rootScope.$on('$stateChangeSuccess', function(){
+      if ($window._paq) {
+        $window._paq.push(['setCustomUrl', $location.path()]);
+        $window._paq.push(['trackPageView']);
+      }
+    });
+
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
       Auth.isLoggedInAsync(function(loggedIn) {

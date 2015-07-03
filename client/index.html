@@ -42,6 +42,21 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+      if (window.location.hostname === 'bourse.sgmap.fr') {
+        var _paq = _paq || [];
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//stats.data.gouv.fr/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId', 16]);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+      }
+    </script>
+    <noscript><p><img src="//stats.data.gouv.fr/piwik.php?idsite=16" style="border:0;" alt="" /></p></noscript>
+
     <!-- build:js({.tmp,client}) app/vendor.js -->
       <!-- bower:js -->
       <script src="bower_components/jquery/dist/jquery.js"></script>
