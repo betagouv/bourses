@@ -8,13 +8,13 @@ var config = require('../../config/environment');
 var Demande = require('./demande.model');
 var Etablissement = require('../etablissement/etablissement.model');
 var Generator = require('../../components/pdf/generator');
-var SendMail = require('../../components/mail/send-mail').sendMail;
+var sendMail = require('../../components/mail/send-mail').sendMail;
 
 function sendConfirmationToUser(email, req) {
   var subject = 'Confirmation de l\'envoi de votre demande';
   var body = 'Merci d\'avoir passé votre demande avec notre service.';
 
-  SendMail(email, subject, body);
+  sendMail(email, subject, body);
   req.log.info('Notification sent to: ' + email);
 }
 
@@ -35,7 +35,7 @@ function sendNotificationToAgent(identite, college, req) {
           '<h3><a href="' + dashboard + '">Cliquez ici pour voir la liste des demandes passées</a></h3>\n' +
           'Si le lien ne marche pas, vous pouvez copier/coller cette adresse dans votre navigateur:\n' + dashboard;
 
-        SendMail(email, subject, body);
+        sendMail(email, subject, body);
         req.log.info('Notification sent to: ' + etablissement.contact);
       }
     });
