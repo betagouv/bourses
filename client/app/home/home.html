@@ -54,23 +54,18 @@
       </div>
       <div class="vertical-hr"></div>
       <div class="result">
-        <h3>Résultat de votre simulation</h3>
         <p ng-if="computing" class="maxi text-muted">
             <i class="fa fa-spin fa-cog"></i> en cours
         </p>
-        <p ng-if="!computing" class="maxi" ng-class="{'text-muted': montant === null}">
-            {{montant === null ? 'Pas de résultat' : montant + ' €'}}
-        </p>
+        <div ng-if="!computing">
+          <h3>
+            {{montant | descriptionMontant}}
+          </h3>
+          <p ng-if="montant > 0" class="maxi" ng-class="{'text-muted': montant === null}">
+              {{montant | montant}}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- <div class="alert alert-info">
-  <p>La bourse des collèges est une aide destinée à favoriser la scolarité des collégiens. Elle est versée sous conditions de ressources.</p><p>Vous devez déposer votre dossier de demande entre la rentrée scolaire et la fin du mois de septembre.</p>
-  <div class="text-right">
-    <a target="_blank" href="http://vosdroits.service-public.fr/particuliers/F984.xhtml" title="Plus de détails">
-      <i class="fa fa-external-link"></i> Plus de détails
-    </a>
-  </div>
-</div> -->
