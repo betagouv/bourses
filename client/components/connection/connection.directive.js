@@ -42,6 +42,9 @@ angular.module('boursesApp').directive('connection', function ($http, $window, $
 
         scope.onSuccess();
         scope.loading = true;
+
+        scope.credentials.numeroFiscal = trimNumeroFiscal(scope.credentials.numeroFiscal);
+
         $http.get('/api/connection/svair', {params: scope.credentials})
         .success(function(data) {
           data.identites = [data.declarant1];
@@ -62,6 +65,14 @@ angular.module('boursesApp').directive('connection', function ($http, $window, $
         .finally(function() {
           scope.loading = false;
         });
+      }
+
+      function trimNumeroFiscal(numeroFiscal) {
+        if (numeroFiscal && numeroFiscal.length > 13) {
+          return numeroFiscal.substring(0, numeroFiscal.length - 1);
+        }
+
+        return numeroFiscal;
       }
 
       function cancelCredentials() {
