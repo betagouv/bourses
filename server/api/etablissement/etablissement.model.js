@@ -8,7 +8,7 @@ var EtablissementSchema = new Schema({
   nom: String,
   type: String,
   contact: String,
-  vile: {
+  ville: {
     nom: String,
     codePostal: String
   }
