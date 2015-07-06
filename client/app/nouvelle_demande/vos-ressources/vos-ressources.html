@@ -1,20 +1,6 @@
 <form name="foyerForm" ng-submit="next(foyerForm)" novalidate>
-  <div class="form-section">
+  <div class="form-section" id="foyer">
     <h1>Votre foyer</h1>
-
-    <div class="form-group required" ng-class="{'has-error': !foyer.garde && foyerForm.$submitted}">
-      <fieldset>
-        <legend class="control-label-flat">Votre enfant est-il en garde alternée ?</legend>
-        <div class="btn-group">
-          <button type="button" class="btn btn-select" role="radio" ng-model="foyer.garde" btn-radio="'oui'">Oui</button>
-          <button type="button" class="btn btn-select" role="radio" ng-model="foyer.garde" btn-radio="'non'">Non</button>
-        </div>
-      </fieldset>
-
-      <div ng-if="!foyer.garde && foyerForm.$submitted">
-        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      </div>
-    </div>
 
     <div class="form-group required" ng-class="{'has-error': foyerForm.nombreEnfantsACharge.$invalid && foyerForm.$submitted}">
       <label for="nombre-enfants-a-charge" class="control-label-flat">
@@ -67,7 +53,7 @@
 
     <div class="form-group required" ng-if="isCelibataire()">
       <fieldset>
-        <legend class="control-label-flat">Êtes-vous en concubinage avec l'autre parent de l'enfant ?</legend>
+        <legend class="control-label-flat">Êtes-vous en union libre avec l'autre parent de {{identiteEnfant.prenom}} ?</legend>
         <div class="btn-group">
           <button type="button" class="btn btn-select" role="radio" ng-model="foyer.concubinage" btn-radio="'oui'">Oui</button>
           <button type="button" class="btn btn-select" role="radio" ng-model="foyer.concubinage" btn-radio="'non'">Non</button>

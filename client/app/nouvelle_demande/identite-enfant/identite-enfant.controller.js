@@ -20,7 +20,7 @@ angular.module('boursesApp')
       }
     });
 
-    $scope.identite = store.get('identite-enfant') || {};
+    $scope.identite = store.get('identite-enfant') || {garde: 'non'};
     var steps = store.get('steps');
 
     $scope.submit = function(form) {

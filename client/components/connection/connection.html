@@ -1,7 +1,8 @@
 <div ng-if="status !== 'success'">
   <div class="choices-connect">
     <div class="connect-fc">
-      <h2>Vous avez un compte impots.gouv.fr</h2>
+      <h2 ng-if="connectionId === 'demandeur'">Vous avez un compte impots.gouv.fr</h2>
+      <h2 ng-if="connectionId !== 'demandeur'">Connection avec son compte impots.gouv.fr</h2>
       <div class="connect-fc-img">
         <a href="/oauth/fc" ng-click="saveAndConnect($event)" target="self" title="Se connecter avec son compte impots.gouv.fr">
           <img src="assets/images/franceconnect.png" alt="Se connecter avec son compte impots.gouv.fr">
@@ -10,7 +11,8 @@
     </div>
     <div class="vertical-hr"></div>
     <div class="connect-svair">
-      <h2>Vous n'avez pas de compte impots.gouv.fr</h2>
+      <h2 ng-if="connectionId === 'demandeur'">Vous n'avez pas de compte impots.gouv.fr</h2>
+      <h2 ng-if="connectionId !== 'demandeur'">L'autre parent ne possède pas de compte impots.gouv.fr</h2>
       <ng-form class="svair-form" name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
         <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
 
@@ -18,7 +20,7 @@
             <i class="fa fa-question-circle"></i>
 
             <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Votre numéro fiscal</label>
-            <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Numéro fiscal de l'autre parent</label>
+            <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Son numéro fiscal</label>
           </a>
 
           <input id="numeroFiscal_{{connectionId}}" type="text" name="numeroFiscal" class="form-control-flat" ng-model="credentials.numeroFiscal" required>
@@ -33,7 +35,7 @@
             <i class="fa fa-question-circle"></i>
 
             <label for="referenceAvis_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Référence de votre avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}}</label>
-            <label for="referenceAvis_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Référence de l'avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}} de l'autre parent</label>
+            <label for="referenceAvis_{{connectionId}}" ng-if="connectionId !== 'demandeur'" class="control-label-flat">Référence de son avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}}</label>
           </a>
 
           <input id="referenceAvis_{{connectionId}}" type="text" name="referenceAvis" class="form-control-flat" ng-model="credentials.referenceAvis" required>
@@ -48,7 +50,7 @@
 
         <div class="text-right">
           <a ng-if="status" class="action-cancel" ng-click="cancelCredentials()">Annuler</a>
-          <button ladda="loading" ng-click="validateSvair(svairForm)" data-style="expand-right" data-color="white" name="submit" alt="Valider" class="btn btn-action">
+          <button type="button" ladda="loading" ng-click="validateSvair(svairForm)" data-style="expand-right" data-color="white" name="submit" alt="Valider" class="btn btn-action">
             Valider
           </button>
         </div>

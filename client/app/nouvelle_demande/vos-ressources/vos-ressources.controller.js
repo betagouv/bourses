@@ -1,14 +1,17 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $timeout, $modal, store) {
+  .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $location, $anchorScroll, $timeout, $modal, store) {
     $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur');
-    $scope.foyer = store.get('foyer') || {garde: 'non', concubinage: 'non'};
+    $scope.foyer = store.get('foyer') || {concubinage: 'non'};
+    $scope.identiteEnfant = store.get('identite-enfant');
     $scope.statusDemandeur = null;
     $scope.statusConjoint = null;
 
     $scope.next = function(form) {
-      if (!form.$valid) {
+      if (!form.nombreEnfantsACharge.$valid || !form.nombreEnfantsAdultes.$valid) {
+        $location.hash('foyer');
+        $anchorScroll();
         return;
       }
 
@@ -68,7 +71,7 @@ angular.module('boursesApp')
     }
 
     function isGardeAlternee() {
-      return  $scope.foyer.garde === 'oui';
+      return  $scope.identiteEnfant.garde === 'oui';
     }
 
     $scope.showOtherParentConnection = showOtherParentConnection;
