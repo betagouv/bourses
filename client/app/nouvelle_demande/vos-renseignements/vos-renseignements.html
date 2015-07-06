@@ -85,8 +85,8 @@
     <h2>Vos informations bancaires</h2>
 
     <div class="form-group required" ng-class="{'has-error': !identite.titulaire && infoForm.$submitted}">
-      <label class="control-label-flat">Titulaire</label>
-      <div type="text" class="form-control-flat" name="titulaire" disabled required>{{identite.demandeur.prenoms}} {{identite.demandeur.nom}}</div>
+      <label class="control-label-flat">Titulaire du compte</label>
+      <input type="text" class="form-control-flat" name="titulaire" required>
       <p><i class="fa fa-warning"></i> Le titulaire du compte doit être la personne qui fait la demande de bourse</p>
       <div ng-if="!identite.titulaire && infoForm.$submitted">
         <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
@@ -146,4 +146,3 @@
     </button>
   </div>
 </form>
-
