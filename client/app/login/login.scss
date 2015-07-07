@@ -1,6 +1,5 @@
 #login {
-  color: white;
-  background-color: $dark-blue;
+  background-color: white;
   height: 100%;
   margin-bottom: 250px;
 
@@ -9,20 +8,17 @@
     margin: auto;
 
     .control-label-flat {
-      color: $darker-blue;
+      color: white;
     }
 
     .form-control-flat {
-      border: 1px solid $darker-blue;
       background-color: white;
     }
-
   }
 
   .content-box {
-    background-color: $white;
-    padding: 30px;
-    color: $darker-blue;
+    background-color: $dark-blue;
+    padding: 30px 0;
+    color: white;
   }
 }
-

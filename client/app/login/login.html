@@ -1,36 +1,34 @@
 <div id="login">
   <div class="container">
-    <div class="small-box-shadow">
-      <div class="page-header page-header-blue">
-        <h1>Connection</h1>
-      </div>
-      <div class="content-box">
-        <form class="form" name="form" ng-submit="login(form)" novalidate>
-          <div class="form-group required" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
-            <label for="email" class="control-label-flat">Email</label>
-            <input id="email" type="email" name="email" class="form-control-flat" ng-model="user.email" required>
-            <div ng-messages="form.email.$error" ng-if="form.$submitted">
-              <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-            </div>
+    <h1>Connection</h1>
+  </div>
+  <div class="content-box">
+    <div class="container">
+      <form class="form" name="form" ng-submit="login(form)" novalidate>
+        <div class="form-group required" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
+          <label for="email" class="control-label-flat">Email</label>
+          <input id="email" type="email" name="email" class="form-control-flat" ng-model="user.email" required>
+          <div ng-messages="form.email.$error" ng-if="form.$submitted">
+            <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
           </div>
+        </div>
 
-          <div class="form-group required" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
-            <label for="password" class="control-label-flat">Mot de passe</label>
-            <input id="password" type="password" name="password" class="form-control-flat" ng-model="user.password" required>
-            <div ng-messages="form.password.$error" ng-if="form.$submitted">
-              <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-            </div>
+        <div class="form-group required" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
+          <label for="password" class="control-label-flat">Mot de passe</label>
+          <input id="password" type="password" name="password" class="form-control-flat" ng-model="user.password" required>
+          <div ng-messages="form.password.$error" ng-if="form.$submitted">
+            <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
           </div>
+        </div>
 
-          <p class="alert alert-danger" ng-if="errors.other"><i class="fa fa-warning"></i> {{errors.other}}</p>
+        <p class="alert alert-danger" ng-if="errors.other"><i class="fa fa-warning"></i> {{errors.other}}</p>
 
-          <div class="text-right">
-            <button class="btn btn-action-invert btn-lg btn-login" type="submit">
-              Connection
-            </button>
-          </div>
-        </form>
-      </div>
+        <div class="text-right">
+          <button class="btn btn-action-invert btn-lg btn-login" type="submit">
+            Connection
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -1,7 +1,9 @@
 #college {
-  color: white;
-  padding: 0 0 250px 0;
-  background-color: $dark-blue;
+  background-color: white;
+
+  .header {
+    padding-bottom: 20px;
+  }
 
   #college-form {
     background-color: $blue;
@@ -10,24 +12,32 @@
   }
 
   .content-box {
-    background-color: $white;
-    padding: 10px;
-    color: $darker-blue;
+    background-color: $dark-blue;
+    color: white;
+    padding: 30px 0;
   }
 
+  .nav-sections {
+    background-color: $darker-blue;
+    padding: 10px 0;
+
+    li.active {
+      a:focus, a:hover {
+        color: white;
+      }
+    }
+
+    a {
+      color: $white;
+
+      &:focus, &:hover {
+        color: $darker-blue;
+      }
+    }
+  }
 }
 
 .list-group-item {
   background-color: white;
-}
-
-.page-header-blue {
-  padding: 10px;
-  background-color: lighten($darker-blue, 5%);
-  margin-bottom: 0;
-  border-color: #333;
-}
-
-.small-box-shadow {
-  box-shadow: 0px 2px 17px rgba(0, 0, 0, 0.20);
+  color: $darker-blue;
 }

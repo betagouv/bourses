@@ -2,16 +2,10 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeListCtrl', function($scope, $state, $timeout, Etablissement, id) {
+  .controller('DemandeListCtrl', function($scope, $state, $timeout, Etablissement, id, status) {
     $scope.college = Etablissement.get({id: id});
-    $scope.new = Etablissement.queryDemandes({id: id, status: 'new'});
-    $scope.pending = Etablissement.queryDemandes({id: id, status: 'pending'});
-    $scope.done = Etablissement.queryDemandes({id: id, status: 'done'});
-
-    $scope.splice = function(idx, demande) {
-      $timeout(function() {
-        $scope.new.splice(idx, 1);
-        $scope.pending.unshift(demande);
-      }, 200);
+    $scope.demandes = Etablissement.queryDemandes({id: id, status: status});
+    $scope.goTo = function(demande) {
+      $state.go('layout.college.demandes.edit', {'demandeId': demande._id});
     };
   });

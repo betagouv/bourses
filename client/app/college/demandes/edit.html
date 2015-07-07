@@ -1,6 +1,11 @@
 <div id="edition-demande">
-  <div class="page-header">
+  <section>
     <h2>Résumé de la demande <br><small>Passée le {{demande.createdAt | date}}</small></h2>
+    <div class="text-right">
+      <a class="btn btn-primary btn-lg" href="/api/demandes/{{demandeId}}/random/download?access_token={{token}}" target="_blank" download="{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
+        Télécharger le dossier complet
+      </a>
+    </div>
 
     <div class="info-label">Identité du demandeur</div>
     <p class="info">{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</p>
@@ -20,12 +25,25 @@
     <div class="info-label">Déductibilité</div>
     <p class="info">{{demande.identiteEnfant.regime | deductibilite}}</p>
 
-    <div class="text-right">
-      <a class="btn btn-primary btn-lg" href="/api/demandes/{{demandeId}}/random/download?access_token={{token}}" target="_blank" download="{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
-        Télécharger le dossier complet
-      </a>
+    <h2>Vos observations</h2>
+
+    <div ng-switch="saving">
+      <p ng-switch-when="waiting"><i class="fa fa-spin fa-cog"></i> En attente</p>
+      <p ng-switch-when="pending"><i class="fa fa-spin fa-cog"></i> Sauvegarde en cours</p>
+      <p ng-switch-when="success" class="text-success"><i class="fa fa-check"></i> Sauvegarde effectuée</p>
     </div>
-  </div>
+
+    <div class="form-group">
+      <textarea
+        class="form-control"
+        ng-model-options="{ debounce: 1000 }"
+        ng-change="save()"
+        ng-keydown="saving = 'waiting'"
+        ng-model="demande.observations"
+        rows="5"></textarea>
+
+    </div>
+  </section>
 
   <section>
     <h2>Identité de l'enfant</h2>
@@ -108,34 +126,4 @@
     <div class="info-label">Situation familiale</div>
     <p class="info">{{demande.data.situationFamille}}</p>
   </section>
-
-  <section>
-    <h2>Vos observations</h2>
-
-    <div ng-switch="saving">
-      <p ng-switch-when="waiting"><i class="fa fa-spin fa-cog"></i> En attente</p>
-      <p ng-switch-when="pending"><i class="fa fa-spin fa-cog"></i> Sauvegarde en cours</p>
-      <p ng-switch-when="success" class="text-success"><i class="fa fa-check"></i> Sauvegarde effectuée</p>
-    </div>
-
-    <div class="form-group">
-      <textarea
-        class="form-control"
-        ng-model-options="{ debounce: 1000 }"
-        ng-change="save()"
-        ng-keydown="saving = 'waiting'"
-        ng-model="demande.observations"
-        rows="5"></textarea>
-
-    </div>
-  </section>
-
-<!--
-  <h1>Transmission de la notification</h1>
-
-  <a class="btn btn-primary btn-lg" href="/api/demandes/{{id}}/{{key}}/download" target="_blank" download="{{demande.identiteAdulte.titulaire.nom}}_{{demande.identiteAdulte.titulaire.prenoms}}.pdf">
-    Télécharger le pdf de SIECLE et l'envoyer par mail à l'utilisateur
-  </a>
-
-  <pre>{{demande | json}}</pre> -->
 </div>

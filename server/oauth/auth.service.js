@@ -48,7 +48,7 @@ function hasRole(roleRequired) {
         next();
       }
       else {
-        res.res.sendStatus(403);
+        res.sendStatus(403);
       }
     });
 }

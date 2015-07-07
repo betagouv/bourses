@@ -1,0 +1,22 @@
+.finished {
+  font-size: 5em;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.table {
+  background-color: $white;
+  border-radius: 4px;
+  color: $darker-blue;
+
+  thead th {
+    font-weight: 200;
+  }
+  tr.hover {
+    &:hover, &:focus {
+      cursor: pointer;
+      background-color: $darker-blue;
+      color: white;
+    }
+  }
+}

@@ -54,6 +54,8 @@ exports.demandes = function(req, res) {
           if (err) { return handleError(req, res, err); }
           if(!demandes) { return res.sendStatus(404); }
 
+          res.set('count', demandes.length);
+
           if (demandes) {
             return res.json(decode(demandes));
           } else {

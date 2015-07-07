@@ -1,41 +1,28 @@
 <ui-view>
-  <h1>Nouvelles demandes</h1>
-  <ul class="list-group">
-    <li class="list-group-item" ng-if="new.length === 0">
-      Pas de nouvelles demandes
-    </li>
-    <a ui-sref="layout.college.demandes.edit({demandeId: demande._id})" ng-repeat="(idx,demande) in new" ng-click="splice(idx, demande)">
-      <li class="list-group-item">
-        <strong>Demande de {{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</strong> pour
-        {{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}<br>
-        <span class="text-muted">Passée le {{demande.createdAt | date}}</span>
-      </li>
-    </a>
-  </ul>
-  <h1>Demandes en cours</h1>
-  <ul class="list-group">
-    <li class="list-group-item" ng-if="pending.length === 0">
-      Pas de demandes en cours
-    </li>
-    <a ui-sref="layout.college.demandes.edit({demandeId: demande._id})" ng-repeat="demande in pending">
-      <li class="list-group-item">
-        <strong>Demande de {{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</strong> pour
-        {{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}<br>
-        <span class="text-muted">Passée le {{demande.createdAt | date}}</span>
-      </li>
-    </a>
-  </ul>
-  <h1>Demandes archivées</h1>
-  <ul class="list-group">
-    <li class="list-group-item" ng-if="done.length === 0">
-      Pas de demandes archivées
-    </li>
-    <a ui-sref="layout.college.demandes.edit({demandeId: demande._id})" ng-repeat="demande in done">
-      <li class="list-group-item">
-        <strong>Demande de {{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</strong> pour
-        {{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}<br>
-        <span class="text-muted">Passée le {{demande.createdAt | date}}</span>
-      </li>
-    </a>
-  </ul>
+  <div ng-if="demandes.length === 0 && demandes.$resolved" class="finished">
+    <i class="fa fa-thumbs-up"></i>
+  </div>
+
+  <table class="table" ng-if="demandes.length !== 0">
+      <thead>
+        <tr>
+          <th>Enfant</th>
+          <th>Demandeur</th>
+          <th>Revenu fiscal</th>
+          <th>Enfants mineurs</th>
+          <th>Enfants majeurs</th>
+          <th>Déductibilité</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover" ng-repeat="demande in demandes" ng-click="goTo(demande)">
+          <th scope="row">{{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</th>
+          <td>{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</td>
+          <td>{{demande.data.revenuFiscalReference}} €</td>
+          <td>{{demande.foyer.nombreEnfantsACharge}}</td>
+          <td>{{demande.foyer.nombreEnfantsAdultes}}</td>
+          <td>{{demande.identiteEnfant.regime | deductibilite}}</td>
+        </tr>
+      </tbody>
+    </table>
 </ui-view>

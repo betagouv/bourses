@@ -1,19 +1,28 @@
 <div id="college">
-  <div class="container">
-    <div class="small-box-shadow">
-      <div class="page-header page-header-blue">
-        <h1>{{college.nom}}</h1>
-        <span>{{college.contact}}</span>
-        <div class="pull-right">
-          <a href="" class="btn btn-action-invert" ng-click="logout()">
-            Se déconnecter
-          </a>
-        </div>
-        <div class="clearfix"></div>
+  <div class="header">
+    <div class="container">
+      <h1>{{college.nom}}</h1>
+      <span>{{college.contact}}</span>
+      <div class="pull-right">
+        <a href="" class="btn btn-action-invert" ng-click="logout()">
+          Se déconnecter
+        </a>
       </div>
-      <div class="content-box">
-        <ui-view></ui-view>
-      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="nav-sections">
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li role="presentation" ui-sref-active="active"><a ui-sref="layout.college.demandes.new">Nouvelles demandes <span class="badge">{{new}}</span></a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="layout.college.demandes.pending">En cours <span class="badge">{{pending}}</span></a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="layout.college.demandes.done">Traitées <span class="badge">{{done}}</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="content-box">
+    <div class="container">
+      <ui-view></ui-view>
     </div>
   </div>
 </div>

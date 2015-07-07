@@ -20,7 +20,7 @@ angular.module('boursesApp')
 
           Auth.getCurrentUser().$promise.then(function (user) {
             if (user.etablissement) {
-              $state.go('layout.college.demandes', {id: user.etablissement.human_id});
+              $state.go('layout.college.demandes.new', {id: user.etablissement.human_id});
             } else {
               $state.go('layout.admin');
             }
