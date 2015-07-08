@@ -5,7 +5,7 @@
     <div class="form-group required" ng-class="{'has-error': !identite.demandeur && infoForm.$submitted}">
       <label for="demandeur" class="control-label-flat">Vous êtes</label>
       <select ng-model="identite.demandeur" required id="demandeur" class="form-control-flat"
-        ng-options="declarant as getLabel(declarant) for declarant in dataDemandeur.identites">
+        ng-options="declarant as getLabel(declarant) for declarant in dataDemandeur.identites track by declarant.prenoms">
         <option>--</option>
       </select>
       <div ng-if="!identite.demandeur && infoForm.$submitted">
