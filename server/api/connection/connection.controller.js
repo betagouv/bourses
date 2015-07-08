@@ -26,6 +26,9 @@ exports.svair = function (req, res, next) {
     });
   } else {
     svair(req.query.numeroFiscal, req.query.referenceAvis, function (err, result) {
+      if (!result.declarant2.nom) {
+        delete result.declarant2;
+      }
       if (err && err.message === 'Invalid credentials') {
         res.status(404).send({
           code: 404,
