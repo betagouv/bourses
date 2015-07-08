@@ -19,6 +19,8 @@ exports.setup = function (config) {
     }
   );
   strategy.authorizationParams = function () {
+    // Pour ne garder que le FI dgfip:
+    // return { nonce: 'foobar', selected_idp: 'dgfip' };
     return { nonce: 'foobar' };
   };
   strategy.userProfile = function (accessToken, done) {
