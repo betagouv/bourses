@@ -3,12 +3,34 @@
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var wkhtmltopdf = require('wkhtmltopdf');
+var path = require('path');
+var fs = require('fs');
 
 var config = require('../../config/environment');
 var Demande = require('./demande.model');
 var Etablissement = require('../etablissement/etablissement.model');
 var Generator = require('../../components/pdf/generator');
 var sendMail = require('../../components/mail/send-mail').sendMail;
+var crypto = require('../../components/crypto/crypto');
+
+function sendAttributionNotification(email, html, req, cb) {
+  var subject = 'Bourse de collège - Notification d\'attribution';
+  var body = 'Merci d\'avoir passé votre demande avec notre service.';
+  var attachments = [{
+    filename: 'notification.pdf',
+    content: wkhtmltopdf(html, {encoding: 'UTF-8'})
+  }];
+
+  sendMail(email, subject, body, attachments, function(error, info) {
+    if (error) {
+      req.log.error('Notification error: ' + error);
+      if (cb) cb(error, null);
+    } else {
+      req.log.info('Notification sent: ' + info.response);
+      if (cb) cb(null, info.response);
+    }
+  });
+}
 
 function sendConfirmationToUser(email, req) {
   var subject = 'Confirmation de l\'envoi de votre demande';
@@ -44,8 +66,7 @@ function sendNotificationToAgent(identite, college, req) {
 // Creates a new demande in the DB.
 exports.create = function(req, res) {
 
-  var str = JSON.stringify(req.body);
-  var encoded = new Buffer(str).toString('base64');
+  var encoded = crypto.encode(req.body);
 
   Demande.create({
     etablissement: req.params.college,
@@ -68,9 +89,10 @@ exports.show = function(req, res) {
 
   Demande
     .findById(id)
-    .exec(function (err, demande) {
+    .exec(function(err, demande) {
       if (err) { return handleError(req, res, err); }
-      if(!demande) { return res.sendStatus(404); }
+
+      if (!demande) { return res.sendStatus(404); }
 
       if (demande.status === 'new') {
         demande
@@ -78,11 +100,8 @@ exports.show = function(req, res) {
           .save();
       }
 
-      var decoded = new Buffer(demande.data, 'base64').toString();
-      var demandeObj = JSON.parse(decoded);
-      demandeObj.createdAt = demande.createdAt;
-      demandeObj.observations = demande.observations;
-      return res.json(demandeObj);
+      var decoded = crypto.decode(demande);
+      return res.json(decoded);
     });
 };
 
@@ -96,19 +115,17 @@ exports.download = function(req, res) {
 
   Demande
     .findById(id)
-    .exec(function (err, demande) {
+    .exec(function(err, demande) {
       if (err) { return handleError(req, res, err); }
-      if(!demande) { return res.sendStatus(404); }
-      var decoded = new Buffer(demande.data, 'base64').toString();
-      var demandeObj = JSON.parse(decoded);
-      demandeObj.createdAt = demande.createdAt;
-      demandeObj.observations = demande.observations;
-      Generator.toHtml(demandeObj, host, function(html) {
+
+      if (!demande) { return res.sendStatus(404); }
+
+      var decoded = crypto.decode(demande);
+      Generator.toHtml(decoded, host, function(html) {
         wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
       });
     });
-
-}
+};
 
 exports.save = function(req, res) {
   var id = req.params.id;
@@ -116,17 +133,94 @@ exports.save = function(req, res) {
 
   Demande
     .findById(id)
-    .exec(function (err, demande) {
+    .exec(function(err, demande) {
       if (err) { return handleError(req, res, err); }
-      if(!demande) { return res.sendStatus(404); }
+
+      if (!demande) { return res.sendStatus(404); }
 
       demande.set('observations', observations).save(function(err, result) {
         if (err) { return handleError(req, res, err); }
-        res.status(200).send(result);
-      })
-    });
 
-}
+        res.status(200).send(result);
+      });
+    });
+};
+
+exports.saveNotification = function(req, res, next) {
+  var id = req.params.id;
+
+  Demande
+    .findById(id)
+    .exec(function(err, demande) {
+      if (err) return handleError(req, res, err);
+      if (!demande) return res.sendStatus(404);
+
+      demande
+        .set('notification', req.body)
+        .set('status', 'done')
+        .save(function(err, result) {
+          if (err) { return handleError(req, res, err); }
+
+          var decoded = crypto.decode(result);
+          Generator.editNotification(decoded, function(html) {
+            sendAttributionNotification('del.florian@gmail.com', html, req);
+          });
+
+          res.status(200).send(result);
+        });
+    });
+};
+
+exports.downloadNotification = function(req, res) {
+  var id = req.params.id;
+
+  Demande
+    .findById(id)
+    .exec(function(err, demande) {
+      if (err) return handleError(req, res, err);
+      if (!demande) return res.sendStatus(404);
+
+      var decoded = crypto.decode(demande);
+      Generator.editNotification(decoded, function(html) {
+        wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
+      });
+    });
+};
+
+exports.deleteNotification = function(req, res) {
+  var id = req.params.id;
+
+  Demande
+    .findById(id)
+    .exec(function(err, demande) {
+      if (err) return handleError(req, res, err);
+      if (!demande) return res.sendStatus(404);
+
+      var file = demande.notification;
+      if (!file) {
+        return res.sendStatus(304);
+      }
+
+      var filePath = path.join(config.root + '/server/uploads/', file.name);
+
+      fs.unlink(filePath, function(err) {
+        if (err) {
+          req.log.info(req.user + ', not deleted, not found: ' + filePath);
+        } else {
+          req.log.info(req.user + ', successfully deleted: ' + filePath);
+        }
+
+        file.remove();
+
+        demande
+          .save(function(err, result) {
+            if (err) { return handleError(req, res, err); }
+
+            return res.send(result).status(200);
+          });
+      });
+    });
+};
 
 function handleError(req, res, err) {
   req.log.error(err);

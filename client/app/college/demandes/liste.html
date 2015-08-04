@@ -3,26 +3,28 @@
     <i class="fa fa-thumbs-up"></i>
   </div>
 
-  <table class="table" ng-if="demandes.length !== 0">
-      <thead>
-        <tr>
-          <th>Enfant</th>
-          <th>Demandeur</th>
-          <th>Revenu fiscal</th>
-          <th>Enfants mineurs</th>
-          <th>Enfants majeurs</th>
-          <th>Déductibilité</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="hover" ng-repeat="demande in demandes" ng-click="goTo(demande)">
-          <th scope="row">{{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</th>
-          <td>{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</td>
-          <td>{{demande.data.revenuFiscalReference}} €</td>
-          <td>{{demande.foyer.nombreEnfantsACharge}}</td>
-          <td>{{demande.foyer.nombreEnfantsAdultes}}</td>
-          <td>{{demande.identiteEnfant.regime | deductibilite}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <table class="table table-striped" ng-if="demandes.length !== 0">
+    <thead>
+      <tr>
+        <th>Enfant</th>
+        <th>Demandeur</th>
+        <th>Revenu fiscal</th>
+        <th>Enfants mineurs</th>
+        <th>Enfants majeurs</th>
+        <th>Déductibilité</th>
+        <th>Notification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="demande in demandes">
+        <td><a ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</td></a>
+        <td>{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</td>
+        <td>{{demande.data.revenuFiscalReference}} €</td>
+        <td>{{demande.foyer.nombreEnfantsACharge}}</td>
+        <td>{{demande.foyer.nombreEnfantsAdultes}}</td>
+        <td>{{demande.identiteEnfant.regime | deductibilite}}</td>
+        <td><div class="btn btn-action-invert" ng-click="notification(demande)">Éditer <i class="fa fa-send"></i></div></td>
+      </tr>
+    </tbody>
+  </table>
 </ui-view>

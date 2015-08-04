@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 
 var Etablissement = require('./etablissement.model');
 var Demande = require('../demande/demande.model');
+var crypto = require('../../components/crypto/crypto');
 
 exports.show = function(req, res) {
   Etablissement
@@ -29,16 +30,7 @@ exports.query = function(req, res) {
 };
 
 function decode(demandes) {
-  return _.map(demandes, function(demande) {
-    var decoded = new Buffer(demande.data, 'base64').toString();
-    var decodedObj = JSON.parse(decoded);
-
-    decodedObj.createdAt = demande.createdAt;
-    decodedObj._id = demande._id;
-    decodedObj.observations = demande.observations;
-
-    return decodedObj;
-  });
+  return _.map(demandes, crypto.decode);
 }
 
 exports.demandes = function(req, res) {

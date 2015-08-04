@@ -29,56 +29,6 @@
         <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
-
-    <h2>Votre adresse</h2>
-
-    <div class="form-group required" ng-class="{'has-error': infoForm.adresse.$invalid && infoForm.$submitted}">
-      <label for="adresse" class="control-label-flat">Adresse</label>
-      <textarea id="adresse" rows="2" name="adresse" class="form-control-flat" ng-model="identite.adresse" required></textarea>
-      <div ng-messages="infoForm.adresse.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      </div>
-    </div>
-
-    <div
-      class="form-group required"
-      ng-class="{'has-error': infoForm.$submitted && infoForm.codePostal.$invalid}">
-      <label class="control-label-flat" for="postal-code">Code postal</label>
-      <input
-        type="text"
-        inputmode="numeric"
-        minlength="5"
-        maxlength="5"
-        pattern="[0-9]{5}"
-        title="Cinq chiffres"
-        class="form-control-flat"
-        id="postal-code"
-        name="codePostal"
-        required
-        ng-model="identite.codePostal"
-        ng-change="updateCities(infoForm)">
-      <div ng-messages="infoForm.codePostal.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        <p class="help-block" ng-message='notFound'><i class="fa fa-warning"></i> Ce code postal est invalide</p>
-      </div>
-    </div>
-
-    <div class="form-group required" ng-class="{'has-error': infoForm.ville.$invalid && infoForm.$submitted}">
-      <label class="control-label-flat" for="postal-code-ville">Ville</label>
-      <p class="form-control-flat-static" ng-if="retrievingCities"><i class="fa fa-spinner fa-spin"></i></p>
-      <select
-        name="ville"
-        id="postal-code-ville"
-        class="form-control-flat"
-        required
-        ng-disabled="!cities.length"
-        ng-options="city.nomCommune for city in cities track by city.codeInsee"
-        ng-model="identite.ville">
-      </select>
-      <div ng-messages="infoForm.ville.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      </div>
-    </div>
   </div>
 
   <div class="form-section">
@@ -87,7 +37,9 @@
     <div class="form-group required" ng-class="{'has-error': !identite.titulaire && infoForm.$submitted}">
       <label class="control-label-flat">Titulaire du compte</label>
       <input type="text" class="form-control-flat" name="titulaire" required>
-      <p><i class="fa fa-warning"></i> Le titulaire du compte doit être la personne qui fait la demande de bourse</p>
+      <div class="has-error">
+        <p class="help-block"><i class="fa fa-warning"></i> Le titulaire du compte doit être la personne qui fait la demande de bourse</p>
+      </div>
       <div ng-if="!identite.titulaire && infoForm.$submitted">
         <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>

@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
 var DemandeSchema = new Schema({
@@ -9,7 +9,12 @@ var DemandeSchema = new Schema({
   observations:   { type: String },
   data:           { type: String },
   etablissement:  { type: Schema.Types.ObjectId, ref: 'Etablissement' },
-  status:         { type: String, enum: ['new', 'pending', 'done'], default: 'new' }
+  status:         { type: String, enum: ['new', 'pending', 'done'], default: 'new' },
+  notification:   {
+    edited: { type: Boolean, default: false },
+    montant: { type: Number },
+    email: { type: String }
+  }
 });
 
 module.exports = mongoose.model('Demande', DemandeSchema);

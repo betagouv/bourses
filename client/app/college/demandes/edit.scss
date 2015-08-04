@@ -26,4 +26,18 @@
     padding: 20px;
   }
 
+  .drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    text-align: center;
+    padding: 25px;
+
+    &.done {
+      border: none;
+    }
+  }
+
+  .dragover {
+    border: 5px dashed $blue;
+  }
 }

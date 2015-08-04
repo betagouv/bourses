@@ -2,8 +2,11 @@
   <section>
     <h2>Résumé de la demande <br><small>Passée le {{demande.createdAt | date}}</small></h2>
     <div class="text-right">
-      <a class="btn btn-primary btn-lg" href="/api/demandes/{{demandeId}}/random/download?access_token={{token}}" target="_blank" download="{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
+      <a class="btn btn-default" href="/api/demandes/{{demandeId}}/random/download?access_token={{token}}" target="_blank" download="{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
         Télécharger le dossier complet
+      </a>
+      <a class="btn btn-action-invert" ng-if="demande.notification" href="/api/demandes/{{demandeId}}/notification?access_token={{token}}" target="_blank" download="notification_{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
+        Télécharger la notification
       </a>
     </div>
 

@@ -5,13 +5,13 @@
 var _ = require('lodash');
 var os = require('os');
 var fs = require('fs');
-var path = require('path')
+var path = require('path');
 var async = require('async');
 var moment = require('moment');
 var mustache = require('mustache');
 
 function readFile(name, callback) {
-  fs.readFile(path.join(__dirname, name), function (err, html) {
+  fs.readFile(path.join(__dirname, name), function(err, html) {
     callback(err, String(html));
   });
 }
@@ -56,6 +56,7 @@ exports.toHtml = function(demande, path, done) {
     template: function(callback) {
       readFile('template.html', callback);
     },
+
     formattedAnswers: function(callback) {
       var formatted = _.cloneDeep(demande);
 
@@ -74,4 +75,21 @@ exports.toHtml = function(demande, path, done) {
     var html = mustache.render(results.template, results.formattedAnswers);
     done(html);
   });
-}
+};
+
+exports.editNotification = function(demande, done) {
+  async.series({
+    template: function(callback) {
+      readFile('notification.html', callback);
+    },
+
+    answers: function(callback) {
+      var formatted = _.cloneDeep(demande);
+      callback(null, formatted);
+    }
+  },
+  function(err, results) {
+    var html = mustache.render(results.template, results.answers);
+    done(html);
+  });
+};

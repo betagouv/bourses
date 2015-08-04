@@ -1,0 +1,28 @@
+<form name="notificationForm" ng-submit="submit(notificationForm)" novalidate>
+  <div class="modal-body">
+    <h1>Envoi de la notification</h1>
+    <p>Renseignez le montant de la bourse attribuée, une notification sera générée et envoyée directement à l'usager sur le compte email qu'il aura renseigné.</p>
+
+    <div class="form-group required" ng-class="{'has-error': !montant && notificationForm.$submitted}">
+      <label class="control-label">Montant de la bourse</label>
+      <input type="number" class="form-control-flat" name="montant" ng-model="montant" required>
+      <div ng-if="!montant && notificationForm.$submitted">
+        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': !email && notificationForm.$submitted}">
+      <label class="control-label">Email du demandeur</label>
+      <input type="email" class="form-control-flat" name="email" ng-model="email" required>
+      <div ng-if="!email && notificationForm.$submitted">
+        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <a target="_blank" download="Bourse_{{demande.identiteEnfant.prenom}}_{{demande.identiteEnfant.nom}}.pdf" ng-if="demande.status === 'done'" href="/api/demandes/{{demande._id}}/notification?access_token={{token}}">Telecharger</a>
+    <button type="button" class="btn btn-action" ng-click="cancel()">Annuler</button>
+    <button type="submit" class="btn btn-action">OK</button>
+  </div>
+</form>

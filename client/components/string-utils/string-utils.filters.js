@@ -63,7 +63,7 @@ angular.module('boursesApp')
         case null:
           return 'Résultat de votre simulation';
         case 0:
-          return 'D\'après les informations saisies , votre enfant ne pourra pas bénéficier d\'une bourse de collège.';
+          return 'D\'après les informations saisies, votre enfant ne pourra pas bénéficier d\'une bourse de collège.';
         default:
           return 'D\'après les informations saisies, ' +
             'votre enfant pourra bénéficier d\'une bourse de collège d\'un montant annuel de:';

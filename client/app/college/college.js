@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .config(function ($stateProvider) {
+  .config(function($stateProvider) {
     $stateProvider
       .state('layout.college', {
         url: '/college/:id',
@@ -29,10 +29,12 @@ angular.module('boursesApp')
             $state.go('layout.login');
           };
         },
+
         resolve: {
           id: function($stateParams) {
             return $stateParams.id;
           },
+
           college: function(Etablissement, id) {
             return Etablissement.get({id: id}).$promise;
           }
@@ -86,6 +88,7 @@ angular.module('boursesApp')
           demandeId: function($stateParams) {
             return $stateParams.demandeId;
           },
+
           demande: function($http, $state, demandeId) {
             return $http.get('/api/demandes/' + demandeId + '/random').then(function(result) {
               return result.data;

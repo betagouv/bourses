@@ -11,12 +11,15 @@
 
   thead th {
     font-weight: 200;
+    text-align: center;
   }
-  tr.hover {
-    &:hover, &:focus {
-      cursor: pointer;
-      background-color: $darker-blue;
-      color: white;
+
+  > tbody > tr > td {
+    text-align: center;
+    vertical-align: middle;
+
+    .btn-action-invert {
+      width: 100%;
     }
   }
 }

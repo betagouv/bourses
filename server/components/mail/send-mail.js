@@ -31,4 +31,4 @@ exports.sendMail = function(to, subject, body, attachments, done) {
   }
 
   transporter.sendMail(mailOptions, done);
-}
+};
