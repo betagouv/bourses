@@ -51,7 +51,7 @@ function sendNotificationToAgent(identite, college, req) {
       } else {
         var email = etablissement.contact;
         var subject = 'Nouvelle demande - ' + identite.demandeur.prenoms + ' ' + identite.demandeur.nom;
-        var dashboard = config.domain + '/college/' + etablissement.human_id + '/demandes';
+        var dashboard = config.domain + '/college/' + etablissement.human_id + '/demandes/nouvelles';
 
         var body = 'Vous avez une nouvelle demande de bourse.\n' +
           '<h3><a href="' + dashboard + '">Cliquez ici pour voir la liste des demandes passées</a></h3>\n' +
