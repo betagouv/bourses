@@ -11,7 +11,6 @@ var DemandeSchema = new Schema({
   etablissement:  { type: Schema.Types.ObjectId, ref: 'Etablissement' },
   status:         { type: String, enum: ['new', 'pending', 'done'], default: 'new' },
   notification:   {
-    edited: { type: Boolean, default: false },
     montant: { type: Number },
     email: { type: String }
   }

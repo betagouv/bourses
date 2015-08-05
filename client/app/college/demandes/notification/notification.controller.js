@@ -18,10 +18,11 @@ angular.module('boursesApp')
         return;
       }
 
-      $http.post('api/demandes/' + demande._id + '/notification', {edited: true, email: $scope.email, montant: $scope.montant}, function() {
-        $modalInstance.dismiss();
-        $state.go('.', {reload: true});
-      });
+      $http
+        .post('api/demandes/' + demande._id + '/notification', {email: $scope.email, montant: $scope.montant})
+        .then(function() {
+          $modalInstance.close();
+        });
     };
 
     $scope.cancel = function() {
