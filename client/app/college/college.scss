@@ -6,9 +6,18 @@
   }
 
   #college-form {
-    background-color: $blue;
+    background-color: whitesmoke;
+    color: $darker-blue;
     padding: 20px;
     border-radius: 4px;
+  }
+
+  .control-label-flat {
+    color: $darker-blue;
+  }
+
+  .form-control-flat {
+    color: #444444;
   }
 
   .content-box {

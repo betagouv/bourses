@@ -23,6 +23,6 @@
   <div class="modal-footer">
     <a target="_blank" download="Bourse_{{demande.identiteEnfant.prenom}}_{{demande.identiteEnfant.nom}}.pdf" ng-if="demande.status === 'done'" href="/api/demandes/{{demande._id}}/notification?access_token={{token}}">Telecharger</a>
     <button type="button" class="btn btn-action" ng-click="cancel()">Annuler</button>
-    <button type="submit" class="btn btn-action">OK</button>
+    <button type="submit" class="btn btn-action">Envoyer la notification <i class="fa fa-send"></i></button>
   </div>
 </form>

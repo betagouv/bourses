@@ -2,7 +2,10 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeListCtrl', function($scope, $modal, $state, Etablissement, id, status) {
+  .controller('DemandeListCtrl', function($scope, $modal, $state, Auth, Etablissement, id, status) {
+    $scope.status = status;
+
+    $scope.token = Auth.getToken();
     $scope.college = Etablissement.get({id: id});
     $scope.demandes = Etablissement.queryDemandes({id: id, status: status});
 

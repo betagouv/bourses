@@ -23,7 +23,15 @@
         <td>{{demande.foyer.nombreEnfantsACharge}}</td>
         <td>{{demande.foyer.nombreEnfantsAdultes}}</td>
         <td>{{demande.identiteEnfant.regime | deductibilite}}</td>
-        <td><div class="btn btn-action-invert" ng-click="notification(demande)">Éditer <i class="fa fa-send"></i></div></td>
+        <td>
+          <div ng-if="status !== 'done'" class="btn btn-action-invert" ng-click="notification(demande)">Éditer</div>
+          <div ng-if="status === 'done'" class="btn-group">
+            <div class="btn btn-action-invert" ng-click="notification(demande)">Éditer</div>
+            <a class="btn btn-action" href="/api/demandes/{{demande._id}}/notification?access_token={{token}}" target="_blank" download="notification_{{demande.identiteEnfant.prenom}}_{{demande.identiteEnfant.nom}}.pdf">
+              Télécharger
+            </a>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
