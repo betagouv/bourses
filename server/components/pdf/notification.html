@@ -1,5 +1,20 @@
 <html>
   <style>
+    .footer {
+      margin-top: 100px;
+    }
+
+    .cachet {
+      width: 40%;
+      float: left;
+    }
+
+    .signature {
+      width: 40%;
+      float: right;
+      text-align: right;
+    }
+
     #info-college {
       width: 40%;
       float: left;
@@ -44,13 +59,13 @@
   </style>
   <body>
     <div id="info-college">
-      <div>COLLEGE PAUL KLEE - CLG</div>
-      <div>RUE DU PAVE DE GRIGNON</div>
-      <div>THIAIS</div>
+      <div>{{college.nom}}</div>
+      <div>{{college.adresse}}</div>
+      <div>{{college.ville.codePostal}} {{college.ville.nom}}</div>
     </div>
     <div id="info-dates">
-      <div>Année scolaire 2014-2015</div>
-      <div>Date d'émission : 03/11/14</div>
+      <div>Année scolaire 2015-2016</div>
+      <div>Date d'émission : {{date}}</div>
     </div>
     <div class="clearfix"></div>
 
@@ -67,7 +82,7 @@
         </ul>
       </p>
 
-      <p>une bourse de collège d'un montant annuel de <strong>{{notification.montant}} EUR</strong> vous est accordée au titre de l'année scolaire 2014-2015.</p>
+      <p>une bourse de collège d'un montant annuel de <strong>{{notification.montant}} EUR</strong> vous est accordée au titre de l'année scolaire 2015-2016.</p>
 
       <h2 id="info-title">Pour votre information :</h2>
       <ol type="a">
@@ -84,6 +99,17 @@
         </li>
       </ol>
        <p>Je reste à votre disposition pour tout renseignement complémentaire.</p>
+    </div>
+
+    <div class="footer">
+      <div class="cachet">
+        Cachet de l'établissement
+      </div>
+      <div class="signature">
+        <div>A {{college.ville.nom}}, le {{date}}</div>
+        <div>Le chef d'établissement</div>
+        <div>{{college.chef_etablissement}}</div>
+      </div>
     </div>
   </body>
 </html>

@@ -181,9 +181,13 @@ exports.downloadNotification = function(req, res) {
       if (!demande) return res.sendStatus(404);
 
       var decoded = crypto.decode(demande);
-      Generator.editNotification(decoded, function(html) {
-        wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
-      });
+      Etablissement
+        .findById(demande.etablissement)
+        .exec(function(err, college) {
+          Generator.editNotification(decoded, college, function(html) {
+            wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
+          });
+        });
     });
 };
 

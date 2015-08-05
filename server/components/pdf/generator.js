@@ -77,7 +77,7 @@ exports.toHtml = function(demande, path, done) {
   });
 };
 
-exports.editNotification = function(demande, done) {
+exports.editNotification = function(demande, college, done) {
   async.series({
     template: function(callback) {
       readFile('notification.html', callback);
@@ -85,6 +85,10 @@ exports.editNotification = function(demande, done) {
 
     answers: function(callback) {
       var formatted = _.cloneDeep(demande);
+
+      formatted.college = college;
+      formatted.date = moment().format('DD/MM/YYYY');
+
       callback(null, formatted);
     }
   },
