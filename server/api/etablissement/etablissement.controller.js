@@ -10,23 +10,25 @@ var crypto = require('../../components/crypto/crypto');
 exports.show = function(req, res) {
   Etablissement
     .findOne({human_id: req.params.id})
-    .exec(function (err, etablissement) {
+    .exec(function(err, etablissement) {
       if (err) { return handleError(req, res, err); }
-      if(!etablissement) { return res.sendStatus(404); }
+
+      if (!etablissement) { return res.sendStatus(404); }
 
       return res.json(etablissement);
-  });
+    });
 };
 
 exports.query = function(req, res) {
   Etablissement
     .find()
-    .exec(function (err, etablissements) {
+    .exec(function(err, etablissements) {
       if (err) { return handleError(req, res, err); }
-      if(!etablissements) { return res.sendStatus(404); }
+
+      if (!etablissements) { return res.sendStatus(404); }
 
       return res.json(etablissements);
-  });
+    });
 };
 
 function decode(demandes) {
@@ -36,15 +38,17 @@ function decode(demandes) {
 exports.demandes = function(req, res) {
   Etablissement
     .findOne({human_id: req.params.id})
-    .exec(function (err, etablissement) {
+    .exec(function(err, etablissement) {
       if (err) { return handleError(req, res, err); }
-      if(!etablissement) { return res.sendStatus(404); }
+
+      if (!etablissement) { return res.sendStatus(404); }
 
       Demande
         .find({etablissement: etablissement, status: req.query.status})
-        .exec(function (err, demandes) {
+        .exec(function(err, demandes) {
           if (err) { return handleError(req, res, err); }
-          if(!demandes) { return res.sendStatus(404); }
+
+          if (!demandes) { return res.sendStatus(404); }
 
           res.set('count', demandes.length);
 
@@ -54,19 +58,25 @@ exports.demandes = function(req, res) {
             return res.json([]);
           }
         });
-  });
+    });
 };
 
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
+  if (req.body._id) { delete req.body._id; }
+
+  console.log(req.body);
+
   Etablissement.findOne({
     human_id: req.params.id
-  }, function (err, etablissement) {
+  }, function(err, etablissement) {
     if (err) { return handleError(req, res, err); }
-    if(!etablissement) { return res.sendStatus(404); }
+
+    if (!etablissement) { return res.sendStatus(404); }
+
     var updated = _.merge(etablissement, req.body);
-    updated.save(function (err) {
+    updated.save(function(err) {
       if (err) { return handleError(req, res, err); }
+
       return res.status(200).json(etablissement);
     });
   });

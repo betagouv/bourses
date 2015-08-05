@@ -98,19 +98,8 @@ angular.module('boursesApp')
       })
       .state('layout.college.edit', {
         url: '/edit',
-        templateUrl: 'app/college/edit.html',
+        templateUrl: 'app/college/edit/edit.html',
         authenticate: true,
-        controller: function($scope, $state, college) {
-          $scope.college = college;
-          $scope.submit = function(form) {
-            if (!form.$valid) {
-              return;
-            }
-
-            $scope.college.$update(function() {
-              $state.go('layout.admin');
-            });
-          };
-        }
+        controller: 'EditCollegeCtrl'
       });
   });

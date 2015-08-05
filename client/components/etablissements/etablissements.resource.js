@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('boursesApp').factory('Etablissement', function ($resource) {
+angular.module('boursesApp').factory('Etablissement', function($resource) {
   return $resource('/api/etablissements/:id/:controller', {
     id: '@human_id'
   }, {
