@@ -3,7 +3,7 @@
 angular.module('boursesApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
-    if($cookieStore.get('loginToken')) {
+    if ($cookieStore.get('loginToken')) {
       currentUser = User.get();
     }
 
@@ -64,6 +64,7 @@ angular.module('boursesApp')
             currentUser = User.get();
             return cb(user);
           },
+
           function(err) {
             this.logout();
             return cb(err);
@@ -92,13 +93,13 @@ angular.module('boursesApp')
        * Waits for currentUser to resolve before checking if user is logged in
        */
       isLoggedInAsync: function(cb) {
-        if(currentUser.hasOwnProperty('$promise')) {
+        if (currentUser.hasOwnProperty('$promise')) {
           currentUser.$promise.then(function() {
             cb(true);
           }).catch(function() {
             cb(false);
           });
-        } else if(currentUser.hasOwnProperty('role')) {
+        } else if (currentUser.hasOwnProperty('role')) {
           cb(true);
         } else {
           cb(false);

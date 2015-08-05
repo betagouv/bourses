@@ -14,8 +14,8 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function (err, users) {
-    if(err) return res.status(500).send(err);
+  User.find({}, '-salt -hashedPassword', function(err, users) {
+    if (err) return res.status(500).send(err);
     res.json(users);
   });
 };
@@ -24,13 +24,13 @@ exports.index = function(req, res) {
  * Creates a new user
  * restriction: 'admin'
  */
-exports.create = function (req, res, next) {
+exports.create = function(req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60 * 5 });
     res.json({ token: token });
   });
 };
@@ -41,7 +41,7 @@ exports.create = function (req, res, next) {
  */
 exports.destroy = function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
-    if(err) return res.status(500).send(err);
+    if (err) return res.status(500).send(err);
     return res.sendStatus(204);
   });
 };

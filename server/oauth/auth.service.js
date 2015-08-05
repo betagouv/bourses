@@ -15,17 +15,20 @@ var validateJwt = expressJwt({ secret: config.secrets.session });
  */
 function isAuthenticated() {
   return compose()
+
     // Validate jwt
     .use(function(req, res, next) {
       // allow access_token to be passed through query parameter as well
-      if(req.query && req.query.hasOwnProperty('access_token')) {
+      if (req.query && req.query.hasOwnProperty('access_token')) {
         req.headers.authorization = 'Bearer ' + req.query.access_token;
       }
+
       validateJwt(req, res, next);
     })
+
     // Attach user to request
     .use(function(req, res, next) {
-      User.findById(req.user._id, function (err, user) {
+      User.findById(req.user._id, function(err, user) {
         if (err) return next(err);
         if (!user) return res.res.sendStatus(401);
 
@@ -46,8 +49,7 @@ function hasRole(roleRequired) {
     .use(function meetsRequirements(req, res, next) {
       if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {
         next();
-      }
-      else {
+      } else {
         res.sendStatus(403);
       }
     });
@@ -57,7 +59,7 @@ function hasRole(roleRequired) {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id) {
-  return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*5 });
+  return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60 * 5 });
 }
 
 /**

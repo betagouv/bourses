@@ -66,12 +66,11 @@ angular.module('boursesApp')
 
     function isCelibataire() {
       return $scope.dataDemandeur &&
-        // SVAIR || FC
         ($scope.dataDemandeur.situationFamille === 'Célibataire' || $scope.dataDemandeur.sitFam === 'C');
     }
 
     function isGardeAlternee() {
-      return  $scope.identiteEnfant.garde === 'oui';
+      return $scope.identiteEnfant.garde === 'oui';
     }
 
     $scope.showOtherParentConnection = showOtherParentConnection;

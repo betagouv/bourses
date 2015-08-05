@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('boursesApp').directive('connection', function ($http, $window, $location, $timeout, $modal, store) {
+angular.module('boursesApp').directive('connection', function($http, $window, $location, $timeout, $modal, store) {
   return {
     scope: {
       connectionId: '=',
@@ -9,7 +9,7 @@ angular.module('boursesApp').directive('connection', function ($http, $window, $
     },
     templateUrl: 'components/connection/connection.html',
     restrict: 'EA',
-    link: function (scope) {
+    link: function(scope) {
 
       scope.svair = store.get('svair_' + scope.connectionId);
       scope.credentials = scope.svair ? _.cloneDeep(scope.svair.credentials) : {};
@@ -23,9 +23,11 @@ angular.module('boursesApp').directive('connection', function ($http, $window, $
             if (typeof scope.fc === 'string' && scope.fc.startsWith('{')) {
               scope.fc = JSON.parse(scope.fc);
             }
+
             scope.status = 'success';
             store.set('fc_' + scope.connectionId, scope.fc);
           },
+
           function() {
             store.set('fc_' + scope.connectionId, null);
             return null;

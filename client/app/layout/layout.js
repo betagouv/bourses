@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .config(function ($stateProvider) {
+  .config(function($stateProvider) {
     $stateProvider
       .state('layout', {
         url: '',

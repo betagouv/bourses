@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('boursesApp')
   .controller('IdentiteEnfantCtrl', function($scope, $state, $http, $timeout, store, college) {
     $scope.etablissements = [];

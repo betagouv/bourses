@@ -13,10 +13,10 @@ exports.decode = function(demande) {
   demandeObj.notification = demande.notification;
 
   return demandeObj;
-}
+};
 
 exports.encode = function(body) {
   var str = JSON.stringify(body);
   var encoded = new Buffer(str).toString('base64');
   return encoded;
-}
+};

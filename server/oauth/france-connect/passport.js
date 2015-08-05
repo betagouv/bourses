@@ -2,7 +2,7 @@ var passport = require('passport');
 var OAuth2Strategy = require('passport-oauth2').Strategy;
 var request = require('superagent');
 
-exports.setup = function (config) {
+exports.setup = function(config) {
   var strategy = new OAuth2Strategy({
       authorizationURL: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize',
       tokenURL: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/token',
@@ -17,22 +17,25 @@ exports.setup = function (config) {
       user.accessToken = accessToken;
       done(null, user);
     }
+
   );
-  strategy.authorizationParams = function () {
+  strategy.authorizationParams = function() {
     // Pour ne garder que le FI dgfip:
     // return { nonce: 'foobar', selected_idp: 'dgfip' };
     return { nonce: 'foobar' };
   };
-  strategy.userProfile = function (accessToken, done) {
+
+  strategy.userProfile = function(accessToken, done) {
     request
       .get('https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo')
       .query({ schema: 'openid' })
       .set('Authorization', 'Bearer ' + accessToken)
-      .end(function (err, result) {
+      .end(function(err, result) {
         if (err) return done(err);
         if (!result.body || !result.body.family_name) return done(new Error('Bad content'));
         done(null, result.body);
       });
   };
+
   passport.use('france-connect', strategy);
 };

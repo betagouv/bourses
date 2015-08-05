@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Controller: partenaire', function () {
+describe('Controller: partenaire', function() {
 
   // load the service's module
   beforeEach(module('boursesApp'));
 
-  it('should render initial data', function () {
+  it('should render initial data', function() {
     //given
     var scope = {};
     var store = {
@@ -13,13 +13,14 @@ describe('Controller: partenaire', function () {
       set: function(str, val) {
         this[str] = val;
       },
+
       get: function(str) {
         return this[str];
       }
     };
 
     //when
-    inject(function($controller){
+    inject(function($controller) {
       $controller('IdentiteEnfantCtrl', {
         $scope: scope,
         store: store,

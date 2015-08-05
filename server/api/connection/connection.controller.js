@@ -17,7 +17,7 @@ if (config.dgfip.cert && config.dgfip.key) {
 
 var boris = new https.Agent(agentOptions);
 
-exports.svair = function (req, res, next) {
+exports.svair = function(req, res, next) {
   if (!req.query.numeroFiscal || !req.query.referenceAvis) {
     return res.status(400).send({
       code: 400,
@@ -25,10 +25,11 @@ exports.svair = function (req, res, next) {
       explaination: 'Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.'
     });
   } else {
-    svair(req.query.numeroFiscal, req.query.referenceAvis, function (err, result) {
+    svair(req.query.numeroFiscal, req.query.referenceAvis, function(err, result) {
       if (!result.declarant2.nom) {
         delete result.declarant2;
       }
+
       if (err && err.message === 'Invalid credentials') {
         res.status(404).send({
           code: 404,
@@ -51,7 +52,7 @@ function fetchData(accessToken, year, done) {
     .agent(boris)
     .parse(request.parse.text)
     .buffer()
-    .end(function (err, resp) {
+    .end(function(err, resp) {
       if (err && !err.status) return done(err);
       done(null, resp.text);
     });
@@ -59,12 +60,12 @@ function fetchData(accessToken, year, done) {
 
 exports.mockData = function(req, res) {
   res.json({
-    identites: [{nom: 'DUPONT',prenoms: 'MARCEL'}],
-    "rfr": 0,sitFam:"C",nbPart:"1.0","pac":{"nbPac":"0"}
+    identites: [{nom: 'DUPONT', prenoms: 'MARCEL'}],
+    rfr: 0, sitFam:'C', nbPart:'1.0', pac:{nbPac:'0'}
   });
-}
+};
 
-exports.fc = function (req, res, next) {
+exports.fc = function(req, res, next) {
   if (!req.user || !req.user.accessToken) {
     return res.status(401).send({
       code: 401,
@@ -72,7 +73,7 @@ exports.fc = function (req, res, next) {
     });
   }
 
-  fetchData(req.user.accessToken, 2013, function (err, result) {
+  fetchData(req.user.accessToken, 2013, function(err, result) {
     if (err) return next(err);
     res.send({ response: result });
   });

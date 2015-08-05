@@ -25,12 +25,12 @@
 
 angular.module('a11yBootstrap', ['ui.bootstrap'])
 
-.directive('enforceFocus', ['$document', '$timeout',function($document, $timeout){
+.directive('enforceFocus', ['$document', '$timeout', function($document, $timeout) {
   return {
     link: function($scope, iElm) {
       //Save current focus
       var modalOpener = $document[0].activeElement;
-      $timeout(function(){
+      $timeout(function() {
         iElm[0].focus();
       });
 
@@ -40,30 +40,35 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
           iElm[0].focus();
         }
       }
+
       $document[0].addEventListener('focus', enforceFocus, true);
 
-
-      $scope.$on('$destroy',function() {
+      $scope.$on('$destroy', function() {
         //back to first focus
         modalOpener.focus();
+
         //Remove event listener
         $document[0].removeEventListener('focus', enforceFocus, true);
       });
 
       var tababbleSelector = 'a[href], area[href], input:not([disabled]), button:not([disabled]),select:not([disabled]), textarea:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+
       //return lastFocusable element inside modal
       function lastFocusable(domEl) {
         var list = domEl.querySelectorAll(tababbleSelector);
         return list[list.length - 1];
       }
+
       var lastEl = lastFocusable(iElm[0]);
+
       //focus lastElement when shitKey Tab on first element
-      function shiftKeyTabTrap (evt) {
-        if(iElm[0] === evt.target && evt.shiftKey && evt.keyCode === 9){
+      function shiftKeyTabTrap(evt) {
+        if (iElm[0] === evt.target && evt.shiftKey && evt.keyCode === 9) {
           lastEl.focus();
           evt.preventDefault();
         }
       }
+
       iElm.bind('keydown', shiftKeyTabTrap);
     }
   };
@@ -72,81 +77,91 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
 .directive('keySpace', function() {
   return function(scope, element, attrs) {
     element.bind('keydown keypress', function(event) {
-      if(event.which === 32) {
-        scope.$apply(function(){
+      if (event.which === 32) {
+        scope.$apply(function() {
           scope.$eval(attrs.keySpace);
         });
+
         event.preventDefault();
       }
     });
   };
 })
 
-.directive('keyboardRotate',['$document','$timeout',function($document,$timeout){
+.directive('keyboardRotate', ['$document', '$timeout', function($document, $timeout) {
   return {
     restrict: 'A',
     scope: {
-      param : '@keyboardRotate',
+      param: '@keyboardRotate',
     },
     link: function($scope, iElm) {
       var recursion = $scope.param;
-      $timeout(function(){
-        function KeyTrap (evt) {
+      $timeout(function() {
+        function KeyTrap(evt) {
           var next;
           var keyCode = evt.keyCode;
+
           //Right key and up key
           if (keyCode === 39 || keyCode === 40) {
             next = evt.target.nextElementSibling;
             if (recursion === '1') {
               next = evt.target.parentElement.nextElementSibling;
             }
+
             //if last go to first
             if (!next) {
               next = iElm.children()[0];
             }
           }
+
           //Left key and down key
           if (keyCode === 37 || keyCode === 38) {
             next = evt.target.previousElementSibling;
             if (recursion === '1') {
               next = evt.target.parentElement.previousElementSibling;
             }
+
             //if first go to last
             if (!next) {
               var child = iElm.children();
-              next = child[child.length-1];
+              next = child[child.length - 1];
             }
           }
+
           //go to next element if defined (previous or next)
           if (next) {
             if (recursion === '1') {
               next = next.children[0];
             }
+
             next.click();
             next.focus();
           }
         }
-        angular.element(iElm[0]).on('keydown',KeyTrap);
-      },0);
+
+        angular.element(iElm[0]).on('keydown', KeyTrap);
+      }, 0);
     }
   };
 }])
 
-.directive('btnRadio', [function(){
+.directive('btnRadio', [function() {
   return {
     require: ['btnRadio', 'ngModel'],
     priority: 200, //Make sure watches are fired after any other directives that affect the ngModel value
     link: function($scope, iElm, iAttrs, controller) {
-      var buttonsCtrl = controller[0], ngModelCtrl = controller[1];
+      var buttonsCtrl = controller[0];
+      var ngModelCtrl = controller[1];
 
       //model -> UI
-      ngModelCtrl.$render = function () {
+      ngModelCtrl.$render = function() {
         var check = angular.equals(ngModelCtrl.$modelValue, $scope.$eval(iAttrs.btnRadio));
         iElm.attr('aria-checked', check);
         iElm.attr('tabindex', '-1');
         if (check) {
           iElm.attr('tabindex', '0');
         }
+
         iElm.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, $scope.$eval(iAttrs.btnRadio)));
       };
 
@@ -154,12 +169,13 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
   };
 }])
 
-.directive('btnCheckbox', [function(){
+.directive('btnCheckbox', [function() {
   return {
     require: ['btnCheckbox', 'ngModel'],
     priority: 200, //Make sure watches are fired after any other directives that affect the ngModel value
     link: function($scope, iElm, iAttrs, controller) {
-      var buttonsCtrl = controller[0], ngModelCtrl = controller[1];
+      var buttonsCtrl = controller[0];
+      var ngModelCtrl = controller[1];
 
       function getTrueValue() {
         return getCheckboxValue(iAttrs.btnCheckboxTrue, true);
@@ -171,7 +187,7 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
       }
 
       //model -> UI
-      ngModelCtrl.$render = function () {
+      ngModelCtrl.$render = function() {
         var check = angular.equals(ngModelCtrl.$modelValue, getTrueValue());
         iElm.attr('aria-checked', check);
         iElm.toggleClass(buttonsCtrl.activeClass, check);

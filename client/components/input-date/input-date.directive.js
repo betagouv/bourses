@@ -26,7 +26,7 @@ angular.module('boursesApp').directive('inputDate', function() {
           return '';
         }
 
-        return  moment(date).format('DD/MM/YYYY');
+        return moment(date).format('DD/MM/YYYY');
       });
     }
   };

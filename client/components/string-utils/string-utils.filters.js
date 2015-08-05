@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('boursesApp')
-  .filter('sexe', function () {
-    return function (input) {
+  .filter('sexe', function() {
+    return function(input) {
       switch (input) {
         case 'feminin':
           return 'Fille';
@@ -11,8 +11,8 @@ angular.module('boursesApp')
       }
     };
   })
-  .filter('regime', function () {
-    return function (input) {
+  .filter('regime', function() {
+    return function(input) {
       switch (input) {
         case 'externe':
           return 'Externe';
@@ -23,8 +23,8 @@ angular.module('boursesApp')
       }
     };
   })
-  .filter('deductibilite', function () {
-    return function (input) {
+  .filter('deductibilite', function() {
+    return function(input) {
       switch (input) {
         case 'externe':
           return 'Non';
@@ -33,8 +33,8 @@ angular.module('boursesApp')
       }
     };
   })
-  .filter('lien', function () {
-    return function (input) {
+  .filter('lien', function() {
+    return function(input) {
       switch (input) {
         case 'pere':
           return 'Père';
@@ -45,8 +45,8 @@ angular.module('boursesApp')
       }
     };
   })
-  .filter('montant', function () {
-    return function (input) {
+  .filter('montant', function() {
+    return function(input) {
       switch (input) {
         case null:
           return 'Pas de résultat';
@@ -57,8 +57,8 @@ angular.module('boursesApp')
       }
     };
   })
-  .filter('descriptionMontant', function () {
-    return function (input) {
+  .filter('descriptionMontant', function() {
+    return function(input) {
       switch (input) {
         case null:
           return 'Résultat de votre simulation';

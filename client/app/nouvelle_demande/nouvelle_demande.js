@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .config(function ($stateProvider) {
+  .config(function($stateProvider) {
     $stateProvider
       .state('layout.nouvelle_demande', {
         url: '/nouvelle_demande?college',
@@ -13,6 +13,7 @@ angular.module('boursesApp')
             if ($stateParams) {
               return $stateParams.college;
             }
+
             return null;
           }
         }

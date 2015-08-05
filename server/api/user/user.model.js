@@ -36,8 +36,8 @@ UserSchema
   .virtual('profile')
   .get(function() {
     return {
-      'name': this.name,
-      'role': this.role
+      name: this.name,
+      role: this.role
     };
   });
 
@@ -46,8 +46,8 @@ UserSchema
   .virtual('token')
   .get(function() {
     return {
-      '_id': this._id,
-      'role': this.role
+      _id: this._id,
+      role: this.role
     };
   });
 
@@ -73,16 +73,17 @@ UserSchema
 UserSchema
   .path('email')
   .validate(function(value, respond) {
-    var self = this;
+    var _this = this;
     this.constructor.findOne({email: value}, function(err, user) {
-      if(err) throw err;
-      if(user) {
-        if(self.id === user.id) return respond(true);
+      if (err) throw err;
+      if (user) {
+        if (_this.id === user.id) return respond(true);
         return respond(false);
       }
+
       respond(true);
     });
-}, 'The specified email address is already in use.');
+  }, 'The specified email address is already in use.');
 
 var validatePresenceOf = function(value) {
   return value && value.length;
