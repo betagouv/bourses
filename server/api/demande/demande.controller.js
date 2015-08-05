@@ -162,9 +162,13 @@ exports.saveNotification = function(req, res, next) {
           if (err) { return handleError(req, res, err); }
 
           var decoded = crypto.decode(result);
-          Generator.editNotification(decoded, function(html) {
-            sendAttributionNotification('del.florian@gmail.com', html, req);
-          });
+          Etablissement
+            .findById(demande.etablissement)
+            .exec(function(err, college) {
+              Generator.editNotification(decoded, college, function(html) {
+                sendAttributionNotification('del.florian@gmail.com', html, req);
+              });
+            });
 
           res.status(200).send(result);
         });
