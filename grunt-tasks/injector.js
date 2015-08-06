@@ -4,6 +4,7 @@ module.exports = {
   options: {
 
   },
+
   // Inject application script files into index.html (doesn't include bower)
   scripts: {
     options: {
@@ -33,6 +34,7 @@ module.exports = {
         filePath = filePath.replace('/client/components/', '');
         return '@import \'' + filePath + '\';';
       },
+
       starttag: '// injector',
       endtag: '// endinjector'
     },
@@ -52,6 +54,7 @@ module.exports = {
         filePath = filePath.replace('/.tmp/', '');
         return '<link rel="stylesheet" href="' + filePath + '">';
       },
+
       starttag: '<!-- injector:css -->',
       endtag: '<!-- endinjector -->'
     },
