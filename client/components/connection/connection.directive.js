@@ -4,8 +4,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
   return {
     scope: {
       connectionId: '=',
-      onSuccess: '=',
-      status: '='
+      onSuccess: '='
     },
     templateUrl: 'components/connection/connection.html',
     restrict: 'EA',
@@ -13,7 +12,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
       scope.svair = store.get('svair_' + scope.connectionId);
       scope.credentials = scope.svair ? _.cloneDeep(scope.svair.credentials) : {};
-      var oldStatus = scope.status = scope.svair ? 'success' : null;
+      var oldStatus = scope.status = store.get('status_' + scope.connectionId);
 
       $http
         .get('/api/connection/fc')
@@ -24,7 +23,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
               scope.fc = JSON.parse(scope.fc);
             }
 
-            scope.status = 'success';
+            setStatus('success');
             store.set('fc_' + scope.connectionId, scope.fc);
           },
 
@@ -58,11 +57,13 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
           data.credentials = scope.credentials;
           scope.svair = data;
           store.set('svair_' + scope.connectionId, scope.svair);
-          oldStatus = scope.status = 'success';
+
+          oldStatus = 'success';
+          setStatus('success');
         })
         .error(function(err) {
           scope.error = err.message;
-          scope.status = 'error';
+          setStatus('error');
         })
         .finally(function() {
           scope.loading = false;
@@ -79,12 +80,12 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
       function cancelCredentials() {
         scope.credentials = _.cloneDeep(scope.svair.credentials);
-        scope.status = oldStatus;
+        setStatus(oldStatus);
       }
 
       function edit() {
         oldStatus = scope.status;
-        scope.status = 'pending';
+        setStatus('pending');
       }
 
       function detailNumeroFiscal() {
@@ -115,6 +116,11 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         event.preventDefault();
         scope.onSuccess();
         $window.open('/oauth/fc', '_self');
+      }
+
+      function setStatus(status) {
+        scope.status = status;
+        store.set('status_' + scope.connectionId, status);
       }
 
       scope.edit = edit;

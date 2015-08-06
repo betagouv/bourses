@@ -44,7 +44,7 @@
           </strong>
         </p>
       </div>
-      <div connection connection-id="'demandeur'" status="statusDemandeur" on-success="saveFoyer"></div>
+      <div connection connection-id="'demandeur'" on-success="saveFoyer"></div>
     </div>
   </div>
 
@@ -62,7 +62,7 @@
     </div>
 
     <div class="well-connect" ng-if="showOtherParentConnection()">
-      <div connection connection-id="'conjoint'" status="statusConjoint" on-success="saveFoyer"></div>
+      <div connection connection-id="'conjoint'" on-success="saveFoyer"></div>
     </div>
   </div>
 

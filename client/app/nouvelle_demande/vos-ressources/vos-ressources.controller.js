@@ -5,8 +5,6 @@ angular.module('boursesApp')
     $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur');
     $scope.foyer = store.get('foyer') || {concubinage: 'non'};
     $scope.identiteEnfant = store.get('identite-enfant');
-    $scope.statusDemandeur = null;
-    $scope.statusConjoint = null;
 
     $scope.next = function(form) {
       if (!form.nombreEnfantsACharge.$valid || !form.nombreEnfantsAdultes.$valid) {
@@ -41,11 +39,14 @@ angular.module('boursesApp')
     }
 
     function isDataValid() {
-      if ($scope.statusDemandeur !== 'success') {
+      var statusDemandeur = store.get('status_demandeur');
+      var statusConjoint = store.get('status_conjoint');
+
+      if (statusDemandeur !== 'success') {
         return false;
       }
 
-      if (showOtherParentConnection() && $scope.statusConjoint !== 'success') {
+      if (showOtherParentConnection() && statusConjoint !== 'success') {
         return false;
       }
 
