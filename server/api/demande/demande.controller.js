@@ -13,12 +13,12 @@ var Generator = require('../../components/pdf/generator');
 var sendMail = require('../../components/mail/send-mail').sendMail;
 var crypto = require('../../components/crypto/crypto');
 
-function sendAttributionNotification(email, html, req, cb) {
+function sendAttributionNotification(email, stream, req, cb) {
   var subject = 'Bourse de collège - Notification d\'attribution';
   var body = 'Merci d\'avoir passé votre demande avec notre service.';
   var attachments = [{
     filename: 'notification.pdf',
-    content: wkhtmltopdf(html, {encoding: 'UTF-8'})
+    content: stream
   }];
 
   sendMail(email, subject, body, attachments, function(error, info) {
@@ -166,7 +166,8 @@ exports.saveNotification = function(req, res, next) {
             .findById(demande.etablissement)
             .exec(function(err, college) {
               Generator.editNotification(decoded, college, function(html) {
-                sendAttributionNotification('del.florian@gmail.com', html, req);
+                var stream = wkhtmltopdf(html, {encoding: 'UTF-8'});
+                sendAttributionNotification('del.florian@gmail.com', stream, req);
               });
             });
 
