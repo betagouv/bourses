@@ -15,7 +15,7 @@ var sendMail = require('../../components/mail/send-mail').sendMail;
 var crypto = require('../../components/crypto/crypto');
 
 function sendNotificationToUser(email, stream, req, cb) {
-  var subject = 'Notification d\'attribution';
+  var subject = 'Notification demande de bourse';
   var body = 'Merci d\'avoir passé votre demande avec notre service.';
   var attachments = [{
     filename: 'notification.pdf',
@@ -83,6 +83,7 @@ exports.create = function(req, res) {
       .exec(function(err, college) {
         sendConfirmationToUser(req.body.identiteAdulte.email, demande, college, req);
       });
+
     sendNotificationToAgent(req.body.identiteAdulte, req.params.college, req);
 
     return res.status(201).json(demande);
