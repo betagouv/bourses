@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var wkhtmltopdf = require('wkhtmltopdf');
 var path = require('path');
 var fs = require('fs');
+var moment = require('moment');
 
 var config = require('../../config/environment');
 var Demande = require('./demande.model');
@@ -13,8 +14,8 @@ var Generator = require('../../components/pdf/generator');
 var sendMail = require('../../components/mail/send-mail').sendMail;
 var crypto = require('../../components/crypto/crypto');
 
-function sendAttributionNotification(email, stream, req, cb) {
-  var subject = 'Bourse de collège - Notification d\'attribution';
+function sendNotificationToUser(email, stream, req, cb) {
+  var subject = 'Notification d\'attribution';
   var body = 'Merci d\'avoir passé votre demande avec notre service.';
   var attachments = [{
     filename: 'notification.pdf',
@@ -32,9 +33,12 @@ function sendAttributionNotification(email, stream, req, cb) {
   });
 }
 
-function sendConfirmationToUser(email, req) {
-  var subject = 'Confirmation de l\'envoi de votre demande';
-  var body = 'Merci d\'avoir passé votre demande avec notre service.';
+function sendConfirmationToUser(email, demande, college, req) {
+  var subject = 'Accusé de réception';
+  var date = moment(demande.createdAt).format('DD/MM/YYYY');
+  var body = '<html><body>Votre de demande de bourse du ' + date + ' a bien été envoyée à votre établissement.';
+  body += 'Vous recevrez une réponse avant le 15 octobre au plus tard.<br>';
+  body += 'Merci d’avoir utilisé ce service et en cas de question n\'hésitez pas à nous écrire à "' + college.contact + '" ou à contacter l\'intendance au ' + college.telephone + '.<body><html>';
 
   sendMail(email, subject, body);
   req.log.info('Notification sent to: ' + email);
@@ -74,7 +78,11 @@ exports.create = function(req, res) {
   }, function(err, demande) {
     if (err) { return handleError(req, res, err); }
 
-    sendConfirmationToUser(req.body.identiteAdulte.email, req);
+    Etablissement
+      .findById(demande.etablissement)
+      .exec(function(err, college) {
+        sendConfirmationToUser(req.body.identiteAdulte.email, demande, college, req);
+      });
     sendNotificationToAgent(req.body.identiteAdulte, req.params.college, req);
 
     return res.status(201).json(demande);
@@ -167,7 +175,7 @@ exports.saveNotification = function(req, res, next) {
             .exec(function(err, college) {
               Generator.editNotification(decoded, college, function(html) {
                 var stream = wkhtmltopdf(html, {encoding: 'UTF-8'});
-                sendAttributionNotification('del.florian@gmail.com', stream, req);
+                sendNotificationToUser(demande.notification.email, stream, req);
               });
             });
 

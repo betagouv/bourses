@@ -22,7 +22,7 @@ exports.sendMail = function(to, subject, body, attachments, done) {
   var mailOptions = {
     from: config.user,
     to: to,
-    subject: subject,
+    subject: 'Bourse - ' + subject,
     html: body
   };
 
