@@ -14,27 +14,38 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
       scope.credentials = scope.svair ? _.cloneDeep(scope.svair.credentials) : {};
       var oldStatus = scope.status = store.get('status_' + scope.connectionId);
 
-      $http
-        .get('/api/connection/fc')
-        .then(
-          function(result) {
-            scope.fc = result.data.response;
-            if (typeof scope.fc === 'string' && scope.fc.startsWith('{')) {
-              scope.fc = JSON.parse(scope.fc);
-            }
-
-            setStatus('success');
-            store.set('fc_' + scope.connectionId, scope.fc);
-          },
-
-          function() {
-            store.set('fc_' + scope.connectionId, null);
-            return null;
-          });
-
       var currentYear = new Date().getFullYear();
       scope.nMinus1 = currentYear - 1;
       scope.nMinus2 = currentYear - 2;
+
+      function tryFcLogin() {
+        $http
+          .get('/api/connection/fc')
+          .then(
+            function(result) {
+              scope.fc = result.data.response;
+              if (typeof scope.fc === 'string' && scope.fc.startsWith('{')) {
+                scope.fc = JSON.parse(scope.fc);
+              }
+
+              setStatus('success');
+              store.set('fc_' + scope.connectionId, scope.fc);
+            },
+
+            function() {
+              store.set('fc_' + scope.connectionId, null);
+              return null;
+            });
+      }
+
+      function fcLogout() {
+        $http
+          .get('/oauth/fc/logout')
+          .then(function() {
+            setStatus('pending');
+            store.set('fc_' + scope.connectionId, null);
+          });
+      }
 
       function validateSvair(form) {
         if (!form.$valid) {
@@ -123,12 +134,15 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         store.set('status_' + scope.connectionId, status);
       }
 
+      tryFcLogin();
+
       scope.edit = edit;
       scope.validateSvair = validateSvair;
       scope.cancelCredentials = cancelCredentials;
       scope.saveAndConnect = saveAndConnect;
       scope.detailNumeroFiscal = detailNumeroFiscal;
       scope.detailNumeroAvis = detailNumeroAvis;
+      scope.fcLogout = fcLogout;
     }
   };
 });
