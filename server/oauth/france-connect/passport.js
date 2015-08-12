@@ -4,8 +4,8 @@ var request = require('superagent');
 
 exports.setup = function(config) {
   var strategy = new OAuth2Strategy({
-      authorizationURL: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/authorize',
-      tokenURL: 'https://fcp.integ01.dev-franceconnect.fr/api/v1/token',
+      authorizationURL: 'https://app.franceconnect.gouv.fr/api/v1/authorize',
+      tokenURL: 'https://app.franceconnect.gouv.fr/api/v1/token',
       clientID: config.fc.clientId,
       clientSecret: config.fc.clientSecret,
       callbackURL: config.domain + '/oauth/fc/callback',
@@ -27,7 +27,7 @@ exports.setup = function(config) {
 
   strategy.userProfile = function(accessToken, done) {
     request
-      .get('https://fcp.integ01.dev-franceconnect.fr/api/v1/userinfo')
+      .get('https://app.franceconnect.gouv.fr/api/v1/userinfo')
       .query({ schema: 'openid' })
       .set('Authorization', 'Bearer ' + accessToken)
       .end(function(err, result) {
