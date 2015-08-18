@@ -36,7 +36,7 @@
 
     <div class="form-group required" ng-class="{'has-error': !identite.titulaire && infoForm.$submitted}">
       <label class="control-label-flat">Titulaire du compte</label>
-      <input type="text" class="form-control-flat" name="titulaire" required>
+      <input type="text" class="form-control-flat" name="titulaire" ng-model="identite.titulaire" required>
       <div class="has-error">
         <p class="help-block"><i class="fa fa-warning"></i> Le titulaire du compte doit être la personne qui fait la demande de bourse</p>
       </div>
