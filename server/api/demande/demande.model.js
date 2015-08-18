@@ -7,7 +7,7 @@ var crypto = require('crypto');
 var DemandeSchema = new Schema({
   createdAt:      { type: Date, default: Date.now },
   observations:   { type: String },
-  data:           { type: String },
+  data:           { type: Schema.Types.Mixed },
   etablissement:  { type: Schema.Types.ObjectId, ref: 'Etablissement' },
   status:         { type: String, enum: ['new', 'pending', 'done'], default: 'new' },
   notification:   {

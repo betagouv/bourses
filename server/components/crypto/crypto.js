@@ -3,19 +3,19 @@
 var _ = require('lodash');
 
 exports.decode = function(demande) {
-  return demande;
-
   // var decoded = new Buffer(demande.data, 'base64').toString();
   // var demandeObj = JSON.parse(decoded);
 
-  // demandeObj._id = demande._id;
-  // demandeObj.createdAt = demande.createdAt;
-  // demandeObj.etablissement = demande.etablissement;
-  // demandeObj.status = demande.status;
-  // demandeObj.notification = demande.notification;
-  // demandeObj.observations = demande.observations;
+  var demandeObj =  _.assign({}, demande.data);
 
-  // return demandeObj;
+  demandeObj._id = demande._id;
+  demandeObj.createdAt = demande.createdAt;
+  demandeObj.etablissement = demande.etablissement;
+  demandeObj.status = demande.status;
+  demandeObj.notification = demande.notification;
+  demandeObj.observations = demande.observations;
+
+  return demandeObj;
 };
 
 exports.encode = function(body) {
