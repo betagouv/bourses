@@ -3,14 +3,14 @@ module.exports = {
     options: {
       sourceMap: true,
       includePaths: [
-        '<%= app.dirs.client %>/bower_components',
-        '<%= app.dirs.client %>/app',
-        '<%= app.dirs.client %>/components'
+        'client/bower_components',
+        'client/app',
+        'client/components'
       ]
     },
     files: [{
       expand: true,
-      cwd: '<%= app.dirs.client %>',
+      cwd: 'client',
       src: 'app/app.scss',
       dest: '.tmp/',
       ext: '.css'

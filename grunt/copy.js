@@ -3,8 +3,8 @@ module.exports = {
     files: [{
       expand: true,
       dot: true,
-      cwd: '<%= app.dirs.client %>',
-      dest: '<%= app.dirs.dist %>',
+      cwd: 'client',
+      dest: 'dist',
       src: [
         '*.{ico,png,txt,pdf}',
         '.htaccess',
@@ -15,13 +15,13 @@ module.exports = {
     }, {
       expand: true,
       cwd: '.tmp/images',
-      dest: '<%= app.dirs.dist %>/assets/images',
+      dest: 'dist/assets/images',
       src: ['generated/*']
     }]
   },
   styles: {
     expand: true,
-    cwd: '<%= app.dirs.client %>',
+    cwd: 'client',
     dest: '.tmp/',
     src: ['{app,components}/**/*.css']
   }

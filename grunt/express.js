@@ -1,6 +1,6 @@
 module.exports = {
   options: {
-    port: '<%= app.port %>'
+    port: '<%= port %>'
   },
   dev: {
     options: {

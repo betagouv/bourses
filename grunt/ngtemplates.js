@@ -14,7 +14,7 @@ module.exports = {
     usemin: 'app/app.js'
   },
   main: {
-    cwd: '<%= app.dirs.client %>',
+    cwd: 'client',
     src: ['{app,components}/**/*.html'],
     dest: '.tmp/templates.js'
   },

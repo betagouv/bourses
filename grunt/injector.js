@@ -17,11 +17,11 @@ module.exports = {
       endtag: '<!-- endinjector -->'
     },
     files: {
-      '<%= app.dirs.client %>/index.html': [
-          ['{.tmp,<%= app.dirs.client %>}/{app,components}/**/*.js',
-           '!{.tmp,<%= app.dirs.client %>}/app/app.js',
-           '!{.tmp,<%= app.dirs.client %>}/{app,components}/**/*.spec.js',
-           '!{.tmp,<%= app.dirs.client %>}/{app,components}/**/*.mock.js']
+      'client/index.html': [
+          ['{.tmp,client}/{app,components}/**/*.js',
+           '!{.tmp,client}/app/app.js',
+           '!{.tmp,client}/{app,components}/**/*.spec.js',
+           '!{.tmp,client}/{app,components}/**/*.mock.js']
         ]
     }
   },
@@ -39,9 +39,9 @@ module.exports = {
       endtag: '// endinjector'
     },
     files: {
-      '<%= app.dirs.client %>/app/app.scss': [
-        '<%= app.dirs.client %>/{app,components}/**/*.{scss,sass}',
-        '!<%= app.dirs.client %>/app/app.{scss,sass}'
+      'client/app/app.scss': [
+        'client/{app,components}/**/*.{scss,sass}',
+        '!client/app/app.{scss,sass}'
       ]
     }
   },
@@ -59,8 +59,8 @@ module.exports = {
       endtag: '<!-- endinjector -->'
     },
     files: {
-      '<%= app.dirs.client %>/index.html': [
-        '<%= app.dirs.client %>/{app,components}/**/*.css'
+      'client/index.html': [
+        'client/{app,components}/**/*.css'
       ]
     }
   }
