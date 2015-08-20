@@ -18,11 +18,11 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
       scope.nMinus1 = currentYear - 1;
       scope.nMinus2 = currentYear - 2;
       scope.$watch('credentials.referenceAvis', function() {
-        scope.credentials.referenceAvis = scope.credentials.referenceAvis.toLowerCase().replace(/\s+/g, '');
+        scope.credentials.referenceAvis = trimSpaces(scope.credentials.referenceAvis);
       });
 
       scope.$watch('credentials.numeroFiscal', function() {
-        scope.credentials.numeroFiscal = scope.credentials.numeroFiscal.toLowerCase().replace(/\s+/g, '');
+        scope.credentials.numeroFiscal = trimSpaces(scope.credentials.numeroFiscal);
       });
 
       function tryFcLogin() {
@@ -86,6 +86,10 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         .finally(function() {
           scope.loading = false;
         });
+      }
+
+      function trimSpaces(str) {
+        return str ? str.toLowerCase().replace(/\s+/g, '') : '';
       }
 
       function trimNumeroFiscal(numeroFiscal) {
