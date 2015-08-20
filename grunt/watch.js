@@ -54,7 +54,7 @@ module.exports = {
     files: [
       'server/**/*.{js,json}'
     ],
-    tasks: ['express:dev', 'wait'],
+    tasks: ['express:dev'],
     options: {
       livereload: true,
       nospawn: true //Without this option specified express won't be reloaded

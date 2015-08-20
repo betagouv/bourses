@@ -17,6 +17,13 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
       var currentYear = new Date().getFullYear();
       scope.nMinus1 = currentYear - 1;
       scope.nMinus2 = currentYear - 2;
+      scope.$watch('credentials.referenceAvis', function() {
+        scope.credentials.referenceAvis = scope.credentials.referenceAvis.toLowerCase().replace(/\s+/g, '');
+      });
+
+      scope.$watch('credentials.numeroFiscal', function() {
+        scope.credentials.numeroFiscal = scope.credentials.numeroFiscal.toLowerCase().replace(/\s+/g, '');
+      });
 
       function tryFcLogin() {
         $http
