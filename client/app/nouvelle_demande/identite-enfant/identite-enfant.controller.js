@@ -13,7 +13,7 @@ angular.module('boursesApp')
 
       $scope.etablissements = data;
 
-      if (college && !$scope.identite.college) {
+      if (college) {
         var etablissement = _.find(data, {human_id: college});
         $scope.identite.college = etablissement._id;
       }

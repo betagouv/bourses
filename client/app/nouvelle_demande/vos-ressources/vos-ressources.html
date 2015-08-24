@@ -61,8 +61,13 @@
       </fieldset>
     </div>
 
-    <div class="well-connect" ng-if="showOtherParentConnection()">
-      <div connection connection-id="'conjoint'" on-success="saveFoyer"></div>
+    <div class="form-connection-container">
+      <div class="form-connection-disabled" ng-if="!showOtherParentConnection()">
+        <span>Renseignements non-obligatoires</span>
+      </div>
+      <div class="well-connect">
+        <div connection connection-id="'conjoint'" on-success="saveFoyer"></div>
+      </div>
     </div>
   </div>
 
