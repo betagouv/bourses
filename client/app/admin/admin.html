@@ -19,5 +19,17 @@
       </a>
     </ul>
 
+    <h1>Tests SOAP</h1>
+    <div class="form-group">
+      <input class="form-control" type="text" ng-model="fnName">
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" ng-model="args"></textarea>
+    </div>
+
+    <button class="btn btn-action" ng-click="soap(fnName, args)">Valider</button>
+    <hr>
+    <pre>{{result | json}}</pre>
+
   </div>
 </div>

@@ -22,6 +22,7 @@
     "angular-ladda": "~0.2.2",
     "angular-mocks": "~1.4.0",
     "angular-capitalize-filter": "~2.1.0",
-    "ng-iban": "~0.3.2"
+    "ng-iban": "~0.3.2",
+    "angular-soap": "~2.1.0"
   }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('AdminCtrl', function($scope, $http, Auth, User, Etablissement) {
+  .controller('AdminCtrl', function($scope, $http, $soap, Auth, User, Etablissement) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
@@ -15,4 +15,12 @@ angular.module('boursesApp')
         }
       });
     };
+
+    $scope.soap = function(fnName, args) {
+      $soap.post('https://pep-test.caf.fr/sgmap/wswdd/v1?wsdl', fnName, args).then(function(result) {
+        console.log(result);
+        $scope.result = result;
+      });
+    };
+
   });

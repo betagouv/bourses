@@ -11,7 +11,8 @@ angular
     'angular-ladda',
     'angular-capitalize-filter',
     'mm.iban',
-    'a11yBootstrap'
+    'a11yBootstrap',
+    'angularSoap'
   ])
   .config(function($urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider, $httpProvider) {
     moment.locale('fr');
