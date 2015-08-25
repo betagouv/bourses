@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('AdminCtrl', function($scope, $http, $soap, Auth, User, Etablissement) {
+  .controller('AdminCtrl', function($scope, $http, Auth, User, Etablissement) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();

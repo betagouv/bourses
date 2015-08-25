@@ -31,5 +31,17 @@ exports.caf = function(req, res) {
       '</v1:demanderDocumentWeb>' +
    '</soapenv:Body>' +
   '</soapenv:Envelope>';
-  request.post('https://pep-test.caf.fr/sgmap/wswdd/v1?wsdl', soapRequest).pipe(res);
+
+  request.post({
+    url:'https://pep-test.caf.fr/sgmap/wswdd/v1?wsdl',
+    body: soapRequest,
+    headers: {'Content-Type': 'text/xml'}
+  }, function(error, response) {
+    if (error) {
+      req.log.error(error);
+      return res.status(500).send(error);
+    }
+
+    res.send({response: response});
+  });
 };
