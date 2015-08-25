@@ -59,7 +59,6 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
           return;
         }
 
-        scope.onSuccess();
         scope.loading = true;
 
         scope.credentials.numeroFiscal = trimNumeroFiscal(scope.credentials.numeroFiscal);
@@ -85,6 +84,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         })
         .finally(function() {
           scope.loading = false;
+          scope.onSuccess();
         });
       }
 

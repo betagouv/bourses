@@ -3,7 +3,18 @@
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $location, $anchorScroll, $timeout, $modal, store) {
     $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur');
-    $scope.foyer = store.get('foyer') || {concubinage: 'non'};
+    var storedFoyer = store.get('foyer');
+    if (storedFoyer) {
+      $scope.foyer = storedFoyer;
+    } else {
+      $scope.foyer = {concubinage: 'non'};
+      var simulation = store.get('simulation');
+      if (simulation) {
+        $scope.foyer.nombreEnfantsACharge = simulation.enfants;
+        $scope.foyer.nombreEnfantsAdultes = simulation.adultes;
+      }
+    }
+
     $scope.identiteEnfant = store.get('identite-enfant');
 
     $scope.next = function(form) {
@@ -36,6 +47,8 @@ angular.module('boursesApp')
 
     function saveFoyer() {
       store.set('foyer', $scope.foyer);
+      $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur');
+      computeShowOtherParent();
     }
 
     function isDataValid() {
@@ -57,8 +70,8 @@ angular.module('boursesApp')
       return isGardeAlternee() || isConcubinage();
     }
 
-    function showOtherParent() {
-      return isGardeAlternee() || isCelibataire();
+    function computeShowOtherParent() {
+      $scope.showOtherParent = isGardeAlternee() || isCelibataire();
     }
 
     function isConcubinage() {
@@ -76,6 +89,7 @@ angular.module('boursesApp')
 
     $scope.showOtherParentConnection = showOtherParentConnection;
     $scope.isCelibataire = isCelibataire;
-    $scope.showOtherParent = showOtherParent;
     $scope.saveFoyer = saveFoyer;
+
+    computeShowOtherParent();
   });

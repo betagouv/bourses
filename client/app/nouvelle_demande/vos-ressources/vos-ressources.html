@@ -9,7 +9,7 @@
         <small>(tel que mentionné sur l'avis d'imposition)</small>
       </label>
       <input type="number" min="0" class="form-control-flat" required id="nombre-enfants-a-charge" name="nombreEnfantsACharge" ng-model="foyer.nombreEnfantsACharge">
-      <div ng-messages="foyerForm.enfants.$error" ng-if="foyerForm.$submitted">
+      <div ng-messages="foyerForm.nombreEnfantsACharge.$error" ng-if="foyerForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
       </div>
@@ -37,18 +37,13 @@
         <p>
           <i class="fa fa-info-circle"></i> Nous avons besoin des informations de votre avis
           d'imposition afin d'en transmettre une copie à votre académie.
-          <br>
-          Si vous n'avez pas de numéro fiscal, vous pouvez également faire appel au
-          <strong>
-            <a href="http://vosdroits.service-public.fr/particuliers/F1025.xhtml" target="_blank" title="Détail sur le fonds social collégien">fonds social collégien</a>.
-          </strong>
         </p>
       </div>
       <div connection connection-id="'demandeur'" on-success="saveFoyer"></div>
     </div>
   </div>
 
-  <div class="form-section" ng-if="showOtherParent()">
+  <div class="form-section" ng-if="showOtherParent">
     <h1>Renseignements sur l'autre parent</h1>
 
     <div class="form-group required" ng-if="isCelibataire()">

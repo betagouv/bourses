@@ -65,6 +65,11 @@
           <p ng-if="montant > 0" class="maxi" ng-class="{'text-muted': montant === null}">
               {{montant | montant}}
           </p>
+          <div class="text-center">
+            <a class="link-action" ng-if="montant > 0" ui-sref="layout.nouvelle_demande.identite-enfant">
+              Déposez votre demande maintenant !
+            </a>
+          </div>
         </div>
       </div>
     </div>

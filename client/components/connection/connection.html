@@ -44,6 +44,10 @@
           </div>
         </div>
 
+        <div class="alert alert-warning">Si vous n'avez pas de numéro fiscal, vous pouvez également faire appel au <strong>
+          <a href="http://vosdroits.service-public.fr/particuliers/F1025.xhtml" target="_blank" title="Détail sur le fonds social collégien">fonds social collégien</a>.
+        </strong></div>
+
         <div ng-if="status === 'error' && error" class="alert alert-info">
           <p class="text-danger">{{error}}</p>
         </div>
@@ -61,6 +65,11 @@
 
 <div ng-if="status === 'success'">
   <div ng-if="!fc">
+
+    <div class="text-right">
+      <a class="btn btn-action" ng-click="edit()" ng-if="connectionId === 'demandeur'">Changer mes identifiants</a>
+      <a class="btn btn-action" ng-click="edit()" ng-if="connectionId !== 'demandeur'">Changer ces identifiants</a>
+    </div>
     <div class="form-group">
       <label class="control-label-flat" ng-if="connectionId === 'demandeur'">Vos identités fiscales</label>
       <label class="control-label-flat" ng-if="connectionId !== 'demandeur'">Identités fiscales de l'autre parent</label>
@@ -78,10 +87,6 @@
       <div class="form-control-flat">
         <span>{{svair.situationFamille}}</span>
       </div>
-    </div>
-    <div class="text-right">
-      <a class="btn btn-action" ng-click="edit()" ng-if="connectionId === 'demandeur'">Changer mes identifiants</a>
-      <a class="btn btn-action" ng-click="edit()" ng-if="connectionId !== 'demandeur'">Changer ces identifiants</a>
     </div>
   </div>
   <div ng-if="fc">

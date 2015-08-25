@@ -19,14 +19,14 @@ angular.module('boursesApp')
       }
     });
 
-    $scope.identite = store.get('identite-enfant') || {garde: 'non'};
+    $scope.identite = store.get('identite-enfant');
     var steps = store.get('steps');
 
     $scope.submit = function(form) {
       store.set('identite-enfant', $scope.identite);
       steps.identiteEnfant = form.$valid;
 
-      if (form.$valid) {
+      if (form.$valid && $scope.identite.garde && $scope.identite.regime) {
         store.set('steps', steps);
         $state.go('layout.nouvelle_demande.vos-ressources');
       }

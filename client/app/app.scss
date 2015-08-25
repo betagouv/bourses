@@ -65,27 +65,40 @@ select.form-control-flat {
   }
 }
 
+.has-error
+.btn-select {
+  border-bottom: 2px solid $dark-red;
+}
 
 .has-error
 .form-control-flat {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  -webkit-appearance: none;
-  -webkit-border-radius: 0;
+  border-bottom: 2px solid $dark-red;
+}
+
+.has-error
+.help-block-warning {
+  .fa {
+    color: orange !important;
+  }
+  color: white !important;
 }
 
 .help-block {
-  color: $darker-blue;
-  background-color: whitesmoke;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  .fa {
+    color: orange;
+  }
+
+  color: white;
   padding: 4px;
   padding-left: 10px;
 }
 
 .has-error
 .help-block {
-  color: $dark-red;
+  color: white;
+  .fa {
+    color: $dark-red;
+  }
 }
 
 .btn-action-container {
