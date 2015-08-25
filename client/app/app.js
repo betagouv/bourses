@@ -52,6 +52,8 @@ angular
         $window._paq.push(['setCustomUrl', $location.path()]);
         $window._paq.push(['trackPageView']);
       }
+
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
 
     // Redirect to login if route requires auth and you're not logged in
