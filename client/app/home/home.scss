@@ -18,6 +18,7 @@ section#nouvelle_demande {
     a {
       @include primary-action;
       padding: 10px;
+      border: 1px solid;
     }
   }
 
