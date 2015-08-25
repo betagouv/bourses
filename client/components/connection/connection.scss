@@ -9,6 +9,17 @@ a.action {
   }
 }
 
+.connect-fc-img > a {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  img {
+    margin: auto;
+  }
+}
+
 .modal-body {
   img {
     margin-bottom: 20px;
