@@ -4,6 +4,7 @@ angular.module('boursesApp')
   .controller('NotificationCtrl', function($scope, $http, $state, $modalInstance, Auth, demande, simulation) {
     $scope.demande = demande;
     $scope.token = Auth.getToken();
+    $scope.listeMontants = [0, 84, 231, 360];
 
     if (demande.status === 'pending') {
       $scope.email = demande.notification.email;

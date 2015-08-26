@@ -5,7 +5,11 @@
 
     <div class="form-group required" ng-class="{'has-error': !montant && notificationForm.$submitted}">
       <label class="control-label">Montant de la bourse</label>
-      <input type="number" class="form-control-flat" name="montant" ng-model="montant" required>
+      <select ng-model="montant" required name="montant" id="select-montant" class="form-control-flat"
+        ng-options="montant for montant in listeMontants">
+        <option>--</option>
+      </select>
+
       <div ng-if="!montant && notificationForm.$submitted">
         <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
