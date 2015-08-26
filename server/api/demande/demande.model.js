@@ -12,7 +12,8 @@ var DemandeSchema = new Schema({
   status:         { type: String, enum: ['new', 'pending', 'done'], default: 'new' },
   notification:   {
     montant: { type: Number },
-    email: { type: String }
+    email: { type: String },
+    createdAt: { type: Date }
   }
 });
 

@@ -1,6 +1,10 @@
 <form name="notificationForm" ng-submit="submit(notificationForm)" novalidate>
   <div class="modal-body">
     <h1>Envoi de la notification</h1>
+
+    <div ng-if="demande.status === 'done'" class="alert alert-info">
+      Dernière notification envoyée le <strong>{{demande.notification.createdAt | date}}</strong> à l'adresse <strong>{{demande.notification.email}}</strong>, pour un montant de <strong>{{demande.notification.montant}} euros</strong>.
+    </div>
     <p>Renseignez le montant de la bourse attribuée, une notification sera générée et envoyée directement à l'usager sur le compte email qu'il aura renseigné.</p>
 
     <div class="form-group required" ng-class="{'has-error': !montant && notificationForm.$submitted}">

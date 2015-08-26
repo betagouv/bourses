@@ -1,6 +1,11 @@
 <div id="edition-demande">
   <section>
     <h2>Résumé de la demande <br><small>Passée le {{demande.createdAt | date}}</small></h2>
+
+    <div ng-if="demande.status === 'done'" class="alert alert-info">
+      Notification envoyée le <strong>{{demande.notification.createdAt | date}}</strong> à l'adresse <strong>{{demande.notification.email}}</strong>, pour un montant de <strong>{{demande.notification.montant}} euros</strong>.
+    </div>
+
     <div class="text-right">
       <a class="btn btn-action-invert" href="/api/demandes/{{demandeId}}/random/download?access_token={{token}}" target="_blank" download="{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
         Télécharger

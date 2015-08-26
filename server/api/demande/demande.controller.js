@@ -164,8 +164,10 @@ exports.saveNotification = function(req, res, next) {
       if (err) return handleError(req, res, err);
       if (!demande) return res.sendStatus(404);
 
+      var notification = _.assign(req.body, {createdAt: Date.now()});
+
       demande
-        .set('notification', req.body)
+        .set('notification', notification)
         .set('status', 'done')
         .save(function(err, result) {
           if (err) { return handleError(req, res, err); }
