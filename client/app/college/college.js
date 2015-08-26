@@ -6,22 +6,22 @@ angular.module('boursesApp')
       .state('layout.college', {
         url: '/college/:id',
         templateUrl: 'app/college/college.html',
-        controller: function($scope, $http, $state, Auth, college) {
+        controller: function($scope, $http, $state, Auth, college, newRequests, pendingRequests, doneRequests) {
           $scope.college = college;
+          $scope.new = newRequests;
+          $scope.pending = pendingRequests;
+          $scope.done = doneRequests;
 
-          $scope.new = 0;
-          $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=new'}).then(function(result) {
-            $scope.new = result.headers('count');
-          });
+          function updateCount(status) {
+            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=' + status}).then(function(result) {
+              $scope[status] = result.headers('count');
+            });
+          }
 
-          $scope.pending = 0;
-          $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=pending'}).then(function(result) {
-            $scope.pending = result.headers('count');
-          });
-
-          $scope.done = 0;
-          $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=done'}).then(function(result) {
-            $scope.done = result.headers('count');
+          $scope.$on('updateCount', function() {
+            updateCount('new');
+            updateCount('pending');
+            updateCount('done');
           });
 
           $scope.logout = function() {
@@ -37,6 +37,24 @@ angular.module('boursesApp')
 
           college: function(Etablissement, id) {
             return Etablissement.get({id: id}).$promise;
+          },
+
+          newRequests: function($http, college) {
+            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=new'}).then(function(result) {
+              return result.headers('count');
+            });
+          },
+
+          pendingRequests: function($http, college) {
+            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=pending'}).then(function(result) {
+              return result.headers('count');
+            });
+          },
+
+          doneRequests: function($http, college) {
+            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=done'}).then(function(result) {
+              return result.headers('count');
+            });
           }
         },
         abstract: true

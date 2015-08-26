@@ -6,6 +6,8 @@ angular.module('boursesApp')
     $scope.demandeId = demandeId;
     $scope.token = Auth.getToken();
 
+    $scope.$emit('updateCount');
+
     $scope.save = function() {
       $scope.saving = 'pending';
       $http.post('/api/demandes/comment/' + demandeId, {observations: demande.observations}).then(function() {
