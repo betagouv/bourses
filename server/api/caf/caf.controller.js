@@ -33,7 +33,7 @@ exports.caf = function(req, res) {
   '</soapenv:Envelope>';
 
   request.post({
-    url:'https://pep-test.caf.fr/sgmap/wswdd/v1?wsdl',
+    url: 'https://pep-test.caf.fr/sgmap/wswdd/v1',
     body: soapRequest,
     headers: {'Content-Type': 'text/xml'}
   }, function(error, response) {
