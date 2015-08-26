@@ -35,15 +35,13 @@
     <h2>Vos informations bancaires</h2>
 
     <div class="alert alert-warning">
-      Ces informations bancaires sont nécessaires au paiement de votre bourse.
+      Ces informations bancaires sont nécessaires au paiement de votre bourse. <br>
+      <i class="fa fa-warning"></i> Le titulaire du compte doit être la personne qui fait la demande de bourse.</p>
     </div>
 
     <div class="form-group required" ng-class="{'has-error': !identite.titulaire && infoForm.$submitted}">
       <label class="control-label-flat">Titulaire du compte</label>
       <input type="text" class="form-control-flat" name="titulaire" ng-model="identite.titulaire" required>
-      <div class="has-error">
-        <p class="help-block"><i class="fa fa-warning"></i> Le titulaire du compte doit être la personne qui fait la demande de bourse</p>
-      </div>
       <div ng-if="!identite.titulaire && infoForm.$submitted">
         <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
