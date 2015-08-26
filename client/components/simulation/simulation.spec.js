@@ -11,13 +11,13 @@ describe('Service: simulation', function() {
     simulation = _simulation_;
   }));
 
-  it('should return 84 for 18003 and 2 children', function() {
-    var montant = simulation(18003, 2);
+  it('should return 84 for 18061 and 2 children', function() {
+    var montant = simulation(18061, 2);
     expect(montant).toBe(84);
   });
 
-  it('should return 84 for 14627 and 1 children', function() {
-    var montant = simulation(14627, 1);
+  it('should return 84 for 14674 and 1 children', function() {
+    var montant = simulation(14674, 1);
     expect(montant).toBe(84);
   });
 
@@ -26,19 +26,14 @@ describe('Service: simulation', function() {
     expect(montant).toBe(0);
   });
 
-  it('should return 228 for 9732 and 2 children', function() {
-    var montant = simulation(9732, 2);
-    expect(montant).toBe(228);
+  it('should return 231 for 9763 and 2 children', function() {
+    var montant = simulation(9763, 2);
+    expect(montant).toBe(231);
   });
 
-  it('should return 84 for 9733 and 2 children', function() {
-    var montant = simulation(9733, 2);
-    expect(montant).toBe(84);
-  });
-
-  it('should return 357 for 4720 and 4 children', function() {
-    var montant = simulation(4720, 4);
-    expect(montant).toBe(357);
+  it('should return 360 for 4737 and 4 children', function() {
+    var montant = simulation(4737, 4);
+    expect(montant).toBe(360);
   });
 
 });
