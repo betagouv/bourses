@@ -6,7 +6,7 @@ angular.module('boursesApp')
     $scope.token = Auth.getToken();
     $scope.listeMontants = [0, 84, 231, 360];
 
-    if (demande.status === 'pending') {
+    if (demande.status === 'done') {
       $scope.email = demande.notification.email;
       $scope.montant = demande.notification.montant;
     } else {
