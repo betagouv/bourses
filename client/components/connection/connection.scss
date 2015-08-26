@@ -1,11 +1,19 @@
 a.action {
   .fa {
-    font-size: 1.2em;
+    font-size: 2em;
     color: white;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: left;
+
+    &:hover {
+      color: $darker-blue;
+      cursor: pointer;
+    }
   }
 
-  &:hover {
-    cursor: pointer;
+  .control-label-flat {
+    margin-top: 4px;
   }
 }
 
