@@ -51,13 +51,31 @@
   </section>
 
   <section>
+    <h2>Renseignements bancaires</h2>
+
+    <div class="info-label">Titulaire du compte</div>
+    <p class="info">{{demande.identiteAdulte.titulaire}}</p>
+
+    <div class="info-label">IBAN</div>
+    <p class="info">{{demande.identiteAdulte.iban}}</p>
+
+    <div class="info-label">BIC</div>
+    <p class="info">{{demande.identiteAdulte.bic}}</p>
+  </section>
+
+  <section>
     <h2>Identité de l'enfant</h2>
 
-    <div class="info-label">Nom</div>
-    <p class="info">{{demande.identiteEnfant.nom}}</p>
-
-    <div class="info-label">Prénom</div>
-    <p class="info">{{demande.identiteEnfant.prenom}}</p>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="info-label">Nom</div>
+        <p class="info">{{demande.identiteEnfant.nom}}</p>
+      </div>
+      <div class="col-sm-3">
+        <div class="info-label">Prénom</div>
+        <p class="info">{{demande.identiteEnfant.prenom}}</p>
+      </div>
+    </div>
 
     <div class="info-label">Sexe</div>
     <p class="info">{{demande.identiteEnfant.sexe | sexe}}</p>
@@ -72,11 +90,16 @@
   <section>
     <h2>Identité de l'adulte</h2>
 
-    <div class="info-label">Nom</div>
-    <p class="info">{{demande.identiteAdulte.demandeur.nom}}</p>
-
-    <div class="info-label">Prénom</div>
-    <p class="info">{{demande.identiteAdulte.demandeur.prenoms}}</p>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="info-label">Nom</div>
+        <p class="info">{{demande.identiteAdulte.demandeur.nom}}</p>
+      </div>
+      <div class="col-sm-3">
+        <div class="info-label">Prénom</div>
+        <p class="info">{{demande.identiteAdulte.demandeur.prenoms}}</p>
+      </div>
+    </div>
 
     <div class="info-label">Lien avec l'enfant</div>
     <p class="info">{{demande.identiteAdulte.lien | lien}}</p>
@@ -86,11 +109,16 @@
   <section>
     <h2>Renseignements du foyer</h2>
 
-    <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
-    <p class="info">{{demande.foyer.nombreEnfantsACharge}}</p>
-
-    <div class="info-label">Nombre d'enfants majeurs célibataires</div>
-    <p class="info">{{demande.foyer.nombreEnfantsAdultes}}</p>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
+        <p class="info">{{demande.foyer.nombreEnfantsACharge}}</p>
+      </div>
+      <div class="col-sm-3">
+        <div class="info-label">Nombre d'enfants majeurs célibataires</div>
+        <p class="info">{{demande.foyer.nombreEnfantsAdultes}}</p>
+      </div>
+    </div>
 
     <div class="info-label">Garde alternée</div>
     <p class="info">{{demande.identiteEnfant.garde}}</p>
@@ -99,27 +127,11 @@
   <section>
     <h2>Renseignements de contact</h2>
 
-    <div class="info-label">Adresse</div>
-    <p class="info">{{demande.identiteAdulte.adresse}}</p>
-
-    <div class="info-label">Code postal</div>
-    <p class="info">{{demande.identiteAdulte.codePostal}}</p>
-
-    <div class="info-label">Ville</div>
-    <p class="info">{{demande.identiteAdulte.ville.nomCommune}}</p>
-
     <div class="info-label">E-mail</div>
-    <p class="info">{{demande.identiteAdulte.email}}</p>
-  </section>
+    <p class="info"><a href="mailto:{{demande.identiteAdulte.email}}">{{demande.identiteAdulte.email}}</a></p>
 
-  <section>
-    <h2>Renseignements bancaires</h2>
-
-    <div class="info-label">IBAN</div>
-    <p class="info">{{demande.identiteAdulte.iban}}</p>
-
-    <div class="info-label">BIC</div>
-    <p class="info">{{demande.identiteAdulte.bic}}</p>
+    <div class="info-label">Téléphone</div>
+    <p class="info">{{demande.identiteAdulte.telephone || 'Pas de téléphone renseigné'}}</p>
   </section>
 
   <section>
