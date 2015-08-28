@@ -30,7 +30,7 @@
     "request": "^2.61.0",
     "serve-favicon": "^2.2.1",
     "superagent": "^1.2.0",
-    "svair-api": "^0.1.3",
+    "svair-api": "^0.1.5",
     "wkhtmltopdf": "^0.1.5"
   },
   "devDependencies": {
