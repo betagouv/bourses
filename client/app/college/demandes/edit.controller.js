@@ -1,12 +1,22 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeEditCtrl', function($scope, $timeout, $http, Auth, demandeId, demande) {
+  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, Auth, demandeId, demande) {
     $scope.demande = demande;
     $scope.demandeId = demandeId;
     $scope.token = Auth.getToken();
 
     $scope.$emit('updateCount');
+
+    var myEl = angular.element(document.querySelector('#nav-menu'));
+
+    angular.element($window).bind('scroll', function() {
+      if (this.pageYOffset >= 395) {
+        myEl.addClass('affix');
+      } else {
+        myEl.removeClass('affix');
+      }
+    });
 
     $scope.save = function() {
       $scope.saving = 'pending';

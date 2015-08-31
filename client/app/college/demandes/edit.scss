@@ -44,4 +44,8 @@
 .edition-demande-nav {
   color: #333;
   background-color: white;
+
+  &.affix {
+    top: 30px;
+  }
 }
