@@ -1,19 +1,6 @@
 <div ng-if="status !== 'success'">
   <div class="choices-connect">
-    <div class="connect-fc">
-      <h2 ng-if="connectionId === 'demandeur'">Vous avez un compte impots.gouv.fr</h2>
-      <h2 ng-if="connectionId !== 'demandeur'">Connection avec son compte impots.gouv.fr</h2>
-      <div class="connect-fc-img">
-        <a href="/oauth/fc" ng-click="saveAndConnect($event)" target="self" title="Se connecter avec son compte impots.gouv.fr">
-          <img src="assets/images/franceconnect.png" alt="Se connecter avec son compte impots.gouv.fr">
-          <span>Se connecter avec son compte impots.gouv.fr</span>
-        </a>
-      </div>
-    </div>
-    <div class="vertical-hr"></div>
     <div class="connect-svair">
-      <h2 ng-if="connectionId === 'demandeur'">Vous n'avez pas de compte impots.gouv.fr</h2>
-      <h2 ng-if="connectionId !== 'demandeur'">L'autre parent ne possède pas de compte impots.gouv.fr</h2>
       <ng-form class="svair-form" name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
         <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
 
@@ -45,7 +32,7 @@
           </div>
         </div>
 
-        <div class="alert alert-warning">Si vous n'avez pas de numéro fiscal, vous pouvez également faire appel au <strong>
+        <div class="alert alert-warning">Si vous n'avez pas de numéro fiscal, vous pouvez recourir au <strong>
           <a href="http://vosdroits.service-public.fr/particuliers/F1025.xhtml" target="_blank" title="Détail sur le fonds social collégien">fonds social collégien</a>.
         </strong></div>
 

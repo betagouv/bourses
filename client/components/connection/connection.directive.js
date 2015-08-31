@@ -25,35 +25,6 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         scope.credentials.numeroFiscal = trimSpaces(scope.credentials.numeroFiscal);
       });
 
-      function tryFcLogin() {
-        $http
-          .get('/api/connection/fc')
-          .then(
-            function(result) {
-              scope.fc = result.data.response;
-              if (typeof scope.fc === 'string' && scope.fc.startsWith('{')) {
-                scope.fc = JSON.parse(scope.fc);
-              }
-
-              setStatus('success');
-              store.set('fc_' + scope.connectionId, scope.fc);
-            },
-
-            function() {
-              store.set('fc_' + scope.connectionId, null);
-              return null;
-            });
-      }
-
-      function fcLogout() {
-        $http
-          .get('/oauth/fc/logout')
-          .then(function() {
-            setStatus('pending');
-            store.set('fc_' + scope.connectionId, null);
-          });
-      }
-
       function validateSvair(form) {
         if (!form.$valid) {
           return;
@@ -145,15 +116,12 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         store.set('status_' + scope.connectionId, status);
       }
 
-      tryFcLogin();
-
       scope.edit = edit;
       scope.validateSvair = validateSvair;
       scope.cancelCredentials = cancelCredentials;
       scope.saveAndConnect = saveAndConnect;
       scope.detailNumeroFiscal = detailNumeroFiscal;
       scope.detailNumeroAvis = detailNumeroAvis;
-      scope.fcLogout = fcLogout;
     }
   };
 });

@@ -38,37 +38,8 @@
   display: flex;
 }
 
-@media(max-width: 767px) {
-  .choices-connect {
-    flex-direction: column;
-    .connect-fc {
-      width: 100%;
-    }
-    .connect-svair {
-      width: 100%;
-    }
-  }
-}
-
-.connect-fc {
-  width: 50%;
-  border-radius: 4px;
-
-  .connect-fc-img {
-    text-align: center;
-    padding: 25px;
-    align-items: center;
-  }
-
-  img {
-    max-width: 400px;
-    width: 100%;
-  }
-}
-
 .connect-svair {
-  width: 50%;
-
+  width: 100%;
   .svair-form {
     display: block;
     padding: 25px;
