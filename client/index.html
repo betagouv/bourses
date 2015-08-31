@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
       <link rel="stylesheet" href="bower_components/ladda/dist/ladda.min.css" />
       <!-- endbower -->
     <!-- endbuild -->
@@ -61,21 +62,23 @@
       <!-- bower:js -->
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/angular-aria/angular-aria.js"></script>
-      <script src="bower_components/angular-messages/angular-messages.js"></script>
-      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-      <script src="bower_components/lodash/lodash.js"></script>
-      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-      <script src="bower_components/moment/moment.js"></script>
       <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
+      <script src="bower_components/angular-aria/angular-aria.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/angular-capitalize-filter/capitalize.js"></script>
+      <script src="bower_components/Chart.js/Chart.js"></script>
+      <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/spin.js/spin.js"></script>
       <script src="bower_components/ladda/dist/ladda.min.js"></script>
       <script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.js"></script>
       <script src="bower_components/angular-mocks/angular-mocks.js"></script>
-      <script src="bower_components/angular-capitalize-filter/capitalize.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/lodash/lodash.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
       <script src="bower_components/ng-iban/dist/ng-iban.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
@@ -103,6 +106,8 @@
       <script src="app/nouvelle_demande/nouvelle_demande.js"></script>
       <script src="app/nouvelle_demande/vos-renseignements/vos-renseignements.controller.js"></script>
       <script src="app/nouvelle_demande/vos-ressources/vos-ressources.controller.js"></script>
+      <script src="app/stats/stats.controller.js"></script>
+      <script src="app/stats/stats.js"></script>
       <script src="components/auth/auth.service.js"></script>
       <script src="components/auth/user.resource.js"></script>
       <script src="components/connection/connection.directive.js"></script>

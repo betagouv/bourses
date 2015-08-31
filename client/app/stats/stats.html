@@ -1,0 +1,47 @@
+<div id="stats-container" class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="section">
+        <h1>Nombre de demandes</h1>
+        <hr>
+        <div class="bigup">{{sumRequests(colleges)}}</div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="section">
+        <h1>Nombre d'utilisateurs inscrits</h1>
+        <hr>
+        <div class="bigup">{{site.count}}</div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="section">
+        <h1>Nombre de Collèges pilotes</h1>
+        <hr>
+        <div class="bigup">{{colleges.length}}</div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="section">
+        <h1>Historique des demandes</h1>
+        <hr>
+        <canvas id="line" class="chart chart-line" data="historyData" labels="historyLabels" series="historySeries" legend="true"></canvas>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="section">
+        <h1>Demandes par Collège</h1>
+        <hr>
+        <canvas id="pie" class="chart chart-pie" data="dataTotal" labels="labels"
+          legend="true"></canvas>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="section">
+        <h1>Détail des demandes</h1>
+        <hr>
+        <canvas id="bar" class="chart chart-bar" data="data" labels="labels" series="series" legend="true"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
