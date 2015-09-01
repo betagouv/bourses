@@ -51,18 +51,6 @@ exports.etablissement = function(req, res) {
   });
 };
 
-exports.site = function(req, res) {
-  User.find().exec(function(err, users) {
-    if (err) { return handleError(req, res, err); }
-
-    var data = {
-      count: users.length
-    };
-
-    res.json(data);
-  });
-};
-
 function getOneWeekAgo() {
   var oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);

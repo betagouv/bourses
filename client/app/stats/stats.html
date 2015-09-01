@@ -9,16 +9,16 @@
     </div>
     <div class="col-sm-4">
       <div class="section">
-        <h1>Nombre d'utilisateurs inscrits</h1>
+        <h1>Nombre de Collèges pilotes</h1>
         <hr>
-        <div class="bigup">{{site.count}}</div>
+        <div class="bigup">{{colleges.length}}</div>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="section">
-        <h1>Nombre de Collèges pilotes</h1>
+        <h1>Dernières visites</h1>
         <hr>
-        <div class="bigup">{{colleges.length}}</div>
+        <img src="http://stats.data.gouv.fr/index.php?module=API&method=ImageGraph.get&idSite=16&apiModule=VisitsSummary&apiAction=get&token_auth=anonymous&graphType=evolution&period=day&date=previous30&width=300&height=150&language=fr" alt="Visites des 30 derniers jours">
       </div>
     </div>
     <div class="col-sm-6">

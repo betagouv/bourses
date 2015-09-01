@@ -37,10 +37,6 @@ angular.module('boursesApp')
       $scope.data = sumByType(result.data);
     });
 
-    $http.get('/api/stats/site').then(function(result) {
-      $scope.site = result.data;
-    });
-
     $http.get('/api/stats/history').then(function(result) {
       $scope.history = result.data;
       $scope.historyLabels = _.pluck(result.data, 'date');
