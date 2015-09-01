@@ -43,20 +43,45 @@ exports.demandes = function(req, res) {
 
       if (!etablissement) { return res.sendStatus(404); }
 
+      var q;
+      var limit;
+      var offset;
+
+      if (req.query.searchQuery) {
+        var searchQuery = JSON.parse(req.query.searchQuery);
+        q = searchQuery.q && _.isString(searchQuery.q) && searchQuery.q.length ? searchQuery.q : null;
+        offset = parseInt(searchQuery.offset);
+        offset = _.isNumber(offset) && offset > 0 ? Math.floor(offset) : 0;
+      } else {
+        q = null;
+        offset = 0;
+      }
+
+      var query = {etablissement: etablissement, status: req.query.status};
+
+      // Text search
+      if (q) {
+        query.$text = { $search: q, $language: 'french' };
+      }
+
       Demande
-        .find({etablissement: etablissement, status: req.query.status})
+        .find(query)
+        .limit(25)
+        .skip(offset)
         .exec(function(err, demandes) {
           if (err) { return handleError(req, res, err); }
 
           if (!demandes) { return res.sendStatus(404); }
 
-          res.set('count', demandes.length);
+          Demande.count(query).exec(function(err, count) {
+            res.set('count', count);
 
-          if (demandes) {
-            return res.json(decode(demandes));
-          } else {
-            return res.json([]);
-          }
+            if (demandes) {
+              return res.json(decode(demandes));
+            } else {
+              return res.json([]);
+            }
+          });
         });
     });
 };

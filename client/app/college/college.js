@@ -66,35 +66,59 @@ angular.module('boursesApp')
         abstract: true
       })
       .state('layout.college.demandes.new', {
-        url: '/nouvelles',
+        url: '/nouvelles?recherche?page',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
         resolve: {
           status: function() {
             return 'new';
+          },
+
+          recherche: function($stateParams) {
+            return $stateParams.recherche || null;
+          },
+
+          page: function($stateParams) {
+            return $stateParams.page || null;
           }
         }
       })
       .state('layout.college.demandes.pending', {
-        url: '/en_cours',
+        url: '/en_cours?recherche?page',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
         resolve: {
           status: function() {
             return 'pending';
+          },
+
+          recherche: function($stateParams) {
+            return $stateParams.recherche || null;
+          },
+
+          page: function($stateParams) {
+            return $stateParams.page || null;
           }
         }
       })
       .state('layout.college.demandes.done', {
-        url: '/traitees',
+        url: '/traitees?recherche?page',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
         resolve: {
           status: function() {
             return 'done';
+          },
+
+          recherche: function($stateParams) {
+            return $stateParams.recherche || null;
+          },
+
+          page: function($stateParams) {
+            return $stateParams.page || null;
           }
         }
       })

@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/bourses-dev'
+    uri: 'mongodb://localhost/bourses'
   },
 
   port: 5000

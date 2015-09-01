@@ -17,4 +17,21 @@ var DemandeSchema = new Schema({
   }
 });
 
+/*
+** Indexes
+*/
+var textIndexOptions = {
+  default_language: 'french',
+  name: 'default_text_index'
+};
+
+var textIndexDefinition = {
+  'data.identiteEnfant.prenom': 'text',
+  'data.identiteEnfant.nom': 'text',
+  'data.identiteAdulte.demandeur.nom': 'text',
+  'data.identiteAdulte.demandeur.prenoms': 'text'
+};
+
+DemandeSchema.index(textIndexDefinition, textIndexOptions);
+
 module.exports = mongoose.model('Demande', DemandeSchema);
