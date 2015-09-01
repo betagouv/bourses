@@ -1,14 +1,18 @@
 <ui-view>
-  <form novalidate class="simple-form">
-    <div class="form-group">
-      <div class="input-group">
-        <input type="text" class="form-control" id="recherche" placeholder="Recherche" ng-model="recherche">
-        <span class="input-group-btn">
-          <input type="submit" class="btn btn-action" value="Rechercher" ng-click="search(recherche)">
-        </span>
-      </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <form novalidate class="simple-form">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" id="recherche" placeholder="Recherche" ng-model="recherche">
+            <span class="input-group-btn">
+              <input type="submit" class="btn btn-action" value="Rechercher" ng-click="search(recherche)">
+            </span>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 
   <div ng-if="demandes.length === 0 && demandes.$resolved" class="finished">
     <i class="fa fa-thumbs-up"></i>
