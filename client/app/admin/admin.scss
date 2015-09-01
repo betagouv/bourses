@@ -17,10 +17,10 @@
   }
 
   .trash {
-    color: white;
+    color: $red;
 
     &:hover {
-      color: lighten($blue, 15%);
+      color: red;
       cursor: pointer;
     }
   }
