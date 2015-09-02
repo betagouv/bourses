@@ -72,7 +72,7 @@ exports.demandes = function(req, res) {
             function(waterFallCallback) {
               Demande
                 .find(query)
-                .limit(25)
+                .limit(10)
                 .skip(offset)
                 .exec(waterFallCallback);
             },
