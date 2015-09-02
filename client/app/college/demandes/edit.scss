@@ -39,6 +39,11 @@
   .dragover {
     border: 5px dashed $blue;
   }
+
+  .actions {
+    text-align: right;
+    margin-bottom: 10px;
+  }
 }
 
 .edition-demande-nav {

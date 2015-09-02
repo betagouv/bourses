@@ -8,10 +8,20 @@
           Notification envoyée le <strong>{{demande.notification.createdAt | date}}</strong> à l'adresse <strong>{{demande.notification.email}}</strong>, pour un montant de <strong>{{demande.notification.montant}} euros</strong>.
         </div>
 
-        <div class="text-right">
+        <div class="actions">
+          <a ng-click="delete()" class="btn btn-action-danger pull-left">Supprimer</a>
           <a class="btn btn-action-invert" href="/api/demandes/{{demandeId}}/random/download?access_token={{token}}" target="_blank" download="{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
             Télécharger
           </a>
+        </div>
+
+        <div ng-if="demande.isDuplicate" class="alert alert-danger">
+          Cette demande est peut-être un doublon de:
+          <ul>
+            <li ng-repeat="(idx, duplicate) in demande.duplicates">
+              <a target="_blank" ui-sref="layout.college.demandes.edit({demandeId: duplicate})">Doublon possible numéro {{idx + 1}}</a>
+            </li>
+          </ul>
         </div>
 
         <div class="info-label">Identité du demandeur</div>

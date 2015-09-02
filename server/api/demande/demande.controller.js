@@ -13,6 +13,7 @@ var Etablissement = require('../etablissement/etablissement.model');
 var Generator = require('../../components/pdf/generator');
 var sendMail = require('../../components/mail/send-mail').sendMail;
 var crypto = require('../../components/crypto/crypto');
+var duplicates = require('../../components/duplicates/duplicates');
 
 function sendNotificationToUser(email, stream, req, cb) {
   var subject = 'Notification demande de bourse';
@@ -109,8 +110,37 @@ exports.show = function(req, res) {
           .save();
       }
 
-      var decoded = crypto.decode(demande);
-      return res.json(decoded);
+      duplicates.findDuplicates([demande], demande.etablissement, function(err, demandes, duplicates) {
+        var decoded = crypto.decode(demande);
+
+        if (duplicates.length > 0) {
+          decoded.isDuplicate = true;
+          decoded.duplicates = duplicates;
+        }
+
+        return res.json(decoded);
+      });
+    });
+};
+
+exports.delete = function(req, res) {
+  var id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.sendStatus(400);
+  }
+
+  Demande
+    .findById(id)
+    .exec(function(err, demande) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!demande) { return res.sendStatus(404); }
+
+      demande.remove(function(err) {
+        if (err) { return handleError(req, res, err); }
+
+        return res.send(204);
+      });
     });
 };
 

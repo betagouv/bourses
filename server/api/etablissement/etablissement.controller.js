@@ -2,10 +2,12 @@
 
 var _ = require('lodash');
 var mongoose = require('mongoose');
+var async = require('async');
 
 var Etablissement = require('./etablissement.model');
 var Demande = require('../demande/demande.model');
 var crypto = require('../../components/crypto/crypto');
+var duplicates = require('../../components/duplicates/duplicates');
 
 exports.show = function(req, res) {
   Etablissement
@@ -64,32 +66,56 @@ exports.demandes = function(req, res) {
         query.$text = { $search: q, $language: 'french' };
       }
 
-      Demande
-        .find(query)
-        .limit(25)
-        .skip(offset)
-        .exec(function(err, demandes) {
-          if (err) { return handleError(req, res, err); }
+      async.parallel({
+        demandes: function(callback) {
+          async.waterfall([
+            function(waterFallCallback) {
+              Demande
+                .find(query)
+                .limit(25)
+                .skip(offset)
+                .exec(waterFallCallback);
+            },
 
-          if (!demandes) { return res.sendStatus(404); }
+            function(demandes, waterFallCallback) {
+              duplicates.findDuplicates(demandes, etablissement, waterFallCallback);
+            },
 
-          Demande.count(query).exec(function(err, count) {
-            res.set('count', count);
+            function(demandes, duplicates, waterFallCallback) {
+              demandes.forEach(function(demande) {
+                demande.isDuplicate = duplicates.indexOf(demande.id) > -1;
+              });
 
-            if (demandes) {
-              return res.json(decode(demandes));
-            } else {
-              return res.json([]);
+              waterFallCallback(null, demandes);
             }
+
+          ], function(err, demandes) {
+            callback(err, demandes);
           });
-        });
+        },
+
+        count: function(callback) {
+          Demande.count(query).exec(callback);
+        },
+
+      }, function(err, result) {
+        if (err) {
+          return handleError(req, res, err);
+        }
+
+        if (result.demandes) {
+          res.set('count', result.count);
+          var decoded = decode(result.demandes);
+          return res.json(decoded);
+        } else {
+          return res.json([]);
+        }
+      });
     });
 };
 
 exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
-
-  console.log(req.body);
 
   Etablissement.findOne({
     human_id: req.params.id

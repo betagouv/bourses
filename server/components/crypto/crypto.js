@@ -14,6 +14,7 @@ exports.decode = function(demande) {
   demandeObj.status = demande.status;
   demandeObj.notification = demande.notification;
   demandeObj.observations = demande.observations;
+  demandeObj.isDuplicate = demande.isDuplicate;
 
   return demandeObj;
 };

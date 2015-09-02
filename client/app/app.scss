@@ -244,6 +244,17 @@ h1 {
   font-size: 30px;
 }
 
+.btn-action-danger {
+  @extend .btn-action;
+  background-color: $red;
+  box-shadow: 0 2px darken($red, 15%);
+  color: white;
+
+  &:hover {
+    background-color: darken($red, 15%);
+  }
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.scss';

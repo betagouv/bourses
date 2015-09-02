@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, Auth, demandeId, demande) {
+  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, $modal, $state, Auth, demandeId, demande) {
     $scope.demande = demande;
     $scope.demandeId = demandeId;
     $scope.token = Auth.getToken();
@@ -17,6 +17,23 @@ angular.module('boursesApp')
         myEl.removeClass('affix');
       }
     });
+
+    $scope.delete = function() {
+      var instance = $modal.open({
+        animation: true,
+        templateUrl: 'app/college/demandes/delete/delete.html',
+        controller: 'DeleteCtrl',
+        resolve: {
+          demande: function() {
+            return demande;
+          }
+        }
+      });
+
+      instance.result.then(function() {
+        $state.go('layout.college.demandes.new', {}, {reload: true});
+      });
+    };
 
     $scope.save = function() {
       $scope.saving = 'pending';
