@@ -43,4 +43,11 @@ angular.module('boursesApp')
       $scope.historyData = [_.pluck(result.data, 'count')];
       $scope.historySeries = ['Nombre de demandes'];
     });
+
+    $http.get('/api/stats/historyTotal').then(function(result) {
+      var data = result.data;
+      $scope.historyLabelsByEtablissement = data.dates;
+      $scope.historyDataByEtablissement = data.count;
+      $scope.historySeriesByEtablissement = _.pluck(data.etablissements, 'nom');
+    });
   });

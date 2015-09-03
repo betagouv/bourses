@@ -84,6 +84,56 @@ exports.history = function(req, res) {
   });
 };
 
+exports.historyTotal = function(req, res) {
+  async.parallel({
+    demandes: function(callback) {
+      Demande.find({
+        createdAt: {$gte: new Date(2015, 8, 1)}
+      }).sort('createdAt').exec(callback);
+    },
+
+    etablissements: function(callback) {
+      Etablissement.find().sort('zipcode').exec(callback);
+    }
+  }, function(err, result) {
+    var demandes = result.demandes;
+    var etablissements = result.etablissements;
+
+    if (!demandes) {
+      return res.json({});
+    }
+
+    demandes.forEach(function(request) {
+      request.createdAtByDay = moment(request.createdAt).format('DD/MM/YYYY');
+    });
+
+    var groupByDate = _.groupBy(demandes, 'createdAtByDay');
+    var data = {dates: [], etablissements: etablissements, count: []};
+
+    var allCount = [];
+    _.forEach(groupByDate, function(demandes, date) {
+      var groupByEtablissement = _.groupBy(demandes, 'etablissement');
+
+      var idx = 0;
+      etablissements.forEach(function(etablissement) {
+        var demandeByEtablissement = groupByEtablissement[etablissement._id] || [];
+        if (!allCount[idx]) {
+          allCount[idx] = [];
+        }
+
+        allCount[idx].push(demandeByEtablissement.length);
+        idx++;
+      });
+
+      data.dates.push(date);
+    });
+
+    data.count = allCount;
+
+    return res.json(data);
+  });
+};
+
 function handleError(req, res, err) {
   req.log.error(err);
   return res.status(500).send(err);
