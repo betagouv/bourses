@@ -31,6 +31,8 @@ module.exports = function(config) {
       'client/bower_components/ng-iban/dist/ng-iban.js',
       'client/bower_components/moment/moment.js',
       'client/bower_components/moment/locale/fr.js',
+      'client/bower_components/Chart.js/Chart.js',
+      'client/bower_components/angular-chart.js/dist/angular-chart.js',
       'client/app/app.js',
       'client/app/**/*.js',
       'client/components/**/*.js',
