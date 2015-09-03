@@ -12,6 +12,7 @@ angular.module('boursesApp')
       });
 
       $scope.etablissements = data;
+      $scope.etablissementsById = _.indexBy(data, '_id');
 
       if (college) {
         var etablissement = _.find(data, {human_id: college});
