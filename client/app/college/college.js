@@ -6,6 +6,7 @@ angular.module('boursesApp')
       .state('layout.college', {
         url: '/college/:id',
         templateUrl: 'app/college/college.html',
+        authenticate: true,
         controller: function($scope, $http, $state, Auth, college, newRequests, pendingRequests, doneRequests) {
           $scope.college = college;
           $scope.new = newRequests;
@@ -124,6 +125,7 @@ angular.module('boursesApp')
       })
       .state('layout.college.demandes.edit', {
         url: '/:demandeId',
+        authenticate: true,
         templateUrl: 'app/college/demandes/edit.html',
         controller: 'DemandeEditCtrl',
         resolve: {
