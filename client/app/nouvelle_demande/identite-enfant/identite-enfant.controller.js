@@ -7,7 +7,7 @@ angular.module('boursesApp')
       var data = result.data;
       _.map(data, function(etablissement) {
         if (etablissement.ville) {
-          etablissement.ville.label = label(etablissement.ville);
+          etablissement.label = label(etablissement);
         }
       });
 
@@ -33,7 +33,7 @@ angular.module('boursesApp')
       }
     };
 
-    var label = function(city) {
-      return city.nom + ', ' + city.codePostal;
+    var label = function(etablissement) {
+      return etablissement.nom + ', ' + etablissement.ville.codePostal;
     };
   });
