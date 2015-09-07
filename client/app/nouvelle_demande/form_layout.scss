@@ -57,6 +57,14 @@ ul#status-buttons {
   color: white;
   padding: 40px 0 100px 0;
   background-color: $dark-blue;
+
+  h1 {
+    font-size: 40px;
+    text-align: center;
+    font-weight: 300;
+    margin: 0;
+    margin-bottom: 30px;
+  }
 }
 
 .form-section {
