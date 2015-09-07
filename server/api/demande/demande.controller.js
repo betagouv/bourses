@@ -6,6 +6,8 @@ var wkhtmltopdf = require('wkhtmltopdf');
 var path = require('path');
 var fs = require('fs');
 var moment = require('moment');
+var svair = require('svair-api');
+var async = require('async');
 
 var config = require('../../config/environment');
 var Demande = require('./demande.model');
@@ -104,22 +106,41 @@ exports.show = function(req, res) {
 
       if (!demande) { return res.sendStatus(404); }
 
-      if (demande.status === 'new') {
-        demande
-          .set('status', 'pending')
-          .save();
-      }
+      var data = demande.data.data;
 
-      duplicates.findDuplicates([demande], demande.etablissement, function(err, demandes, duplicates) {
-        var decoded = crypto.decode(demande);
+      async.series([
+        function(callback) {
+          if (demande.status === 'new') {
+            demande
+              .set('status', 'pending')
+              .save(callback);
+          } else if (!data.anneeImpots) {
+            svair(data.credentials.numeroFiscal, data.credentials.referenceAvis, function(err, result) {
+              demande
+                .set('data.data.anneeRevenus', result.anneeRevenus)
+                .set('data.data.anneeImpots', result.anneeImpots)
+                .save(callback);
+            });
+          } else {
+            callback();
+          }
+        },
 
-        if (duplicates.length > 0) {
-          decoded.isDuplicate = true;
-          decoded.duplicates = duplicates;
+        function(callback) {
+          duplicates.findDuplicates([demande], demande.etablissement, function(err, demandes, duplicates) {
+            var decoded = crypto.decode(demande);
+
+            if (duplicates.length > 0) {
+              decoded.isDuplicate = true;
+              decoded.duplicates = duplicates;
+            }
+
+            return res.json(decoded);
+          });
         }
 
-        return res.json(decoded);
-      });
+      ]);
+
     });
 };
 

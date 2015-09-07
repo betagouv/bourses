@@ -137,20 +137,6 @@ angular.module('boursesApp')
             return $http.get('/api/demandes/' + demandeId + '/random').then(function(result) {
               return result.data;
             });
-          },
-
-          demandeWithSvair: function($http, demande) {
-            return $http.get('/api/connection/svair', {params: demande.data.credentials})
-              .then(function(result) {
-                demande.data = result.data;
-                demande.data.identites = [result.data.declarant1];
-
-                if (result.data.declarant2) {
-                  demande.data.identites.push(result.data.declarant2);
-                }
-
-                return demande;
-              });
           }
         }
       })

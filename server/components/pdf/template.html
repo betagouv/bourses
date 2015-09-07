@@ -2,7 +2,7 @@
   <head>
     <style>
       h2 {
-        font-size: 12px;
+        font-size: 16px;
         margin-bottom: 5px;
       }
 
@@ -13,19 +13,30 @@
 
       .info-label {
         color: #333;
-        font-size: 10px;
-        line-height: 1;
+        font-size: 15px;
       }
 
       p.info {
         font-size: 14px;
-        font-weight: 500;
-        line-height: 1;
         margin: 4px 0;
       }
 
       img {
         width: 50px;
+      }
+
+      .left {
+        width: 50%;
+        float: left;
+      }
+
+      .right {
+        width: 50%;
+        float: right;
+      }
+
+      .clear {
+        clear: both;
       }
 
     </style>
@@ -48,52 +59,62 @@
     <div class="info-label">Nombre d'enfants majeurs célibataires</div>
     <p class="info">{{foyer.nombreEnfantsAdultes}}</p>
 
-    <h2>Identité de l'enfant</h2>
+    <div class="left">
+      <h2>Identité de l'enfant</h2>
 
-    <div class="info-label">Nom</div>
-    <p class="info">{{identiteEnfant.nom}}</p>
+      <div class="info-label">Nom</div>
+      <p class="info">{{identiteEnfant.nom}}</p>
 
-    <div class="info-label">Prénom</div>
-    <p class="info">{{identiteEnfant.prenom}}</p>
+      <div class="info-label">Prénom</div>
+      <p class="info">{{identiteEnfant.prenom}}</p>
 
-    <div class="info-label">Sexe</div>
-    <p class="info">{{identiteEnfant.sexe}}</p>
+      <div class="info-label">Sexe</div>
+      <p class="info">{{identiteEnfant.sexe}}</p>
 
-    <div class="info-label">Date de naissance</div>
-    <p class="info">{{identiteEnfant.dateNaissance}}</p>
+      <div class="info-label">Date de naissance</div>
+      <p class="info">{{identiteEnfant.dateNaissance}}</p>
 
-    <div class="info-label">Régime</div>
-    <p class="info">{{identiteEnfant.regime}}</p>
+      <div class="info-label">Régime</div>
+      <p class="info">{{identiteEnfant.regime}}</p>
+    </div>
 
-    <h2>Identité de l'adulte</h2>
+    <div class="right">
+      <h2>Identité de l'adulte</h2>
 
-    <div class="info-label">Nom</div>
-    <p class="info">{{identiteAdulte.demandeur.nom}}</p>
+      <div class="info-label">Nom</div>
+      <p class="info">{{identiteAdulte.demandeur.nom}}</p>
 
-    <div class="info-label">Prénom</div>
-    <p class="info">{{identiteAdulte.demandeur.prenoms}}</p>
+      <div class="info-label">Prénom</div>
+      <p class="info">{{identiteAdulte.demandeur.prenoms}}</p>
 
-    <div class="info-label">Lien avec l'enfant</div>
-    <p class="info">{{identiteAdulte.lien}}</p>
+      <div class="info-label">Lien avec l'enfant</div>
+      <p class="info">{{identiteAdulte.lien}}</p>
+    </div>
 
-    <h2>Renseignements du foyer</h2>
+    <div class="clear"></div>
 
-    <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
-    <p class="info">{{foyer.nombreEnfantsACharge}}</p>
+    <div class="left">
+      <h2>Renseignements du foyer</h2>
 
-    <div class="info-label">Nombre d'enfants majeurs célibataires</div>
-    <p class="info">{{foyer.nombreEnfantsAdultes}}</p>
+      <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
+      <p class="info">{{foyer.nombreEnfantsACharge}}</p>
 
-    <div class="info-label">Garde alternée</div>
-    <p class="info">{{identiteEnfant.garde}}</p>
+      <div class="info-label">Nombre d'enfants majeurs célibataires</div>
+      <p class="info">{{foyer.nombreEnfantsAdultes}}</p>
 
-    <h2>Renseignements de contact</h2>
+      <div class="info-label">Garde alternée</div>
+      <p class="info">{{identiteEnfant.garde}}</p>
+    </div>
 
-    <div class="info-label">E-mail</div>
-    <p class="info">{{identiteAdulte.email}}</p>
+    <div class="right">
+      <h2>Renseignements de contact</h2>
 
-    <div class="info-label">Téléphone</div>
-    <p class="info">{{identiteAdulte.phone}}</p>
+      <div class="info-label">E-mail</div>
+      <p class="info">{{identiteAdulte.email}}</p>
+
+      <div class="info-label">Téléphone</div>
+      <p class="info">{{identiteAdulte.phone}}</p>
+    </div>
 
     <h2>Renseignements bancaires</h2>
 
@@ -106,7 +127,7 @@
     <div class="info-label">BIC</div>
     <p class="info">{{identiteAdulte.bic}}</p>
 
-    <h2>Renseignements issus de la déclaration d'impôt</h2>
+    <h2>Renseignements issus de la déclaration d'impôt <strong>{{data.anneeImpots}}</strong> sur les revenus de l'année <strong>{{data.anneeRevenus}}</strong></h2>
 
     <div class="info-label">Nombre de parts</div>
     <p class="info">{{data.nombreParts}}</p>
