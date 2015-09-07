@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, $modal, $state, Auth, demandeId, demande) {
-    $scope.demande = demande;
+  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, $modal, $state, Auth, demandeId, demandeWithSvair) {
+    $scope.demande = demandeWithSvair;
     $scope.demandeId = demandeId;
     $scope.token = Auth.getToken();
 
@@ -25,7 +25,7 @@ angular.module('boursesApp')
         controller: 'DeleteCtrl',
         resolve: {
           demande: function() {
-            return demande;
+            return demandeWithSvair;
           }
         }
       });
@@ -37,7 +37,7 @@ angular.module('boursesApp')
 
     $scope.save = function() {
       $scope.saving = 'pending';
-      $http.post('/api/demandes/comment/' + demandeId, {observations: demande.observations}).then(function() {
+      $http.post('/api/demandes/comment/' + demandeId, {observations: demandeWithSvair.observations}).then(function() {
         $scope.saving = 'success';
         $timeout(function() {
           $scope.saving = '';
