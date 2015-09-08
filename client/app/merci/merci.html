@@ -1,12 +1,23 @@
 <section id="merci">
   <div class="container">
 
-    <h1>Merci !</h1>
+    <h1>Merci ! Votre demande est maintenant terminée</h1>
 
-    <p>Votre demande a bien été prise en compte.</p>
-    <a ui-sref="layout.nouvelle_demande.identite-enfant" ng-click="clean()">
-      Vous pouvez faire une demande pour un autre enfant
-    </a>
+    <p>
+      Votre demande a été transmise à votre établissement, vous allez reçevoir un accusé de réception dans votre boite mail <em>{{email}}</em>.
+      <br>
+      En cas de questions, vous pouvez joindre le collège {{etablissement.nom}}:
+      <ul>
+        <li ng-if="etablissement.telephone">Par téléphone : {{etablissement.telephone}}</li>
+        <li>Par Email : <a href="mailto:{{etablissement.email}}">{{etablissement.contact}}</a></li>
+      </ul>
+    </p>
+    <hr>
+    <div class="text-right">
+      <a ui-sref="layout.nouvelle_demande.identite-enfant" ng-click="clean()">
+        Vous pouvez faire une demande pour un autre enfant
+      </a>
+    </div>
 
   </div>
 </section>

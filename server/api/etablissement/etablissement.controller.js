@@ -21,6 +21,18 @@ exports.show = function(req, res) {
     });
 };
 
+exports.showById = function(req, res) {
+  Etablissement
+    .findById(req.params.id)
+    .exec(function(err, etablissement) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!etablissement) { return res.sendStatus(404); }
+
+      return res.json(etablissement);
+    });
+};
+
 exports.query = function(req, res) {
   Etablissement
     .find()
