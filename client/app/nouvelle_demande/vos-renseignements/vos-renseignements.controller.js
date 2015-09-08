@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRenseignementsCtrl', function($scope, $http, $state, $timeout, store) {
+  .controller('VosRenseignementsCtrl', function($scope, $http, $state, $timeout, $modal, store) {
     $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur') || {};
     $scope.identite = store.get('identite-adulte') || {};
     $scope.identiteEnfant = store.get('identite-enfant');
@@ -24,6 +24,21 @@ angular.module('boursesApp')
         foyer: store.get('foyer'),
         data: store.get('svair_demandeur')
       };
+
+      if (!demande.data || !demande.data.revenuFiscalReference) {
+        $scope.loading = false;
+        $modal.open({
+          animation: true,
+          templateUrl: 'app/nouvelle_demande/vos-renseignements/error.html',
+          controller: function($scope, $modalInstance) {
+            $scope.ok = function() {
+              $modalInstance.dismiss();
+            };
+          }
+        });
+
+        return;
+      }
 
       $http.post('/api/demandes/' + demande.identiteEnfant.college, demande).then(function() {
         $state.go('layout.merci');
