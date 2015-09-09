@@ -20,7 +20,6 @@ serve:
 test:
   - 'env:all'
   - 'env:test'
-  - 'mochaTest'
   - 'clean:server'
   - 'injector:sass'
   - 'concurrent:test'
