@@ -11,12 +11,6 @@ module.exports = {
       '!server/**/*.spec.js'
     ]
   },
-  serverTest: {
-    options: {
-      jshintrc: 'server/.jshintrc-spec'
-    },
-    src: ['server/**/*.spec.js']
-  },
   all: [
     'client/{app,components}/**/*.js',
     '!client/{app,components}/**/*.spec.js',
