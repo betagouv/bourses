@@ -1,21 +1,6 @@
 'use strict';
 
-var https = require('https');
-var fs = require('fs');
-
 var svair = require('svair-api');
-var request = require('superagent');
-
-var config = require('../../config/environment');
-
-var agentOptions = { hostname: config.dgfip.host };
-
-if (config.dgfip.cert && config.dgfip.key) {
-  agentOptions.key = fs.readFileSync(config.dgfip.key);
-  agentOptions.cert = fs.readFileSync(config.dgfip.cert);
-}
-
-var boris = new https.Agent(agentOptions);
 
 exports.svair = function(req, res, next) {
   if (!req.query.numeroFiscal || !req.query.referenceAvis) {
@@ -44,39 +29,3 @@ exports.svair = function(req, res, next) {
     });
   }
 };
-
-function fetchData(accessToken, year, done) {
-  request.get(config.dgfip.baseUrl + '/' + year)
-    .set('Authorization', 'Bearer ' + accessToken)
-    .redirects(0)
-    .agent(boris)
-    .parse(request.parse.text)
-    .buffer()
-    .end(function(err, resp) {
-      if (err && !err.status) return done(err);
-      done(null, resp.text);
-    });
-}
-
-exports.mockData = function(req, res) {
-  res.json({
-    identites: [{nom: 'DUPONT', prenoms: 'MARCEL'}],
-    rfr: 0, sitFam:'C', nbPart:'1.0', pac:{nbPac:'0'}
-  });
-};
-
-exports.fc = function(req, res, next) {
-  if (!req.user || !req.user.accessToken) {
-    return res.status(401).send({
-      code: 401,
-      message: 'Utilisateur non authentifié'
-    });
-  }
-
-  fetchData(req.user.accessToken, 2013, function(err, result) {
-    if (err) return next(err);
-    res.send({ response: result });
-  });
-};
-
-exports.fetchData = fetchData;
