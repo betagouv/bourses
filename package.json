@@ -30,7 +30,7 @@
     "serve-favicon": "^2.2.1",
     "soap": "^0.9.1",
     "superagent": "^1.2.0",
-    "svair-api": "^0.1.7",
+    "svair-api": "0.1.6",
     "wkhtmltopdf": "^0.1.5"
   },
   "devDependencies": {
