@@ -8,5 +8,11 @@ module.exports = {
     uri: 'mongodb://localhost/bourses'
   },
 
+  smtp: {
+    host: 'http://localhost:5000',
+    user: 'toto',
+    pass: 'password'
+  },
+
   port: 5000
 };

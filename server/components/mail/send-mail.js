@@ -5,7 +5,7 @@ var smtpTransport = require('nodemailer-smtp-transport');
 
 var config = require('../../config/environment').smtp;
 
-exports.sendMail = function(to, subject, body, attachments, done) {
+exports.sendMail = function(to, from, subject, body, attachments, done) {
   var transporter = nodemailer.createTransport(
     smtpTransport({
       port: 587,
@@ -20,7 +20,7 @@ exports.sendMail = function(to, subject, body, attachments, done) {
   );
 
   var mailOptions = {
-    from: config.user,
+    from: from,
     to: to,
     subject: 'Bourse - ' + subject,
     html: body

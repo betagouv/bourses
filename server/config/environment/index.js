@@ -39,12 +39,6 @@ var all = {
         safe: true
       }
     }
-  },
-
-  smtp: {
-    host: process.env.SMTP_HOST || 'http://localhost:5000',
-    user: process.env.SMTP_USER || 'toto',
-    pass: process.env.SMTP_PASS || 'password'
   }
 };
 

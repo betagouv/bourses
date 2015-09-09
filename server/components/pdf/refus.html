@@ -1,0 +1,112 @@
+<html>
+  <style>
+    .footer {
+      margin-top: 100px;
+    }
+
+    .cachet {
+      width: 40%;
+      float: left;
+    }
+
+    .signature {
+      width: 40%;
+      float: right;
+      text-align: right;
+    }
+
+    #info-college {
+      width: 40%;
+      float: left;
+    }
+
+    #info-dates {
+      width: 40%;
+      float: right;
+      text-align: right;
+    }
+
+    .clearfix {
+      *zoom: 1;
+    }
+
+    .clearfix:after {
+      display: table;
+      content: "";
+      line-height: 0;
+      clear: both;
+    }
+
+    .title {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    h1 {
+      font-size: 1.4em;
+      margin: 0;
+    }
+
+    h2#info-title {
+      font-size: 1.2em;
+      margin-top: 40px;
+      margin-bottom: 0;
+    }
+
+    .content {
+      text-align: justify;
+    }
+  </style>
+  <body>
+    <div id="info-college">
+      <div>{{college.nom}}</div>
+      <div>{{college.adresse}}</div>
+      <div>{{college.ville.codePostal}} {{college.ville.nom}}</div>
+    </div>
+    <div id="info-dates">
+      <div>Année scolaire 2015-2016</div>
+      <div>Date d'émission : {{date}}</div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="title">
+      <h1>BOURSE DE COLLEGE<br>NOTIFICATION DE REFUS</h1>
+    </div>
+    <div class="content">
+      <p>Le chef d'établissement vous informe qu'après examen du dossier de demande de bourse de collège concernant <strong>{{identiteEnfant.prenom}} {{identiteEnfant.nom}}</strong>,
+        et compte tenu des éléments figurants sur votre avis d'impôt sur le revenu:
+        <ul>
+          <li>revenu fiscal de référence: {{data.revenuFiscalReference}} EUR</li>
+          <li>nombre d'enfants mineurs ou infirmes: {{foyer.nombreEnfantsACharge}}</li>
+          <li>nombre d'enfants majeurs ou célibataires: {{foyer.nombreEnfantsAdultes}}</li>
+        </ul>
+      </p>
+
+      <p>la bourse de collège que vous avez sollicitée au titre de l'année scolaire 2015-2016 ne peut pas vous être accordée.</p>
+
+      <h2 id="info-title">Pour votre information :</h2>
+      <ol type="a">
+        <li>En cas d'erreur dans les données ci-dessus indiquées, je vous prie de bien vouloir m'en informer le plus rapidement possible.</li>
+        <li>Si vous contestez cette décision, vous pouvez former dans les deux mois de sa notification :
+          <ul>
+            <li>soit un recours administratif que vous m'adresserez;</li>
+            <li>soit un recours contentieux devant le tribunal administratif.</li>
+          </ul>
+          En cas de recours administratif, vous disposerez à compter de la notification de la réponse, d'un
+          délai de deux mois pour vous pourvoir devant le tribunal administratif. Ce délai est porté à
+          quatre mois à compter de l'introduction du recours administratif, si ce dernier est resté sans
+          réponse.
+        </li>
+      </ol>
+       <p>Je reste à votre disposition pour tout renseignement complémentaire.</p>
+    </div>
+
+    <div class="footer">
+      <div class="signature">
+        <div>A {{college.ville.nom}}, le {{date}}</div>
+        <div>Le chef d'établissement</div>
+        <div>{{college.chef_etablissement}}</div>
+      </div>
+    </div>
+  </body>
+</html>

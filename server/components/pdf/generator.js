@@ -80,7 +80,11 @@ exports.toHtml = function(demande, path, done) {
 exports.editNotification = function(demande, college, done) {
   async.series({
     template: function(callback) {
-      readFile('notification.html', callback);
+      if (demande.notification.montant === 0) {
+        readFile('refus.html', callback);
+      } else {
+        readFile('notification.html', callback);
+      }
     },
 
     answers: function(callback) {
