@@ -25,7 +25,7 @@ angular.module('boursesApp')
         data: store.get('svair_demandeur')
       };
 
-      if (!demande.data || !demande.data.revenuFiscalReference) {
+      if (!demande.data || typeof demande.data.revenuFiscalReference === 'undefined') {
         $scope.loading = false;
         $modal.open({
           animation: true,
