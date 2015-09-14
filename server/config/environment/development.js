@@ -14,5 +14,15 @@ module.exports = {
     pass: 'password'
   },
 
+  mailjet: {
+    port: 465,
+    host: '',
+    secure: true,
+    auth: {
+        user: '',
+        pass: ''
+      }
+  },
+
   port: 5000
 };

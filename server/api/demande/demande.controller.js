@@ -63,7 +63,7 @@ function sendConfirmationToUser(email, demande, college, req) {
   body += 'Vous recevrez une réponse avant le 15 octobre au plus tard.<br>';
   body += 'Merci d’avoir utilisé ce service et en cas de question n\'hésitez pas à nous écrire à "' + college.contact + '" ou à contacter l\'intendance au ' + college.telephone + '.<body><html>';
 
-  sendMail(email, config.user, subject, body);
+  sendMail(email, 'bourse@sgmap.fr', subject, body);
   req.log.info('Notification sent to: ' + email);
 }
 
@@ -84,7 +84,7 @@ function sendNotificationToAgent(identite, college, req) {
           '<h3><a href="' + dashboard + '">Cliquez ici pour voir la liste des demandes passées</a></h3>\n' +
           'Si le lien ne marche pas, vous pouvez copier/coller cette adresse dans votre navigateur:\n' + dashboard;
 
-        sendMail(email, config.user, subject, body);
+        sendMail(email, 'bourse@sgmap.fr', subject, body);
         req.log.info('Notification sent to: ' + etablissement.contact);
       }
     });

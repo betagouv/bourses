@@ -21,9 +21,9 @@
 
         "NODE_TLS_REJECT_UNAUTHORIZED": 0,
 
-        "SMTP_USER": "abc@yourdomain.com",
-        "SMTP_PASS": "pass",
-        "SMTP_HOST": "yourdomain.com"
+        "MAILJET_SENDER": "abc@yourdomain.com",
+        "MAILJET_API_KEY": "mailjet_api_key",
+        "MAILJET_SECRET_KEY": "mailjet_secret_key"
       }
     }
   ]

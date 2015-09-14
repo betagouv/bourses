@@ -3,25 +3,17 @@
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
-var config = require('../../config/environment').smtp;
+var config = require('../../config/environment').mailjet;
 
-exports.sendMail = function(to, from, subject, body, attachments, done) {
+exports.sendMail = function(to, replyTo, subject, body, attachments, done) {
   var transporter = nodemailer.createTransport(
-    smtpTransport({
-      port: 587,
-      host: config.host,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: config.user,
-        pass: config.pass
-      }
-    })
+    smtpTransport(config)
   );
 
   var mailOptions = {
-    from: from,
+    from: 'bourse@sgmap.fr',
     to: to,
+    replyTo: replyTo,
     subject: 'Bourse - ' + subject,
     html: body
   };

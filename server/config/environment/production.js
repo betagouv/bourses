@@ -21,5 +21,16 @@ module.exports = {
     host: process.env.SMTP_HOST,
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS
+  },
+
+  mailjet: {
+    port: 465,
+    host: 'in.mailjet.com',
+    secure: true,
+    auth: {
+        user: process.env.MAILJET_API_KEY,
+        pass: process.env.MAILJET_SECRET_KEY
+      }
   }
+
 };
