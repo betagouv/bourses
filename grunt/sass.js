@@ -1,19 +1,15 @@
 module.exports = {
   server: {
     options: {
-      sourceMap: true,
-      includePaths: [
+      loadPath: [
         'client/bower_components',
         'client/app',
         'client/components'
-      ]
+      ],
+      compass: false
     },
-    files: [{
-      expand: true,
-      cwd: 'client',
-      src: 'app/app.scss',
-      dest: '.tmp/',
-      ext: '.css'
-    }]
+    files: {
+      '.tmp/app/app.css': 'client/app/app.scss'
+    }
   }
 };
