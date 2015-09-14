@@ -29,6 +29,18 @@ var all = {
 
   domain: process.env.DOMAIN || 'http://localhost:5000',
 
+  fc: {
+    clientId: process.env.FC_CLIENT_ID || 'fc-clientId',
+    clientSecret: process.env.FC_CLIENT_SECRET || 'fc-clientSecret'
+  },
+
+  dgfip: {
+    host: process.env.DGFIP_HOST,
+    baseUrl: process.env.DGFIP_BASE_URL || 'http://localhost:5000/api/connection/mock',
+    cert: process.env.DGFIP_CERT_LOCATION,
+    key: process.env.DGFIP_KEY_LOCATION
+  },
+
   // List of user roles
   userRoles: ['user', 'admin'],
 

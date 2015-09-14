@@ -15,9 +15,11 @@ passport.deserializeUser(function(user, done) {
 });
 
 require('./local/passport').setup(User, config);
+require('./france-connect/passport').setup(config);
 
 var router = express.Router();
 
 router.use('/local', require('./local'));
+router.use('/fc', require('./france-connect'));
 
 module.exports = router;
