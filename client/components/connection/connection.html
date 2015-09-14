@@ -1,6 +1,22 @@
 <div ng-if="status !== 'success'">
   <div class="choices-connect">
+    <div ng-if="enableFranceConnect">
+      <div class="connect-fc">
+        <h2 ng-if="connectionId === 'demandeur'">Vous avez un compte impots.gouv.fr</h2>
+        <h2 ng-if="connectionId !== 'demandeur'">Connection avec son compte impots.gouv.fr</h2>
+        <div class="connect-fc-img">
+          <a href="/oauth/fc" ng-click="saveAndConnect($event)" target="self" title="Se connecter avec son compte impots.gouv.fr">
+            <img src="assets/images/franceconnect.png" alt="Se connecter avec son compte impots.gouv.fr">
+            <span>Se connecter avec son compte impots.gouv.fr</span>
+          </a>
+        </div>
+      </div>
+    </div>
     <div class="connect-svair">
+      <div ng-if="enableFranceConnect">
+        <h2 ng-if="connectionId === 'demandeur'">Vous n'avez pas de compte impots.gouv.fr</h2>
+        <h2 ng-if="connectionId !== 'demandeur'">L'autre parent ne possède pas de compte impots.gouv.fr</h2>
+      </div>
       <ng-form class="svair-form" name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
         <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
 

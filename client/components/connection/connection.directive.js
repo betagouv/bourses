@@ -10,6 +10,38 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
     restrict: 'EA',
     link: function(scope) {
 
+      // Feature-flipping fc
+      scope.enableFranceConnect = false;
+
+      function tryFcLogin() {
+        $http
+          .get('/api/connection/fc')
+          .then(
+            function(result) {
+              scope.fc = result.data.response;
+              if (typeof scope.fc === 'string' && scope.fc.startsWith('{')) {
+                scope.fc = JSON.parse(scope.fc);
+              }
+
+              setStatus('success');
+              store.set('fc_' + scope.connectionId, scope.fc);
+            },
+
+            function() {
+              store.set('fc_' + scope.connectionId, null);
+              return null;
+            });
+      }
+
+      function fcLogout() {
+        $http
+          .get('/oauth/fc/logout')
+          .then(function() {
+            setStatus('pending');
+            store.set('fc_' + scope.connectionId, null);
+          });
+      }
+
       scope.svair = store.get('svair_' + scope.connectionId);
       scope.credentials = scope.svair ? _.cloneDeep(scope.svair.credentials) : {};
       var oldStatus = scope.status = store.get('status_' + scope.connectionId);
@@ -114,6 +146,11 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
       function setStatus(status) {
         scope.status = status;
         store.set('status_' + scope.connectionId, status);
+      }
+
+      if (scope.enableFranceConnect) {
+        tryFcLogin();
+        scope.fcLogout = fcLogout;
       }
 
       scope.edit = edit;
