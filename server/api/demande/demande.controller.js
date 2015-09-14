@@ -61,7 +61,13 @@ function sendConfirmationToUser(email, demande, college, req) {
   var date = moment(demande.createdAt).format('DD/MM/YYYY');
   var body = '<html><body>Votre de demande de bourse du ' + date + ' a bien été envoyée à votre établissement.';
   body += 'Vous recevrez une réponse avant le 15 octobre au plus tard.<br>';
-  body += 'Merci d’avoir utilisé ce service et en cas de question n\'hésitez pas à nous écrire à "' + college.contact + '" ou à contacter l\'intendance au ' + college.telephone + '.<body><html>';
+  body += 'Merci d’avoir utilisé ce service et en cas de question n\'hésitez pas à nous écrire à "' + college.contact;
+
+  if (college.telephone) {
+    body += '" ou à contacter l\'intendance au ' + college.telephone;
+  }
+
+  body += '.<body><html>';
 
   sendMail(email, 'bourse@sgmap.fr', subject, body);
   req.log.info('Notification sent to: ' + email);
