@@ -41,6 +41,10 @@ var all = {
     key: process.env.DGFIP_KEY_LOCATION
   },
 
+  sendGrid: {
+    apiKey: process.env.SENDGRID_API_KEY || 'sendgrid_api_key'
+  },
+
   // List of user roles
   userRoles: ['user', 'admin'],
 

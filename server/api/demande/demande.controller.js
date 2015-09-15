@@ -8,6 +8,7 @@ var fs = require('fs');
 var moment = require('moment');
 var svair = require('svair-api');
 var async = require('async');
+var tmp = require('tmp');
 
 var config = require('../../config/environment');
 var Demande = require('./demande.model');
@@ -16,6 +17,14 @@ var Generator = require('../../components/pdf/generator');
 var sendMail = require('../../components/mail/send-mail').sendMail;
 var crypto = require('../../components/crypto/crypto');
 var duplicates = require('../../components/duplicates/duplicates');
+
+function logMail(logger, error, info) {
+  if (error) {
+    logger.error('Notification error: ', error);
+  } else {
+    logger.info('Notification sent: ', info);
+  }
+}
 
 function sendNotificationToUser(demande, etablissement, stream, req, cb) {
   var subject = 'Notification demande de bourse';
@@ -40,19 +49,8 @@ function sendNotificationToUser(demande, etablissement, stream, req, cb) {
   'En cas de recours administratif, vous disposerez à compter de la notification de la réponse, d\'un délai de deux mois pour vous pourvoir devant le tribunal administratif. Ce délai est porté à ' +
   'quatre mois à compter de l\'introduction du recours administratif, si ce dernier est resté sans réponse.</li></ol></div></body></html>';
 
-  var attachments = [{
-    filename: 'notification.pdf',
-    content: stream
-  }];
-
-  sendMail(demande.notification.email, etablissement.contact, subject, body, attachments, function(error, info) {
-    if (error) {
-      req.log.error('Notification error: ' + error);
-      if (cb) cb(error, null);
-    } else {
-      req.log.info('Notification sent: ' + info.response);
-      if (cb) cb(null, info.response);
-    }
+  sendMail(demande.notification.email, etablissement.contact, subject, body, stream, function(error, info) {
+    logMail(req.log, error, info);
   });
 }
 
@@ -69,8 +67,9 @@ function sendConfirmationToUser(email, demande, college, req) {
 
   body += '.<body><html>';
 
-  sendMail(email, 'bourse@sgmap.fr', subject, body);
-  req.log.info('Notification sent to: ' + email);
+  sendMail(email, 'bourse@sgmap.fr', subject, body, null, function(error, info) {
+    logMail(req.log, error, info);
+  });
 }
 
 function sendNotificationToAgent(identite, college, req) {
@@ -90,8 +89,9 @@ function sendNotificationToAgent(identite, college, req) {
           '<h3><a href="' + dashboard + '">Cliquez ici pour voir la liste des demandes passées</a></h3>\n' +
           'Si le lien ne marche pas, vous pouvez copier/coller cette adresse dans votre navigateur:\n' + dashboard;
 
-        sendMail(email, 'bourse@sgmap.fr', subject, body);
-        req.log.info('Notification sent to: ' + etablissement.contact);
+        sendMail(email, 'bourse@sgmap.fr', subject, body, null, function(error, info) {
+          logMail(req.log, error, info);
+        });
       }
     });
 }
@@ -254,8 +254,15 @@ exports.saveNotification = function(req, res, next) {
             .findById(demande.etablissement)
             .exec(function(err, college) {
               Generator.editNotification(decoded, college, function(html) {
-                var stream = wkhtmltopdf(html, {encoding: 'UTF-8'});
-                sendNotificationToUser(demande, college, stream, req);
+
+                tmp.file(function _tempFileCreated(err, path, fd, cleanupCallback) {
+                  if (err) throw err;
+
+                  wkhtmltopdf(html, {encoding: 'UTF-8', output: path}, function() {
+                    sendNotificationToUser(demande, college, path, req, cleanupCallback);
+                  });
+                });
+
               });
             });
 
