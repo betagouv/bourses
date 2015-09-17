@@ -1,3 +1,4 @@
+
 <form name="foyerForm" ng-submit="next(foyerForm)" novalidate>
   <div class="form-section" id="foyer">
     <h1>Votre foyer</h1>
@@ -48,7 +49,7 @@
 
     <div class="form-group required" ng-if="isCelibataire()">
       <fieldset>
-        <legend class="control-label-flat">Êtes-vous en union libre avec l'autre parent de {{identiteEnfant.prenom}} ?</legend>
+        <legend class="control-label-flat">Vivez-vous avec l'autre parent de {{identiteEnfant.prenom}} ?</legend>
         <div class="btn-group">
           <button type="button" class="btn btn-select" role="radio" ng-model="foyer.concubinage" btn-radio="'oui'">Oui</button>
           <button type="button" class="btn btn-select" role="radio" ng-model="foyer.concubinage" btn-radio="'non'">Non</button>
