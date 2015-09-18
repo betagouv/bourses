@@ -115,12 +115,16 @@ exports.demandes = function(req, res) {
                 var data = demande.data.data;
                 if (!data.anneeImpots) {
                   svair(data.credentials.numeroFiscal, data.credentials.referenceAvis, function(err, result) {
-                    demande
-                      .set('data.data.anneeRevenus', result.anneeRevenus)
-                      .set('data.data.anneeImpots', result.anneeImpots)
-                      .save(function() {
-                        eachSeriesCallback();
-                      });
+                    if (result && result.anneeRevenus) {
+                      demande
+                        .set('data.data.anneeRevenus', result.anneeRevenus)
+                        .set('data.data.anneeImpots', result.anneeImpots)
+                        .save(function() {
+                          eachSeriesCallback();
+                        });
+                    } else {
+                      eachSeriesCallback();
+                    }
                   });
                 } else {
                   eachSeriesCallback();
