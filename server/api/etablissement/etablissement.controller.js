@@ -71,7 +71,8 @@ exports.demandes = function(req, res) {
         offset = 0;
       }
 
-      var query = {etablissement: etablissement, status: req.query.status};
+      var status = req.query.status === 'new' ?  ['new', 'pending'] : [req.query.status];
+      var query = {etablissement: etablissement, status: {$in: status}};
 
       // Text search
       if (q) {
@@ -85,6 +86,7 @@ exports.demandes = function(req, res) {
               Demande
                 .find(query)
                 .limit(10)
+                .sort('-createdAt')
                 .skip(offset)
                 .exec(waterFallCallback);
             },

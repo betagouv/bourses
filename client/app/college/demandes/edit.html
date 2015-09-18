@@ -2,17 +2,25 @@
   <div class="col-md-9">
     <div id="edition-demande">
       <section>
-        <h2>Résumé de la demande <br><small>Passée le {{demande.createdAt | date}}</small></h2>
+        <h2>Résumé de la demande
+          <a class="btn btn-action-invert pull-right" href="/api/demandes/{{demandeId}}/random/download?access_token={{token}}" target="_blank" download="detail_{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
+            Télécharger le détail au format PDF
+          </a>
+          <br>
+          <small> Statut: {{demande.status | status}} / Passée le {{demande.createdAt | date}}</small>
+        </h2>
 
         <div ng-if="demande.status === 'done'" class="alert alert-info">
           Notification envoyée le <strong>{{demande.notification.createdAt | date}}</strong> à l'adresse <strong>{{demande.notification.email}}</strong>, pour un montant de <strong>{{demande.notification.montant}} euros</strong>.
         </div>
 
+        <div ng-if="demande.status === 'error'" class="alert alert-danger">
+          Nous avons rencontré une erreur lors de l'envoi d'un mail vers <a href="mailto:{{demande.identiteAdulte.email}}">{{demande.identiteAdulte.email}}</a> <br>
+          Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l'adresse <a href="mailto:bourse@sgmap.fr">bourse@sgmap.fr</a>
+        </div>
+
         <div class="actions">
-          <a ng-click="delete()" class="btn btn-action-danger pull-left">Supprimer</a>
-          <a class="btn btn-action-invert" href="/api/demandes/{{demandeId}}/random/download?access_token={{token}}" target="_blank" download="{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">
-            Télécharger
-          </a>
+          <a ng-click="delete()" class="btn btn-action-danger">Supprimer</a>
         </div>
 
         <div ng-if="demande.isDuplicate" class="alert alert-danger">
@@ -24,20 +32,30 @@
           </ul>
         </div>
 
-        <div class="info-label">Identité du demandeur</div>
-        <p class="info">{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</p>
-
-        <div class="info-label">Identité de l'enfant</div>
-        <p class="info">{{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="info-label">Identité du demandeur</div>
+            <p class="info">{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</p>
+          </div>
+          <div class="col-md-6">
+            <div class="info-label">Identité de l'enfant</div>
+            <p class="info">{{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</p>
+          </div>
+        </div>
 
         <div class="info-label">Revenu fiscal de référence</div>
         <p class="info">{{demande.data.revenuFiscalReference}} €</p>
 
-        <div class="info-label">Nombre d'enfants mineurs ou infirmes</div>
-        <p class="info">{{demande.foyer.nombreEnfantsACharge}}</p>
-
-        <div class="info-label">Nombre d'enfants majeurs célibataires</div>
-        <p class="info">{{demande.foyer.nombreEnfantsAdultes}}</p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="info-label">Nombre d'enfants <strong>mineurs</strong> ou infirmes</div>
+            <p class="info">{{demande.foyer.nombreEnfantsACharge}}</p>
+          </div>
+          <div class="col-md-6">
+            <div class="info-label">Nombre d'enfants <strong>majeurs</strong> célibataires</div>
+            <p class="info">{{demande.foyer.nombreEnfantsAdultes}}</p>
+          </div>
+        </div>
 
         <div class="info-label">Déductibilité</div>
         <p class="info">{{demande.identiteEnfant.regime | deductibilite}}</p>
@@ -58,7 +76,10 @@
             ng-keydown="saving = 'waiting'"
             ng-model="demande.observations"
             rows="5"></textarea>
+        </div>
 
+        <div class="text-right" ng-if="demande.status === 'new' || demande.status === 'pending'">
+          <a ng-click="pause()" class="btn btn-action-warning"><i class="fa fa-calendar"></i> Mettre cette demande en attente</a>
         </div>
       </section>
 
@@ -88,9 +109,6 @@
             <p class="info">{{demande.identiteEnfant.prenom}}</p>
           </div>
         </div>
-
-        <div class="info-label">Sexe</div>
-        <p class="info">{{demande.identiteEnfant.sexe | sexe}}</p>
 
         <div class="info-label">Date de naissance</div>
         <p class="info">{{demande.identiteEnfant.dateNaissance | date}}</p>

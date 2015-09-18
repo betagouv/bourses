@@ -57,6 +57,22 @@ angular.module('boursesApp')
       }
     };
   })
+  .filter('status', function() {
+    return function(input) {
+      switch (input) {
+        case 'new':
+          return 'Nouvelle demande';
+        case 'pending':
+          return 'En cours';
+        case 'pause':
+          return 'En attente';
+        case 'error':
+          return 'En erreur';
+        case 'done':
+          return 'Traitée';
+      }
+    };
+  })
   .filter('descriptionMontant', function() {
     return function(input) {
       switch (input) {

@@ -8,6 +8,8 @@ var router = express.Router();
 
 router.post('/:college', controller.create);
 
+router.post('/:id/pause', auth.isAuthenticated(), controller.pause);
+
 router.post('/:id/notification', auth.isAuthenticated(), controller.saveNotification);
 router.get('/:id/notification', auth.isAuthenticated(), controller.downloadNotification);
 

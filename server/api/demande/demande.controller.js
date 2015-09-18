@@ -20,7 +20,7 @@ var duplicates = require('../../components/duplicates/duplicates');
 
 function logMail(logger, error, info) {
   if (error) {
-    logger.error('Notification error: ', error);
+    logger.error('Notification error: ' + error);
   } else {
     logger.info('Notification sent: ', info);
   }
@@ -50,6 +50,13 @@ function sendNotificationToUser(demande, etablissement, stream, req, cb) {
   'quatre mois à compter de l\'introduction du recours administratif, si ce dernier est resté sans réponse.</li></ol></div></body></html>';
 
   sendMail(demande.notification.email, etablissement.contact, subject, body, stream, function(error, info) {
+    if (error) {
+      demande
+        .set('status', 'pause')
+        .set('error', error)
+        .save();
+    }
+
     logMail(req.log, error, info);
   });
 }
@@ -68,6 +75,13 @@ function sendConfirmationToUser(email, demande, college, req) {
   body += '.<body><html>';
 
   sendMail(email, 'bourse@sgmap.fr', subject, body, null, function(error, info) {
+    if (error) {
+      demande
+        .set('status', 'error')
+        .set('error', error)
+        .save();
+    }
+
     logMail(req.log, error, info);
   });
 }
@@ -209,6 +223,24 @@ exports.download = function(req, res) {
       var decoded = crypto.decode(demande);
       Generator.toHtml(decoded, host, function(html) {
         wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
+      });
+    });
+};
+
+exports.pause = function(req, res) {
+  var id = req.params.id;
+
+  Demande
+    .findById(id)
+    .exec(function(err, demande) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!demande) { return res.sendStatus(404); }
+
+      demande.set('status', 'pause').save(function(err, result) {
+        if (err) { return handleError(req, res, err); }
+
+        res.status(200).send(result);
       });
     });
 };

@@ -9,12 +9,13 @@ var DemandeSchema = new Schema({
   observations:   { type: String },
   data:           { type: Schema.Types.Mixed },
   etablissement:  { type: Schema.Types.ObjectId, ref: 'Etablissement' },
-  status:         { type: String, enum: ['new', 'pending', 'done'], default: 'new' },
+  status:         { type: String, enum: ['new', 'pending', 'pause', 'error', 'done'], default: 'new' },
   notification:   {
-    montant: { type: Number },
-    email: { type: String },
-    createdAt: { type: Date }
-  }
+    montant:      { type: Number },
+    email:        { type: String },
+    createdAt:    { type: Date }
+  },
+  error:          { type: Schema.Types.Mixed }
 });
 
 /*

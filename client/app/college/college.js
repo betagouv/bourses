@@ -7,11 +7,12 @@ angular.module('boursesApp')
         url: '/college/:id',
         templateUrl: 'app/college/college.html',
         authenticate: true,
-        controller: function($scope, $http, $state, Auth, college, newRequests, pendingRequests, doneRequests) {
+        controller: function($scope, $http, $state, Auth, college, newRequests, pausedRequests, doneRequests, errorRequests) {
           $scope.college = college;
           $scope.new = newRequests;
-          $scope.pending = pendingRequests;
+          $scope.pause = pausedRequests;
           $scope.done = doneRequests;
+          $scope.error = errorRequests;
 
           function updateCount(status) {
             return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=' + status}).then(function(result) {
@@ -21,8 +22,9 @@ angular.module('boursesApp')
 
           $scope.$on('updateCount', function() {
             updateCount('new');
-            updateCount('pending');
+            updateCount('pause');
             updateCount('done');
+            updateCount('error');
           });
 
           $scope.logout = function() {
@@ -46,14 +48,20 @@ angular.module('boursesApp')
             });
           },
 
-          pendingRequests: function($http, college) {
-            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=pending'}).then(function(result) {
+          pausedRequests: function($http, college) {
+            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=pause'}).then(function(result) {
               return result.headers('count');
             });
           },
 
           doneRequests: function($http, college) {
             return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=done'}).then(function(result) {
+              return result.headers('count');
+            });
+          },
+
+          errorRequests: function($http, college) {
+            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=error'}).then(function(result) {
               return result.headers('count');
             });
           }
@@ -85,14 +93,14 @@ angular.module('boursesApp')
           }
         }
       })
-      .state('layout.college.demandes.pending', {
-        url: '/en_cours?recherche?page',
+      .state('layout.college.demandes.paused', {
+        url: '/en_attente?recherche?page',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
         resolve: {
           status: function() {
-            return 'pending';
+            return 'pause';
           },
 
           recherche: function($stateParams) {
@@ -112,6 +120,25 @@ angular.module('boursesApp')
         resolve: {
           status: function() {
             return 'done';
+          },
+
+          recherche: function($stateParams) {
+            return $stateParams.recherche || null;
+          },
+
+          page: function($stateParams) {
+            return $stateParams.page || null;
+          }
+        }
+      })
+      .state('layout.college.demandes.error', {
+        url: '/erreur?recherche?page',
+        templateUrl: 'app/college/demandes/liste.html',
+        authenticate: true,
+        controller: 'DemandeListCtrl',
+        resolve: {
+          status: function() {
+            return 'error';
           },
 
           recherche: function($stateParams) {

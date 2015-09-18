@@ -14,10 +14,31 @@
   <div class="nav-sections">
     <div class="container">
       <ul class="nav nav-pills">
-        <li role="presentation" ui-sref-active="active"><a ui-sref="layout.college.demandes.new">Nouvelles demandes <span class="badge">{{new}}</span></a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="layout.college.demandes.pending">En cours <span class="badge">{{pending}}</span></a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="layout.college.demandes.done">Traitées <span class="badge">{{done}}</span></a></li>
-        <li role="presentation" ui-sref-active="active" class="pull-right"><a ui-sref="layout.college.edit">Paramètres <span><i class="fa fa-cog"></span></i></a></li>
+        <li role="presentation" ui-sref-active="active">
+          <a ui-sref="layout.college.demandes.new">
+            Liste des demandes <span class="badge">{{new}}</span>
+          </a>
+        </li>
+        <li role="presentation" ui-sref-active="active">
+          <a ui-sref="layout.college.demandes.paused">
+            En attente <span class="badge">{{pause}}</span>
+          </a>
+        </li>
+        <li role="presentation" ui-sref-active="active">
+          <a ui-sref="layout.college.demandes.done">
+            Traitées <span class="badge">{{done}}</span>
+          </a>
+        </li>
+        <li role="presentation" ui-sref-active="active">
+          <a ui-sref="layout.college.demandes.error">
+            En erreur <span class="badge">{{error}}</span>
+          </a>
+        </li>
+        <li role="presentation" ui-sref-active="active" class="pull-right">
+          <a ui-sref="layout.college.edit">
+            Paramètres <span><i class="fa fa-cog"></span></i>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

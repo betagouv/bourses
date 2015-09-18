@@ -18,6 +18,13 @@ angular.module('boursesApp')
       }
     });
 
+    $scope.pause = function() {
+      $http.post('/api/demandes/' + demande._id + '/pause').then(function() {
+        $scope.$emit('updateCount');
+        $state.go('layout.college.demandes.new', {}, {reload: true});
+      });
+    };
+
     $scope.delete = function() {
       var instance = $modal.open({
         animation: true,

@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeListCtrl', function($scope, $modal, $state, $timeout, Auth, Etablissement, id, status, recherche, page) {
+  .controller('DemandeListCtrl', function($scope, $http, $modal, $state, $timeout, Auth, Etablissement, id, status, recherche, page) {
     $scope.status = status;
 
     $scope.recherche = recherche;
@@ -22,6 +22,13 @@ angular.module('boursesApp')
 
     $scope.pageChanged = function(page) {
       $state.go('.', {recherche: recherche, page: page});
+    };
+
+    $scope.pause = function(demande) {
+      $http.post('/api/demandes/' + demande._id + '/pause').then(function() {
+        $scope.$emit('updateCount');
+        $state.go('.', {}, {reload: true});
+      });
     };
 
     $scope.notification = function(demande) {

@@ -7,6 +7,7 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 $blue: #3498DB;
 $dark-blue: #2980B9;
 $darker-blue: #425466;
+$orange: #FD7400;
 $red: #E74C3C;
 $dark-red: #D24436;
 $white: #ECF0F1;
@@ -252,6 +253,23 @@ h1 {
 
   &:hover {
     background-color: darken($red, 15%);
+  }
+}
+
+.btn-action-warning {
+  @extend .btn-action-invert;
+}
+
+.btn-group > .btn:first-child {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+
+  &.btn-action-invert {
+    border-right: 2px solid darken($blue, 5%);
+
+    &:hover {
+      border-right: 2px solid $darker-blue;
+    }
   }
 }
 
