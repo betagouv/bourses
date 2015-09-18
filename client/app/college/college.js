@@ -171,6 +171,13 @@ angular.module('boursesApp')
         url: '/edit',
         templateUrl: 'app/college/edit/edit.html',
         authenticate: true,
-        controller: 'EditCollegeCtrl'
+        controller: 'EditCollegeCtrl',
+        resolve: {
+          demandes: function($http, college) {
+            return $http.get('/api/etablissements/' + college.human_id + '/wrongYear').then(function(result) {
+              return result.data;
+            });
+          }
+        }
       });
   });

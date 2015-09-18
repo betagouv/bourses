@@ -63,7 +63,23 @@
   <hr>
 
   <h1>Statistiques</h1>
-
-  <table></table>
-  <p>Nombre de demandes</p>
+  <p class="lead">{{demandes.length}} demandes en erreur</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Demandeur</th>
+        <th>Email</th>
+        <th>Année de l'avis</th>
+        <th>Statut de la demande</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="demande in demandes">
+        <td>{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</td>
+        <td>{{demande.identiteAdulte.email}}</td>
+        <td>{{demande.data.anneeImpots}}</td>
+        <td>{{demande.status | status}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

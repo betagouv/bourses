@@ -50,6 +50,24 @@ function decode(demandes) {
   return _.map(demandes, crypto.decode);
 }
 
+exports.wrongYear = function(req, res) {
+  Etablissement
+    .findOne({human_id: req.params.id})
+    .exec(function(err, etablissement) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!etablissement) { return res.sendStatus(404); }
+
+      var query = {etablissement: etablissement, 'data.data.anneeImpots': {$ne: '2014'}};
+      Demande
+        .find(query)
+        .exec(function(err, demandes) {
+          var decoded = decode(demandes);
+          return res.json(decoded);
+        });
+    });
+};
+
 exports.demandes = function(req, res) {
   Etablissement
     .findOne({human_id: req.params.id})
