@@ -53,7 +53,7 @@
                   <span class="sr-only">Autres actions</span>
                 </button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="button-{{demande._id}}">
-                  <li role="menuitem"><a href="#" ng-if="demande.status !== 'pause'" ng-click="pause(demande)">Mettre en attente</a></li>
+                  <li role="menuitem"><a href="#" ng-if="demande.status !== 'pause'" ng-click="pauseDemande(demande)">Mettre en attente</a></li>
                   <li role="menuitem"><a href="/api/demandes/{{demande._id}}/random/download?access_token={{token}}" target="_blank" download="detail_{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">Télécharger le détail</a></li>
                 </ul>
               </div>

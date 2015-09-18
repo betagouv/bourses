@@ -26,7 +26,7 @@ angular.module('boursesApp')
       $state.go('.', {recherche: recherche, currentPage: page});
     };
 
-    $scope.pause = function(demande) {
+    $scope.pauseDemande = function(demande) {
       $http.post('/api/demandes/' + demande._id + '/pause').then(function() {
         $scope.$emit('updateCount');
         $state.go('.', {}, {reload: true});
