@@ -25,7 +25,7 @@ angular.module('boursesApp')
     };
 
     $scope.pageChanged = function(page) {
-      $state.go('.', {recherche: recherche, page: page});
+      $state.go('.', {recherche: recherche, page: page}, {reload: true});
     };
 
     $scope.pause = function(demande) {
