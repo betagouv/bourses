@@ -68,6 +68,12 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
         $http.get('/api/connection/svair', {params: scope.credentials})
         .success(function(data) {
+          if (data.anneeImpots !== '2014') {
+            scope.error = 'Vous avez entré un avis datant de ' + data.anneeImpots + '. La bourse est calculée à partir de l\'avis 2014 sur vos revenus 2013. Veuillez modifier vos renseignements fiscaux.';
+            setStatus('error');
+            return;
+          }
+
           data.identites = [data.declarant1];
 
           if (data.declarant2) {
