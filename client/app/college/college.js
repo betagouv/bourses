@@ -173,7 +173,7 @@ angular.module('boursesApp')
         authenticate: true,
         controller: 'EditCollegeCtrl',
         resolve: {
-          demandes: function($http, college) {
+          listeDemandes: function($http, college) {
             return $http.get('/api/etablissements/' + college.human_id + '/wrongYear').then(function(result) {
               return result.data;
             });

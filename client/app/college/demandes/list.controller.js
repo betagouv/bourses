@@ -7,11 +7,14 @@ angular.module('boursesApp')
     $scope.recherche = recherche;
     $scope.page = page;
     $scope.token = Auth.getToken();
+
     $scope.college = Etablissement.get({id: id});
-    $scope.demandes = Etablissement.queryDemandes({id: id, status: status, searchQuery: {
+
+    Etablissement.queryDemandes({id: id, status: status, searchQuery: {
       q: recherche,
       offset: (page - 1) * 10
     }}, function(demandes, getResponseHeaders) {
+      $scope.demandes = demandes;
       $scope.totalItems = getResponseHeaders('count');
     });
 
