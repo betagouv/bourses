@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="demande in demandes" ng-class="{duplicate: demande.isDuplicate, 'new': demande.status === 'new'}">
+        <tr ng-repeat="demande in demandes" ng-class="{duplicate: demande.isDuplicate, 'wrong-year': isWrongYear(demande), 'new': demande.status === 'new'}">
           <td><a ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</a></td>
           <td>{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</td>
           <td>{{demande.data.revenuFiscalReference}} €</td>

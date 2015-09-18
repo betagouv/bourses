@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var async = require('async');
+var svair = require('svair-api');
 
 var Etablissement = require('./etablissement.model');
 var Demande = require('../demande/demande.model');
@@ -89,6 +90,28 @@ exports.demandes = function(req, res) {
                 .sort('-createdAt')
                 .skip(offset)
                 .exec(waterFallCallback);
+            },
+
+            function(demandes, waterFallCallback) {
+              async.each(demandes, function(demande, eachSeriesCallback) {
+                var data = demande.data.data;
+                if (!data.anneeImpots) {
+                  svair(data.credentials.numeroFiscal, data.credentials.referenceAvis, function(err, result) {
+                    demande
+                      .set('data.data.anneeRevenus', result.anneeRevenus)
+                      .set('data.data.anneeImpots', result.anneeImpots)
+                      .save(function() {
+                        eachSeriesCallback();
+                      });
+                  });
+                } else {
+                  eachSeriesCallback();
+                }
+              },
+
+              function() {
+                waterFallCallback(null, demandes);
+              });
             },
 
             function(demandes, waterFallCallback) {

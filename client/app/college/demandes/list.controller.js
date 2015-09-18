@@ -16,6 +16,10 @@ angular.module('boursesApp')
       $scope.totalItems = getResponseHeaders('count');
     });
 
+    $scope.isWrongYear = function(demande) {
+      return demande.data.anneeImpots !== '2014';
+    };
+
     $scope.search = function(recherche) {
       $state.go('.', {recherche: recherche});
     };
