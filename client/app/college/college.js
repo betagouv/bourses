@@ -75,7 +75,7 @@ angular.module('boursesApp')
         abstract: true
       })
       .state('layout.college.demandes.new', {
-        url: '/nouvelles?recherche?currentPage',
+        url: '/nouvelles?recherche&currentPage',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -94,7 +94,7 @@ angular.module('boursesApp')
         }
       })
       .state('layout.college.demandes.paused', {
-        url: '/en_attente?recherche?currentPage',
+        url: '/en_attente?recherche&currentPage',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -113,7 +113,7 @@ angular.module('boursesApp')
         }
       })
       .state('layout.college.demandes.done', {
-        url: '/traitees?recherche?currentPage',
+        url: '/traitees?recherche&currentPage',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -132,7 +132,7 @@ angular.module('boursesApp')
         }
       })
       .state('layout.college.demandes.error', {
-        url: '/erreur?recherche?currentPage',
+        url: '/erreur?recherche&currentPage',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
