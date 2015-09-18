@@ -8,15 +8,17 @@ angular.module('boursesApp')
         templateUrl: 'app/college/college.html',
         authenticate: true,
         controller: function($scope, $http, $state, Auth, college, newRequests, pausedRequests, doneRequests, errorRequests) {
-          $scope.college = college;
-          $scope.new = newRequests;
-          $scope.pause = pausedRequests;
-          $scope.done = doneRequests;
-          $scope.error = errorRequests;
+          $scope.count = {
+            college: college,
+            new: newRequests,
+            pause: pausedRequests,
+            done: doneRequests,
+            error: errorRequests
+          };
 
           function updateCount(status) {
             return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=' + status}).then(function(result) {
-              $scope[status] = result.headers('count');
+              $scope.count[status] = result.headers('count');
             });
           }
 
