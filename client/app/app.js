@@ -58,12 +58,9 @@ angular
     });
 
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
+    $rootScope.$on('$stateChangeStart', function(event, toState) {
       Auth.isLoggedInAsync(function(loggedIn) {
         if (toState.authenticate && !loggedIn) {
-          $rootScope.returnToState = toState;
-          $rootScope.returnToStateParams = toStateParams;
-
           event.preventDefault();
           $state.go('layout.login');
         }
