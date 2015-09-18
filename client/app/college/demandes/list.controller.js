@@ -2,17 +2,17 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeListCtrl', function($scope, $http, $modal, $state, $timeout, Auth, Etablissement, id, status, recherche, page) {
+  .controller('DemandeListCtrl', function($scope, $http, $modal, $state, $timeout, Auth, Etablissement, id, status, recherche, currentPage) {
     $scope.status = status;
     $scope.recherche = recherche;
-    $scope.page = page;
+    $scope.currentPage = currentPage;
     $scope.token = Auth.getToken();
 
     $scope.college = Etablissement.get({id: id});
 
     Etablissement.queryDemandes({id: id, status: status, searchQuery: {
       q: recherche,
-      offset: (page - 1) * 10
+      offset: (currentPage - 1) * 10
     }}, function(demandes, getResponseHeaders) {
       $scope.demandes = demandes;
       $scope.totalItems = getResponseHeaders('count');
@@ -23,7 +23,7 @@ angular.module('boursesApp')
     };
 
     $scope.pageChanged = function(page) {
-      $state.go('.', {recherche: recherche, page: page});
+      $state.go('.', {recherche: recherche, currentPage: page});
     };
 
     $scope.pause = function(demande) {

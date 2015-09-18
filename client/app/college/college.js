@@ -75,7 +75,7 @@ angular.module('boursesApp')
         abstract: true
       })
       .state('layout.college.demandes.new', {
-        url: '/nouvelles?recherche?page',
+        url: '/nouvelles?recherche?currentPage',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -88,13 +88,13 @@ angular.module('boursesApp')
             return $stateParams.recherche || null;
           },
 
-          page: function($stateParams) {
-            return $stateParams.page || null;
+          currentPage: function($stateParams) {
+            return $stateParams.currentPage || null;
           }
         }
       })
       .state('layout.college.demandes.paused', {
-        url: '/en_attente?recherche?page',
+        url: '/en_attente?recherche?currentPage',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -107,13 +107,13 @@ angular.module('boursesApp')
             return $stateParams.recherche || null;
           },
 
-          page: function($stateParams) {
-            return $stateParams.page || null;
+          currentPage: function($stateParams) {
+            return $stateParams.currentPage || null;
           }
         }
       })
       .state('layout.college.demandes.done', {
-        url: '/traitees?recherche?page',
+        url: '/traitees?recherche?currentPage',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -126,13 +126,13 @@ angular.module('boursesApp')
             return $stateParams.recherche || null;
           },
 
-          page: function($stateParams) {
-            return $stateParams.page || null;
+          currentPage: function($stateParams) {
+            return $stateParams.currentPage || null;
           }
         }
       })
       .state('layout.college.demandes.error', {
-        url: '/erreur?recherche?page',
+        url: '/erreur?recherche?currentPage',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -145,8 +145,8 @@ angular.module('boursesApp')
             return $stateParams.recherche || null;
           },
 
-          page: function($stateParams) {
-            return $stateParams.page || null;
+          currentPage: function($stateParams) {
+            return $stateParams.currentPage || null;
           }
         }
       })
