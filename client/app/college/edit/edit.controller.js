@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('EditCollegeCtrl', function($scope, $state, Etablissement, college, demandes) {
+  .controller('EditCollegeCtrl', function($scope, $state, Etablissement, college, listeDemandes) {
     $scope.college = _.cloneDeep(college);
-    $scope.demandes = demandes;
+    $scope.demandes = listeDemandes;
 
     $scope.submit = function(form) {
       if (!form.$valid) {

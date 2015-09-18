@@ -4,7 +4,6 @@
 angular.module('boursesApp')
   .controller('DemandeListCtrl', function($scope, $http, $modal, $state, $timeout, Auth, Etablissement, id, status, recherche, page) {
     $scope.status = status;
-
     $scope.recherche = recherche;
     $scope.page = page;
     $scope.token = Auth.getToken();
@@ -15,10 +14,6 @@ angular.module('boursesApp')
     }}, function(demandes, getResponseHeaders) {
       $scope.totalItems = getResponseHeaders('count');
     });
-
-    $scope.isWrongYear = function(demande) {
-      return demande.data.anneeImpots !== '2014';
-    };
 
     $scope.search = function(recherche) {
       $state.go('.', {recherche: recherche});
