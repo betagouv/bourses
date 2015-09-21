@@ -13,9 +13,8 @@ angular.module('boursesApp')
     Etablissement.queryDemandes({id: id, status: status, searchQuery: {
       q: recherche,
       offset: (currentPage - 1) * 10
-    }}, function(demandes, getResponseHeaders) {
+    }}, function(demandes) {
       $scope.demandes = demandes;
-      $scope.totalItems = getResponseHeaders('count');
     });
 
     $scope.search = function(recherche) {
