@@ -68,6 +68,54 @@ exports.wrongYear = function(req, res) {
     });
 };
 
+exports.count = function(req, res) {
+  Etablissement
+    .findOne({human_id: req.params.id})
+    .exec(function(err, etablissement) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!etablissement) { return res.sendStatus(404); }
+
+      // status: ... ['new', 'pending', 'pause', 'error', 'done'] ...
+      async.parallel({
+        new: function(callback) {
+          Demande.count({
+            etablissement: etablissement,
+            status: {$in: ['new', 'pending']}
+          }).exec(callback);
+        },
+
+        pause: function(callback) {
+          Demande.count({
+            etablissement: etablissement,
+            status: 'pause'
+          }).exec(callback);
+        },
+
+        error: function(callback) {
+          Demande.count({
+            etablissement: etablissement,
+            status: 'error'
+          }).exec(callback);
+        },
+
+        done: function(callback) {
+          Demande.count({
+            etablissement: etablissement,
+            status: 'done'
+          }).exec(callback);
+        }
+
+      }, function(err, result) {
+        if (err) {
+          return handleError(req, res, err);
+        }
+
+        return res.json(result);
+      });
+    });
+};
+
 exports.demandes = function(req, res) {
   Etablissement
     .findOne({human_id: req.params.id})

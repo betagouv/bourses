@@ -7,34 +7,7 @@ angular.module('boursesApp')
         url: '/college/:id',
         templateUrl: 'app/college/college.html',
         authenticate: true,
-        controller: function($scope, $http, $state, Auth, college, newRequests, pausedRequests, doneRequests, errorRequests) {
-          $scope.count = {
-            college: college,
-            new: newRequests,
-            pause: pausedRequests,
-            done: doneRequests,
-            error: errorRequests
-          };
-
-          function updateCount(status) {
-            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=' + status}).then(function(result) {
-              $scope.count[status] = result.headers('count');
-            });
-          }
-
-          $scope.$on('updateCount', function() {
-            updateCount('new');
-            updateCount('pause');
-            updateCount('done');
-            updateCount('error');
-          });
-
-          $scope.logout = function() {
-            Auth.logout();
-            $state.go('layout.login');
-          };
-        },
-
+        controller: 'CollegeAbstractCtrl',
         resolve: {
           id: function($stateParams) {
             return $stateParams.id;
@@ -44,29 +17,11 @@ angular.module('boursesApp')
             return Etablissement.get({id: id}).$promise;
           },
 
-          newRequests: function($http, college) {
-            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=new'}).then(function(result) {
-              return result.headers('count');
+          count: function($http, college) {
+            return $http({method: 'GET', url: '/api/etablissements/' + college.human_id + '/count'}).then(function(result) {
+              return result.data;
             });
           },
-
-          pausedRequests: function($http, college) {
-            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=pause'}).then(function(result) {
-              return result.headers('count');
-            });
-          },
-
-          doneRequests: function($http, college) {
-            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=done'}).then(function(result) {
-              return result.headers('count');
-            });
-          },
-
-          errorRequests: function($http, college) {
-            return $http({method: 'HEAD', url: '/api/etablissements/' + college.human_id + '/demandes?status=error'}).then(function(result) {
-              return result.headers('count');
-            });
-          }
         },
         abstract: true
       })

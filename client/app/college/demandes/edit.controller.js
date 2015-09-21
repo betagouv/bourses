@@ -18,7 +18,7 @@ angular.module('boursesApp')
       }
     });
 
-    $scope.pause = function() {
+    $scope.pauseDemande = function() {
       $http.post('/api/demandes/' + demande._id + '/pause').then(function() {
         $scope.$emit('updateCount');
         $state.go('layout.college.demandes.new', {}, {reload: true});

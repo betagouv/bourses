@@ -256,10 +256,6 @@ h1 {
   }
 }
 
-.btn-action-warning {
-  @extend .btn-action-invert;
-}
-
 .btn-group > .btn:first-child {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
