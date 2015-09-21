@@ -199,11 +199,7 @@ exports.demandes = function(req, res) {
           ], function(err, demandes) {
             callback(err, demandes);
           });
-        },
-
-        count: function(callback) {
-          Demande.count(query).exec(callback);
-        },
+        }
 
       }, function(err, result) {
         if (err) {
@@ -211,7 +207,6 @@ exports.demandes = function(req, res) {
         }
 
         if (result.demandes) {
-          res.set('count', result.count);
           var decoded = decode(result.demandes);
           return res.json(decoded);
         } else {
