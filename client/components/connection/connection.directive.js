@@ -4,7 +4,8 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
   return {
     scope: {
       connectionId: '=',
-      onSuccess: '='
+      onSuccess: '=',
+      demande: '='
     },
     templateUrl: 'components/connection/connection.html',
     restrict: 'EA',
@@ -12,6 +13,15 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
       // Feature-flipping fc
       scope.enableFranceConnect = false;
+
+      function setStatus(status) {
+        scope.status = status;
+        store.set('status_' + scope.connectionId, status);
+      }
+
+      function buildErrorMsg(data) {
+        return 'Vous avez entré un avis datant de ' + data.anneeImpots + '. La bourse est calculée à partir de l\'avis 2014 sur vos revenus 2013. Veuillez modifier vos renseignements fiscaux.';
+      }
 
       function tryFcLogin() {
         $http
@@ -42,9 +52,19 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
           });
       }
 
-      scope.svair = store.get('svair_' + scope.connectionId);
-      scope.credentials = scope.svair ? _.cloneDeep(scope.svair.credentials) : {};
-      var oldStatus = scope.status = store.get('status_' + scope.connectionId);
+      var oldStatus;
+
+      if (scope.demande) {
+        var data = scope.demande.data.data;
+        scope.svair = data;
+        scope.credentials = data.credentials;
+        setStatus('error');
+        scope.error = buildErrorMsg(data);
+      } else {
+        scope.svair = store.get('svair_' + scope.connectionId);
+        scope.credentials = scope.svair ? _.cloneDeep(scope.svair.credentials) : {};
+        oldStatus = scope.status = store.get('status_' + scope.connectionId);
+      }
 
       var currentYear = new Date().getFullYear();
       scope.nMinus1 = currentYear - 1;
@@ -69,7 +89,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         $http.get('/api/connection/svair', {params: scope.credentials})
         .success(function(data) {
           if (data.anneeImpots !== '2014') {
-            scope.error = 'Vous avez entré un avis datant de ' + data.anneeImpots + '. La bourse est calculée à partir de l\'avis 2014 sur vos revenus 2013. Veuillez modifier vos renseignements fiscaux.';
+            scope.error = buildErrorMsg(data);
             setStatus('error');
             return;
           }
@@ -86,14 +106,19 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
           oldStatus = 'success';
           setStatus('success');
+          scope.onSuccess(data);
         })
         .error(function(err) {
           scope.error = err.message;
           setStatus('error');
+          if (scope.onError) {
+            scope.onError();
+          } else {
+            scope.onSuccess();
+          }
         })
         .finally(function() {
           scope.loading = false;
-          scope.onSuccess();
         });
       }
 
@@ -147,11 +172,6 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         event.preventDefault();
         scope.onSuccess();
         $window.open('/oauth/fc', '_self');
-      }
-
-      function setStatus(status) {
-        scope.status = status;
-        store.set('status_' + scope.connectionId, status);
       }
 
       if (scope.enableFranceConnect) {

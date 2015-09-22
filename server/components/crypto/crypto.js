@@ -1,11 +1,12 @@
 'use strict';
 
 var _ = require('lodash');
+var crypto = require('crypto');
+
+//var config = require('../../config/environment');
+var jwt = require('jsonwebtoken');
 
 exports.decode = function(demande) {
-  // var decoded = new Buffer(demande.data, 'base64').toString();
-  // var demandeObj = JSON.parse(decoded);
-
   var demandeObj =  _.assign({}, demande.data);
 
   demandeObj._id = demande._id;
@@ -15,14 +16,19 @@ exports.decode = function(demande) {
   demandeObj.notification = demande.notification;
   demandeObj.observations = demande.observations;
   demandeObj.isDuplicate = demande.isDuplicate;
+  demandeObj.error = demande.error;
 
   return demandeObj;
 };
 
 exports.encode = function(body) {
   return body;
+};
 
-  // var str = JSON.stringify(body);
-  // var encoded = new Buffer(str).toString('base64');
-  // return encoded;
+exports.encryptId = function(demande) {
+  return jwt.sign({_id: demande._id}, 'ssshhhhh'); //config.secrets.session);
+};
+
+exports.decryptId = function(token) {
+  return jwt.verify(token, 'ssshhhhh'); //config.secrets.session);
 };

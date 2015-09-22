@@ -51,9 +51,11 @@ function sendNotificationToUser(demande, etablissement, stream, req, cb) {
 
   sendMail(demande.notification.email, etablissement.contact, subject, body, stream, function(error, info) {
     if (error) {
+      var msg = 'Nous avons rencontré une erreur lors de l\'envoi d\'un mail vers ' + demande.data.identiteAdulte.email + '<br>' +
+          'Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l\'adresse bourse@sgmap.fr';
       demande
-        .set('status', 'pause')
-        .set('error', error)
+        .set('status', 'error')
+        .set('error', {msg: msg, detail: error})
         .save();
     }
 
@@ -76,9 +78,11 @@ function sendConfirmationToUser(email, demande, college, req) {
 
   sendMail(email, 'bourse@sgmap.fr', subject, body, null, function(error, info) {
     if (error) {
+      var msg = 'Nous avons rencontré une erreur lors de l\'envoi d\'un mail vers ' + demande.data.identiteAdulte.email + '<br>' +
+          'Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l\'adresse bourse@sgmap.fr';
       demande
         .set('status', 'error')
-        .set('error', error)
+        .set('error', {msg: msg, detail: error})
         .save();
     }
 
@@ -133,8 +137,44 @@ exports.create = function(req, res) {
   });
 };
 
+exports.showPublic = function(req, res) {
+  var id = crypto.decryptId(req.query.token);
+  Demande
+    .findById(id)
+    .select('data.data data.foyer notification')
+    .exec(function(err, demande) {
+      res.json(demande);
+    });
+};
+
+exports.editPublic = function(req, res) {
+  var id = crypto.decryptId(req.query.token);
+  Demande
+    .findById(id)
+    .exec(function(err, demande) {
+      var montant = req.body.montant;
+      var newData = req.body.data;
+      var msg = 'Dossier placé en erreur car relevé fiscal de ' + demande.data.data.anneeImpots;
+      msg += ' , modification effectuée par l\'utilisateur.';
+      msg += ' (Ancien RFR: ' + demande.data.data.revenuFiscalReference;
+      msg += ', nouvel RFR: ' + newData.revenuFiscalReference;
+      msg += ', ancien taux: ' + demande.notification.montant;
+      msg += ', nouveau taux: ' + montant;
+      msg += ').';
+
+      demande
+        .set('error', {msg: msg})
+        .set('data.data', newData)
+        .set('status', 'error')
+        .save(function() {
+          res.json(demande);
+        });
+    });
+};
+
 exports.show = function(req, res) {
   var id = req.params.id;
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.sendStatus(400);
   }

@@ -15,7 +15,10 @@ var DemandeSchema = new Schema({
     email:        { type: String },
     createdAt:    { type: Date }
   },
-  error:          { type: Schema.Types.Mixed }
+  error:          {
+    msg:          { type: String },
+    detail:       { type: Schema.Types.Mixed }
+  }
 });
 
 /*

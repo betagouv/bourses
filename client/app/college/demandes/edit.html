@@ -15,8 +15,7 @@
         </div>
 
         <div ng-if="demande.status === 'error'" class="alert alert-danger">
-          Nous avons rencontré une erreur lors de l'envoi d'un mail vers <a href="mailto:{{demande.identiteAdulte.email}}">{{demande.identiteAdulte.email}}</a> <br>
-          Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l'adresse <a href="mailto:bourse@sgmap.fr">bourse@sgmap.fr</a>
+          {{demande.error.msg}}
         </div>
 
         <div class="actions">
