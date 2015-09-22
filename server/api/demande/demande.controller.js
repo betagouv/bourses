@@ -164,15 +164,11 @@ exports.editPublic = function(req, res) {
       var newData = req.body.data;
       var msg = 'Dossier placé en erreur car relevé fiscal de ' + demande.data.data.anneeImpots;
       msg += ' , modification effectuée par l\'utilisateur.';
-      msg += ' (Ancien RFR: ' + demande.data.data.revenuFiscalReference;
-      msg += ', nouvel RFR: ' + newData.revenuFiscalReference;
-      msg += ', ancien taux: ' + demande.notification.montant;
-      msg += ', nouveau taux: ' + montant;
-      msg += ').';
 
       demande
         .set('error', {msg: msg})
         .set('data.data', newData)
+        .set('rfr', newData.revenuFiscalReference)
         .set('status', 'error')
         .save(function() {
           res.json(demande);
