@@ -18,7 +18,8 @@ var DemandeSchema = new Schema({
   error:          {
     msg:          { type: String },
     detail:       { type: Schema.Types.Mixed }
-  }
+  },
+  rfr:            { type: Number }
 });
 
 /*

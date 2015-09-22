@@ -22,7 +22,8 @@ angular.module('boursesApp')
         identiteEnfant: store.get('identite-enfant'),
         identiteAdulte: store.get('identite-adulte'),
         foyer: store.get('foyer'),
-        data: store.get('svair_demandeur')
+        data: store.get('svair_demandeur'),
+        data_conjoint: store.get('svair_conjoint')
       };
 
       if (!demande.data || typeof demande.data.revenuFiscalReference === 'undefined') {

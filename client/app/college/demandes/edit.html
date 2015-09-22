@@ -43,7 +43,7 @@
         </div>
 
         <div class="info-label">Revenu fiscal de référence</div>
-        <p class="info">{{demande.data.revenuFiscalReference}} €</p>
+        <p class="info">{{demande.rfr}} €</p>
 
         <div class="row">
           <div class="col-md-6">
@@ -175,6 +175,20 @@
         <div class="info-label">Situation familiale</div>
         <p class="info">{{demande.data.situationFamille}}</p>
       </section>
+
+      <section id="section-impots-conjoint" ng-if="demande.data_conjoint">
+        <h2>Renseignements issus de la déclaration d'impôt du conjoint <strong>{{demande.data.anneeImpots}}</strong> sur les revenus de l'année <strong>{{demande.data.anneeRevenus}}</strong></h2>
+
+        <div class="info-label">Nombre de parts</div>
+        <p class="info">{{demande.data_conjoint.nombreParts}}</p>
+
+        <div class="info-label">Revenu fiscal de référence</div>
+        <p class="info">{{demande.data_conjoint.revenuFiscalReference}} €</p>
+
+        <div class="info-label">Situation familiale</div>
+        <p class="info">{{demande.data_conjoint.situationFamille}}</p>
+
+      </section>
     </div>
   </div>
   <div class="col-md-3">
@@ -187,6 +201,7 @@
         <li><a href="#section-foyer">Renseignements du foyer</a></li>
         <li><a href="#section-contact">Renseignements de contact</a></li>
         <li><a href="#section-impots">Renseignements issus de la déclaration d'impôt</a></li>
+        <li><a href="#section-impots-conjoint" ng-if="demande.data_conjoint">Renseignements issus de la déclaration d'impôt du conjoint</a></li>
       </ul>
     </nav>
   </div>

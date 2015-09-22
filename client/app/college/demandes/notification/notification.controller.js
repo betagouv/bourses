@@ -11,7 +11,15 @@ angular.module('boursesApp')
       $scope.montant = demande.notification.montant;
     } else {
       $scope.email = demande.identiteAdulte.email;
-      $scope.montant = simulation(demande.data.revenuFiscalReference, demande.foyer.nombreEnfantsACharge + demande.foyer.nombreEnfantsAdultes);
+
+      var rfr;
+      if (demande.data_conjoint) {
+        rfr = demande.data.revenuFiscalReference + demande.data_conjoint.revenuFiscalReference;
+      } else {
+        rfr = demande.data.revenuFiscalReference;
+      }
+
+      $scope.montant = simulation(rfr, demande.foyer.nombreEnfantsACharge + demande.foyer.nombreEnfantsAdultes);
     }
 
     $scope.submit = function(form) {

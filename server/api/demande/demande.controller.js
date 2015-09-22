@@ -28,10 +28,11 @@ function logMail(logger, error, info) {
 
 function sendNotificationToUser(demande, etablissement, stream, req, cb) {
   var subject = 'Notification demande de bourse';
+
   var body = '<html><body><p>Merci d\'avoir passé votre demande avec notre service.</p>' +
    '<p>Le chef d\'établissement vous informe qu\'après examen du dossier de demande de bourse de collège concernant <strong>' + demande.data.identiteEnfant.prenom + ' ' +  demande.data.identiteEnfant.nom + '</strong>,' +
    '<br>et compte tenu des éléments figurants sur votre avis d\'impôt sur le revenu:' +
-   '<ul><li>revenu fiscal de référence: ' + demande.data.data.revenuFiscalReference + ' EUR</li>' +
+   '<ul><li>revenu fiscal de référence: ' + demande.rfr + ' EUR</li>' +
    '<li>nombre d\'enfants mineurs ou infirmes: ' + demande.data.foyer.nombreEnfantsACharge + '</li>' +
    '<li>nombre d\'enfants majeurs ou célibataires: ' + demande.data.foyer.nombreEnfantsAdultes + '</li></ul></p>';
 
@@ -78,7 +79,7 @@ function sendConfirmationToUser(email, demande, college, req) {
 
   sendMail(email, 'bourse@sgmap.fr', subject, body, null, function(error, info) {
     if (error) {
-      var msg = 'Nous avons rencontré une erreur lors de l\'envoi d\'un mail vers ' + demande.data.identiteAdulte.email + '<br>' +
+      var msg = 'Nous avons rencontré une erreur lors de l\'envoi d\'un mail vers ' + demande.data.identiteAdulte.email + '. ' +
           'Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l\'adresse bourse@sgmap.fr';
       demande
         .set('status', 'error')
@@ -118,10 +119,17 @@ function sendNotificationToAgent(identite, college, req) {
 exports.create = function(req, res) {
 
   var encoded = crypto.encode(req.body);
+  var rfr;
+  if (encoded.data_conjoint) {
+    rfr = encoded.data.revenuFiscalReference + encoded.data_conjoint.revenuFiscalReference;
+  } else {
+    rfr = encoded.data.revenuFiscalReference;
+  }
 
   Demande.create({
     etablissement: req.params.college,
-    data: encoded
+    data: encoded,
+    rfr: rfr
   }, function(err, demande) {
     if (err) { return handleError(req, res, err); }
 

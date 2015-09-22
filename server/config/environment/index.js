@@ -24,7 +24,7 @@ var all = {
 
   // Secret for session
   secrets: {
-    session: process.env.SESSION_SECRET || 'bourses-secret'
+    session: process.env.SESSION_SECRET || 'ssshhhhh'
   },
 
   domain: process.env.DOMAIN || 'http://localhost:5000',
