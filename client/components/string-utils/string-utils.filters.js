@@ -1,6 +1,11 @@
 'use strict';
 
 angular.module('boursesApp')
+  .filter('capitalize', function() {
+    return function(input) {
+      return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+    };
+  })
   .filter('sexe', function() {
     return function(input) {
       switch (input) {
