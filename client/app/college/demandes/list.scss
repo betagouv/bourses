@@ -11,13 +11,6 @@
 
   thead th {
     font-weight: 200;
-    text-align: center;
-  }
-
-  > tbody > tr > td {
-    text-align: center;
-    vertical-align: middle;
-    padding: 8px 2px;
   }
 
   tr.new {
@@ -28,14 +21,20 @@
     background-color: $red !important;
     color: white;
 
-    a {
+    a.detail {
       color: white;
+      font-weight: bold;
     }
   }
 
   .wrong-year {
     background-color: $orange !important;
     color: white;
+
+    a.detail {
+      color: white;
+      font-weight: bold;
+    }
   }
 }
 
