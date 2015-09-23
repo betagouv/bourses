@@ -36,9 +36,23 @@
       font-weight: bold;
     }
   }
+
+  .btn-group {
+    display: flex;
+  }
 }
 
 #recherche {
-  border: none;
-  box-shadow: 0 2px #1b557a;
+  .form-control {
+    border: none;
+    box-shadow: 0 2px #1b557a;
+  }
+
+  .btn-action {
+    height: 34px;
+  }
+
+  ul.no-margin {
+    margin: 0;
+  }
 }
