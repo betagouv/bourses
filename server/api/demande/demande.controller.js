@@ -146,6 +146,10 @@ exports.create = function(req, res) {
 };
 
 exports.showPublic = function(req, res) {
+  if (!req.query.token) {
+    return res.sendStatus(404);
+  }
+
   var id = crypto.decryptId(req.query.token);
   Demande
     .findById(id)
@@ -156,6 +160,10 @@ exports.showPublic = function(req, res) {
 };
 
 exports.editPublic = function(req, res) {
+  if (!req.query.token) {
+    return res.sendStatus(404);
+  }
+
   var id = crypto.decryptId(req.query.token);
   Demande
     .findById(id)
