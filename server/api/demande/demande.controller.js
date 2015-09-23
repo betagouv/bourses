@@ -150,7 +150,7 @@ exports.showPublic = function(req, res) {
     return res.sendStatus(404);
   }
 
-  var id = crypto.decryptId(req.query.token);
+  var id = crypto.decryptId(req.query.token)._id;
   Demande
     .findById(id)
     .select('data.data data.foyer notification')
@@ -164,7 +164,7 @@ exports.editPublic = function(req, res) {
     return res.sendStatus(404);
   }
 
-  var id = crypto.decryptId(req.query.token);
+  var id = crypto.decryptId(req.query.token)._id;
   Demande
     .findById(id)
     .exec(function(err, demande) {

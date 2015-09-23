@@ -11,6 +11,10 @@ angular.module('boursesApp')
       var rfr = data.revenuFiscalReference;
       var montant = simulation(rfr, nbEnfants);
 
+      if (!$stateParams.token) {
+        return;
+      }
+
       $http.post('/api/demandes/modification?token=' + $stateParams.token, {data: data, montant: montant})
         .success(function() {
           $modal.open({

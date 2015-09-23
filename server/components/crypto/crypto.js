@@ -31,5 +31,5 @@ exports.encryptId = function(demande) {
 };
 
 exports.decryptId = function(token) {
-  return jwt.verify(token, config.secrets.session);
+  return jwt.verify(token, config.secrets.session, {ignoreExpiration: true});
 };

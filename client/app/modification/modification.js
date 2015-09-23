@@ -5,7 +5,7 @@ angular.module('boursesApp')
     $stateProvider
       .state('layout.modification', {
         url: '/modification?token',
-        templateUrl: '/app/modification/modification.html',
+        templateUrl: 'app/modification/modification.html',
         resolve: {
           demande: function($stateParams, $http) {
             return $http.get('/api/demandes/modification?token=' + $stateParams.token).then(function(result) {
