@@ -26,8 +26,6 @@ module.exports = function(config) {
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/angular-capitalize-filter/capitalize.js',
       'client/bower_components/spin.js/spin.js',
-      'client/bower_components/ladda/dist/ladda.min.js',
-      'client/bower_components/angular-ladda/dist/angular-ladda.min.js',
       'client/bower_components/ng-iban/dist/ng-iban.js',
       'client/bower_components/moment/moment.js',
       'client/bower_components/moment/locale/fr.js',
