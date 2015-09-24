@@ -10,7 +10,6 @@
     "angular-chart.js": "~0.8.3",
     "angular-cookies": ">=1.4.*",
     "angular-i18n": ">=1.4.*",
-    "angular-ladda": "~0.3.1",
     "angular-messages": ">=1.4.*",
     "angular-mocks": ">=1.4.*",
     "angular-resource": ">=1.4.*",

@@ -33,6 +33,9 @@
           <th>Enfants majeurs</th>
           <th>Déductibilité</th>
           <th>Date de création</th>
+          <th ng-if="status === 'done'">
+            Taux accordé
+          </th>
           <th>Notification</th>
         </tr>
       </thead>
@@ -40,11 +43,12 @@
         <tr ng-repeat="demande in demandes" ng-class="{duplicate: demande.isDuplicate, 'wrong-year': demande.data.anneeImpots !== '2014', 'new': demande.status === 'new'}">
           <td><a class="detail" ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteEnfant.prenom | capitalize}} {{demande.identiteEnfant.nom | capitalize}}</a></td>
           <td>{{demande.identiteAdulte.demandeur.prenoms | capitalize}} {{demande.identiteAdulte.demandeur.nom | capitalize}}</td>
-          <td class="text-center">{{demande.rfr}} €</td>
+          <td class="text-right">{{demande.rfr}} €</td>
           <td class="text-center">{{demande.foyer.nombreEnfantsACharge}}</td>
           <td class="text-center">{{demande.foyer.nombreEnfantsAdultes}}</td>
           <td class="text-center">{{demande.identiteEnfant.regime | deductibilite}}</td>
           <td>{{demande.createdAt | date}}</td>
+          <td class="text-center" ng-if="status === 'done'">{{demande.notification.montant}} €</td>
           <td>
             <div ng-if="status !== 'done'">
               <div class="btn-group" dropdown is-open="dropdownStatus.isopen">
@@ -57,6 +61,7 @@
                 </button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="button-{{demande._id}}">
                   <li role="menuitem"><a href="#" ng-if="demande.status !== 'pause'" ng-click="pauseDemande(demande)">Mettre en attente</a></li>
+                  <li role="separator" class="divider"></li>
                   <li role="menuitem"><a href="/api/demandes/{{demande._id}}/random/download?access_token={{token}}" target="_blank" download="detail_{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">Télécharger le détail</a></li>
                 </ul>
               </div>
@@ -71,19 +76,24 @@
                   <span class="sr-only">Autres actions</span>
                 </button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="button-{{demande._id}}">
-                  <li role="menuitem"><a href="#" ng-click="notification(demande)">Envoyer une nouvelle notification</a></li>
+                  <li role="menuitem"><a href="#" ng-click="notification(demande)">Envoyer une <br> nouvelle notification</a></li>
+                  <li role="separator" class="divider"></li>
                   <li role="menuitem"><a href="/api/demandes/{{demande._id}}/random/download?access_token={{token}}" target="_blank" download="detail_{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">Télécharger le détail</a></li>
                 </ul>
               </div>
-            </div>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div class="text-right">
-      <pagination total-items="count[status]" ng-model="currentPage" items-per-page="10" ng-change="pageChanged(currentPage)" previous-text="Précédente" next-text="Suivante"></pagination>
+    <div class="pull-left" ng-if="status === 'done'">
+      <a target="_blank" class="btn btn-action" download="demandes.zip" href="/api/etablissements/{{college.human_id}}/listeDemandes?access_token={{token}}">Télécharger toutes les demandes</a>
+      <a target="_blank" class="btn btn-action" download="notifications.zip" href="/api/etablissements/{{college.human_id}}/notifications?access_token={{token}}">Télécharger toutes les notifications</a>
+    </div>
+
+    <div class="pull-right">
+      <pagination class="no-margin" total-items="count[status]" ng-model="currentPage" items-per-page="10" ng-change="pageChanged(currentPage)" previous-text="Précédente" next-text="Suivante"></pagination>
     </div>
   </div>
 </ui-view>

@@ -4,11 +4,15 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var async = require('async');
 var svair = require('svair-api');
+var wkhtmltopdf = require('wkhtmltopdf');
+var tmp = require('tmp');
+var archiver = require('archiver');
 
 var Etablissement = require('./etablissement.model');
 var Demande = require('../demande/demande.model');
 var crypto = require('../../components/crypto/crypto');
 var duplicates = require('../../components/duplicates/duplicates');
+var Generator = require('../../components/pdf/generator');
 
 exports.show = function(req, res) {
   Etablissement
@@ -116,6 +120,116 @@ exports.count = function(req, res) {
     });
 };
 
+exports.notifications = function(req, res) {
+  Etablissement
+    .findOne({human_id: req.params.id})
+    .exec(function(err, etablissement) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!etablissement) { return res.sendStatus(404); }
+
+      var host = req.headers.host;
+      async.waterfall([
+        function(callback) {
+          Demande
+            .find({status: 'done', etablissement: etablissement._id})
+            .sort('-createdAt')
+            .exec(callback);
+        },
+
+        function(demandes, callback) {
+          tmp.dir({unsafeCleanup: true}, function _tempDirCreated(err, path, cleanupCallback) {
+            if (err) throw err;
+
+            async.eachLimit(demandes, 8, function(demande, eachSeriesCallback) {
+              var decoded = crypto.decode(demande);
+              Generator.editNotification(decoded, etablissement, function(html) {
+                var fileName = path + '/notification_' + decoded.identiteEnfant.prenom + '_' + decoded.identiteEnfant.nom + '.pdf';
+                wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
+                  eachSeriesCallback();
+                });
+              });
+            },
+
+            function() {
+              callback(null, path, cleanupCallback);
+            });
+          });
+        }
+
+      ], function(err, path, cleanupCallback) {
+        var archive = archiver.create('zip', {});
+        archive.directory(path, false);
+        archive.pipe(res);
+        archive.finalize();
+
+        archive.on('finish', function(err) {
+          cleanupCallback();
+        });
+
+        archive.on('error', function(err) {
+          throw err;
+        });
+
+      });
+    });
+};
+
+exports.listeDemandes = function(req, res) {
+  Etablissement
+    .findOne({human_id: req.params.id})
+    .exec(function(err, etablissement) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!etablissement) { return res.sendStatus(404); }
+
+      var host = req.headers.host;
+      async.waterfall([
+        function(callback) {
+          Demande
+            .find({status: 'done', etablissement: etablissement._id})
+            .sort('-createdAt')
+            .exec(callback);
+        },
+
+        function(demandes, callback) {
+          tmp.dir({unsafeCleanup: true}, function _tempDirCreated(err, path, cleanupCallback) {
+            if (err) throw err;
+
+            async.eachLimit(demandes, 8, function(demande, eachSeriesCallback) {
+              var decoded = crypto.decode(demande);
+              Generator.toHtml(decoded, host, function(html) {
+                var fileName = path + '/notification_' + decoded.identiteEnfant.prenom + '_' + decoded.identiteEnfant.nom + '.pdf';
+                wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
+                  eachSeriesCallback();
+                });
+              });
+            },
+
+            function() {
+              callback(null, path, cleanupCallback);
+            });
+          });
+        }
+
+      ], function(err, path, cleanupCallback) {
+        var archive = archiver.create('zip', {});
+        archive.directory(path, false);
+        archive.pipe(res);
+        archive.finalize();
+
+        archive.on('finish', function(err) {
+          cleanupCallback();
+        });
+
+        archive.on('error', function(err) {
+          throw err;
+        });
+
+      });
+    });
+};
+
 exports.demandes = function(req, res) {
   Etablissement
     .findOne({human_id: req.params.id})
@@ -133,9 +247,12 @@ exports.demandes = function(req, res) {
         q = searchQuery.q && _.isString(searchQuery.q) && searchQuery.q.length ? searchQuery.q : null;
         offset = parseInt(searchQuery.offset);
         offset = _.isNumber(offset) && offset > 0 ? Math.floor(offset) : 0;
+        limit = parseInt(searchQuery.limit);
+        limit = _.isNumber(limit) ? limit : 10;
       } else {
         q = null;
         offset = 0;
+        limit = 10;
       }
 
       var status = req.query.status === 'new' ?  ['new', 'pending'] : [req.query.status];
@@ -152,7 +269,7 @@ exports.demandes = function(req, res) {
             function(waterFallCallback) {
               Demande
                 .find(query)
-                .limit(10)
+                .limit(limit)
                 .sort('-createdAt')
                 .skip(offset)
                 .exec(waterFallCallback);
