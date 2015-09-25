@@ -19,11 +19,27 @@ angular.module('boursesApp')
     });
 
     $scope.search = function(recherche) {
-      $state.go('.', {recherche: recherche});
+      $state.go('.', {recherche: recherche, currentPage: 1});
     };
 
     $scope.pageChanged = function(page) {
       $state.go('.', {recherche: recherche, currentPage: page});
+    };
+
+    function isWrongYear(demande) {
+      return demande.data.anneeImpots !== '2014';
+    }
+
+    function needMorePj(demande) {
+      if (demande.foyer.concubinage === 'oui' || demande.identiteEnfant.garde === 'oui') {
+        return typeof demande.data_conjoint === 'undefined';
+      }
+
+      return false;
+    }
+
+    $scope.isWarning = function(demande) {
+      return isWrongYear(demande) || needMorePj(demande);
     };
 
     $scope.pauseDemande = function(demande) {

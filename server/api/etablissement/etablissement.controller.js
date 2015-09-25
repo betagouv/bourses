@@ -256,7 +256,7 @@ exports.demandes = function(req, res) {
       }
 
       var status = req.query.status === 'new' ?  ['new', 'pending'] : [req.query.status];
-      var query = {etablissement: etablissement, status: {$in: status}, 'data.foyer.concubinage': 'non', 'data.identiteEnfant.garde': 'non'};
+      var query = {etablissement: etablissement, status: {$in: status}};
 
       // Text search
       if (q) {
