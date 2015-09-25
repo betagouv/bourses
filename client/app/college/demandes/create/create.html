@@ -122,6 +122,16 @@
       </div>
     </div>
 
+    <div class="form-group required" ng-class="{'has-error': infoForm.annee.$invalid && infoForm.$submitted}">
+      <label for="annee" class="control-label-flat">Année de l'avis</label>
+      <input id="annee" type="number" name="annee" min="2014" max="2015" class="form-control-flat" ng-model="demande.data.anneeImpots" required>
+      <div ng-messages="infoForm.annee.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='min'><i class="fa fa-warning"></i> Valeur min 2014.</p>
+        <p class="help-block" ng-message='max'><i class="fa fa-warning"></i> Valeur max 2015.</p>
+      </div>
+    </div>
+
     <div class="form-group required" ng-class="{'has-error': !demande.data.situationFamille && infoForm.$submitted}">
       <fieldset>
         <legend class="control-label-flat">Situation</legend>
@@ -137,7 +147,7 @@
       </div>
     </div>
 
-    <div class="form-group required" ng-if="demande.data.situationFamille" ng-class="{'has-error': !demande.foyer.concubinage && infoForm.$submitted}">
+    <div class="form-group required" ng-if="demande.data.situationFamille === 'Célibataire'" ng-class="{'has-error': !demande.foyer.concubinage && infoForm.$submitted}">
       <fieldset>
         <legend class="control-label-flat">Vit-il/elle avec l'autre parent ?</legend>
         <div class="btn-group">
@@ -155,6 +165,15 @@
       <div class="form-group">
         <label for="rfrConjoint" class="control-label-flat">Revenu de référence du foyer du conjoint</label>
         <input id="rfrConjoint" type="number" name="rfrConjoint" class="form-control-flat" ng-model="demande.data_conjoint.revenuFiscalReference">
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': infoForm.annee_conjoint.$invalid && infoForm.$submitted}">
+        <label for="annee_conjoint" class="control-label-flat">Année de l'avis</label>
+        <input id="annee_conjoint" type="number" name="annee_conjoint" min="2014" max="2015" class="form-control-flat" ng-model="demande.data_conjoint.annee_Impots">
+        <div ng-messages="infoForm.annee_conjoint.$error" ng-if="infoForm.$submitted">
+          <p class="help-block" ng-message='min'><i class="fa fa-warning"></i> Valeur min 2014.</p>
+          <p class="help-block" ng-message='max'><i class="fa fa-warning"></i> Valeur max 2015.</p>
+        </div>
       </div>
 
       <div class="form-group">
