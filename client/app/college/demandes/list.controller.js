@@ -31,7 +31,7 @@ angular.module('boursesApp')
     }
 
     function needMorePj(demande) {
-      if (demande.foyer.concubinage === 'oui' || demande.identiteEnfant.garde === 'oui') {
+      if ((demande.data.situationFamille === 'Célibataire' && demande.foyer.concubinage === 'oui') || demande.identiteEnfant.garde === 'oui') {
         return typeof demande.data_conjoint === 'undefined';
       }
 
