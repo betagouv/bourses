@@ -13,6 +13,17 @@ angular.module('boursesApp')
           $scope.enfants = storedSimulation ? storedSimulation.enfants : 1;
           $scope.montant = null;
 
+          $scope.reset = function() {
+            store.set('foyer', {});
+            store.set('identite-adulte', {});
+            store.set('identite-enfant', {});
+            store.set('status-conjoint', {});
+            store.set('status-demandeur', {});
+            store.set('svair-conjoint', {});
+            store.set('svair-demandeur', {});
+            store.set('steps', {});
+          };
+
           $scope.submit = function(form) {
             if (form.$valid) {
               store.set('simulation', {enfants: $scope.enfants, adultes: $scope.adultes});
