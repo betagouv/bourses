@@ -67,7 +67,12 @@ angular.module('boursesApp')
     }
 
     function showOtherParentConnection() {
-      return isGardeAlternee() || isConcubinage();
+      var res = isGardeAlternee() || isConcubinage();
+      if (!res) {
+        store.set('svair_conjoint', {});
+      }
+
+      return res;
     }
 
     function computeShowOtherParent() {

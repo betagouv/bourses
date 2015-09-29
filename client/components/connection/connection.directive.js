@@ -141,6 +141,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
       function edit() {
         oldStatus = scope.status;
+        store.set('svair_' + scope.connectionId, {});
         setStatus('pending');
       }
 
