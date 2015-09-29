@@ -67,16 +67,15 @@ angular.module('boursesApp')
     }
 
     function showOtherParentConnection() {
-      var res = isGardeAlternee() || isConcubinage();
-      if (!res) {
-        store.set('svair_conjoint', {});
-      }
-
-      return res;
+      return isGardeAlternee() || isConcubinage();
     }
 
     function computeShowOtherParent() {
       $scope.showOtherParent = isGardeAlternee() || isCelibataire();
+      if (!$scope.showOtherParent) {
+        store.set('svair_conjoint', {});
+        store.set('status_conjoint', 'pending');
+      }
     }
 
     function isConcubinage() {
