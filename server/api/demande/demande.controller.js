@@ -227,6 +227,8 @@ exports.show = function(req, res) {
               decoded.duplicates = duplicates;
             }
 
+            decoded.encryptedId = crypto.encryptId(demande);
+
             return res.json(decoded);
           });
         }

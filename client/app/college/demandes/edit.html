@@ -166,6 +166,10 @@
       <section id="section-impots">
         <h2>Renseignements issus de la déclaration d'impôt <strong>{{demande.data.anneeImpots}}</strong> sur les revenus de l'année <strong>{{demande.data.anneeRevenus}}</strong></h2>
 
+        <div class="lead">
+          <a class="btn btn-action-invert" target="_blank" ui-sref="layout.modification({token: demande.encryptedId})">Modifier</a>
+        </div>
+
         <div class="info-label">Nombre de parts</div>
         <p class="info">{{demande.data.nombreParts}}</p>
 
