@@ -3,6 +3,11 @@
     <div class="container">
       <h1>{{college.nom}}</h1>
       <span>{{college.contact}}</span>
+      <div class="pull-left">
+        <a class="btn btn-action" ui-sref="layout.college.demandes.create">
+          <i class="fa fa-plus"></i> Nouvelle demande
+        </a>
+      </div>
       <div class="pull-right">
         <a href="" class="btn btn-action-invert" ng-click="logout()">
           Se déconnecter

@@ -1,0 +1,20 @@
+#create-demande-college {
+  form {
+    background-color: whitesmoke;
+    padding: 30px;
+    border-radius: 5px;
+  }
+
+  h2 {
+    color: #333;
+    margin: 0 0 15px 0;
+  }
+
+  .has-error .help-block {
+    color: $red;
+  }
+
+  .help-block {
+    color: #333;
+  }
+}

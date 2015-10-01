@@ -1,0 +1,221 @@
+<div id="create-demande-college">
+  <h1>Nouvelle demande</h1>
+  <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
+    <h2>Identité de l'enfant</h2>
+    <div class="form-group required" ng-class="{'has-error': infoForm.nom.$invalid && infoForm.$submitted}">
+      <label for="nom" class="control-label-flat">Nom</label>
+      <input id="nom" type="text" name="nom" class="form-control-flat" ng-model="demande.identiteEnfant.nom" required>
+      <div ng-messages="infoForm.nom.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.prenom.$invalid && infoForm.$submitted}">
+      <label for="prenom" class="control-label-flat">Prénom</label>
+      <input id="prenom" type="text" name="prenom" class="form-control-flat" ng-model="demande.identiteEnfant.prenom" required>
+      <div ng-messages="infoForm.prenom.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required"
+      ng-class="{
+        'has-error': infoForm.dateDeNaissance.$invalid && infoForm.$submitted
+      }">
+      <label class="control-label-flat" for="date-de-naissance">
+        Date de naissance <span class="small">au format jour/mois/année</span>
+      </label>
+      <input
+        type="text"
+        class="form-control-flat"
+        name="dateDeNaissance"
+        id="date-de-naissance"
+        required
+        ng-model="demande.identiteEnfant.dateNaissance"
+        input-date
+        date-autocomplete
+        placeholder="JJ/MM/AAAA"
+        aria-describedby="help-date-de-naissance">
+      <div ng-messages="infoForm.dateDeNaissance.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" id="help-date-de-naissance" ng-message='inputDate'><i class="fa fa-warning"></i> Veuillez utiliser le format JJ/MM/AAAA. Par exemple : 14/09/1989.</p>
+        <p class="help-block" id="help-date-de-naissance" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': !demande.identiteEnfant.regime && infoForm.$submitted}">
+      <fieldset>
+        <legend class="control-label-flat">Est-il</legend>
+        <div class="btn-group">
+          <button type="button" class="btn btn-select" role="radio" ng-model="demande.identiteEnfant.regime" btn-radio="'externe'">Externe</button>
+          <button type="button" class="btn btn-select" role="radio" ng-model="demande.identiteEnfant.regime" btn-radio="'demi-pensionnaire'">Demi-pensionnaire</button>
+          <button type="button" class="btn btn-select" role="radio" ng-model="demande.identiteEnfant.regime" btn-radio="'interne'">Interne</button>
+        </div>
+      </fieldset>
+      <div ng-if="!demande.identiteEnfant.regime && infoForm.$submitted">
+        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': !demande.identiteEnfant.garde && infoForm.$submitted}">
+      <fieldset>
+        <legend class="control-label-flat">Est-il en garde alternée ?</legend>
+        <div class="btn-group">
+          <button type="button" class="btn btn-select" role="radio" ng-model="demande.identiteEnfant.garde" btn-radio="'oui'">Oui</button>
+          <button type="button" class="btn btn-select" role="radio" ng-model="demande.identiteEnfant.garde" btn-radio="'non'">Non</button>
+        </div>
+      </fieldset>
+
+      <div ng-if="!demande.identiteEnfant.garde && infoForm.$submitted">
+        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2>Renseigments du foyer</h2>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.nombreEnfantsACharge.$invalid && infoForm.$submitted}">
+      <label for="nombre-enfants-a-charge" class="control-label-flat">
+        Nombre d'enfants mineurs ou handicapés
+        <br>
+        <small>(tel que mentionné sur l'avis d'imposition)</small>
+      </label>
+      <input type="number" min="0" class="form-control-flat" required id="nombre-enfants-a-charge" name="nombreEnfantsACharge" ng-model="demande.foyer.nombreEnfantsACharge">
+      <div ng-messages="infoForm.nombreEnfantsACharge.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.nombreEnfantsAdultes.$invalid && infoForm.$submitted}">
+      <label for="nombre-enfants-majeurs" class="control-label-flat">
+        Nombre d'enfants majeurs célibataires
+        <br>
+        <small>(tel que mentionné sur l'avis d'imposition)</small>
+      </label>
+      <input type="number" min="0" class="form-control-flat" required id="nombre-enfants-majeurs" name="nombreEnfantsAdultes" ng-model="demande.foyer.nombreEnfantsAdultes">
+      <div ng-messages="infoForm.nombreEnfantsAdultes.$error" ng-if="infoForm.$submitted">
+        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
+      </div>
+    </div>
+
+    <h2>Renseignements fiscaux</h2>
+
+    <div class="well-connect">
+      <div connection connection-id="'demandeur'" for-agent="true" on-success="saveSvair"></div>
+    </div>
+
+    <div class="form-group required" ng-if="demande.data.situationFamille === 'Célibataire'" ng-class="{'has-error': !demande.foyer.concubinage && infoForm.$submitted}">
+      <fieldset>
+        <legend class="control-label-flat">Vit-il/elle avec l'autre parent ?</legend>
+        <div class="btn-group">
+          <button type="button" class="btn btn-select" role="radio" ng-model="demande.foyer.concubinage" btn-radio="'oui'">Oui</button>
+          <button type="button" class="btn btn-select" role="radio" ng-model="demande.foyer.concubinage" btn-radio="'non'">Non</button>
+        </div>
+      </fieldset>
+
+      <div ng-if="!demande.foyer.concubinage && infoForm.$submitted">
+        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div ng-if="demande.foyer.concubinage === 'oui' || demande.identiteEnfant.garde === 'oui'">
+      <div class="well-connect">
+        <div connection connection-id="'conjoint'" for-agent="true" on-success="saveSvair"></div>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2>Identité de l'adulte</h2>
+    <div class="form-section">
+      <div class="form-group required" ng-class="{'has-error': infoForm.nomAdulte.$invalid && infoForm.$submitted}">
+        <label for="nomAdulte" class="control-label-flat">Nom</label>
+        <input id="nomAdulte" type="text" name="nomAdulte" class="form-control-flat" ng-model="demande.identiteAdulte.demandeur.nom" required>
+        <div ng-messages="infoForm.nomAdulte.$error" ng-if="infoForm.$submitted">
+          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        </div>
+      </div>
+
+      <div class="form-group required" ng-class="{'has-error': infoForm.prenomAdulte.$invalid && infoForm.$submitted}">
+        <label for="prenomAdulte" class="control-label-flat">Prénom</label>
+        <input id="prenomAdulte" type="text" name="prenomAdulte" class="form-control-flat" ng-model="demande.identiteAdulte.demandeur.prenoms" required>
+        <div ng-messages="infoForm.prenomAdulte.$error" ng-if="infoForm.$submitted">
+          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        </div>
+      </div>
+
+      <div class="form-group required" ng-class="{'has-error': !demande.identiteAdulte.lien && infoForm.$submitted}">
+        <fieldset>
+          <legend class="control-label-flat">
+            Relation avec l'enfant
+          </legend>
+          <div class="btn-group">
+            <button type="button" class="btn btn-select" role="radio" ng-model="demande.identiteAdulte.lien" btn-radio="'pere'">Père</button>
+            <button type="button" class="btn btn-select" role="radio" ng-model="demande.identiteAdulte.lien" btn-radio="'mere'">Mère</button>
+            <button type="button" class="btn btn-select" role="radio" ng-model="demande.identiteAdulte.lien" btn-radio="'responsable'">Représentant légal</button>
+          </div>
+        </fieldset>
+
+        <div ng-if="!demande.identiteAdulte.lien && infoForm.$submitted">
+          <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Informations bancaires</h2>
+
+      <div class="form-group required" ng-class="{'has-error': !demande.identiteAdulte.titulaire && infoForm.$submitted}">
+        <label class="control-label-flat">Titulaire du compte</label>
+        <input type="text" class="form-control-flat" name="titulaire" ng-model="demande.identiteAdulte.titulaire" required>
+        <div ng-if="!demande.identiteAdulte.titulaire && infoForm.$submitted">
+          <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        </div>
+      </div>
+
+      <div class="form-group required" ng-class="{'has-error': infoForm.iban.$invalid && infoForm.$submitted}">
+        <label for="iban-input" class="control-label-flat">IBAN</label>
+        <input type="text" id="iban-input" class="form-control-flat" name="iban" ng-model="demande.identiteAdulte.iban" ng-iban="FR" required/>
+        <div ng-messages="infoForm.iban.$error" ng-if="infoForm.$submitted">
+          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+          <p class="help-block" ng-message='iban'><i class="fa fa-warning"></i> L'IBAN saisi est incorrect.</p>
+        </div>
+      </div>
+
+      <div class="form-group required" ng-class="{'has-error': infoForm.bic.$invalid && infoForm.$submitted}">
+        <label for="input-bic" class="control-label-flat">BIC</label>
+        <input type="text" id="input-bic" class="form-control-flat" minlength="8" maxlength="11" name="bic" ng-model="demande.identiteAdulte.bic" required/>
+        <div ng-messages="infoForm.bic.$error" ng-if="infoForm.$submitted">
+          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+          <p class="help-block" ng-message='minlength maxlength'><i class="fa fa-warning"></i> Le BIC saisi est incorrect, il doit être de 8 ou 11 caractères.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Renseignements de contact</h2>
+      <div class="form-group required" ng-class="{'has-error': infoForm.email.$invalid && infoForm.$submitted}">
+        <label for="email" class="control-label-flat">Email</label>
+        <input id="email" type="email" name="email" class="form-control-flat" ng-model="demande.identiteAdulte.email" required>
+        <div ng-messages="infoForm.email.$error" ng-if="infoForm.$submitted">
+          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+          <p class="help-block" ng-message='email'><i class="fa fa-warning"></i> L'adresse email saisie est incorrecte.</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone" class="control-label-flat">Téléphone</label>
+        <input id="phone" type="phone" name="phone" class="form-control-flat" ng-model="demande.identiteAdulte.phone">
+      </div>
+    </div>
+
+    <div class="text-right">
+      <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action-invert">
+          Valider <i class="fa fa-check"></i>
+      </button>
+    </div>
+  </form>
+
+</div>
