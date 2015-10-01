@@ -5,6 +5,32 @@ angular.module('boursesApp')
     $scope.college = _.cloneDeep(college);
     $scope.groups = groups;
     $scope.count = count;
+    $scope.total = _.reduce(count, function(total, n) {
+      return total + n;
+    });
+
+    $scope.expression = 'identiteEnfant.nom';
+    $scope.reverse = false;
+    $scope.type = 'enfant';
+
+    $scope.toggleSort = function(type) {
+      switch (type) {
+        case 'enfant':
+          $scope.expression = 'identiteEnfant.nom';
+          break;
+        case 'adulte':
+          $scope.expression = 'identiteAdulte.demandeur.nom';
+          break;
+        case 'email':
+          $scope.expression = 'identiteAdulte.email';
+          break;
+      }
+      if (type === $scope.type) {
+        $scope.reverse = !$scope.reverse;
+      }
+
+      $scope.type = type;
+    };
 
     $scope.getLabel = function(group, demandes) {
       var str = demandes.length + ' demandes ';

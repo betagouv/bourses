@@ -64,7 +64,7 @@
 
   <h1>Statistiques</h1>
 
-  <p class="lead">Demandes par taux</p>
+  <p class="lead">Demandes par taux <small>(Total des demandes: {{total}})</small></p>
 
   <div class="row">
     <div class="col-sm-4 col-sm-offset-4">
@@ -73,19 +73,19 @@
   </div>
 
   <accordion>
-    <accordion-group ng-repeat="(group, demandes) in groups" heading="{{getLabel(group, demandes)}}" is-open="group.isOpen">
-      <table class="table table-striped" >
+    <accordion-group ng-repeat="(group, demandes) in groups" heading="{{getLabel(group, demandes)}}">
+      <table class="table table-striped">
         <thead>
           <tr>
-            <th>Enfant</th>
-            <th>Demandeur</th>
-            <th>Email</th>
+            <th><a href="#" ng-click="toggleSort('enfant')">Enfant</a></th>
+            <th><a href="#" ng-click="toggleSort('adulte')">Demandeur</a></th>
+            <th><a href="#" ng-click="toggleSort('email')">Email</a></th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="demande in demandes track by demande._id">
-            <td>{{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</td>
-            <td>{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</td>
+          <tr ng-repeat="demande in demandes | orderBy: expression: reverse track by demande._id">
+            <td>{{demande.identiteEnfant.prenom | capitalize}}, {{demande.identiteEnfant.nom | capitalize}}</td>
+            <td>{{demande.identiteAdulte.demandeur.prenoms | capitalize}}, {{demande.identiteAdulte.demandeur.nom | capitalize}}</td>
             <td>{{demande.identiteAdulte.email}}</td>
           </tr>
         </tbody>
