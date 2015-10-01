@@ -21,6 +21,11 @@ angular.module('boursesApp')
     $scope.saveSvair = function(svair, id) {
       if (id === 'demandeur') {
         $scope.demande.data = svair;
+        if ($scope.demande.identiteAdulte) {
+          $scope.demande.identiteAdulte.demandeur = svair.identites[0];
+        } else {
+          $scope.demande.identiteAdulte = {demandeur: svair.identites[0]};
+        }
       } else {
         $scope.demande.data_conjoint = svair;
       }
