@@ -15,6 +15,10 @@ angular.module('boursesApp')
       }
     }
 
+    if (!$scope.foyer.concubinage) {
+      $scope.foyer.concubinage = 'non';
+    }
+
     $scope.identiteEnfant = store.get('identite-enfant');
 
     $scope.next = function(form) {

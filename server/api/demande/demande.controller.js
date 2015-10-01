@@ -119,8 +119,9 @@ function sendNotificationToAgent(identite, college, req) {
 exports.create = function(req, res) {
 
   var encoded = crypto.encode(req.body);
+
   var rfr;
-  if (encoded.data_conjoint) {
+  if (encoded.data_conjoint && encoded.data_conjoint.revenuFiscalReference) {
     rfr = encoded.data.revenuFiscalReference + encoded.data_conjoint.revenuFiscalReference;
   } else {
     rfr = encoded.data.revenuFiscalReference;
@@ -131,8 +132,10 @@ exports.create = function(req, res) {
     data: encoded,
     rfr: rfr
   }, function(err, demande) {
+    console.log(err);
     if (err) { return handleError(req, res, err); }
 
+    console.log(demande);
     Etablissement
       .findById(demande.etablissement)
       .exec(function(err, college) {
