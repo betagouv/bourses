@@ -1,4 +1,4 @@
-<div id="create-demande-college">
+<div id="create-demande-college" class="container">
   <h1>Nouvelle demande</h1>
   <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
     <h2>Identité de l'enfant</h2>
@@ -102,6 +102,7 @@
 
     <h2>Renseignements fiscaux</h2>
 
+    <h3>Avis du demandeur</h3>
     <div class="well-connect">
       <div connection connection-id="'demandeur'" for-agent="true" on-success="saveSvair"></div>
     </div>
@@ -121,6 +122,7 @@
     </div>
 
     <div ng-if="demande.foyer.concubinage === 'oui' || demande.identiteEnfant.garde === 'oui'">
+      <h3>Avis du conjoint</h3>
       <div class="well-connect">
         <div connection connection-id="'conjoint'" for-agent="true" on-success="saveSvair"></div>
       </div>
