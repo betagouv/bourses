@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted || status === 'error' && error && svairForm.referenceAvis.$pristine}">
+        <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted || status === 'error' && error}">
 
           <label class="action" ng-if="forAgent">
             Référence de l'avis d'imposition
@@ -51,10 +51,10 @@
           <div ng-messages="svairForm.referenceAvis.$error" ng-if="svairForm.$submitted">
             <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
           </div>
-          <p class="help-block" ng-if="status === 'error' && error && svairForm.referenceAvis.$pristine"><i class="fa fa-warning"></i> Renseignements fiscaux incorrects</p>
+          <p class="help-block" ng-if="status === 'error' && error"><i class="fa fa-warning"></i> Renseignements fiscaux incorrects</p>
         </div>
 
-        <div ng-if="status === 'error' && error && svairForm.referenceAvis.$pristine" class="alert alert-info">
+        <div ng-if="status === 'error' && error" class="alert alert-info">
           <p class="text-danger">{{error}}</p>
         </div>
 
