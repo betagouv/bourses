@@ -77,9 +77,21 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th><a href="#" ng-click="toggleSort('enfant')">Enfant</a></th>
-            <th><a href="#" ng-click="toggleSort('adulte')">Demandeur</a></th>
-            <th><a href="#" ng-click="toggleSort('email')">Email</a></th>
+            <th>
+              <i ng-if="type === 'enfant' && !reverse" class="fa fa-sort-alpha-asc"></i>
+              <i ng-if="type === 'enfant' && reverse" class="fa fa-sort-alpha-desc"></i>
+              <a href="#" ng-click="toggleSort('enfant')">Enfant</a>
+            </th>
+            <th>
+              <i ng-if="type === 'adulte' && !reverse" class="fa fa-sort-alpha-asc"></i>
+              <i ng-if="type === 'adulte' && reverse" class="fa fa-sort-alpha-desc"></i>
+              <a href="#" ng-click="toggleSort('adulte')">Demandeur</a>
+            </th>
+            <th>
+              <i ng-if="type === 'email' && !reverse" class="fa fa-sort-alpha-asc"></i>
+              <i ng-if="type === 'email' && reverse" class="fa fa-sort-alpha-desc"></i>
+              <a href="#" ng-click="toggleSort('email')">Email</a>
+            </th>
           </tr>
         </thead>
         <tbody>
