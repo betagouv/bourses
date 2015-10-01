@@ -132,10 +132,8 @@ exports.create = function(req, res) {
     data: encoded,
     rfr: rfr
   }, function(err, demande) {
-    console.log(err);
     if (err) { return handleError(req, res, err); }
 
-    console.log(demande);
     Etablissement
       .findById(demande.etablissement)
       .exec(function(err, college) {
