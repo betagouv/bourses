@@ -20,7 +20,9 @@
       <ng-form class="svair-form" name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
         <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
 
-          <a class="action" ng-click="detailNumeroFiscal()">
+          <label class="action" ng-if="forAgent">Numéro fiscal</label>
+
+          <a class="action" ng-click="detailNumeroFiscal()" ng-if="!forAgent">
             <i class="fa fa-question-circle"></i>
 
             <label for="numeroFiscal_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Votre numéro fiscal</label>
@@ -35,7 +37,10 @@
 
         <div class="form-group required" ng-class="{'has-error': svairForm.referenceAvis.$invalid && svairForm.$submitted || status === 'error' && error && svairForm.referenceAvis.$pristine}">
 
-          <a class="action" ng-click="detailNumeroAvis()">
+          <label class="action" ng-if="forAgent">
+            Référence de l'avis d'imposition
+          </label>
+          <a class="action" ng-click="detailNumeroAvis()" ng-if="!forAgent">
             <i class="fa fa-question-circle"></i>
 
             <label for="referenceAvis_{{connectionId}}" ng-if="connectionId === 'demandeur'" class="control-label-flat">Référence de votre avis d'imposition {{nMinus1}} sur les revenus de l'année {{nMinus2}}</label>
@@ -53,7 +58,7 @@
           <p class="text-danger">{{error}}</p>
         </div>
 
-        <div class="alert alert-warning" ng-if="!demande">Si vous n'avez pas de numéro fiscal, vous pouvez recourir au <strong>
+        <div class="alert alert-warning" ng-if="!forAgent && !demande">Si vous n'avez pas de numéro fiscal, vous pouvez recourir au <strong>
           <a href="http://vosdroits.service-public.fr/particuliers/F1025.xhtml" target="_blank" title="Détail sur le fonds social collégien">fonds social collégien</a>.
         </strong></div>
 
@@ -68,7 +73,59 @@
   </div>
 </div>
 
-<div ng-if="status === 'success'">
+<div ng-if="status === 'success' && forAgent">
+  <div class="text-right">
+    <a class="btn btn-action" ng-click="edit()">Changer ces identifiants</a>
+  </div>
+  <div class="form-group">
+    <label>Identités fiscales</label>
+
+    <div class="form-control-flat">
+      <div class="identite" ng-if="declarant.nom" ng-repeat="declarant in svair.identites">
+        <span>{{declarant.prenoms | capitalize:'first'}} {{declarant.nom | capitalize:'first'}}</span>
+        <small>Né(e) le {{declarant.dateNaissance}}</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Situation familiale</label>
+    <div class="form-control-flat">
+      <span>{{svair.situationFamille}}</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Revenu fiscal de référence</label>
+    <div class="form-control-flat">
+      <span>{{svair.revenuFiscalReference}} €</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Année de l'avis</label>
+        <div class="form-control-flat">
+          <span>{{svair.anneeImpots}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>Année des revenus</label>
+        <div class="form-control-flat">
+          <span>{{svair.anneeRevenus}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Nombre de parts</label>
+    <div class="form-control-flat">
+      <span>{{svair.nombreParts}}</span>
+    </div>
+  </div>
+</div>
+
+<div ng-if="status === 'success' && !forAgent">
   <div ng-if="!fc">
 
     <div class="text-right">

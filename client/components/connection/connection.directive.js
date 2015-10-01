@@ -5,7 +5,8 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
     scope: {
       connectionId: '=',
       onSuccess: '=',
-      demande: '='
+      demande: '=',
+      forAgent: '='
     },
     templateUrl: 'components/connection/connection.html',
     restrict: 'EA',
@@ -62,7 +63,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         scope.error = buildErrorMsg(data);
       } else {
         scope.svair = store.get('svair_' + scope.connectionId);
-        scope.credentials = scope.svair ? _.cloneDeep(scope.svair.credentials) : {};
+        scope.credentials = (scope.svair && scope.svair.credentials) ? _.cloneDeep(scope.svair.credentials) : {};
         oldStatus = scope.status = store.get('status_' + scope.connectionId);
       }
 
@@ -88,7 +89,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
         $http.get('/api/connection/svair', {params: scope.credentials})
         .success(function(data) {
-          if (data.anneeImpots !== '2014') {
+          if (data.anneeImpots !== '2014' && !scope.forAgent) {
             scope.error = buildErrorMsg(data);
             setStatus('error');
             return;
@@ -106,7 +107,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
           oldStatus = 'success';
           setStatus('success');
-          scope.onSuccess(data);
+          scope.onSuccess(data, scope.connectionId);
         })
         .error(function(err) {
           scope.error = err.message;

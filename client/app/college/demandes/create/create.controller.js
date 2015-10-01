@@ -1,7 +1,12 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeCreateCtrl', function($scope, $http, $state, college) {
+  .controller('DemandeCreateCtrl', function($scope, $http, $state, college, store) {
+    store.set('svair_demandeur', null);
+    store.set('svair_conjoint', null);
+    store.set('status_conjoint', null);
+    store.set('status_demandeur', null);
+
     $scope.demande = {
       identiteEnfant: {
         garde: 'non'
@@ -10,21 +15,20 @@ angular.module('boursesApp')
         nombreEnfantsACharge: 1,
         nombreEnfantsAdultes: 0,
         concubinage: 'non'
-      },
-      data: {
-        anneeImpots: 2014,
-        anneeRevenus: 2013
+      }
+    };
+
+    $scope.saveSvair = function(svair, id) {
+      if (id === 'demandeur') {
+        $scope.demande.data = svair;
+      } else {
+        $scope.demande.data_conjoint = svair;
       }
     };
 
     $scope.submit = function(form) {
       if (!form.$valid) {
         return;
-      }
-
-      $scope.demande.data.anneeRevenus = $scope.demande.data.anneeImpots - 1;
-      if ($scope.demande.data_conjoint) {
-        $scope.demande.data_conjoint.anneeRevenus = $scope.demande.data_conjoint.anneeImpots - 1;
       }
 
       $http.post('/api/demandes/' + college._id, $scope.demande).then(function() {

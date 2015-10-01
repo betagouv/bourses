@@ -101,50 +101,9 @@
     </div>
 
     <h2>Renseignements fiscaux</h2>
-    <div class="form-group required" ng-class="{'has-error': infoForm.rfr.$invalid && infoForm.$submitted}">
-      <label for="rfr" class="control-label-flat">Revenu de référence du foyer</label>
-      <input id="rfr" type="number" name="rfr" class="form-control-flat" ng-model="demande.data.revenuFiscalReference" required>
-      <div ng-messages="infoForm.rfr.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      </div>
-    </div>
 
-    <div class="form-group required" ng-class="{'has-error': infoForm.nombresParts.$invalid && infoForm.$submitted}">
-      <label for="nombre-parts" class="control-label-flat">
-        Nombre de parts
-        <br>
-        <small>(tel que mentionné sur l'avis d'imposition)</small>
-      </label>
-      <input type="number" min="0" class="form-control-flat" required id="nombre-parts" name="nombresParts" ng-model="demande.data.nombreParts">
-      <div ng-messages="infoForm.nombresParts.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
-      </div>
-    </div>
-
-    <div class="form-group required" ng-class="{'has-error': infoForm.annee.$invalid && infoForm.$submitted}">
-      <label for="annee" class="control-label-flat">Année de l'avis</label>
-      <input id="annee" type="number" name="annee" min="2014" max="2015" class="form-control-flat" ng-model="demande.data.anneeImpots" required>
-      <div ng-messages="infoForm.annee.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        <p class="help-block" ng-message='min'><i class="fa fa-warning"></i> Valeur min 2014.</p>
-        <p class="help-block" ng-message='max'><i class="fa fa-warning"></i> Valeur max 2015.</p>
-      </div>
-    </div>
-
-    <div class="form-group required" ng-class="{'has-error': !demande.data.situationFamille && infoForm.$submitted}">
-      <fieldset>
-        <legend class="control-label-flat">Situation</legend>
-        <div class="btn-group">
-          <button type="button" class="btn btn-select" role="radio" ng-model="demande.data.situationFamille" btn-radio="'Célibataire'">Célibataire</button>
-          <button type="button" class="btn btn-select" role="radio" ng-model="demande.data.situationFamille" btn-radio="'Marié(e)'">Marié(e)</button>
-          <button type="button" class="btn btn-select" role="radio" ng-model="demande.data.situationFamille" btn-radio="'Divorcé(e)'">Divorcé(e)</button>
-        </div>
-      </fieldset>
-
-      <div ng-if="!demande.data.situationFamille && infoForm.$submitted">
-        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      </div>
+    <div class="well-connect">
+      <div connection connection-id="'demandeur'" for-agent="true" on-success="saveSvair"></div>
     </div>
 
     <div class="form-group required" ng-if="demande.data.situationFamille === 'Célibataire'" ng-class="{'has-error': !demande.foyer.concubinage && infoForm.$submitted}">
@@ -162,47 +121,9 @@
     </div>
 
     <div ng-if="demande.foyer.concubinage === 'oui' || demande.identiteEnfant.garde === 'oui'">
-      <div class="form-group">
-        <label for="rfrConjoint" class="control-label-flat">Revenu de référence du foyer du conjoint</label>
-        <input id="rfrConjoint" type="number" name="rfrConjoint" class="form-control-flat" ng-model="demande.data_conjoint.revenuFiscalReference">
+      <div class="well-connect">
+        <div connection connection-id="'conjoint'" for-agent="true" on-success="saveSvair"></div>
       </div>
-
-      <div class="form-group" ng-class="{'has-error': infoForm.annee_conjoint.$invalid && infoForm.$submitted}">
-        <label for="annee_conjoint" class="control-label-flat">Année de l'avis</label>
-        <input id="annee_conjoint" type="number" name="annee_conjoint" min="2014" max="2015" class="form-control-flat" ng-model="demande.data_conjoint.annee_Impots">
-        <div ng-messages="infoForm.annee_conjoint.$error" ng-if="infoForm.$submitted">
-          <p class="help-block" ng-message='min'><i class="fa fa-warning"></i> Valeur min 2014.</p>
-          <p class="help-block" ng-message='max'><i class="fa fa-warning"></i> Valeur max 2015.</p>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="nombre-parts-conjoint" class="control-label-flat">
-          Nombre de parts
-          <br>
-          <small>(tel que mentionné sur l'avis d'imposition)</small>
-        </label>
-        <input type="number" min="0" class="form-control-flat" id="nombre-parts-conjoint" name="nombresPartsConjoint" ng-model="demande.data_conjoint.nombreParts">
-        <div ng-messages="infoForm.nombresPartsConjoint.$error" ng-if="infoForm.$submitted">
-          <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
-        </div>
-      </div>
-
-      <div class="form-group required" ng-class="{'has-error': !demande.data_conjoint.situationFamille && infoForm.$submitted}">
-        <fieldset>
-          <legend class="control-label-flat">Situation</legend>
-          <div class="btn-group">
-            <button type="button" class="btn btn-select" role="radio" ng-model="demande.data_conjoint.situationFamille" btn-radio="'Célibataire'">Célibataire</button>
-            <button type="button" class="btn btn-select" role="radio" ng-model="demande.data_conjoint.situationFamille" btn-radio="'Marié(e)'">Marié(e)</button>
-            <button type="button" class="btn btn-select" role="radio" ng-model="demande.data_conjoint.situationFamille" btn-radio="'Divorcé(e)'">Divorcé(e)</button>
-          </div>
-        </fieldset>
-
-        <div ng-if="!demande.data_conjoint.situationFamille && infoForm.$submitted">
-          <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-        </div>
-      </div>
-
     </div>
 
     <hr>
