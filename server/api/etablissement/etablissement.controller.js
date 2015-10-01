@@ -252,11 +252,14 @@ exports.demandes = function(req, res) {
       } else {
         q = null;
         offset = 0;
-        limit = 10;
+        limit = null;
       }
 
-      var status = req.query.status === 'new' ?  ['new', 'pending'] : [req.query.status];
-      var query = {etablissement: etablissement, status: {$in: status}};
+      var query = {etablissement: etablissement};
+      if (req.query.status) {
+        var status = req.query.status === 'new' ?  ['new', 'pending'] : [req.query.status];
+        query.status = {$in: status};
+      }
 
       // Text search
       if (q) {

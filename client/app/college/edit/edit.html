@@ -63,23 +63,34 @@
   <hr>
 
   <h1>Statistiques</h1>
-  <p class="lead">{{demandes.length}} demandes en erreur</p>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Demandeur</th>
-        <th>Email</th>
-        <th>Année de l'avis</th>
-        <th>Statut de la demande</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="demande in demandes">
-        <td>{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</td>
-        <td>{{demande.identiteAdulte.email}}</td>
-        <td>{{demande.data.anneeImpots}}</td>
-        <td>{{demande.status | status}}</td>
-      </tr>
-    </tbody>
-  </table>
+
+  <p class="lead">Demandes par taux</p>
+
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <canvas id="pie" class="chart chart-pie" chart-data="count" chart-labels="['Refus', 'Taux 1', 'Taux 2', 'Taux 3']" chart-legend="true"></canvas>
+    </div>
+  </div>
+
+  <accordion>
+    <accordion-group ng-repeat="(group, demandes) in groups" heading="{{getLabel(group, demandes)}}" is-open="group.isOpen">
+      <table class="table table-striped" >
+        <thead>
+          <tr>
+            <th>Enfant</th>
+            <th>Demandeur</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="demande in demandes track by demande._id">
+            <td>{{demande.identiteEnfant.prenom}} {{demande.identiteEnfant.nom}}</td>
+            <td>{{demande.identiteAdulte.demandeur.prenoms}} {{demande.identiteAdulte.demandeur.nom}}</td>
+            <td>{{demande.identiteAdulte.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </accordion-group>
+  </accordion>
+
 </div>
