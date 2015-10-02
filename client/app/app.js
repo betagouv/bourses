@@ -14,12 +14,13 @@ angular
     'a11yBootstrap',
     'chart.js'
   ])
-  .config(function($urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider, $httpProvider) {
+  .config(function($urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider, $httpProvider, storeProvider) {
     moment.locale('fr');
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
     $urlMatcherFactoryProvider.strictMode(false);
     $httpProvider.interceptors.push('authInterceptor');
+    storeProvider.setStore('sessionStorage');
   })
 
   .factory('authInterceptor', function($rootScope, $q, $cookieStore) {
