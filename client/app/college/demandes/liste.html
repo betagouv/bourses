@@ -93,7 +93,7 @@
     </div>
 
     <div class="pull-right">
-      <pagination class="no-margin" total-items="count[status]" ng-model="currentPage" items-per-page="10" ng-change="pageChanged(currentPage)" previous-text="Précédente" next-text="Suivante"></pagination>
+      <pagination class="no-margin" total-items="count[status]" max-size="10" ng-model="currentPage" items-per-page="10" ng-change="pageChanged(currentPage)" previous-text="Précédente" next-text="Suivante" rotate="false"></pagination>
     </div>
   </div>
 </ui-view>
