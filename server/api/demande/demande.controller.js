@@ -17,6 +17,7 @@ var Generator = require('../../components/pdf/generator');
 var sendMail = require('../../components/mail/send-mail').sendMail;
 var crypto = require('../../components/crypto/crypto');
 var duplicates = require('../../components/duplicates/duplicates');
+var isCampaignOver = require('../../components/time/time').isCampaignOver;
 
 function logMail(logger, error, info) {
   if (error) {
@@ -117,6 +118,10 @@ function sendNotificationToAgent(identite, college, req) {
 
 // Creates a new demande in the DB.
 exports.create = function(req, res) {
+
+  if (isCampaignOver()) {
+    return res.status(500).send('Campaign is over');
+  }
 
   var encoded = crypto.encode(req.body);
 

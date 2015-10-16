@@ -41,9 +41,16 @@ angular.module('boursesApp')
         return;
       }
 
-      $http.post('/api/demandes/' + demande.identiteEnfant.college, demande).then(function() {
-        $state.go('layout.merci');
-      });
+      $http.post('/api/demandes/' + demande.identiteEnfant.college, demande).then(
+        function() {
+          $state.go('layout.merci');
+        },
+
+        function() {
+          $state.go('layout.closed');
+        }
+
+      );
     };
 
     function getLabel(declarant) {

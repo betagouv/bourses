@@ -1,0 +1,15 @@
+<section id="merci">
+  <div class="container">
+
+    <h1>Attention</h1>
+    <p>
+      Votre demande <strong>n'a pas été transmise</strong> à votre établissement car la campagne de bourse de collège 2015-2016 est terminée.
+      <br>
+      En cas de questions, vous pouvez joindre le collège {{etablissement.nom}}:
+      <ul>
+        <li ng-if="etablissement.telephone">Par téléphone : {{etablissement.telephone}}</li>
+        <li>Par Email : <a href="mailto:{{etablissement.email}}">{{etablissement.contact}}</a></li>
+      </ul>
+    </p>
+  </div>
+</section>

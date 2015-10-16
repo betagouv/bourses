@@ -9,6 +9,8 @@ angular.module('boursesApp')
         controller: function($scope, $timeout, store, simulation) {
           var storedSimulation = store.get('simulation');
 
+          $scope.isCampaignOver = moment().isAfter(moment('2015-10-17'));
+
           $scope.adultes = storedSimulation ? storedSimulation.adultes : 0;
           $scope.enfants = storedSimulation ? storedSimulation.enfants : 1;
           $scope.montant = null;
