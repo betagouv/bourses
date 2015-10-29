@@ -266,7 +266,7 @@ exports.listeRIBs = function(req, res) {
           });
 
           var html = Generator.editRib(demandes, etablissement, host);
-          wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
+          wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
         });
     });
 };
