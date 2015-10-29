@@ -10,11 +10,10 @@ var async = require('async');
 var moment = require('moment');
 var mustache = require('mustache');
 
-function readFile(name, callback) {
-  fs.readFile(path.join(__dirname, name), function(err, html) {
-    callback(err, String(html));
-  });
-}
+var templateNotification = String(fs.readFileSync(path.join(__dirname, 'notification.html')));
+var templateRib = String(fs.readFileSync(path.join(__dirname, 'rib.html')));
+var templateRefus = String(fs.readFileSync(path.join(__dirname, 'refus.html')));
+var template = String(fs.readFileSync(path.join(__dirname, 'template.html')));
 
 function formatDate(date) {
   return moment(date, moment.ISO_8601).format('DD/MM/YYYY');
@@ -54,7 +53,7 @@ function formatLien(input) {
 exports.toHtml = function(demande, path, done) {
   async.series({
     template: function(callback) {
-      readFile('template.html', callback);
+      callback(null, template);
     },
 
     formattedAnswers: function(callback) {
@@ -81,9 +80,9 @@ exports.editNotification = function(demande, college, done) {
   async.series({
     template: function(callback) {
       if (demande.notification.montant === 0) {
-        readFile('refus.html', callback);
+        callback(null, templateRefus);
       } else {
-        readFile('notification.html', callback);
+        callback(null, templateNotification);
       }
     },
 
@@ -100,4 +99,8 @@ exports.editNotification = function(demande, college, done) {
     var html = mustache.render(results.template, results.answers);
     done(html);
   });
+};
+
+exports.editRib = function(demandes, college, host) {
+  return mustache.render(templateRib, {demandes: demandes, college: college, host: host});
 };

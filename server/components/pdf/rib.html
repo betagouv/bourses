@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <style type="text/css">
+
+      .table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          empty-cells: show;
+          border: 1px solid #cbcbcb;
+      }
+
+      .table td,
+      .table th {
+          border-left: 1px solid #cbcbcb;/*  inner column border */
+          border-width: 0 0 0 1px;
+          font-size: inherit;
+          margin: 0;
+          overflow: visible; /*to make ths where the title is really long work*/
+          padding: 0.5em 1em; /* cell padding */
+      }
+
+      .table td:first-child,
+      .table th:first-child {
+          border-left-width: 0;
+      }
+
+      .table thead {
+        background-color: #e0e0e0;
+        color: #000;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      .table-striped tr:nth-child(2n-1) td {
+          background-color: #f2f2f2;
+      }
+
+      .table-bordered td {
+          border-bottom: 1px solid #cbcbcb;
+      }
+
+      .table-bordered tbody > tr:last-child > td {
+          border-bottom-width: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="https://{{host}}/assets/images/sgmap-horiz.png"></img>
+    <img src="https://{{host}}/assets/images/men-horiz.png"></img>
+
+    <h1>Liste des RIBs pour le collège {{college.nom}}</h1>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>Parent</th>
+        <th>Enfant</th>
+        <th>Montant</th>
+        <th>Titulaire</th>
+        <th>IBAN</th>
+        <th>BIC</th>
+      </thead>
+      {{#demandes}}
+        <tr>
+          <td>{{data.identiteAdulte.demandeur.prenoms}} {{data.identiteAdulte.demandeur.nom}}</td>
+          <td>{{data.identiteEnfant.prenom}} {{data.identiteEnfant.nom}}</td>
+          <td>{{notification.montant}}</td>
+          <td>{{data.identiteAdulte.titulaire}}</td>
+          <td>{{data.identiteAdulte.iban}}</td>
+          <td>{{data.identiteAdulte.bic}}</td>
+        </tr>
+      {{/demandes}}
+    </table>
+  </body>
+</html>

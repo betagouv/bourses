@@ -230,6 +230,47 @@ exports.listeDemandes = function(req, res) {
     });
 };
 
+function toUpper(str, force) {
+  if (force) {
+    return str.toUpperCase();
+  }
+
+  return str && str.toLowerCase().replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
+
+exports.listeRIBs = function(req, res) {
+  Etablissement
+    .findOne({human_id: req.params.id})
+    .exec(function(err, etablissement) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!etablissement) { return res.sendStatus(404); }
+
+      var host = req.headers.host;
+      Demande
+        .find({status: 'done', 'notification.montant': {$ne: 0}, etablissement: etablissement._id})
+        .sort('-createdAt')
+        .exec(function(err, demandes) {
+
+          demandes.forEach(function(demande) {
+            demande.data.identiteAdulte.demandeur.prenoms = toUpper(demande.data.identiteAdulte.demandeur.prenoms);
+            demande.data.identiteAdulte.demandeur.nom = toUpper(demande.data.identiteAdulte.demandeur.nom, true);
+
+            demande.data.identiteEnfant.prenom = toUpper(demande.data.identiteEnfant.prenom);
+            demande.data.identiteEnfant.nom = toUpper(demande.data.identiteEnfant.nom, true);
+
+            demande.data.identiteAdulte.titulaire = toUpper(demande.data.identiteAdulte.titulaire);
+            demande.data.identiteAdulte.bic = toUpper(demande.data.identiteAdulte.bic, true);
+          });
+
+          var html = Generator.editRib(demandes, etablissement, host);
+          wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
+        });
+    });
+};
+
 exports.demandes = function(req, res) {
   Etablissement
     .findOne({human_id: req.params.id})

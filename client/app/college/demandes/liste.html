@@ -89,6 +89,7 @@
 
     <div class="pull-left" ng-if="status === 'done'">
       <a target="_blank" class="btn btn-action" download="demandes.zip" href="/api/etablissements/{{college.human_id}}/listeDemandes?access_token={{token}}">Télécharger toutes les demandes</a>
+      <a target="_blank" class="btn btn-action" download="liste_ribs.pdf" href="/api/etablissements/{{college.human_id}}/listeRibs?access_token={{token}}">Télécharger la liste des RIBs</a>
       <a target="_blank" class="btn btn-action" download="notifications.zip" href="/api/etablissements/{{college.human_id}}/notifications?access_token={{token}}">Télécharger toutes les notifications</a>
     </div>
 

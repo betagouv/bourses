@@ -13,6 +13,7 @@ router.get('/:id/demandes', auth.isAuthenticated(), controller.demandes);
 
 router.get('/:id/notifications', auth.isAuthenticated(), controller.notifications);
 router.get('/:id/listeDemandes', auth.isAuthenticated(), controller.listeDemandes);
+router.get('/:id/listeRIBs', auth.isAuthenticated(), controller.listeRIBs);
 
 router.get('/:id/wrongYear', auth.isAuthenticated(), controller.wrongYear);
 router.get('/:id/count', auth.isAuthenticated(), controller.count);
