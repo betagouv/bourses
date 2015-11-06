@@ -9,6 +9,7 @@ var router = express.Router();
 router.get('/modification', controller.showPublic);
 router.post('/modification', controller.editPublic);
 router.post('/:college', controller.create);
+router.post('/:college/admin', auth.isAuthenticated(), controller.createAdmin);
 
 router.post('/:id/pause', auth.isAuthenticated(), controller.pause);
 router.post('/:id/notification', auth.isAuthenticated(), controller.saveNotification);

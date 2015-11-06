@@ -116,13 +116,7 @@ function sendNotificationToAgent(identite, college, req) {
     });
 }
 
-// Creates a new demande in the DB.
-exports.create = function(req, res) {
-
-  if (isCampaignOver()) {
-    return res.status(500).send('Campaign is over');
-  }
-
+function saveDemande(req, done) {
   var encoded = crypto.encode(req.body);
 
   var rfr;
@@ -137,7 +131,7 @@ exports.create = function(req, res) {
     data: encoded,
     rfr: rfr
   }, function(err, demande) {
-    if (err) { return handleError(req, res, err); }
+    if (err) { return done(err); }
 
     Etablissement
       .findById(demande.etablissement)
@@ -146,6 +140,28 @@ exports.create = function(req, res) {
       });
 
     sendNotificationToAgent(req.body.identiteAdulte, req.params.college, req);
+
+    return done(null, demande);
+  });
+}
+
+// Creates a new demande in the DB.
+exports.create = function(req, res) {
+  if (isCampaignOver()) {
+    return res.status(500).send('Campaign is over');
+  }
+
+  saveDemande(req, function(err, demande) {
+    if (err) return handleError(req, res, err);
+
+    return res.status(201).json(demande);
+  });
+};
+
+// Creates a new demande in the DB, don't make additionnal checks
+exports.createAdmin = function(req, res) {
+  saveDemande(req, function(err, demande) {
+    if (err) return handleError(req, res, err);
 
     return res.status(201).json(demande);
   });

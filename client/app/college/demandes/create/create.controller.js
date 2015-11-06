@@ -36,7 +36,7 @@ angular.module('boursesApp')
         return;
       }
 
-      $http.post('/api/demandes/' + college._id, $scope.demande).then(function() {
+      $http.post('/api/demandes/' + college._id + '/admin', $scope.demande).then(function() {
         $state.go('layout.college.demandes.new');
       });
     };
