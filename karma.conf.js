@@ -33,6 +33,7 @@ module.exports = function(config) {
       'client/bower_components/moment/locale/fr.js',
       'client/bower_components/Chart.js/Chart.js',
       'client/bower_components/angular-chart.js/dist/angular-chart.js',
+      'client/bower_components/angular-xeditable/dist/js/xeditable.js',
       'client/app/app.js',
       'client/app/**/*.js',
       'client/components/**/*.js',
