@@ -12,7 +12,8 @@ angular
     'angular-capitalize-filter',
     'mm.iban',
     'a11yBootstrap',
-    'chart.js'
+    'chart.js',
+    'xeditable'
   ])
   .config(function($urlRouterProvider, $locationProvider, $urlMatcherFactoryProvider, $httpProvider, storeProvider) {
     moment.locale('fr');
@@ -48,7 +49,8 @@ angular
     };
   })
 
-  .run(function($rootScope, $state, $window, $location, Auth) {
+  .run(function($rootScope, $state, $window, $location, Auth, editableOptions) {
+    editableOptions.theme = 'bs3';
     $rootScope.$on('$stateChangeSuccess', function() {
       if ($window._paq) {
         $window._paq.push(['setCustomUrl', $location.path()]);

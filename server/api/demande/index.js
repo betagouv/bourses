@@ -11,6 +11,7 @@ router.post('/modification', controller.editPublic);
 router.post('/:college', controller.create);
 router.post('/:college/admin', auth.isAuthenticated(), controller.createAdmin);
 
+router.put('/:id', auth.isAuthenticated(), controller.update);
 router.post('/:id/pause', auth.isAuthenticated(), controller.pause);
 router.post('/:id/notification', auth.isAuthenticated(), controller.saveNotification);
 router.get('/:id/notification', auth.isAuthenticated(), controller.downloadNotification);

@@ -158,6 +158,31 @@ exports.create = function(req, res) {
   });
 };
 
+// Updates a demande in the DB.
+exports.update = function(req, res) {
+  var id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.sendStatus(400);
+  }
+
+  Demande
+    .findById(id)
+    .exec(function(err, demande) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!demande) { return res.sendStatus(404); }
+
+      demande
+        .set(req.body.attr, req.body.value)
+        .save(function(err, updated) {
+          if (err) { return handleError(res, err); }
+
+          return res.json(updated);
+        });
+    });
+};
+
 // Creates a new demande in the DB, don't make additionnal checks
 exports.createAdmin = function(req, res) {
   saveDemande(req, function(err, demande) {

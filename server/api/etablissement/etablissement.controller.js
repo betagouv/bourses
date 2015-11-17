@@ -377,6 +377,31 @@ exports.demandes = function(req, res) {
     });
 };
 
+exports.compta = function(req, res) {
+  Etablissement
+    .findOne({human_id: req.params.id})
+    .exec(function(err, etablissement) {
+      if (err) { return handleError(req, res, err); }
+
+      if (!etablissement) { return res.sendStatus(404); }
+
+      Demande
+        .find({etablissement: etablissement, status: 'done', 'notification.montant': {$gt: 0}})
+        .sort('data.identiteAdulte.demandeur.nom')
+        .select('data.identiteAdulte notification')
+        .exec(function(err, demandes) {
+          if (err) { return handleError(req, res, err); }
+
+          if (demandes && demandes.length > 0) {
+            var decoded = decode(demandes);
+            return res.json(decoded);
+          } else {
+            return res.json([]);
+          }
+        });
+    });
+};
+
 exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
 

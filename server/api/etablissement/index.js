@@ -10,6 +10,7 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/byId/:id', controller.showById);
 router.put('/:id', auth.isAuthenticated(), controller.update);
 router.get('/:id/demandes', auth.isAuthenticated(), controller.demandes);
+router.get('/:id/compta', auth.isAuthenticated(), controller.compta);
 
 router.get('/:id/notifications', auth.isAuthenticated(), controller.notifications);
 router.get('/:id/listeDemandes', auth.isAuthenticated(), controller.listeDemandes);
