@@ -25,6 +25,7 @@
           <th>Taux accordé</th>
           <th>IBAN</th>
           <th>BIC</th>
+          <th>Domiciliation</th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +35,7 @@
           <td class="text-center">{{demande.notification.montant}} €</td>
           <td><a href="#" onaftersave="update(demande, 'iban')" editable-text="demande.identiteAdulte.iban">{{demande.identiteAdulte.iban}}</a></td>
           <td><a href="#" onaftersave="update(demande, 'bic')" editable-text="demande.identiteAdulte.bic">{{demande.identiteAdulte.bic}}</a></td>
+          <td><button class="btn btn-link" ng-click="search(demande.identiteAdulte.bic)"><i class="fa fa-search"></i> Chercher</button></td>
         </tr>
       </tbody>
     </table>
