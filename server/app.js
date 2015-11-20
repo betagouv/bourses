@@ -25,5 +25,11 @@ server.listen(config.port, config.ip, function() {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
+app.use(function(err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send('Invalid token');
+  }
+});
+
 // Expose app
 exports = module.exports = app;

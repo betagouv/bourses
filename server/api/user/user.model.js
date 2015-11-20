@@ -11,10 +11,10 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
-  hashedPassword: String,
+  hashedPassword: { type: String, select: false },
   etablissement: { type: Schema.Types.ObjectId, ref: 'Etablissement' },
   provider: String,
-  salt: String
+  salt: { type: String, select: false }
 });
 
 /**
