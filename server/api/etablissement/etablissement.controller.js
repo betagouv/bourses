@@ -251,7 +251,7 @@ exports.listeRIBs = function(req, res) {
       var host = req.headers.host;
       Demande
         .find({status: 'done', 'notification.montant': {$ne: 0}, etablissement: etablissement._id})
-        .sort('-createdAt')
+        .sort('data.identiteAdulte.demandeur.nom')
         .exec(function(err, demandes) {
 
           demandes.forEach(function(demande) {
