@@ -3,7 +3,7 @@
 var https = require('https');
 var fs = require('fs');
 
-var svair = require('svair-api');
+var Svair = require('svair-api');
 var request = require('superagent');
 
 var config = require('../../config/environment');
@@ -25,6 +25,7 @@ exports.svair = function(req, res, next) {
       explaination: 'Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.'
     });
   } else {
+    var svair = new Svair('https://cfsmsp.impots.gouv.fr');
     svair(req.query.numeroFiscal, req.query.referenceAvis, function(err, result) {
       if (err && err.message === 'Invalid credentials') {
         res.status(404).send({

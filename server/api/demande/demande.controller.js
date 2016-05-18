@@ -6,7 +6,7 @@ var wkhtmltopdf = require('wkhtmltopdf');
 var path = require('path');
 var fs = require('fs');
 var moment = require('moment');
-var svair = require('svair-api');
+var Svair = require('svair-api');
 var async = require('async');
 var tmp = require('tmp');
 
@@ -254,6 +254,7 @@ exports.show = function(req, res) {
               .set('status', 'pending')
               .save(callback);
           } else if (!data.anneeImpots) {
+            var svair = new Svair('https://cfsmsp.impots.gouv.fr');
             svair(data.credentials.numeroFiscal, data.credentials.referenceAvis, function(err, result) {
               demande
                 .set('data.data.anneeRevenus', result.anneeRevenus)

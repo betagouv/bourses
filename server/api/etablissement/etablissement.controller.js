@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var async = require('async');
-var svair = require('svair-api');
+var Svair = require('svair-api');
 var wkhtmltopdf = require('wkhtmltopdf');
 var tmp = require('tmp');
 var archiver = require('archiver');
@@ -323,6 +323,7 @@ exports.demandes = function(req, res) {
               async.each(demandes, function(demande, eachSeriesCallback) {
                 var data = demande.data.data;
                 if (!data.anneeImpots) {
+                  var svair = new Svair('https://cfsmsp.impots.gouv.fr');
                   svair(data.credentials.numeroFiscal, data.credentials.referenceAvis, function(err, result) {
                     if (result && result.anneeRevenus) {
                       demande
