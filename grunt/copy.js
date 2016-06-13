@@ -6,10 +6,11 @@ module.exports = {
       cwd: 'client',
       dest: 'dist',
       src: [
-        '*.{ico,png,txt,pdf,pptx}',
+        '*.{ico,png,txt,pdf}',
         '.htaccess',
         'bower_components/**/*',
         'assets/images/{,*/}*.{webp}',
+        'assets/files/*',
         'index.html'
       ]
     }, {
