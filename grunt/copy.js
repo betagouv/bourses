@@ -6,7 +6,7 @@ module.exports = {
       cwd: 'client',
       dest: 'dist',
       src: [
-        '*.{ico,png,txt,pdf}',
+        '*.{ico,png,txt,pdf,pptx}',
         '.htaccess',
         'bower_components/**/*',
         'assets/images/{,*/}*.{webp}',

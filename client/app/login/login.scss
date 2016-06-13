@@ -20,5 +20,10 @@
     background-color: $dark-blue;
     padding: 30px 0;
     color: white;
+
+    > .container > .row {
+      display: flex;
+      align-items: center;
+    }
   }
 }
