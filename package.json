@@ -32,7 +32,6 @@
     "serve-favicon": "^2.2.1",
     "soap": "^0.9.1",
     "superagent": "^1.2.0",
-    "svair-api": "0.4.0",
     "tmp": "0.0.27",
     "wkhtmltopdf": "^0.1.5"
   },
