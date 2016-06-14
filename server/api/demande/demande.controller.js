@@ -38,9 +38,9 @@ function sendNotificationToUser(demande, etablissement, stream, req, cb) {
    '<li>nombre d\'enfants majeurs ou célibataires: ' + demande.data.foyer.nombreEnfantsAdultes + '</li></ul></p>';
 
   if (demande.notification.montant === 0) {
-    body += '<br><p>la bourse de collège que vous avez sollicitée au titre de l\'année scolaire 2015-2016 ne peut pas vous être accordée.</p>';
+    body += '<br><p>la bourse de collège que vous avez sollicitée au titre de l\'année scolaire 2016-2017 ne peut pas vous être accordée.</p>';
   } else {
-    body += '<br><p>une bourse de collège d\'un montant annuel de <strong>' + demande.notification.montant + ' EUR</strong> vous est accordée au titre de l\'année scolaire 2015-2016.</p>';
+    body += '<br><p>une bourse de collège d\'un montant annuel de <strong>' + demande.notification.montant + ' EUR</strong> vous est accordée au titre de l\'année scolaire 2016-2017.</p>';
   }
 
   body += '<h4>Pour votre information :</h4><ol type="a">' +

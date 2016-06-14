@@ -21,7 +21,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
       }
 
       function buildErrorMsg(data) {
-        return 'Vous avez entré un avis datant de ' + data.anneeImpots + '. La bourse est calculée à partir de l\'avis 2014 sur vos revenus 2013. Veuillez modifier vos renseignements fiscaux.';
+        return 'Vous avez entré un avis datant de ' + data.anneeImpots + '. La bourse est calculée à partir de l\'avis 2015 sur vos revenus 2014. Veuillez modifier vos renseignements fiscaux.';
       }
 
       function tryFcLogin() {
@@ -89,7 +89,7 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
 
         $http.get('/api/connection/svair', {params: scope.credentials})
         .success(function(data) {
-          if (data.anneeImpots !== '2014' && !scope.forAgent) {
+          if (data.anneeImpots !== '2015' && !scope.forAgent) {
             scope.error = buildErrorMsg(data);
             setStatus('error');
             return;

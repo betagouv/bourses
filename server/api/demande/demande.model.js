@@ -19,7 +19,8 @@ var DemandeSchema = new Schema({
     msg:          { type: String },
     detail:       { type: Schema.Types.Mixed }
   },
-  rfr:            { type: Number }
+  rfr:            { type: Number },
+  period:         { type: String, enum: ['2015-2016', '2016-2017'], default: '2016-2017'}
 });
 
 /*
