@@ -34,6 +34,11 @@ var all = {
     clientSecret: process.env.FC_CLIENT_SECRET || 'fc-clientSecret'
   },
 
+  apiParticulier: {
+    token: process.env.API_PARTICULIER_TOKEN || 'test-token',
+    url: process.env.API_PARTICULIER_URL || 'https://particulier-test.api.gouv.fr/api/impots/svair'
+  },
+
   dgfip: {
     host: process.env.DGFIP_HOST,
     baseUrl: process.env.DGFIP_BASE_URL || 'http://localhost:5000/api/connection/mock',

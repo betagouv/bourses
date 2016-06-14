@@ -6,9 +6,9 @@ var wkhtmltopdf = require('wkhtmltopdf');
 var path = require('path');
 var fs = require('fs');
 var moment = require('moment');
-var Svair = require('svair-api');
 var async = require('async');
 var tmp = require('tmp');
+var request = require('superagent');
 
 var config = require('../../config/environment');
 var Demande = require('./demande.model');
@@ -254,13 +254,17 @@ exports.show = function(req, res) {
               .set('status', 'pending')
               .save(callback);
           } else if (!data.anneeImpots) {
-            var svair = new Svair('https://cfsmsp.impots.gouv.fr');
-            svair(data.credentials.numeroFiscal, data.credentials.referenceAvis, function(err, result) {
-              demande
-                .set('data.data.anneeRevenus', result.anneeRevenus)
-                .set('data.data.anneeImpots', result.anneeImpots)
-                .save(callback);
-            });
+            request
+              .get(config.apiParticulier.url)
+              .send({ numeroFiscal: data.credentials.numeroFiscal, referenceAvis: data.credentials.referenceAvis })
+              .set('X-API-Key', config.apiParticulier.token)
+              .set('Accept', 'application/json')
+              .end(function(err, result){
+                demande
+                  .set('data.data.anneeRevenus', result.body.anneeRevenus)
+                  .set('data.data.anneeImpots', result.body.anneeImpots)
+                  .save(callback);
+              });
           } else {
             callback();
           }

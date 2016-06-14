@@ -3,10 +3,12 @@
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var async = require('async');
-var Svair = require('svair-api');
 var wkhtmltopdf = require('wkhtmltopdf');
 var tmp = require('tmp');
 var archiver = require('archiver');
+var request = require('superagent');
+
+var config = require('../../config/environment');
 
 var Etablissement = require('./etablissement.model');
 var Demande = require('../demande/demande.model');
@@ -323,19 +325,23 @@ exports.demandes = function(req, res) {
               async.each(demandes, function(demande, eachSeriesCallback) {
                 var data = demande.data.data;
                 if (!data.anneeImpots) {
-                  var svair = new Svair('https://cfsmsp.impots.gouv.fr');
-                  svair(data.credentials.numeroFiscal, data.credentials.referenceAvis, function(err, result) {
-                    if (result && result.anneeRevenus) {
-                      demande
-                        .set('data.data.anneeRevenus', result.anneeRevenus)
-                        .set('data.data.anneeImpots', result.anneeImpots)
-                        .save(function() {
-                          eachSeriesCallback();
-                        });
-                    } else {
-                      eachSeriesCallback();
-                    }
-                  });
+                  request
+                    .get(config.apiParticulier.url)
+                    .send({ numeroFiscal: data.credentials.numeroFiscal, referenceAvis: data.credentials.referenceAvis })
+                    .set('X-API-Key', config.apiParticulier.token)
+                    .set('Accept', 'application/json')
+                    .end(function(err, result){
+                      if (result && result.body && result.body.anneeRevenus) {
+                        demande
+                          .set('data.data.anneeRevenus', result.body.anneeRevenus)
+                          .set('data.data.anneeImpots', result.body.anneeImpots)
+                          .save(function() {
+                            eachSeriesCallback();
+                          });
+                      } else {
+                        eachSeriesCallback();
+                      }
+                    });
                 } else {
                   eachSeriesCallback();
                 }
