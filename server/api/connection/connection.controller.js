@@ -29,7 +29,7 @@ exports.svair = function(req, res, next) {
       .query(req.query)
       .set('X-API-Key', config.apiParticulier.token)
       .set('Accept', 'application/json')
-      .end(function(err, result){
+      .end(function(err, result) {
         if (err && err.message === 'Invalid credentials') {
           res.status(404).send({
             code: 404,

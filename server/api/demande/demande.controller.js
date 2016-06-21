@@ -259,7 +259,7 @@ exports.show = function(req, res) {
               .send({ numeroFiscal: data.credentials.numeroFiscal, referenceAvis: data.credentials.referenceAvis })
               .set('X-API-Key', config.apiParticulier.token)
               .set('Accept', 'application/json')
-              .end(function(err, result){
+              .end(function(err, result) {
                 demande
                   .set('data.data.anneeRevenus', result.body.anneeRevenus)
                   .set('data.data.anneeImpots', result.body.anneeImpots)
