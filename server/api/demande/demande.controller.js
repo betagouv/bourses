@@ -116,7 +116,7 @@ function sendNotificationToAgent(identite, college, req) {
     });
 }
 
-function saveDemande(req, done) {
+function saveDemande(req, college, done) {
   var encoded = crypto.encode(req.body);
 
   var rfr;
@@ -133,12 +133,7 @@ function saveDemande(req, done) {
   }, function(err, demande) {
     if (err) { return done(err); }
 
-    Etablissement
-      .findById(demande.etablissement)
-      .exec(function(err, college) {
-        sendConfirmationToUser(req.body.identiteAdulte.email, demande, college, req);
-      });
-
+    sendConfirmationToUser(req.body.identiteAdulte.email, demande, college, req);
     sendNotificationToAgent(req.body.identiteAdulte, req.params.college, req);
 
     return done(null, demande);
@@ -147,15 +142,21 @@ function saveDemande(req, done) {
 
 // Creates a new demande in the DB.
 exports.create = function(req, res) {
-  if (isCampaignOver()) {
-    return res.status(500).send('Campaign is over');
-  }
+  Etablissement
+    .findById(req.params.college)
+    .exec()
+    .then(college => {
+      console.log(college);
+      if (isCampaignOver(college)) {
+        return res.status(500).send('Campaign is over');
+      }
 
-  saveDemande(req, function(err, demande) {
-    if (err) return handleError(req, res, err);
+      saveDemande(req, college, function(err, demande) {
+        if (err) return handleError(req, res, err);
 
-    return res.status(201).json(demande);
-  });
+        return res.status(201).json(demande);
+      });
+    });
 };
 
 // Updates a demande in the DB.

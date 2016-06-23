@@ -1,5 +1,16 @@
 <div id="college-form" class="container">
   <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
+
+    <div class="form-group required">
+      <fieldset>
+        <legend class="control-label-flat">Ouverture du service</legend>
+        <div class="btn-group">
+          <button type="button" class="btn btn-select btn-select-success" role="radio" ng-model="college.ouverture_service" btn-radio="true">Le service est ouvert</button>
+          <button type="button" class="btn btn-select btn-select-danger" role="radio" ng-model="college.ouverture_service" btn-radio="false">Le service est fermé</button>
+        </div>
+      </fieldset>
+    </div>
+
     <div class="form-group required" ng-class="{'has-error': infoForm.nom.$invalid && infoForm.$submitted}">
       <label for="nom" class="control-label-flat">Nom du collège</label>
       <input id="nom" type="text" name="nom" class="form-control-flat" ng-model="college.nom" required>

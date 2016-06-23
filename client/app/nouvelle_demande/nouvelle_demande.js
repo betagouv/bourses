@@ -7,21 +7,27 @@ angular.module('boursesApp')
         url: '/nouvelle_demande?college',
         templateUrl: 'app/nouvelle_demande/form_layout.html',
         controller: 'FormLayoutCtrl',
-        abstract: true,
-        resolve: {
-          college: function($stateParams) {
-            if ($stateParams) {
-              return $stateParams.college;
-            }
-
-            return null;
-          }
-        }
+        abstract: true
       })
       .state('layout.nouvelle_demande.identite-enfant', {
         url: '',
         templateUrl: 'app/nouvelle_demande/identite-enfant/identite-enfant.html',
-        controller: 'IdentiteEnfantCtrl'
+        controller: 'IdentiteEnfantCtrl',
+        resolve: {
+          etablissements: function($http) {
+            return $http.get('/api/etablissements').then(function(result) {
+              var data = result.data;
+
+              _.map(data, function(etablissement) {
+                if (etablissement.ville) {
+                  etablissement.label = `${etablissement.nom}, ${etablissement.ville.nom} ${etablissement.ville.codePostal}`;
+                }
+              });
+
+              return data;
+            });
+          }
+        }
       })
       .state('layout.nouvelle_demande.vos-ressources', {
         url: '/vos-ressources',

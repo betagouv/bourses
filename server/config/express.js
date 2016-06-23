@@ -79,7 +79,7 @@ module.exports = function(app) {
   };
 
   if (env === 'production') {
-    app.use(favicon(path.join(config.root, 'dist', 'favicon.ico')));
+    app.use(favicon(path.join(config.root, 'dist', 'client', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'dist')));
     app.set('appPath', config.root + '/dist');
     app.use(requestLogger);

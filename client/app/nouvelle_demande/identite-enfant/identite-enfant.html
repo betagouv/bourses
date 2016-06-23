@@ -42,17 +42,25 @@
 
   <div class="form-group required" ng-class="{'has-error': !identite.college && infoForm.$submitted}">
     <label for="select-college" class="control-label-flat">Dans quel collège est-il inscrit</label>
-    <select ng-model="identite.college" required name="college" id="select-college" class="form-control-flat"
-      ng-options="college._id as college.label group by college.ville.nom for college in etablissements">
-      <option>--</option>
-    </select>
+    <input type="text" ng-model="selectedCollegeLabel" placeholder="ex: Collège Paul Klee, Thiais, 94"typeahead-on-select="select($item)" typeahead-editable="false" typeahead="college as college.label for college in etablissements | filter:$viewValue" class="form-control">
     <div ng-if="!identite.college && infoForm.$submitted">
       <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
     </div>
     <p class="help-block help-block-warning"><i class="fa fa-warning"></i> Seuls ces établissements pilotes peuvent traiter votre demande de bourse en ligne.</p>
   </div>
 
-  <div ng-if="identite.college" class="alert alert-info">
+  <div ng-if="identite.college && !selectedCollege.ouverture_service" class="alert alert-danger">
+    <h2 class="info-title">Votre collège n'accepte pas de demandes de bourse actuellement .</h2>
+    <p>
+      Vous pouvez joindre le collège {{etablissementsById[identite.college].nom}}:
+      <ul>
+        <li ng-if="etablissementsById[identite.college].telephone">Par téléphone : {{etablissementsById[identite.college].telephone}}</li>
+        <li>Par Email : <a href="mailto:{{etablissementsById[identite.college].email}}">{{etablissementsById[identite.college].contact}}</a></li>
+      </ul>
+    </p>
+  </div>
+
+  <div ng-if="identite.college && selectedCollege.ouverture_service" class="alert alert-info">
     <h2 class="info-title">Vous avez des questions sur votre dossier de demande de bourse ?</h2>
     <p>
       Vous pouvez joindre le collège {{etablissementsById[identite.college].nom}}:
@@ -92,7 +100,7 @@
   </div>
 
   <div class="text-right">
-    <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action">
+    <button type="submit" ng-disabled="identite.college && !selectedCollege.ouverture_service" name="submit" alt="Valider" class="btn btn-lg btn-action">
         Étape suivante <i class="fa fa-long-arrow-right"></i>
     </button>
   </div>

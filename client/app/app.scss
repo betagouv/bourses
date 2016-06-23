@@ -176,6 +176,30 @@ select.form-control-flat {
   }
 }
 
+.btn-select.btn-select-success {
+  &.active {
+    background-color: $brand-success;
+    color: white;
+  }
+
+  &:focus, &:hover {
+    background-color: lighten($brand-success, 10%);
+    color: white;
+  }
+}
+
+.btn-select.btn-select-danger {
+  &.active {
+    background-color: $dark-red;
+    color: white;
+  }
+
+  &:focus, &:hover {
+    background-color: lighten($dark-red, 5%);
+    color: white;
+  }
+}
+
 .form-group.required .control-label-flat:after {
   content:" *";
   color: $dark-red;
