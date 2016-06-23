@@ -20,7 +20,7 @@ angular.module('boursesApp')
 
               _.map(data, function(etablissement) {
                 if (etablissement.ville) {
-                  etablissement.label = `${etablissement.nom}, ${etablissement.ville.nom} ${etablissement.ville.codePostal}`;
+                  etablissement.label = etablissement.nom + ', ' + etablissement.ville.nom + ' ' + etablissement.ville.codePostal;
                 }
               });
 
