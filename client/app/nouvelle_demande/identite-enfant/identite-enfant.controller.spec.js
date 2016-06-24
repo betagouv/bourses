@@ -24,7 +24,7 @@ describe('Controller: partenaire', function() {
       $controller('IdentiteEnfantCtrl', {
         $scope: scope,
         store: store,
-        college: null
+        etablissements: []
       });
     });
 

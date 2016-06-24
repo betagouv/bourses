@@ -4,7 +4,7 @@ angular.module('boursesApp')
   .controller('IdentiteEnfantCtrl', function($scope, $state, $http, $timeout, store, etablissements) {
     $scope.etablissements = etablissements;
     $scope.etablissementsById = _.indexBy(etablissements, '_id');
-    $scope.identite = store.get('identite-enfant');
+    $scope.identite = store.get('identite-enfant') || {};
 
     var etablissement = $scope.identite.college ? _.find($scope.etablissements, {_id: $scope.identite.college}) : null;
 
