@@ -30,8 +30,8 @@ angular.module('boursesApp')
       types.forEach(function(type) {
         var data = [];
         _.forEach(colleges, function(college) {
-           data.push(college.requests[type]);
-         });
+          data.push(college.requests[type]);
+        });
 
         series.push(data);
       });

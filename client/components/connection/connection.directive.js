@@ -12,6 +12,18 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
     restrict: 'EA',
     link: function(scope) {
 
+      function trimSpaces(str) {
+        return str ? str.toLowerCase().replace(/\s+/g, '') : '';
+      }
+
+      function trimNumeroFiscal(numeroFiscal) {
+        if (numeroFiscal && numeroFiscal.length > 13) {
+          return numeroFiscal.substring(0, numeroFiscal.length - 1);
+        }
+
+        return numeroFiscal;
+      }
+
       // Feature-flipping fc
       scope.enableFranceConnect = false;
 
@@ -121,18 +133,6 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         .finally(function() {
           scope.loading = false;
         });
-      }
-
-      function trimSpaces(str) {
-        return str ? str.toLowerCase().replace(/\s+/g, '') : '';
-      }
-
-      function trimNumeroFiscal(numeroFiscal) {
-        if (numeroFiscal && numeroFiscal.length > 13) {
-          return numeroFiscal.substring(0, numeroFiscal.length - 1);
-        }
-
-        return numeroFiscal;
       }
 
       function cancelCredentials() {

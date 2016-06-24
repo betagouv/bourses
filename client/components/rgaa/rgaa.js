@@ -177,13 +177,13 @@ angular.module('a11yBootstrap', ['ui.bootstrap'])
       var buttonsCtrl = controller[0];
       var ngModelCtrl = controller[1];
 
-      function getTrueValue() {
-        return getCheckboxValue(iAttrs.btnCheckboxTrue, true);
-      }
-
       function getCheckboxValue(attributeValue, defaultValue) {
         var val = $scope.$eval(attributeValue);
         return angular.isDefined(val) ? val : defaultValue;
+      }
+
+      function getTrueValue() {
+        return getCheckboxValue(iAttrs.btnCheckboxTrue, true);
       }
 
       //model -> UI

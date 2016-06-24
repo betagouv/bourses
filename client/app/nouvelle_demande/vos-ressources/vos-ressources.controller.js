@@ -2,6 +2,53 @@
 
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $location, $anchorScroll, $timeout, $modal, store) {
+
+    function isCelibataire() {
+      return $scope.dataDemandeur &&
+        ($scope.dataDemandeur.situationFamille === 'Célibataire' || $scope.dataDemandeur.sitFam === 'C');
+    }
+
+    function isGardeAlternee() {
+      return $scope.identiteEnfant.garde === 'oui';
+    }
+
+    function computeShowOtherParent() {
+      $scope.showOtherParent = isGardeAlternee() || isCelibataire();
+      if (!$scope.showOtherParent) {
+        store.set('svair_conjoint', {});
+        store.set('status_conjoint', 'pending');
+      }
+    }
+
+    function saveFoyer() {
+      store.set('foyer', $scope.foyer);
+      $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur');
+      computeShowOtherParent();
+    }
+
+    function isConcubinage() {
+      return $scope.foyer.concubinage === 'oui';
+    }
+
+    function showOtherParentConnection() {
+      return isGardeAlternee() || isConcubinage();
+    }
+
+    function isDataValid() {
+      var statusDemandeur = store.get('status_demandeur');
+      var statusConjoint = store.get('status_conjoint');
+
+      if (statusDemandeur !== 'success') {
+        return false;
+      }
+
+      if (showOtherParentConnection() && statusConjoint !== 'success') {
+        return false;
+      }
+
+      return true;
+    }
+
     $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur');
     var storedFoyer = store.get('foyer');
     if (storedFoyer) {
@@ -48,52 +95,6 @@ angular.module('boursesApp')
       saveFoyer();
       $state.go('layout.nouvelle_demande.vos-renseignements');
     };
-
-    function saveFoyer() {
-      store.set('foyer', $scope.foyer);
-      $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur');
-      computeShowOtherParent();
-    }
-
-    function isDataValid() {
-      var statusDemandeur = store.get('status_demandeur');
-      var statusConjoint = store.get('status_conjoint');
-
-      if (statusDemandeur !== 'success') {
-        return false;
-      }
-
-      if (showOtherParentConnection() && statusConjoint !== 'success') {
-        return false;
-      }
-
-      return true;
-    }
-
-    function showOtherParentConnection() {
-      return isGardeAlternee() || isConcubinage();
-    }
-
-    function computeShowOtherParent() {
-      $scope.showOtherParent = isGardeAlternee() || isCelibataire();
-      if (!$scope.showOtherParent) {
-        store.set('svair_conjoint', {});
-        store.set('status_conjoint', 'pending');
-      }
-    }
-
-    function isConcubinage() {
-      return $scope.foyer.concubinage === 'oui';
-    }
-
-    function isCelibataire() {
-      return $scope.dataDemandeur &&
-        ($scope.dataDemandeur.situationFamille === 'Célibataire' || $scope.dataDemandeur.sitFam === 'C');
-    }
-
-    function isGardeAlternee() {
-      return $scope.identiteEnfant.garde === 'oui';
-    }
 
     $scope.showOtherParentConnection = showOtherParentConnection;
     $scope.isCelibataire = isCelibataire;
