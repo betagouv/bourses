@@ -17,6 +17,7 @@
     "express-jwt": "^3.0.1",
     "express-session": "^1.11.2",
     "jsonwebtoken": "^5.0.2",
+    "kerberos": "0.0.21",
     "lodash": "^3.9.3",
     "method-override": "^2.3.3",
     "moment": "^2.10.3",
@@ -62,6 +63,7 @@
     "grunt-rev": "~0.1.0",
     "grunt-usemin": "3.0.0",
     "grunt-wiredep": "2.0.0",
+    "jasmine-core": "^2.4.1",
     "jit-grunt": "^0.9.1",
     "karma": "0.13.9",
     "karma-html2js-preprocessor": "~0.1.0",
@@ -73,6 +75,7 @@
     "karma-script-launcher": "~0.1.0",
     "load-grunt-config": "^0.17.2",
     "open": "0.0.5",
+    "phantomjs": "^2.1.7",
     "requirejs": "^2.1.17",
     "should": "^7.1.0",
     "time-grunt": "^1.2.1"
