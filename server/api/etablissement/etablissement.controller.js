@@ -322,37 +322,6 @@ exports.demandes = function(req, res) {
             },
 
             function(demandes, waterFallCallback) {
-              async.each(demandes, function(demande, eachSeriesCallback) {
-                var data = demande.data.data;
-                if (!data.anneeImpots) {
-                  request
-                    .get(config.apiParticulier.url)
-                    .send({ numeroFiscal: data.credentials.numeroFiscal, referenceAvis: data.credentials.referenceAvis })
-                    .set('X-API-Key', config.apiParticulier.token)
-                    .set('Accept', 'application/json')
-                    .end(function(err, result) {
-                      if (result && result.body && result.body.anneeRevenus) {
-                        demande
-                          .set('data.data.anneeRevenus', result.body.anneeRevenus)
-                          .set('data.data.anneeImpots', result.body.anneeImpots)
-                          .save(function() {
-                            eachSeriesCallback();
-                          });
-                      } else {
-                        eachSeriesCallback();
-                      }
-                    });
-                } else {
-                  eachSeriesCallback();
-                }
-              },
-
-              function() {
-                waterFallCallback(null, demandes);
-              });
-            },
-
-            function(demandes, waterFallCallback) {
               duplicates.findDuplicates(demandes, etablissement, waterFallCallback);
             },
 

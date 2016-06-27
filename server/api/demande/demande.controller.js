@@ -16,6 +16,7 @@ var Etablissement = require('../etablissement/etablissement.model');
 var Generator = require('../../components/pdf/generator');
 var sendMail = require('../../components/mail/send-mail').sendMail;
 var crypto = require('../../components/crypto/crypto');
+var apiParticulier = require('../../components/api_particulier/api_particulier');
 var duplicates = require('../../components/duplicates/duplicates');
 var isCampaignOver = require('../../components/time/time').isCampaignOver;
 
@@ -117,27 +118,56 @@ function sendNotificationToAgent(identite, college, req) {
 }
 
 function saveDemande(req, college, done) {
-  var encoded = crypto.encode(req.body);
+  const body = req.body;
+  const demandeur = body.data;
+  const conjoint = body.data_conjoint;
 
-  var rfr;
-  if (encoded.data_conjoint && encoded.data_conjoint.revenuFiscalReference) {
-    rfr = encoded.data.revenuFiscalReference + encoded.data_conjoint.revenuFiscalReference;
-  } else {
-    rfr = encoded.data.revenuFiscalReference;
-  }
+  return apiParticulier(demandeur.credentials.numeroFiscal, demandeur.credentials.referenceAvis)
+    .then(result => {
+      result.identites = demandeur.identites;
+      result.credentials = demandeur.credentials;
 
-  Demande.create({
-    etablissement: req.params.college,
-    data: encoded,
-    rfr: rfr
-  }, function(err, demande) {
-    if (err) { return done(err); }
+      body.data = result;
+    })
+    .then(() => {
+      if (conjoint.credentials) {
+        return apiParticulier(conjoint.credentials.numeroFiscal, conjoint.credentials.referenceAvis);
+      }
+    })
+    .then(result => {
+      if (result) {
+        result.identites = conjoint.identites;
+        result.credentials = conjoint.credentials;
 
-    sendConfirmationToUser(req.body.identiteAdulte.email, demande, college, req);
-    sendNotificationToAgent(req.body.identiteAdulte, req.params.college, req);
+        body.data_conjoint = result;
+      }
+    })
+    .then(() => {
+      var encoded = crypto.encode(body);
 
-    return done(null, demande);
-  });
+      var rfr;
+      if (encoded.data_conjoint && encoded.data_conjoint.revenuFiscalReference) {
+        rfr = encoded.data.revenuFiscalReference + encoded.data_conjoint.revenuFiscalReference;
+      } else {
+        rfr = encoded.data.revenuFiscalReference;
+      }
+
+      return Demande.create({
+        etablissement: req.params.college,
+        data: encoded,
+        rfr: rfr
+      }, function(err, demande) {
+        if (err) { return done(err); }
+
+        sendConfirmationToUser(body.identiteAdulte.email, demande, college, req);
+        sendNotificationToAgent(body.identiteAdulte, req.params.college, req);
+
+        return done(null, demande);
+      });
+    })
+    .catch(err => {
+      return done(err);
+    });
 }
 
 // Creates a new demande in the DB.
@@ -146,7 +176,7 @@ exports.create = function(req, res) {
     .findById(req.params.college)
     .exec()
     .then(college => {
-      console.log(college);
+
       if (isCampaignOver(college)) {
         return res.status(500).send('Campaign is over');
       }
@@ -254,18 +284,6 @@ exports.show = function(req, res) {
             demande
               .set('status', 'pending')
               .save(callback);
-          } else if (!data.anneeImpots) {
-            request
-              .get(config.apiParticulier.url)
-              .send({ numeroFiscal: data.credentials.numeroFiscal, referenceAvis: data.credentials.referenceAvis })
-              .set('X-API-Key', config.apiParticulier.token)
-              .set('Accept', 'application/json')
-              .end(function(err, result) {
-                demande
-                  .set('data.data.anneeRevenus', result.body.anneeRevenus)
-                  .set('data.data.anneeImpots', result.body.anneeImpots)
-                  .save(callback);
-              });
           } else {
             callback();
           }

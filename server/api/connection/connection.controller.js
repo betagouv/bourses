@@ -7,6 +7,8 @@ var request = require('superagent');
 
 var config = require('../../config/environment');
 
+var apiParticulier = require('../../components/api_particulier/api_particulier');
+
 var agentOptions = { hostname: config.dgfip.host };
 
 if (config.dgfip.cert && config.dgfip.key) {
@@ -17,36 +19,14 @@ if (config.dgfip.cert && config.dgfip.key) {
 var boris = new https.Agent(agentOptions);
 
 exports.svair = function(req, res, next) {
-  if (!req.query.numeroFiscal || !req.query.referenceAvis) {
-    return res.status(400).send({
-      code: 400,
-      message: 'Requête incorrecte',
-      explaination: 'Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.'
-    });
-  } else {
-    request
-      .get(config.apiParticulier.url)
-      .query(req.query)
-      .set('X-API-Key', config.apiParticulier.token)
-      .set('Accept', 'application/json')
-      .end(function(err, result) {
-        if (err && err.message === 'Invalid credentials') {
-          res.status(404).send({
-            code: 404,
-            message: 'Résultat non trouvé',
-            explaination: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
-          });
-        } else if (err) {
-          next(err);
-        } else {
-          if (!result.body.declarant2.nom) {
-            delete result.body.declarant2;
-          }
 
-          res.json(result.body);
-        }
-      });
-  }
+  apiParticulier(req.query.numeroFiscal, req.query.referenceAvis, function(err, result) {
+    if (err) {
+      return res.status(err.code).send(err);
+    }
+
+    return res.json(result);
+  });
 };
 
 function fetchData(accessToken, year, done) {
@@ -61,13 +41,6 @@ function fetchData(accessToken, year, done) {
       done(null, resp.text);
     });
 }
-
-exports.mockData = function(req, res) {
-  res.json({
-    identites: [{nom: 'DUPONT', prenoms: 'MARCEL'}],
-    rfr: 0, sitFam:'C', nbPart:'1.0', pac:{nbPac:'0'}
-  });
-};
 
 exports.fc = function(req, res, next) {
   if (!req.user || !req.user.accessToken) {
