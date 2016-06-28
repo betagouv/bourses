@@ -9,6 +9,7 @@ var moment = require('moment');
 var async = require('async');
 var tmp = require('tmp');
 var request = require('superagent');
+var Promise = require('bluebird');
 
 var config = require('../../config/environment');
 var Demande = require('./demande.model');
@@ -16,7 +17,7 @@ var Etablissement = require('../etablissement/etablissement.model');
 var Generator = require('../../components/pdf/generator');
 var sendMail = require('../../components/mail/send-mail').sendMail;
 var crypto = require('../../components/crypto/crypto');
-var apiParticulier = require('../../components/api_particulier/api_particulier');
+var apiParticulier = Promise.promisify(require('../../components/api_particulier/api_particulier'));
 var duplicates = require('../../components/duplicates/duplicates');
 var isCampaignOver = require('../../components/time/time').isCampaignOver;
 
@@ -128,19 +129,23 @@ function saveDemande(req, college, done) {
       result.credentials = demandeur.credentials;
 
       body.data = result;
+      return null;
     })
     .then(() => {
       if (conjoint.credentials) {
         return apiParticulier(conjoint.credentials.numeroFiscal, conjoint.credentials.referenceAvis);
       }
+
+      return null;
     })
     .then(result => {
       if (result) {
         result.identites = conjoint.identites;
         result.credentials = conjoint.credentials;
-
         body.data_conjoint = result;
       }
+
+      return null;
     })
     .then(() => {
       var encoded = crypto.encode(body);
@@ -176,7 +181,6 @@ exports.create = function(req, res) {
     .findById(req.params.college)
     .exec()
     .then(college => {
-
       if (isCampaignOver(college)) {
         return res.status(500).send('Campaign is over');
       }

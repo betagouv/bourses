@@ -1,5 +1,6 @@
 const request = require('superagent');
 const config = require('../../config/environment');
+const Promise = require('bluebird');
 
 const incorrect = {
   code: 400,
@@ -24,15 +25,15 @@ module.exports = function(numeroFiscal, referenceAvis, done) {
       .set('Accept', 'application/json')
       .end(function(err, result) {
         if (err && err.message === 'Invalid credentials') {
-          return done ? done(notFound) : Promise.reject(incorrect);
+          return done(notFound);
         } else if (err) {
-          return done ? done(err) : Promise.reject(incorrect);
+          return done(err);
         } else {
           if (!result.body.declarant2.nom) {
             delete result.body.declarant2;
           }
 
-          return done ? done(null, result.body) : Promise.resolve(incorrect);
+          return done(null, result.body);
         }
       });
   }

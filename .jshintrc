@@ -19,5 +19,6 @@
   "smarttabs": true,
   "globals": {
     "angular": false
-  }
+  },
+  "predef"   : ["-Promise"]
 }
