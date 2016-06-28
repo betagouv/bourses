@@ -55,7 +55,7 @@ function sendNotificationToUser(demande, etablissement, stream, req, cb) {
   sendMail(demande.notification.email, etablissement.contact, subject, body, stream, function(error, info) {
     if (error) {
       var msg = 'Nous avons rencontré une erreur lors de l\'envoi d\'un mail vers ' + demande.data.identiteAdulte.email + '<br>' +
-          'Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l\'adresse bourse@sgmap.fr';
+          'Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l\'adresse contact@bourse.beta.gouv.fr';
       demande
         .set('status', 'error')
         .set('error', {msg: msg, detail: error})
@@ -79,10 +79,10 @@ function sendConfirmationToUser(email, demande, college, req) {
 
   body += '.<body><html>';
 
-  sendMail(email, 'bourse@sgmap.fr', subject, body, null, function(error, info) {
+  sendMail(email, 'contact@bourse.beta.gouv.fr', subject, body, null, function(error, info) {
     if (error) {
       var msg = 'Nous avons rencontré une erreur lors de l\'envoi d\'un mail vers ' + demande.data.identiteAdulte.email + '. ' +
-          'Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l\'adresse bourse@sgmap.fr';
+          'Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l\'adresse contact@bourse.beta.gouv.fr';
       demande
         .set('status', 'error')
         .set('error', {msg: msg, detail: error})
@@ -110,7 +110,7 @@ function sendNotificationToAgent(identite, college, req) {
           '<h3><a href="' + dashboard + '">Cliquez ici pour voir la liste des demandes passées</a></h3>\n' +
           'Si le lien ne marche pas, vous pouvez copier/coller cette adresse dans votre navigateur:\n' + dashboard;
 
-        sendMail(email, 'bourse@sgmap.fr', subject, body, null, function(error, info) {
+        sendMail(email, 'contact@bourse.beta.gouv.fr', subject, body, null, function(error, info) {
           logMail(req.log, error, info);
         });
       }
