@@ -3,63 +3,97 @@
     <h1>Connexion à l'espace intendant</h1>
   </div>
   <div class="content-box">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-5">
-          <form class="form" name="form" ng-submit="login(form)" novalidate>
-            <div class="form-group required" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
-              <label for="email" class="control-label-flat">Email</label>
-              <input id="email" type="email" name="email" class="form-control-flat" ng-model="user.email" required>
-              <div ng-messages="form.email.$error" ng-if="form.$submitted">
-                <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-              </div>
-            </div>
-
-            <div class="form-group required" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
-              <label for="password" class="control-label-flat">Mot de passe</label>
-              <input id="password" type="password" name="password" class="form-control-flat" ng-model="user.password" required>
-              <div ng-messages="form.password.$error" ng-if="form.$submitted">
-                <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-              </div>
-            </div>
-
-            <p class="alert alert-danger" ng-if="errors.other"><i class="fa fa-warning"></i> {{errors.other}}</p>
-
-            <div class="text-right">
-              <button class="btn btn-action-invert btn-lg btn-login" type="submit">
-                Connexion
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <div class="col-sm-5 col-sm-offset-2 text-center">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" allowfullscreen src="//www.youtube.com/v/6FOz4E_W6I4"></iframe>
-          </div>
+    <form class="form" name="form" ng-submit="login(form)" novalidate>
+      <div class="form-group required" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
+        <label for="email" class="control-label-flat">Email</label>
+        <input id="email" type="email" name="email" class="form-control-flat" ng-model="user.email" required>
+        <div ng-messages="form.email.$error" ng-if="form.$submitted">
+          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         </div>
       </div>
-    </div>
+
+      <div class="form-group required" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
+        <label for="password" class="control-label-flat">Mot de passe</label>
+        <input id="password" type="password" name="password" class="form-control-flat" ng-model="user.password" required>
+        <div ng-messages="form.password.$error" ng-if="form.$submitted">
+          <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        </div>
+      </div>
+
+      <p class="alert alert-danger" ng-if="errors.other"><i class="fa fa-warning"></i> {{errors.other}}</p>
+
+      <div class="text-right">
+        <button class="btn btn-action-invert btn-lg btn-login" type="submit">
+          Connexion
+        </button>
+      </div>
+    </form>
   </div>
 
   <div class="container">
     <h2>Préparez la rentrée 2016-2017</h2>
-    <br>
-    <br>
+
     <div class="row">
-      <div class="col-sm-5 text-center">
-        <a href="https://docs.google.com/a/octo.com/forms/d/1eaJ29H8M0gta_sXqcTfoV4UO2b7VYvdi_TUTviS8Hy8/prefill" target="_blank">
-          <p>Inscrivez votre collège</p>
-          <img src="/assets/images/google_form.jpg" alt="Inscrivez votre collège">
-        </a>
+      <div class="col-sm-4">
+        <div class="ui card">
+          <a class="image half" href="https://www.youtube.com/watch?v=6FOz4E_W6I4" target="_blank">
+            <img src="/assets/images/video_presentation.png" title="Vidéo de présentation" style="">
+          </a>
+          <div class="content">
+            <a class="header" href="https://www.youtube.com/watch?v=6FOz4E_W6I4" target="_blank">La vidéo</a>
+            <div class="meta">
+              <a href="https://www.youtube.com/watch?v=6FOz4E_W6I4" target="_blank">Regardez notre vidéo de présentation du service</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-5 col-sm-offset-2 text-center">
-        <a href="assets/files/flyer_usager.pptx" download target="self">
-          <p>Télécharger le flyer à destination des usager</p>
-          <img src="/assets/images/preview_flyer.jpg" alt="Télécharger le flyer à destination des usager">
-        </a>
+
+      <div class="col-sm-4">
+        <div class="ui card">
+          <a class="image half" href="assets/files/flyer_usager.pptx" download target="self">
+            <img src="/assets/images/preview_flyer.jpg" title="Téléchargez le flyer à destination des usager" style="">
+          </a>
+          <div class="content">
+            <a class="header" href="assets/files/flyer_usager.pptx" download target="self">Le flyer</a>
+            <div class="meta">
+              <a href="assets/files/flyer_usager.pptx" download target="self">Téléchargez le flyer à destination des usager</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="ui card">
+          <a class="image half" href="https://docs.google.com/a/octo.com/forms/d/1eaJ29H8M0gta_sXqcTfoV4UO2b7VYvdi_TUTviS8Hy8/prefill" target="_blank">
+            <img src="/assets/images/google_form.jpg" title="Formulaire d'inscription" style="">
+          </a>
+          <div class="content">
+            <a class="header" href="https://docs.google.com/a/octo.com/forms/d/1eaJ29H8M0gta_sXqcTfoV4UO2b7VYvdi_TUTviS8Hy8/prefill" target="_blank">Inscription</a>
+            <div class="meta">
+              <a href="https://docs.google.com/a/octo.com/forms/d/1eaJ29H8M0gta_sXqcTfoV4UO2b7VYvdi_TUTviS8Hy8/prefill" target="_blank">Inscrivez votre collège pour participer au service</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="ui card">
+          <a class="image half" href="https://github.com/sgmap/bourses/wiki/FAQ" target="_blank">
+            <img src="/assets/images/faq.png" title="FAQ" style="">
+          </a>
+          <div class="content">
+            <a class="header" href="https://github.com/sgmap/bourses/wiki/FAQ" target="_blank">La FAQ</a>
+            <div class="meta">
+              <a href="https://github.com/sgmap/bourses/wiki/FAQ" target="_blank">Consultez notre Foire Aux Questions</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
     <br>
     <br>
   </div>
