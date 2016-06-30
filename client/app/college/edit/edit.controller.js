@@ -60,7 +60,7 @@ angular.module('boursesApp')
       }
 
       Etablissement.update($scope.college, function() {
-        $state.go('layout.college.demandes.pending', {}, {reload: true});
+        $state.go('.', {}, {reload: true});
       });
     };
   });
