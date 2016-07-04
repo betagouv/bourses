@@ -13,12 +13,13 @@
 
       .info-label {
         color: #333;
-        font-size: 15px;
+        font-size: 13px;
       }
 
       p.info {
         font-size: 14px;
         margin: 4px 0;
+        font-weight: bold;
       }
 
       img {
@@ -58,6 +59,11 @@
 
     <div class="info-label">Nombre d'enfants majeurs célibataires</div>
     <p class="info">{{foyer.nombreEnfantsAdultes}}</p>
+
+    {{#identiteEnfant.cantine}}
+      <div class="info-label">Cantine</div>
+      <p class="info">Demande de tarification spécifique pour la cantine</p>
+    {{/identiteEnfant.cantine}}
 
     <div class="left">
       <h2>Identité de l'enfant</h2>
@@ -112,6 +118,8 @@
       <div class="info-label">Téléphone</div>
       <p class="info">{{identiteAdulte.phone}}</p>
     </div>
+
+    <div class="clear"></div>
 
     <h2>Renseignements bancaires</h2>
 

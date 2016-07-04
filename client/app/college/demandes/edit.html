@@ -56,8 +56,16 @@
           </div>
         </div>
 
-        <div class="info-label">Déductibilité</div>
-        <p class="info">{{demande.identiteEnfant.regime | deductibilite}}</p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="info-label">Déductibilité</div>
+            <p class="info">{{demande.identiteEnfant.regime | deductibilite}}</p>
+          </div>
+          <div class="col-md-6" ng-if="college.gestion_cantine">
+            <div class="info-label">Demande de tarification spécifique pour la cantine</div>
+            <p class="info">{{demande.identiteEnfant.cantine | boolean}}</p>
+          </div>
+        </div>
 
         <h2>Vos observations</h2>
 

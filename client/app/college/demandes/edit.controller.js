@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, $modal, $state, Auth, demandeId, demande) {
+  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, $modal, $state, Auth, demandeId, demande, college) {
     $scope.demande = demande;
     $scope.demandeId = demandeId;
     $scope.token = Auth.getToken();
-
+    $scope.college = college;
     $scope.$emit('updateCount');
 
     var myEl = angular.element(document.querySelector('#nav-menu'));

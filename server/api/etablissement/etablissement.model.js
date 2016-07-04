@@ -15,7 +15,8 @@ var EtablissementSchema = new Schema({
     nom: String,
     codePostal: String
   },
-  ouverture_service: {type: Boolean, default: false}
+  ouverture_service: {type: Boolean, default: false},
+  gestion_cantine: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('Etablissement', EtablissementSchema);

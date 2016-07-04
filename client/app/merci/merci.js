@@ -9,7 +9,9 @@ angular.module('boursesApp')
         controller: function($scope, $http, store) {
           $scope.email = store.get('identite-adulte').email;
 
-          var etablissementId = store.get('identite-enfant').college;
+          var identite = store.get('identite-enfant');
+          var etablissementId = identite.college;
+          $scope.cantine = identite.college && identite.regime === 'demi-pensionnaire' && identite.cantine === true;
 
           $http.get('/api/etablissements/byId/' + etablissementId).then(function(result) {
             $scope.etablissement = result.data;

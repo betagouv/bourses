@@ -22,6 +22,17 @@ angular.module('boursesApp')
       }
     };
   })
+  .filter('boolean', function() {
+    return function(input) {
+      if (input === true) {
+        return 'Oui';
+      } else if (typeof input !== 'undefined') {
+        return 'Non';
+      } else {
+        return 'N/A';
+      }
+    };
+  })
   .filter('regime', function() {
     return function(input) {
       switch (input) {

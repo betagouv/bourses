@@ -1,8 +1,5 @@
 default:
-  - 'newer:jshint'
-  - 'jscs'
-  - 'test'
-  - 'build'
+  - 'serve'
 
 serve:
   - 'clean:server'
