@@ -87,7 +87,7 @@
 
   <div class="form-group required" ng-init="identite.cantine = false" ng-if="identite.college && identite.regime === 'demi-pensionnaire'" ng-class="{'has-error': !identite.regime && infoForm.$submitted}">
     <fieldset>
-      <legend class="control-label-flat">Souhaitez-vous que cette demande serve aussi de demande de tarification spécifique pour la cantine ?</legend>
+      <legend class="control-label-flat">Souhaitez-vous que cette demande serve aussi de demande d'aide départementale pour la demi-pension ?</legend>
       <div class="btn-group">
         <button type="button" class="btn btn-select" role="radio" ng-model="identite.cantine" btn-radio="true">Oui</button>
         <button type="button" class="btn btn-select" role="radio" ng-model="identite.cantine" btn-radio="false">Non</button>
