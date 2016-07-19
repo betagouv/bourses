@@ -50,7 +50,7 @@ function formatLien(input) {
   }
 }
 
-exports.toHtml = function(demande, path, done) {
+exports.toHtml = function(demande, college, path, done) {
   async.series({
     template: function(callback) {
       callback(null, template);
@@ -66,6 +66,7 @@ exports.toHtml = function(demande, path, done) {
       formatted.identiteEnfant.regime = formatRegime(demande.identiteEnfant.regime);
       formatted.identiteAdulte.lien = formatLien(demande.identiteAdulte.lien);
 
+      formatted.college = college;
       formatted.path = path;
       callback(null, formatted);
     }

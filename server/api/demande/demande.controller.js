@@ -349,10 +349,18 @@ exports.download = function(req, res) {
 
       if (!demande) { return res.sendStatus(404); }
 
-      var decoded = crypto.decode(demande);
-      Generator.toHtml(decoded, host, function(html) {
-        wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
-      });
+      Etablissement
+        .findById(demande.etablissement)
+        .exec(function(err, college) {
+          if (err) { return handleError(req, res, err); }
+
+          if (!college) { return res.sendStatus(404); }
+
+          var decoded = crypto.decode(demande);
+          Generator.toHtml(decoded, college, host, function(html) {
+            wkhtmltopdf(html, {encoding: 'UTF-8'}).pipe(res);
+          });
+        });
     });
 };
 

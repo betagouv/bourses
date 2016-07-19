@@ -200,7 +200,7 @@ exports.listeDemandes = function(req, res) {
 
             async.eachLimit(demandes, 8, function(demande, eachSeriesCallback) {
               var decoded = crypto.decode(demande);
-              Generator.toHtml(decoded, host, function(html) {
+              Generator.toHtml(decoded, etablissement, host, function(html) {
                 var fileName = path + '/notification_' + decoded.identiteEnfant.prenom + '_' + decoded.identiteEnfant.nom + '.pdf';
                 wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
                   eachSeriesCallback();
