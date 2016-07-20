@@ -56,14 +56,14 @@ angular.module('boursesApp')
     };
   })
   .filter('lien', function() {
-    return function(input) {
+    return function(input, lowercase) {
       switch (input) {
         case 'pere':
-          return 'Père';
+          return lowercase ? 'le père' : 'Père';
         case 'mere':
-          return 'Mère';
+          return lowercase ? 'la mère' : 'Mère';
         default:
-          return 'Responsable légal';
+          return lowercase ? 'le responsable légal' : 'Responsable légal';
       }
     };
   })
