@@ -133,14 +133,27 @@
 
     <h2>Renseignements issus de la déclaration d'impôt <strong>{{data.anneeImpots}}</strong> sur les revenus de l'année <strong>{{data.anneeRevenus}}</strong></h2>
 
-    <div class="info-label">Nombre de parts</div>
-    <p class="info">{{data.nombreParts}}</p>
+    <div class="left">
+      <div class="info-label">Nombre de parts</div>
+      <p class="info">{{data.nombreParts}}</p>
 
-    <div class="info-label">Revenu fiscal de référence</div>
-    <p class="info">{{data.revenuFiscalReference}} €</p>
+      <div class="info-label">Revenu fiscal de référence</div>
+      <p class="info">{{data.revenuFiscalReference}} €</p>
 
-    <div class="info-label">Situation familiale</div>
-    <p class="info">{{data.situationFamille}}</p>
+      <div class="info-label">Situation familiale</div>
+      <p class="info">{{data.situationFamille}}</p>
+    </div>
+
+    <div class="right">
+      <div class="info-label">Numéro fiscal</div>
+      <p class="info">{{data.credentials.numeroFiscal}}</p>
+
+      <div class="info-label">Référence de l'avis</div>
+      <p class="info">{{data.credentials.referenceAvis}}</p>
+
+      <div class="info-label">Vérifier l'exactitude des données</div>
+      <a href="https://cfsmsp.impots.gouv.fr/secavis" target="_blank" class="info">https://cfsmsp.impots.gouv.fr/secavis</a>
+    </div>
 
     {{#observations}}
       <h2>Vos observations</h2>
