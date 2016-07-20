@@ -9,12 +9,6 @@ angular.module('boursesApp')
         authenticate: true,
         abstract: true
       })
-      .state('layout.college.demandes.create', {
-        url: '/nouvelle_demande',
-        templateUrl: 'app/college/demandes/create/create.html',
-        authenticate: true,
-        controller: 'DemandeCreateCtrl'
-      })
       .state('layout.college.demandes.new', {
         url: '/nouvelles?recherche&currentPage',
         templateUrl: 'app/college/demandes/liste.html',
