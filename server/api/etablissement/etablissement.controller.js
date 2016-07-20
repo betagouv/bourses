@@ -263,7 +263,6 @@ exports.listeRIBs = function(req, res) {
             demande.data.identiteEnfant.prenom = toUpper(demande.data.identiteEnfant.prenom);
             demande.data.identiteEnfant.nom = toUpper(demande.data.identiteEnfant.nom, true);
 
-            demande.data.identiteAdulte.titulaire = toUpper(demande.data.identiteAdulte.titulaire);
             demande.data.identiteAdulte.bic = toUpper(demande.data.identiteAdulte.bic, true);
           });
 
