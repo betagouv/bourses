@@ -13,6 +13,26 @@ angular.module('boursesApp')
 
     var steps = store.get('steps');
 
+    function clean(value) {
+      return value
+        .replace(/á|à|â|ä/g, 'a')
+        .replace(/è|é|ê|ë/g, 'e')
+        .replace(/í|î|ï/g, 'i')
+        .replace(/ó|ô|ö/g, 'o')
+        .replace(/ú|û|ù/g, 'u')
+        .replace(/ /g, '')
+        .toLowerCase();
+    }
+
+    $scope.search = function(query) {
+      return function(college) {
+        return !query ||
+          (clean(college.ville.nom).indexOf(clean(query)) !== -1) ||
+          (clean(college.nom).indexOf(clean(query)) !== -1) ||
+          (college.ville.codePostal.startsWith(query));
+      };
+    };
+
     $scope.select = function(item) {
       $scope.identite.college = item._id;
       $scope.selectedCollege = item;
