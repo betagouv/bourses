@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DeleteCtrl', function($scope, $http, $modalInstance, demande) {
+  .controller('DeleteCtrl', function($scope, $http, $uibModalInstance, demande) {
     $scope.demande = demande;
 
     $scope.submit = function() {
       $http
         .delete('api/demandes/' + demande._id)
         .then(function() {
-          $modalInstance.close();
+          $uibModalInstance.close();
         });
     };
 
     $scope.cancel = function() {
-      $modalInstance.dismiss();
+      $uibModalInstance.dismiss();
     };
   });

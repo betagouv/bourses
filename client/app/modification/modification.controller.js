@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('ModificationCtrl', function($scope, demande, $modal, $state, $stateParams, $http, simulation) {
+  .controller('ModificationCtrl', function($scope, demande, $uibModal, $state, $stateParams, $http, simulation) {
     $scope.demande = demande;
 
     $scope.doNothing = function() {};
@@ -17,16 +17,16 @@ angular.module('boursesApp')
 
       $http.post('/api/demandes/modification?token=' + $stateParams.token, {data: data, montant: montant})
         .success(function() {
-          $modal.open({
+          $uibModal.open({
             animation: true,
             templateUrl: 'app/modification/success.html',
             resolve: {
               newMontant: montant
             },
-            controller: function($scope, $modalInstance, newMontant) {
+            controller: function($scope, $uibModalInstance, newMontant) {
               $scope.newMontant = newMontant;
               $scope.ok = function() {
-                $modalInstance.dismiss();
+                $uibModalInstance.dismiss();
                 $state.go('layout.home');
               };
             }

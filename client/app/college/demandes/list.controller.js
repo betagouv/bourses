@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeListCtrl', function($scope, $http, $modal, $state, $timeout, Auth, Etablissement, id, status, recherche, currentPage) {
+  .controller('DemandeListCtrl', function($scope, $http, $uibModal, $state, $timeout, Auth, Etablissement, id, status, recherche, currentPage) {
     $scope.status = status;
     $scope.recherche = recherche;
     $scope.currentPage = currentPage;
@@ -34,7 +34,7 @@ angular.module('boursesApp')
     };
 
     $scope.notification = function(demande) {
-      var instance = $modal.open({
+      var instance = $uibModal.open({
         animation: true,
         templateUrl: 'app/college/demandes/notification/notification.html',
         controller: 'NotificationCtrl',
