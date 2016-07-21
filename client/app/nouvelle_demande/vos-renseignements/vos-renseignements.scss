@@ -1,0 +1,12 @@
+.final-send {
+  @extend .alert, .alert-success;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 15px;
+  align-items: center;
+
+  button {
+    margin-top: 5px;
+  }
+}

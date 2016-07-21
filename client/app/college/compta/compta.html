@@ -21,7 +21,6 @@
       <thead>
         <tr>
           <th>Demandeur</th>
-          <th>Titulaire</th>
           <th>Taux accordé</th>
           <th>IBAN</th>
           <th>BIC</th>
@@ -31,7 +30,6 @@
       <tbody>
         <tr ng-repeat="demande in demandes | filter:searchText" ng-class="{duplicate: demande.isDuplicate, 'warning-demande': isWarning(demande), 'new': demande.status === 'new'}">
           <td><a class="detail" ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteAdulte.demandeur.nom | capitalize}}, {{demande.identiteAdulte.demandeur.prenoms | capitalize:true}}</a></td>
-          <td><a href="#" onaftersave="update(demande, 'titulaire')" editable-text="demande.identiteAdulte.titulaire">{{ demande.identiteAdulte.titulaire }}</a></td>
           <td class="text-center">{{demande.notification.montant}} €</td>
           <td><a href="#" onaftersave="update(demande, 'iban')" editable-text="demande.identiteAdulte.iban">{{demande.identiteAdulte.iban}}</a></td>
           <td><a href="#" onaftersave="update(demande, 'bic')" editable-text="demande.identiteAdulte.bic">{{demande.identiteAdulte.bic}}</a></td>

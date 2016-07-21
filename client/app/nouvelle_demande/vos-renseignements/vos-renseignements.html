@@ -34,22 +34,10 @@
   <div class="form-section">
     <h2>Vos informations bancaires</h2>
 
-    <div class="alert alert-warning">
-      Ces informations bancaires sont nécessaires au paiement de votre bourse. <br>
-      <i class="fa fa-warning"></i> Le titulaire du compte doit être la personne qui fait la demande de bourse.</p>
-    </div>
-
-    <div class="form-group required" ng-class="{'has-error': !identite.titulaire && infoForm.$submitted}">
-      <label class="control-label-flat">Titulaire du compte</label>
-      <input type="text" class="form-control-flat" name="titulaire" ng-model="identite.titulaire" required>
-      <div ng-if="!identite.titulaire && infoForm.$submitted">
-        <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-      </div>
-    </div>
-
     <div class="form-group required" ng-class="{'has-error': infoForm.iban.$invalid && infoForm.$submitted}">
       <label for="iban-input" class="control-label-flat">IBAN</label>
       <input type="text" id="iban-input" class="form-control-flat" name="iban" ng-model="identite.iban" ng-iban="FR" required/>
+      <p class="help-block"><i class="fa fa-warning"></i> Le titulaire de ce compte doit être la personne qui fait la demande de bourse.</p>
       <div ng-messages="infoForm.iban.$error" ng-if="infoForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block" ng-message='iban'><i class="fa fa-warning"></i> L'IBAN saisi est incorrect.</p>
@@ -83,9 +71,12 @@
     </div>
   </div>
 
-  <div class="text-right">
+  <div class="final-send">
+    <p>En envoyant cette demande, vous attestez que vous êtes bien <b>{{getLabel(identite.demandeur)}}</b>, <b>{{identite.lien | lien:true}}</b> de <b>{{identiteEnfant.prenom}} {{identiteEnfant.nom}}</b><span ng-if="identite.iban">, <b>titulaire du compte {{identite.iban}}</b></span>.</p>
+
     <button type="submit" ladda="loading" data-style="expand-right" name="submit" alt="Valider" class="btn btn-lg btn-success">
         Envoyer votre demande
     </button>
   </div>
+
 </form>

@@ -93,9 +93,6 @@
       <section id="section-bancaire">
         <h2>Renseignements bancaires</h2>
 
-        <div class="info-label">Titulaire du compte</div>
-        <p class="info">{{demande.identiteAdulte.titulaire}}</p>
-
         <div class="info-label">IBAN</div>
         <p class="info">{{demande.identiteAdulte.iban}}</p>
 
@@ -171,17 +168,33 @@
       <section id="section-impots">
         <h2>Renseignements issus de la déclaration d'impôt <strong>{{demande.data.anneeImpots}}</strong> sur les revenus de l'année <strong>{{demande.data.anneeRevenus}}</strong></h2>
 
-        <div class="info-label">Nombre de parts</div>
-        <p class="info">{{demande.data.nombreParts}}</p>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="info-label">Nombre de parts</div>
+            <p class="info">{{demande.data.nombreParts}}</p>
 
-        <div class="info-label">Revenu fiscal de référence</div>
-        <p class="info">{{demande.data.revenuFiscalReference}} €</p>
+            <div class="info-label">Revenu fiscal de référence</div>
+            <p class="info">{{demande.data.revenuFiscalReference}} €</p>
 
-        <div class="info-label">Situation familiale</div>
-        <p class="info">{{demande.data.situationFamille}}</p>
+            <div class="info-label">Situation familiale</div>
+            <p class="info">{{demande.data.situationFamille}}</p>
 
-        <div class="info-label">En concubinage</div>
-        <p class="info">{{demande.foyer.concubinage}}</p>
+            <div class="info-label">En concubinage</div>
+            <p class="info">{{demande.foyer.concubinage}}</p>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="info-label">Numéro fiscal</div>
+            <p class="info">{{demande.data.credentials.numeroFiscal}}</p>
+
+            <div class="info-label">Référence de l'avis</div>
+            <p class="info">{{demande.data.credentials.referenceAvis}}</p>
+
+            <div class="info-label">Vérifier l'exactitude des données</div>
+            <a href="https://cfsmsp.impots.gouv.fr/secavis" target="_blank" class="info">https://cfsmsp.impots.gouv.fr/secavis</a>
+          </div>
+        </div>
+
       </section>
 
       <section id="section-impots-concubin">
