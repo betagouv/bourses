@@ -34,15 +34,24 @@
             En erreur <span class="badge">{{count.error}}</span>
           </a>
         </li>
-        <li role="presentation" ui-sref-active="active" class="pull-right">
-          <a ui-sref="layout.college.edit">
-            <span><i class="fa fa-home"></span></i> Mon établissement
-          </a>
-        </li>
-        <li role="presentation" ui-sref-active="active" class="pull-right">
-          <a ui-sref="layout.college.compta">
-            <span><i class="fa fa-money"></span></i> Gestion des RIBs
-          </a>
+        <li role="presentation" class="pull-right">
+          <div uib-dropdown is-open="status.isopen">
+            <button id="single-button" type="button" class="btn btn-action-menu" uib-dropdown-toggle>
+              Menu <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem">
+                <a class="darker" ui-sref="layout.college.edit">
+                  <span><i class="fa fa-home"></span></i> Mon établissement
+                </a>
+              </li>
+              <li role="menuitem">
+                <a class="darker" ui-sref="layout.college.compta">
+                  <span><i class="fa fa-money"></span></i> Gestion des RIBs
+                </a>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </div>
