@@ -2,17 +2,6 @@
 
 angular.module('boursesApp')
   .controller('StatsCtrl', function($scope, $http) {
-    $scope.colours = [
-      '#97BBCD', // blue
-      '#DCDCDC', // light grey
-      '#F7464A', // red
-      '#46BFBD', // green
-      '#FDB45C', // yellow
-      '#949FB1', // grey
-      '#4D5360', // dark grey
-      '#FD6868' // light red
-    ];
-
     $scope.sumRequests = function(colleges) {
       var count = 0;
       if (colleges) {
