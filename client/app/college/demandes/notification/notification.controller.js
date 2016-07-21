@@ -13,8 +13,8 @@ angular.module('boursesApp')
       $scope.email = demande.identiteAdulte.email;
 
       var rfr;
-      if (demande.data_conjoint) {
-        rfr = demande.data.revenuFiscalReference + demande.data_conjoint.revenuFiscalReference;
+      if (demande.data_concubin) {
+        rfr = demande.data.revenuFiscalReference + demande.data_concubin.revenuFiscalReference;
       } else {
         rfr = demande.data.revenuFiscalReference;
       }

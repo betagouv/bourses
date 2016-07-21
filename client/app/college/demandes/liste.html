@@ -40,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="demande in demandes" ng-class="{duplicate: demande.isDuplicate, 'warning-demande': isWarning(demande), 'new': demande.status === 'new'}">
+        <tr ng-repeat="demande in demandes" ng-class="{duplicate: demande.isDuplicate, 'new': demande.status === 'new'}">
           <td><a class="detail" ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteEnfant.prenom | capitalize}} {{demande.identiteEnfant.nom | capitalize}}</a></td>
           <td>{{demande.identiteAdulte.demandeur.prenoms | capitalize}} {{demande.identiteAdulte.demandeur.nom | capitalize}}</td>
           <td class="text-right">{{demande.rfr}} €</td>

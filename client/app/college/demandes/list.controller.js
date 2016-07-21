@@ -26,22 +26,6 @@ angular.module('boursesApp')
       $state.go('.', {recherche: recherche, currentPage: page});
     };
 
-    function isWrongYear(demande) {
-      return demande.data.anneeImpots !== '2015';
-    }
-
-    function needMorePj(demande) {
-      if ((demande.data.situationFamille === 'Célibataire' && demande.foyer.concubinage === 'oui') || demande.identiteEnfant.garde === 'oui') {
-        return typeof demande.data_conjoint === 'undefined';
-      }
-
-      return false;
-    }
-
-    $scope.isWarning = function(demande) {
-      return isWrongYear(demande) || needMorePj(demande);
-    };
-
     $scope.pauseDemande = function(demande) {
       $http.post('/api/demandes/' + demande._id + '/pause').then(function() {
         $scope.$emit('updateCount');
