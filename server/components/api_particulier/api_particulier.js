@@ -27,7 +27,7 @@ module.exports = function(numeroFiscal, referenceAvis, done) {
         if (err && err.message === 'Invalid credentials') {
           return done(notFound);
         } else if (err) {
-          return done(err);
+          return done(notFound);
         } else {
           if (!result.body.declarant2.nom) {
             delete result.body.declarant2;
