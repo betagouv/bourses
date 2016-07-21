@@ -43,6 +43,24 @@
         color: $darker-blue;
       }
     }
+
+    a.darker {
+      color: $dark-blue;
+
+      &:focus, &:hover {
+        color: $darker-blue;
+      }
+    }
+  }
+}
+
+.btn-action-menu {
+  @extend .btn-action-invert;
+  padding: 10px 15px;
+
+  &:focus, &:hover {
+    background-color: $white;
+    color: $darker-blue;
   }
 }
 
