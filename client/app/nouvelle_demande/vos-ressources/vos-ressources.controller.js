@@ -3,20 +3,28 @@
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $location, $anchorScroll, $timeout, $modal, store) {
 
-    function isCelibataire() {
+    function checkStatus(status, shortStatus) {
       return $scope.dataDemandeur &&
-        ($scope.dataDemandeur.situationFamille === 'Célibataire' || $scope.dataDemandeur.sitFam === 'C');
+        ($scope.dataDemandeur.situationFamille === status || $scope.dataDemandeur.sitFam === shortStatus);
     }
 
-    function isGardeAlternee() {
-      return $scope.identiteEnfant.garde === 'oui';
+    function isCelibataire() {
+      return checkStatus('Célibataire', 'C');
+    }
+
+    function isDivorceOrSeparation() {
+      return checkStatus('Divorcé(e)', 'D') ||  checkStatus('Séparé(e)', 'D');
+    }
+
+    function isVeuf() {
+      return checkStatus('Veuf(ve)', 'V');
     }
 
     function computeShowOtherParent() {
-      $scope.showOtherParent = isGardeAlternee() || isCelibataire();
+      $scope.showOtherParent = isCelibataire() || isVeuf() || isDivorceOrSeparation();
       if (!$scope.showOtherParent) {
-        store.set('svair_conjoint', {});
-        store.set('status_conjoint', 'pending');
+        store.set('svair_concubin', {});
+        store.set('status_concubin', 'pending');
       }
     }
 
@@ -31,18 +39,18 @@ angular.module('boursesApp')
     }
 
     function showOtherParentConnection() {
-      return isGardeAlternee() || isConcubinage();
+      return isConcubinage();
     }
 
     function isDataValid() {
       var statusDemandeur = store.get('status_demandeur');
-      var statusConjoint = store.get('status_conjoint');
+      var statusConcubin = store.get('status_concubin');
 
       if (statusDemandeur !== 'success') {
         return false;
       }
 
-      if (showOtherParentConnection() && statusConjoint !== 'success') {
+      if (showOtherParentConnection() && statusConcubin !== 'success') {
         return false;
       }
 

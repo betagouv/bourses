@@ -15,7 +15,7 @@
     <div class="connect-svair">
       <div ng-if="enableFranceConnect">
         <h2 ng-if="connectionId === 'demandeur'">Vous n'avez pas de compte impots.gouv.fr</h2>
-        <h2 ng-if="connectionId !== 'demandeur'">L'autre parent ne possède pas de compte impots.gouv.fr</h2>
+        <h2 ng-if="connectionId !== 'demandeur'">Ne possède pas de compte impots.gouv.fr</h2>
       </div>
       <ng-form class="svair-form" name="svairForm" ng-submit="validateSvair(svairForm)" novalidate>
         <div class="form-group required" ng-class="{'has-error': svairForm.numeroFiscal.$invalid && svairForm.$submitted}">
@@ -134,7 +134,7 @@
     </div>
     <div class="form-group">
       <label class="control-label-flat" ng-if="connectionId === 'demandeur'">Vos identités fiscales</label>
-      <label class="control-label-flat" ng-if="connectionId !== 'demandeur'">Identités fiscales de l'autre parent</label>
+      <label class="control-label-flat" ng-if="connectionId !== 'demandeur'">Ses identités fiscales</label>
 
       <div class="form-control-flat">
         <div class="identite" ng-if="declarant.nom" ng-repeat="declarant in svair.identites">
@@ -145,7 +145,7 @@
     </div>
     <div class="form-group">
       <label class="control-label-flat" ng-if="connectionId === 'demandeur'">Votre situation familiale</label>
-      <label class="control-label-flat" ng-if="connectionId !== 'demandeur'">Situation familiale de l'autre parent</label>
+      <label class="control-label-flat" ng-if="connectionId !== 'demandeur'">Sa situation familiale</label>
       <div class="form-control-flat">
         <span>{{svair.situationFamille}}</span>
       </div>

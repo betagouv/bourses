@@ -17,9 +17,9 @@ angular.module('boursesApp')
             store.set('foyer', {});
             store.set('identite-adulte', {});
             store.set('identite-enfant', {});
-            store.set('status-conjoint', {});
+            store.set('status-concubin', {});
             store.set('status-demandeur', {});
-            store.set('svair-conjoint', {});
+            store.set('svair-concubin', {});
             store.set('svair-demandeur', {});
             store.set('steps', {});
           };

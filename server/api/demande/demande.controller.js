@@ -121,7 +121,7 @@ function sendNotificationToAgent(identite, college, req) {
 function saveDemande(req, college, done) {
   const body = req.body;
   const demandeur = body.data;
-  const conjoint = body.data_conjoint;
+  const concubin = body.data_concubin;
 
   return apiParticulier(demandeur.credentials.numeroFiscal, demandeur.credentials.referenceAvis)
     .then(result => {
@@ -132,17 +132,17 @@ function saveDemande(req, college, done) {
       return null;
     })
     .then(() => {
-      if (conjoint.credentials) {
-        return apiParticulier(conjoint.credentials.numeroFiscal, conjoint.credentials.referenceAvis);
+      if (concubin.credentials) {
+        return apiParticulier(concubin.credentials.numeroFiscal, concubin.credentials.referenceAvis);
       }
 
       return null;
     })
     .then(result => {
       if (result) {
-        result.identites = conjoint.identites;
-        result.credentials = conjoint.credentials;
-        body.data_conjoint = result;
+        result.identites = concubin.identites;
+        result.credentials = concubin.credentials;
+        body.data_concubin = result;
       }
 
       return null;
@@ -151,8 +151,8 @@ function saveDemande(req, college, done) {
       var encoded = crypto.encode(body);
 
       var rfr;
-      if (encoded.data_conjoint && encoded.data_conjoint.revenuFiscalReference) {
-        rfr = encoded.data.revenuFiscalReference + encoded.data_conjoint.revenuFiscalReference;
+      if (encoded.data_concubin && encoded.data_concubin.revenuFiscalReference) {
+        rfr = encoded.data.revenuFiscalReference + encoded.data_concubin.revenuFiscalReference;
       } else {
         rfr = encoded.data.revenuFiscalReference;
       }
