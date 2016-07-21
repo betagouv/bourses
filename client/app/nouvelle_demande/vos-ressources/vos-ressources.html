@@ -45,11 +45,9 @@
   </div>
 
   <div class="form-section" ng-if="showOtherParent">
-    <h2>Renseignements sur l'autre parent</h2>
-
-    <div class="form-group required" ng-if="isCelibataire()">
+    <div class="form-group required">
       <fieldset>
-        <legend class="control-label-flat">Vivez-vous avec l'autre parent de {{identiteEnfant.prenom}} ?</legend>
+        <legend class="control-label-flat">Êtes vous actuellement en concubinage ?</legend>
         <div class="btn-group">
           <button type="button" class="btn btn-select" role="radio" ng-model="foyer.concubinage" btn-radio="'oui'">Oui</button>
           <button type="button" class="btn btn-select" role="radio" ng-model="foyer.concubinage" btn-radio="'non'">Non</button>
@@ -58,11 +56,9 @@
     </div>
 
     <div class="form-connection-container">
-      <div class="form-connection-disabled" ng-if="!showOtherParentConnection()">
-        <span>Renseignements non-obligatoires</span>
-      </div>
+      <div class="form-connection-disabled" ng-if="!showOtherParentConnection()"></div>
       <div class="well-connect">
-        <div connection connection-id="'conjoint'" on-success="saveFoyer"></div>
+        <div connection connection-id="'concubin'" on-success="saveFoyer"></div>
       </div>
     </div>
   </div>

@@ -1,17 +1,17 @@
 <h1>Identité de l'enfant</h1>
 <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
-  <div class="form-group required" ng-class="{'has-error': infoForm.nom.$invalid && infoForm.$submitted}">
-    <label for="nom" class="control-label-flat">Nom</label>
-    <input id="nom" type="text" name="nom" class="form-control-flat" ng-model="identite.nom" required>
-    <div ng-messages="infoForm.nom.$error" ng-if="infoForm.$submitted">
-      <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-    </div>
-  </div>
-
   <div class="form-group required" ng-class="{'has-error': infoForm.prenom.$invalid && infoForm.$submitted}">
     <label for="prenom" class="control-label-flat">Prénom</label>
     <input id="prenom" type="text" name="prenom" class="form-control-flat" ng-model="identite.prenom" required>
     <div ng-messages="infoForm.prenom.$error" ng-if="infoForm.$submitted">
+      <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+    </div>
+  </div>
+
+  <div class="form-group required" ng-class="{'has-error': infoForm.nom.$invalid && infoForm.$submitted}">
+    <label for="nom" class="control-label-flat">Nom</label>
+    <input id="nom" type="text" name="nom" class="form-control-flat" ng-model="identite.nom" required>
+    <div ng-messages="infoForm.nom.$error" ng-if="infoForm.$submitted">
       <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
     </div>
   </div>
@@ -93,23 +93,6 @@
         <button type="button" class="btn btn-select" role="radio" ng-model="identite.cantine" btn-radio="false">Non</button>
       </div>
     </fieldset>
-    <div ng-if="!identite.cantine && infoForm.$submitted">
-      <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-    </div>
-  </div>
-
-  <div class="form-group required" ng-class="{'has-error': !identite.garde && infoForm.$submitted}">
-    <fieldset>
-      <legend class="control-label-flat">Est-il en garde alternée ?</legend>
-      <div class="btn-group">
-        <button type="button" class="btn btn-select" role="radio" ng-model="identite.garde" btn-radio="'oui'">Oui</button>
-        <button type="button" class="btn btn-select" role="radio" ng-model="identite.garde" btn-radio="'non'">Non</button>
-      </div>
-    </fieldset>
-
-    <div ng-if="!identite.garde && infoForm.$submitted">
-      <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
-    </div>
   </div>
 
   <div class="text-right">

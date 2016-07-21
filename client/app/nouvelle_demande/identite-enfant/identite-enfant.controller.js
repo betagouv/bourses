@@ -22,7 +22,7 @@ angular.module('boursesApp')
       store.set('identite-enfant', $scope.identite);
       steps.identiteEnfant = form.$valid;
 
-      if (form.$valid && $scope.identite && $scope.identite.garde && $scope.identite.regime) {
+      if (form.$valid && $scope.identite && $scope.identite.regime) {
         store.set('steps', steps);
         $state.go('layout.nouvelle_demande.vos-ressources');
       }
