@@ -1,0 +1,65 @@
+<div id="college-help" class="container">
+  <h2>Les établissements dans mon département</h2>
+
+  <p>Un collègue peut vous aider ?</p>
+  <label for="input-code-postal" class="control-label">Code postal</label>
+  <input id="input-code-postal" type="text" class="form-control" ng-model="departement">
+  <br>
+  <table class="table">
+    <tr>
+      <th>Nom</th>
+      <th>Téléphone</th>
+      <th>Email</th>
+    </tr>
+    <tr ng-repeat="college in colleges | filter:codePostalFilter">
+      <td>{{college.nom}}, {{college.ville.nom}} - {{college.ville.codePostal}}</td>
+      <td>{{college.telephone}}</td>
+      <td>{{college.contact}}</td>
+    </tr>
+  </table>
+
+  <h2>Autres liens</h2>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="ui card">
+        <a class="image half" href="https://github.com/sgmap/bourses/wiki/FAQ" target="_blank">
+          <img src="/assets/images/faq.png" title="FAQ" style="">
+        </a>
+        <div class="content">
+          <a class="header" href="https://github.com/sgmap/bourses/wiki/FAQ" target="_blank">La FAQ</a>
+          <div class="meta">
+            <a href="https://github.com/sgmap/bourses/wiki/FAQ" target="_blank">Consultez notre Foire Aux Questions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="ui card">
+        <a class="image half" href="http://gestionnaires.actifforum.com/t34300-eboursesco-dematerialisez-les-demandes-de-bourses-de-college" target="_blank">
+          <img src="/assets/images/forum.jpg" title="Forum des gestionnaires" style="">
+        </a>
+        <div class="content">
+          <a class="header" href="http://gestionnaires.actifforum.com/t34300-eboursesco-dematerialisez-les-demandes-de-bourses-de-college" target="_blank">Le fil du forum</a>
+          <div class="meta">
+            <a href="http://gestionnaires.actifforum.com/t34300-eboursesco-dematerialisez-les-demandes-de-bourses-de-college" target="_blank">Posez vos questions sur le forum des gestionnaires d’EPLE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="ui card">
+        <a class="image text-center" href="mailto:contact@bourse.beta.gouv.fr">
+          <i class="fa fa-envelope fa-4x"></i>
+        </a>
+        <div class="content">
+          <a class="header" href="mailto:contact@bourse.beta.gouv.fr">Nous contacter</a>
+          <div class="meta">
+            <a href="mailto:contact@bourse.beta.gouv.fr">Contactez les développeurs du site directement à l'adresse <b>contact@beta.gouv.fr</b></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
