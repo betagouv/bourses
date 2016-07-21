@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $location, $anchorScroll, $timeout, $modal, store) {
+  .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $location, $anchorScroll, $timeout, $uibModal, store) {
 
     function checkStatus(status, shortStatus) {
       return $scope.dataDemandeur &&
@@ -84,12 +84,12 @@ angular.module('boursesApp')
       }
 
       if (!isDataValid()) {
-        $modal.open({
+        $uibModal.open({
           animation: true,
           templateUrl: 'app/nouvelle_demande/vos-ressources/error.html',
-          controller: function($scope, $modalInstance) {
+          controller: function($scope, $uibModalInstance) {
             $scope.ok = function() {
-              $modalInstance.dismiss();
+              $uibModalInstance.dismiss();
             };
           }
         });

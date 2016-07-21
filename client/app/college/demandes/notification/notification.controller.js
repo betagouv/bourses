@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('NotificationCtrl', function($scope, $http, $state, $modalInstance, Auth, demande, simulation) {
+  .controller('NotificationCtrl', function($scope, $http, $state, $uibModalInstance, Auth, demande, simulation) {
     $scope.demande = demande;
     $scope.token = Auth.getToken();
     $scope.listeMontants = [0, 84, 231, 360];
@@ -30,11 +30,11 @@ angular.module('boursesApp')
       $http
         .post('api/demandes/' + demande._id + '/notification', {email: $scope.email, montant: $scope.montant})
         .then(function() {
-          $modalInstance.close();
+          $uibModalInstance.close();
         });
     };
 
     $scope.cancel = function() {
-      $modalInstance.dismiss();
+      $uibModalInstance.dismiss();
     };
   });

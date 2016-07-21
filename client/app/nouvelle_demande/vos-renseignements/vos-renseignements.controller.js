@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('VosRenseignementsCtrl', function($scope, $http, $state, $timeout, $modal, store) {
+  .controller('VosRenseignementsCtrl', function($scope, $http, $state, $timeout, $uibModal, store) {
     $scope.dataDemandeur = store.get('svair_demandeur') || store.get('fc_demandeur') || {};
     $scope.identite = store.get('identite-adulte') || {};
     $scope.identiteEnfant = store.get('identite-enfant');
@@ -28,12 +28,12 @@ angular.module('boursesApp')
 
       if (!demande.data || typeof demande.data.revenuFiscalReference === 'undefined') {
         $scope.loading = false;
-        $modal.open({
+        $uibModal.open({
           animation: true,
           templateUrl: 'app/nouvelle_demande/vos-renseignements/error.html',
-          controller: function($scope, $modalInstance) {
+          controller: function($scope, $uibModalInstance) {
             $scope.ok = function() {
-              $modalInstance.dismiss();
+              $uibModalInstance.dismiss();
             };
           }
         });

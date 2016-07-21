@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, $modal, $state, Auth, demandeId, demande, college) {
+  .controller('DemandeEditCtrl', function($scope, $timeout, $http, $window, $uibModal, $state, Auth, demandeId, demande, college) {
     $scope.demande = demande;
     $scope.demandeId = demandeId;
     $scope.token = Auth.getToken();
@@ -26,7 +26,7 @@ angular.module('boursesApp')
     };
 
     $scope.delete = function() {
-      var instance = $modal.open({
+      var instance = $uibModal.open({
         animation: true,
         templateUrl: 'app/college/demandes/delete/delete.html',
         controller: 'DeleteCtrl',

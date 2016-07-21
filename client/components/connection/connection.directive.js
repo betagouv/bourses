@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('boursesApp').directive('connection', function($http, $window, $location, $timeout, $modal, store) {
+angular.module('boursesApp').directive('connection', function($http, $window, $location, $timeout, $uibModal, store) {
   return {
     scope: {
       connectionId: '=',
@@ -147,24 +147,24 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
       }
 
       function detailNumeroFiscal() {
-        $modal.open({
+        $uibModal.open({
           animation: true,
           templateUrl: 'components/connection/numerofiscal.html',
-          controller: function($scope, $modalInstance) {
+          controller: function($scope, $uibModalInstance) {
             $scope.ok = function() {
-              $modalInstance.dismiss();
+              $uibModalInstance.dismiss();
             };
           }
         });
       }
 
       function detailNumeroAvis() {
-        $modal.open({
+        $uibModal.open({
           animation: true,
           templateUrl: 'components/connection/numeroavis.html',
-          controller: function($scope, $modalInstance) {
+          controller: function($scope, $uibModalInstance) {
             $scope.ok = function() {
-              $modalInstance.dismiss();
+              $uibModalInstance.dismiss();
             };
           }
         });

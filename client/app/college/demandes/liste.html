@@ -51,15 +51,15 @@
           <td class="text-center" ng-if="status === 'done'">{{demande.notification.montant}} €</td>
           <td>
             <div ng-if="status !== 'done'">
-              <div class="btn-group" dropdown is-open="dropdownStatus.isopen">
+              <div class="btn-group" uib-dropdown is-open="dropdownStatus.isopen">
                 <button id="button-{{demande._id}}" type="button" class="btn btn-action-invert" ng-click="notification(demande)" dropdown-toggle ng-disabled="disabled">
                   Notifier
                 </button>
-                <button type="button" class="btn btn-action-invert" dropdown-toggle>
+                <button type="button" class="btn btn-action-invert" uib-dropdown-toggle>
                   <span class="caret"></span>
                   <span class="sr-only">Autres actions</span>
                 </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="button-{{demande._id}}">
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="button-{{demande._id}}">
                   <li role="menuitem"><a href="#" ng-if="demande.status !== 'pause'" ng-click="pauseDemande(demande)">Mettre en attente</a></li>
                   <li role="separator" class="divider"></li>
                   <li role="menuitem"><a href="/api/demandes/{{demande._id}}/random/download?access_token={{token}}" target="_blank" download="detail_{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">Télécharger le détail</a></li>
@@ -67,15 +67,15 @@
               </div>
             </div>
             <div ng-if="status === 'done'" class="btn-group">
-              <div class="btn-group" dropdown is-open="dropdownStatus.isopen">
+              <div class="btn-group" uib-dropdown is-open="dropdownStatus.isopen">
                 <a type="button" class="btn btn-action-invert" href="/api/demandes/{{demande._id}}/notification?access_token={{token}}" target="_blank" download="notification_{{demande.identiteEnfant.prenom}}_{{demande.identiteEnfant.nom}}.pdf" dropdown-toggle ng-disabled="disabled" id="button-{{demande._id}}">
                   Télécharger
                 </a>
-                <button type="button" class="btn btn-action-invert" dropdown-toggle>
+                <button type="button" class="btn btn-action-invert" uib-dropdown-toggle>
                   <span class="caret"></span>
                   <span class="sr-only">Autres actions</span>
                 </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="button-{{demande._id}}">
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="button-{{demande._id}}">
                   <li role="menuitem"><a href="#" ng-click="notification(demande)">Envoyer une <br> nouvelle notification</a></li>
                   <li role="separator" class="divider"></li>
                   <li role="menuitem"><a href="/api/demandes/{{demande._id}}/random/download?access_token={{token}}" target="_blank" download="detail_{{demande.identiteAdulte.demandeur.nom}}_{{demande.identiteAdulte.demandeur.prenoms}}.pdf">Télécharger le détail</a></li>
