@@ -85,7 +85,7 @@
     </div>
   </div>
 
-  <div class="form-group required" ng-init="identite.cantine = false" ng-if="identite.college && identite.regime === 'demi-pensionnaire'" ng-class="{'has-error': !identite.regime && infoForm.$submitted}">
+  <div class="form-group required" ng-init="identite.cantine = false" ng-if="identite.college && identite.college.gestion_cantine && identite.regime === 'demi-pensionnaire'" ng-class="{'has-error': !identite.regime && infoForm.$submitted}">
     <fieldset>
       <legend class="control-label-flat">Souhaitez-vous que cette demande serve aussi de demande d'aide départementale pour la demi-pension ?</legend>
       <div class="btn-group">
