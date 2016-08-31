@@ -3,12 +3,12 @@
 var config = require('../../config/environment').sendGrid;
 var sendgrid  = require('sendgrid')(config.apiKey);
 
-exports.sendMail = function(to, replyTo, subject, body, filepath, done) {
+exports.sendMail = function(to, replyto, subject, body, filepath, done) {
 
   var email = new sendgrid.Email({
     from: 'contact@bourse.beta.gouv.fr',
     to: to,
-    replyTo: replyTo,
+    replyto, replyto,
     subject: 'Bourse - ' + subject,
     html: body
   });
