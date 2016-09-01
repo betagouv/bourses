@@ -34,7 +34,7 @@
             <th>Total</th>
           </tr>
           <tr ng-repeat="college in colleges | orderBy:'-requests.total'">
-            <td>{{college.nom}}</td>
+            <td>{{college.nom}}, {{college.ville.nom}} - {{college.ville.codePostal}}</td>
             <td>{{college.requests.new}}</td>
             <td>{{college.requests.pending}}</td>
             <td>{{college.requests.done}}</td>

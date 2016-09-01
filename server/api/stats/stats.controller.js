@@ -40,6 +40,7 @@ exports.etablissement = function(req, res) {
     etablissements.forEach(function(etablissement) {
       data.push({
         nom: etablissement.nom,
+        ville: etablissement.ville,
         _id: etablissement._id
       });
     });
