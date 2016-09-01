@@ -149,6 +149,34 @@
       <a href="https://cfsmsp.impots.gouv.fr/secavis" target="_blank" class="info">https://cfsmsp.impots.gouv.fr/secavis</a>
     </div>
 
+    <div class="clear"></div>
+
+    {{#data_concubin}}
+    <h2>Renseignements issus de la déclaration d'impôt du concubin <strong>{{data_concubin.anneeImpots}}</strong> sur les revenus de l'année <strong>{{data.anneeRevenus}}</strong></h2>
+
+    <div class="left">
+      <div class="info-label">Nombre de parts</div>
+      <p class="info">{{data_concubin.nombreParts}}</p>
+
+      <div class="info-label">Revenu fiscal de référence</div>
+      <p class="info">{{data_concubin.revenuFiscalReference}} €</p>
+
+      <div class="info-label">Situation familiale</div>
+      <p class="info">{{data_concubin.situationFamille}}</p>
+    </div>
+
+    <div class="right">
+      <div class="info-label">Numéro fiscal</div>
+      <p class="info">{{data_concubin.credentials.numeroFiscal}}</p>
+
+      <div class="info-label">Référence de l'avis</div>
+      <p class="info">{{data_concubin.credentials.referenceAvis}}</p>
+
+      <div class="info-label">Vérifier l'exactitude des données</div>
+      <a href="https://cfsmsp.impots.gouv.fr/secavis" target="_blank" class="info">https://cfsmsp.impots.gouv.fr/secavis</a>
+    </div>
+    {{/data_concubin}}
+
     {{#observations}}
       <h2>Vos observations</h2>
 
