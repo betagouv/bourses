@@ -8,7 +8,7 @@ exports.sendMail = function(to, replyto, subject, body, filepath, done) {
   var email = new sendgrid.Email({
     from: 'contact@bourse.beta.gouv.fr',
     to: to,
-    replyto, replyto,
+    replyto: replyto,
     subject: 'Bourse - ' + subject,
     html: body
   });
