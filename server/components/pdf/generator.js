@@ -66,7 +66,7 @@ exports.toHtml = function(demande, college, path, done) {
       formatted.identiteEnfant.regime = formatRegime(demande.identiteEnfant.regime);
       formatted.identiteAdulte.lien = formatLien(demande.identiteAdulte.lien);
 
-      formatted.rfr = demande.rfr
+      formatted.rfr = demande.rfr;
       formatted.college = college;
       formatted.path = path;
       callback(null, formatted);
