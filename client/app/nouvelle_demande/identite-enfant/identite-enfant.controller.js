@@ -2,6 +2,14 @@
 
 angular.module('boursesApp')
   .controller('IdentiteEnfantCtrl', function($scope, $state, $http, $timeout, store, etablissements) {
+
+    if (!String.prototype.startsWith) {
+      String.prototype.startsWith = function(searchString, position) {
+        position = position || 0;
+        return this.substr(position, searchString.length) === searchString;
+      };
+    }
+
     $scope.etablissements = etablissements;
     $scope.etablissementsById = _.indexBy(etablissements, '_id');
     $scope.identite = store.get('identite-enfant') || {};
