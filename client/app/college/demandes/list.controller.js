@@ -9,11 +9,12 @@ angular.module('boursesApp')
     $scope.token = Auth.getToken();
 
     $scope.college = Etablissement.get({id: id});
+    $scope.itemsPerPage = 10;
 
     Etablissement.queryDemandes({id: id, status: status, searchQuery: {
       q: recherche,
-      offset: (currentPage - 1) * 10,
-      limit: 10
+      offset: (currentPage - 1) * $scope.itemsPerPage,
+      limit: $scope.itemsPerPage
     }}, function(demandes) {
       $scope.demandes = demandes;
     });
@@ -49,8 +50,4 @@ angular.module('boursesApp')
         $state.go('layout.college.demandes.' + status, {}, {reload: true});
       });
     };
-
-    $timeout(function() {
-      angular.element('#recherche').trigger('focus');
-    });
   });

@@ -13,7 +13,7 @@
       </form>
     </div>
     <div class="col-sm-7 text-right">
-      <pagination class="no-margin" total-items="count[status]" max-size="10" ng-model="currentPage" items-per-page="10" ng-change="pageChanged(currentPage)" previous-text="Précédente" next-text="Suivante" rotate="false"></pagination>
+      <ul uib-pagination class="no-margin" total-items="count[status]" ng-model="currentPage" items-per-page="itemsPerPage" max-size="maxSize" ng-change="pageChanged(currentPage)" previous-text="Précédente" next-text="Suivante" boundary-link-numbers="true" rotate="false"></ul>
     </div>
   </div>
 
