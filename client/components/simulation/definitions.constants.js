@@ -12,5 +12,7 @@ angular.module('boursesApp').constant('definitions', {
   taux3: {
     plafonds: [2829, 3481, 4134, 4787, 5440, 6093, 6745, 7398],
     montant: 360
-  }
+  },
+
+  taux: [0, 84, 231, 369]
 });

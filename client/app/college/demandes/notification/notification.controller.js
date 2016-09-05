@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('NotificationCtrl', function($scope, $http, $state, $uibModalInstance, Auth, demande, simulation) {
+  .controller('NotificationCtrl', function($scope, $http, $state, $uibModalInstance, Auth, demande, simulation, definitions) {
     $scope.demande = demande;
     $scope.token = Auth.getToken();
-    $scope.listeMontants = [0, 84, 231, 360];
+    $scope.listeMontants = definitions.taux;
 
     if (demande.status === 'done') {
       $scope.email = demande.notification.email;

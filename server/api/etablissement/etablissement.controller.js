@@ -316,7 +316,6 @@ exports.demandes = function(req, res) {
                 .find(query)
                 .limit(limit)
                 .sort('-createdAt')
-                .select('data identiteAdulte.demandeur rfr foyer identiteEnfant createdAt demande.notification.montant status')
                 .skip(offset)
                 .exec(waterFallCallback);
             },

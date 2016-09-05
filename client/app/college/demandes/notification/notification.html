@@ -26,6 +26,13 @@
         <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
+
+    <div class="alert alert-info" ng-if="demande.observations">
+      <small>Rappel de vos observations, ne seront pas transmises à l'utilisateur</small>
+      <p id="observations">
+        {{demande.observations}}
+      </p>
+    </div>
   </div>
 
   <div class="modal-footer">
