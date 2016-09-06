@@ -33,47 +33,48 @@
 
   <hr>
 
-  <h1>Statistiques</h1>
+  <div ng-if="total > 0">
+    <h1>Statistiques</h1>
 
-  <p class="lead">Demandes par taux <small>(Total des demandes: {{total}})</small></p>
+    <p class="lead">Demandes par taux <small>(Total des demandes: {{total}})</small></p>
 
-  <div class="row">
-    <div class="col-sm-4 col-sm-offset-4">
-      <canvas id="pie" class="chart chart-pie" chart-data="count" chart-labels="['Refus', 'Taux 1', 'Taux 2', 'Taux 3']" chart-legend="true"></canvas>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <canvas id="pie" class="chart chart-pie" chart-data="count" chart-labels="['Refus', 'Taux 1', 'Taux 2', 'Taux 3']" chart-legend="true"></canvas>
+      </div>
     </div>
+
+    <uib-accordion>
+      <div uib-accordion-group ng-repeat="(group, demandes) in groups" heading="{{getLabel(group, demandes)}}">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                <i ng-if="type === 'enfant' && !reverse" class="fa fa-sort-alpha-asc"></i>
+                <i ng-if="type === 'enfant' && reverse" class="fa fa-sort-alpha-desc"></i>
+                <a href="#" ng-click="toggleSort('enfant')">Enfant</a>
+              </th>
+              <th>
+                <i ng-if="type === 'adulte' && !reverse" class="fa fa-sort-alpha-asc"></i>
+                <i ng-if="type === 'adulte' && reverse" class="fa fa-sort-alpha-desc"></i>
+                <a href="#" ng-click="toggleSort('adulte')">Demandeur</a>
+              </th>
+              <th>
+                <i ng-if="type === 'email' && !reverse" class="fa fa-sort-alpha-asc"></i>
+                <i ng-if="type === 'email' && reverse" class="fa fa-sort-alpha-desc"></i>
+                <a href="#" ng-click="toggleSort('email')">Email</a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="demande in demandes | orderBy: expression: reverse track by demande._id">
+              <td>{{demande.identiteEnfant.prenom | capitalize}}, {{demande.identiteEnfant.nom | capitalize}}</td>
+              <td>{{demande.identiteAdulte.demandeur.prenoms | capitalize}}, {{demande.identiteAdulte.demandeur.nom | capitalize}}</td>
+              <td>{{demande.identiteAdulte.email}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </uib-accordion>
   </div>
-
-  <uib-accordion>
-    <div uib-accordion-group ng-repeat="(group, demandes) in groups" heading="{{getLabel(group, demandes)}}">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>
-              <i ng-if="type === 'enfant' && !reverse" class="fa fa-sort-alpha-asc"></i>
-              <i ng-if="type === 'enfant' && reverse" class="fa fa-sort-alpha-desc"></i>
-              <a href="#" ng-click="toggleSort('enfant')">Enfant</a>
-            </th>
-            <th>
-              <i ng-if="type === 'adulte' && !reverse" class="fa fa-sort-alpha-asc"></i>
-              <i ng-if="type === 'adulte' && reverse" class="fa fa-sort-alpha-desc"></i>
-              <a href="#" ng-click="toggleSort('adulte')">Demandeur</a>
-            </th>
-            <th>
-              <i ng-if="type === 'email' && !reverse" class="fa fa-sort-alpha-asc"></i>
-              <i ng-if="type === 'email' && reverse" class="fa fa-sort-alpha-desc"></i>
-              <a href="#" ng-click="toggleSort('email')">Email</a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="demande in demandes | orderBy: expression: reverse track by demande._id">
-            <td>{{demande.identiteEnfant.prenom | capitalize}}, {{demande.identiteEnfant.nom | capitalize}}</td>
-            <td>{{demande.identiteAdulte.demandeur.prenoms | capitalize}}, {{demande.identiteAdulte.demandeur.nom | capitalize}}</td>
-            <td>{{demande.identiteAdulte.email}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </uib-accordion>
-
 </div>
