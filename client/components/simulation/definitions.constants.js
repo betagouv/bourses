@@ -14,5 +14,5 @@ angular.module('boursesApp').constant('definitions', {
     montant: 360
   },
 
-  taux: [0, 84, 231, 369]
+  taux: [0, 84, 231, 360]
 });
