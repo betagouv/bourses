@@ -18,9 +18,7 @@ exports.findDuplicates = function(demandes, etablissement, done) {
       .exec(function(err, duplicates) {
         if (duplicates.length >= 2) {
           duplicates.forEach(function(duplicate) {
-            if (duplicate._id.toString() !== demande._id.toString()) {
-              foundDuplicates.push(duplicate._id.toString());
-            }
+            foundDuplicates.push(duplicate._id.toString());
           });
         }
 

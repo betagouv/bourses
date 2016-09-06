@@ -25,8 +25,8 @@
         <div ng-if="demande.isDuplicate" class="alert alert-danger">
           Cette demande est peut-être un doublon de:
           <ul>
-            <li ng-repeat="(idx, duplicate) in demande.duplicates">
-              <a target="_blank" ui-sref="layout.college.demandes.edit({demandeId: duplicate})">Doublon possible numéro {{idx + 1}}</a>
+            <li ng-repeat="duplicate in demande.duplicates" ng-if="duplicate !== demande._id">
+              <a target="_blank" ui-sref="layout.college.demandes.edit({demandeId: duplicate})">Voir le doublon possible</a>
             </li>
           </ul>
         </div>
