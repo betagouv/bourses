@@ -15,7 +15,7 @@ angular.module('boursesApp')
 
     function sumByType(colleges) {
       var series = [];
-      var types = ['new', 'pending', 'done'];
+      var types = ['new', 'pending', 'pause', 'done'];
       types.forEach(function(type) {
         var data = [];
         _.forEach(colleges, function(college) {
@@ -33,7 +33,7 @@ angular.module('boursesApp')
       $scope.labels = _.pluck(result.data, 'nom');
       $scope.dataTotal = _.pluck(result.data, 'requests.total');
 
-      $scope.series = ['Nouvelles', 'En cours', 'Traitées'];
+      $scope.series = ['Nouvelles', 'En cours', 'En attente', 'Traitées'];
       $scope.data = sumByType(result.data);
     });
 

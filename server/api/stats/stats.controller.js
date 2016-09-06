@@ -16,7 +16,7 @@ function countRequests(data, etablissements, done) {
       data[etablissement._id].requests.total = err || !list ? 0 : list.length;
 
       var requestByStatus = _.groupBy(list, 'status');
-      _.forEach(['new', 'pending', 'done'], function(status) {
+      _.forEach(['new', 'pending', 'pause', 'done'], function(status) {
         var requestsForStatus = requestByStatus[status] ? requestByStatus[status].length : 0;
         data[etablissement._id].requests[status] = requestsForStatus;
       });

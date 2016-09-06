@@ -29,6 +29,7 @@
           <tr>
             <th>Etablissement</th>
             <th>Nouvelle demande</th>
+            <th>En cours</th>
             <th>En attente</th>
             <th>Traitée</th>
             <th>Total</th>
@@ -37,6 +38,7 @@
             <td>{{college.nom}}, {{college.ville.nom}} - {{college.ville.codePostal}}</td>
             <td>{{college.requests.new}}</td>
             <td>{{college.requests.pending}}</td>
+            <td>{{college.requests.pause}}</td>
             <td>{{college.requests.done}}</td>
             <td>{{college.requests.total}}</td>
           </tr>
