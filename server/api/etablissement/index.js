@@ -12,6 +12,7 @@ router.put('/:id', auth.isAuthenticated(), controller.update);
 router.get('/:id/demandes', auth.isAuthenticated(), controller.demandes);
 router.get('/:id/compta', auth.isAuthenticated(), controller.compta);
 
+router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id/notifications', auth.isAuthenticated(), controller.notifications);
 router.get('/:id/listeDemandes', auth.isAuthenticated(), controller.listeDemandes);
 router.get('/:id/listeRIBs', auth.isAuthenticated(), controller.listeRIBs);

@@ -7,7 +7,7 @@
       <label for="nom" class="control-label-flat">Nom du collège</label>
       <input id="nom" type="text" name="nom" class="form-control-flat" ng-model="college.nom" required>
       <div ng-messages="infoForm.nom.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
 
@@ -15,7 +15,7 @@
       <label for="chef_etablissement" class="control-label-flat">Nom du chef d'établissement</label>
       <input id="chef_etablissement" type="text" name="chef_etablissement" class="form-control-flat" ng-model="college.chef_etablissement" required>
       <div ng-messages="infoForm.chef_etablissement.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
       <label for="contact" class="control-label-flat">Email de contact</label>
       <input id="contact" type="text" name="contact" class="form-control-flat" ng-model="college.contact" required>
       <div ng-messages="infoForm.contact.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
 
@@ -36,7 +36,7 @@
       <label for="adresse" class="control-label-flat">Adresse</label>
       <input id="adresse" type="text" name="adresse" class="form-control-flat" ng-model="college.adresse" required>
       <div ng-messages="infoForm.adresse.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
 
@@ -44,7 +44,7 @@
       <label for="nomVille" class="control-label-flat">Ville</label>
       <input id="nomVille" type="text" name="nomVille" class="form-control-flat" ng-model="college.ville.nom" required>
       <div ng-messages="infoForm.nomVille.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
 
@@ -52,7 +52,7 @@
       <label for="codePostal" class="control-label-flat">Code postal</label>
       <input id="codePostal" type="text" name="codePostal" class="form-control-flat" ng-model="college.ville.codePostal" required>
       <div ng-messages="infoForm.codePostal.$error" ng-if="infoForm.$submitted">
-        <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
 
@@ -63,4 +63,32 @@
     </div>
   </form>
 
+  <h2>Changer mon mot de passe</h2>
+
+  <form name="infoForm" ng-submit="changePassword(infoForm)" novalidate>
+    <div class="form-group required" ng-class="{'has-error': infoForm.oldPassword.$invalid && infoForm.$submitted}">
+      <label for="oldPassword" class="control-label-flat">Ancien mot de passe</label>
+      <input id="oldPassword" type="password" name="oldPassword" class="form-control-flat" ng-model="oldPassword" required>
+      <div ng-messages="infoForm.oldPassword.$error" ng-if="infoForm.$submitted">
+        <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+      </div>
+    </div>
+
+    <div class="form-group required" ng-class="{'has-error': infoForm.newPassword.$invalid && infoForm.$submitted}">
+      <label for="newPassword" class="control-label-flat">Nouveau mot de passe</label>
+      <input id="newPassword" type="password" ng-minlength="8" name="newPassword" class="form-control-flat" ng-model="newPassword" required>
+      <div ng-messages="infoForm.newPassword.$error" ng-if="infoForm.$submitted">
+        <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
+        <p class="help-block-inverted" ng-message='minlength'><i class="fa fa-warning"></i> Ce champ doit être au moins de 8 caractères.</p>
+      </div>
+    </div>
+
+    <p class="help-block-inverted"> {{ message }} </p>
+
+    <div class="text-right">
+      <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action-invert">
+          Valider
+      </button>
+    </div>
+  </form>
 </div>

@@ -102,6 +102,14 @@ select.form-control-flat {
   }
 }
 
+.has-error
+.help-block-inverted {
+  color: black;
+  .fa {
+    color: $dark-red;
+  }
+}
+
 .btn-action-container {
   padding-top: 20px;
 }

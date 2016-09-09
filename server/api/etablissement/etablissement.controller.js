@@ -11,10 +11,18 @@ var request = require('superagent');
 var config = require('../../config/environment');
 
 var Etablissement = require('./etablissement.model');
+var User = require('../user/user.model');
 var Demande = require('../demande/demande.model');
 var crypto = require('../../components/crypto/crypto');
 var duplicates = require('../../components/duplicates/duplicates');
 var Generator = require('../../components/pdf/generator');
+
+function validationError(res, statusCode) {
+  statusCode = statusCode || 422;
+  return function(err) {
+    return res.status(statusCode).json(err);
+  };
+}
 
 exports.show = function(req, res) {
   Etablissement
@@ -394,6 +402,26 @@ exports.update = function(req, res) {
       return res.status(200).json(etablissement);
     });
   });
+};
+
+exports.changePassword = function(req, res) {
+  var userId = req.user._id;
+  var oldPass = String(req.body.oldPassword);
+  var newPass = String(req.body.newPassword);
+
+  return User.findById(userId).select('+salt +hashedPassword').exec()
+    .then(user => {
+      if (user.authenticate(oldPass)) {
+        user.password = newPass;
+        return user.save()
+          .then(() => {
+            res.status(204).end();
+          })
+          .catch(validationError(res));
+      } else {
+        return res.status(403).end();
+      }
+    });
 };
 
 function handleError(req, res, err) {

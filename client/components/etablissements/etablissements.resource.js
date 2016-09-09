@@ -13,6 +13,12 @@ angular.module('boursesApp').factory('Etablissement', function($resource) {
         controller: 'demandes'
       },
       isArray: true
+    },
+    changePassword: {
+      method: 'PUT',
+      params: {
+        controller: 'password'
+      }
     }
   });
 });
