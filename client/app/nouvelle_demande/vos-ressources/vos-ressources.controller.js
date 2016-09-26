@@ -42,6 +42,10 @@ angular.module('boursesApp')
       return isConcubinage();
     }
 
+    function atLeastOneChild(enfants, adultes) {
+      return enfants + adultes > 0;
+    }
+
     function isDataValid() {
       var statusDemandeur = store.get('status_demandeur');
       var statusConcubin = store.get('status_concubin');
@@ -78,6 +82,13 @@ angular.module('boursesApp')
 
     $scope.next = function(form) {
       if (!form.nombreEnfantsACharge.$valid || !form.nombreEnfantsAdultes.$valid) {
+        $location.hash('foyer');
+        $anchorScroll();
+        return;
+      }
+
+      if (!atLeastOneChild(form.nombreEnfantsACharge.$modelValue, form.nombreEnfantsAdultes.$modelValue)) {
+        $scope.atLeastOneChild = true;
         $location.hash('foyer');
         $anchorScroll();
         return;

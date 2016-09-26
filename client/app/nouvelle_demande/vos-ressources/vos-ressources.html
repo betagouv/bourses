@@ -9,7 +9,7 @@
         <br>
         <small>(tel que mentionné sur l'avis d'imposition)</small>
       </label>
-      <input type="number" min="0" class="form-control-flat" required id="nombre-enfants-a-charge" name="nombreEnfantsACharge" ng-model="foyer.nombreEnfantsACharge">
+      <input type="number" ng-change="atLeastOneChild=false" min="0" class="form-control-flat" required id="nombre-enfants-a-charge" name="nombreEnfantsACharge" ng-model="foyer.nombreEnfantsACharge">
       <div ng-messages="foyerForm.nombreEnfantsACharge.$error" ng-if="foyerForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
@@ -22,12 +22,16 @@
         <br>
         <small>(tel que mentionné sur l'avis d'imposition)</small>
       </label>
-      <input type="number" min="0" class="form-control-flat" required id="nombre-enfants-majeurs" name="nombreEnfantsAdultes" ng-model="foyer.nombreEnfantsAdultes">
+      <input type="number" ng-change="atLeastOneChild=false" min="0" class="form-control-flat" required id="nombre-enfants-majeurs" name="nombreEnfantsAdultes" ng-model="foyer.nombreEnfantsAdultes">
       <div ng-messages="foyerForm.nombreEnfantsAdultes.$error" ng-if="foyerForm.$submitted">
         <p class="help-block" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block" ng-message='min number'><i class="fa fa-warning"></i> Cette valeur n'est pas correcte.</p>
       </div>
     </div>
+  </div>
+
+  <div class="alert alert-danger" ng-if="atLeastOneChild">
+    <i class="fa fa-warning"></i> Vous avez indiqué ne pas avoir d'enfants à charge et n'êtes donc a priori pas éligible à la bourse de collège.</p>
   </div>
 
   <div class="form-section">
