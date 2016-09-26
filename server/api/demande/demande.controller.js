@@ -80,7 +80,7 @@ function sendConfirmationToUser(email, demande, college, req) {
 
   body += '.<body><html>';
 
-  sendMail(email, 'contact@bourse.beta.gouv.fr', subject, body, null, function(error, info) {
+  sendMail(email, college.contact, subject, body, null, function(error, info) {
     if (error) {
       var msg = 'Nous avons rencontré une erreur lors de l\'envoi d\'un mail vers ' + demande.data.identiteAdulte.email + '. ' +
           'Si vous pensez toutefois que cette adresse est correcte, vous pouvez nous contacter à l\'adresse contact@bourse.beta.gouv.fr';
