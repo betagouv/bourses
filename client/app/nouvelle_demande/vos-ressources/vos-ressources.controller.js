@@ -1,5 +1,7 @@
 'use strict';
 
+var INTEGER_REGEXP = /^\-?\d+$/;
+
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $location, $anchorScroll, $timeout, $uibModal, store) {
 
@@ -120,4 +122,25 @@ angular.module('boursesApp')
     $scope.saveFoyer = saveFoyer;
 
     computeShowOtherParent();
+  })
+  .directive('integer', function() {
+    return {
+      require: 'ngModel',
+      link: function(scope, elm, attrs, ctrl) {
+        ctrl.$validators.integer = function(modelValue, viewValue) {
+          if (ctrl.$isEmpty(modelValue)) {
+            // consider empty models to be valid
+            return true;
+          }
+
+          if (INTEGER_REGEXP.test(viewValue)) {
+            // it is valid
+            return true;
+          }
+
+          // it is invalid
+          return false;
+        };
+      }
+    };
   });
