@@ -26,15 +26,25 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Enfant</th>
+          <th>
+            <i ng-if="sortType === 'enfant' && !reverse" class="fa fa-sort-alpha-asc"></i>
+            <i ng-if="sortType === 'enfant' && reverse" class="fa fa-sort-alpha-desc"></i>
+            <a href="#" ng-click="toggleSort('enfant')">Enfant</a>
+          </th>
           <th>Demandeur</th>
           <th>Revenu fiscal</th>
           <th>Enfants mineurs</th>
           <th>Enfants majeurs</th>
           <th>Déductibilité</th>
-          <th>Date de création</th>
+          <th>
+            <i ng-if="sortType === 'createdAt' && !reverse" class="fa fa-sort-alpha-asc"></i>
+            <i ng-if="sortType === 'createdAt' && reverse" class="fa fa-sort-alpha-desc"></i>
+            <a href="#" ng-click="toggleSort('createdAt')">Date de création</a>
+          </th>
           <th ng-if="status === 'done'">
-            Taux accordé
+            <i ng-if="sortType === 'taux' && !reverse" class="fa fa-sort-alpha-asc"></i>
+            <i ng-if="sortType === 'taux' && reverse" class="fa fa-sort-alpha-desc"></i>
+            <a href="#" ng-click="toggleSort('taux')">Taux accordé</a>
           </th>
           <th>Notification</th>
         </tr>

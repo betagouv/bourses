@@ -10,7 +10,7 @@ angular.module('boursesApp')
         abstract: true
       })
       .state('layout.college.demandes.new', {
-        url: '/nouvelles?recherche&currentPage',
+        url: '/nouvelles?recherche&currentPage&sortType&reverse',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -25,11 +25,19 @@ angular.module('boursesApp')
 
           currentPage: function($stateParams) {
             return $stateParams.currentPage || null;
+          },
+
+          sortType: function($stateParams) {
+            return $stateParams.sortType || 'createdAt';
+          },
+
+          reverse: function($stateParams) {
+            return $stateParams.reverse === 'true' || false;
           }
         }
       })
       .state('layout.college.demandes.paused', {
-        url: '/en_attente?recherche&currentPage',
+        url: '/en_attente?recherche&currentPage&sortType&reverse',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -44,11 +52,19 @@ angular.module('boursesApp')
 
           currentPage: function($stateParams) {
             return $stateParams.currentPage || null;
+          },
+
+          sortType: function($stateParams) {
+            return $stateParams.sortType || 'createdAt';
+          },
+
+          reverse: function($stateParams) {
+            return $stateParams.reverse === 'true' || false;
           }
         }
       })
       .state('layout.college.demandes.done', {
-        url: '/traitees?recherche&currentPage',
+        url: '/traitees?recherche&currentPage&sortType&reverse',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -63,11 +79,19 @@ angular.module('boursesApp')
 
           currentPage: function($stateParams) {
             return $stateParams.currentPage || null;
+          },
+
+          sortType: function($stateParams) {
+            return $stateParams.sortType || 'createdAt';
+          },
+
+          reverse: function($stateParams) {
+            return $stateParams.reverse === 'true' || false;
           }
         }
       })
       .state('layout.college.demandes.error', {
-        url: '/erreur?recherche&currentPage',
+        url: '/erreur?recherche&currentPage&sortType&reverse',
         templateUrl: 'app/college/demandes/liste.html',
         authenticate: true,
         controller: 'DemandeListCtrl',
@@ -82,6 +106,14 @@ angular.module('boursesApp')
 
           currentPage: function($stateParams) {
             return $stateParams.currentPage || null;
+          },
+
+          sortType: function($stateParams) {
+            return $stateParams.sortType || 'createdAt';
+          },
+
+          reverse: function($stateParams) {
+            return $stateParams.reverse === 'true' || false;
           }
         }
       })

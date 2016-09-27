@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('CampaignCollegeCtrl', function($scope, $state, Etablissement, college, groups, count) {
+  .controller('CampaignCollegeCtrl', function($scope, $state, Etablissement, college, groups, count, getCorrespondingExpression) {
     $scope.college = _.cloneDeep(college);
     $scope.groups = groups;
     $scope.count = count;
@@ -14,17 +14,7 @@ angular.module('boursesApp')
     $scope.type = 'enfant';
 
     $scope.toggleSort = function(type) {
-      switch (type) {
-        case 'enfant':
-          $scope.expression = 'identiteEnfant.nom';
-          break;
-        case 'adulte':
-          $scope.expression = 'identiteAdulte.demandeur.nom';
-          break;
-        case 'email':
-          $scope.expression = 'identiteAdulte.email';
-          break;
-      }
+      $scope.expression = getCorrespondingExpression(type);
       if (type === $scope.type) {
         $scope.reverse = !$scope.reverse;
       }

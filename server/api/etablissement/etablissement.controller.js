@@ -280,6 +280,21 @@ exports.listeRIBs = function(req, res) {
     });
 };
 
+function getCorrespondingExpression(sortType) {
+  switch (sortType) {
+    case 'enfant':
+      return 'data.identiteEnfant.nom';
+    case 'adulte':
+      return 'data.identiteAdulte.demandeur.nom';
+    case 'email':
+      return 'data.identiteAdulte.email';
+    case 'taux':
+      return 'notification.montant';
+    default:
+      return sortType;
+  }
+}
+
 exports.demandes = function(req, res) {
   Etablissement
     .findOne({human_id: req.params.id})
@@ -291,6 +306,7 @@ exports.demandes = function(req, res) {
       var q;
       var limit;
       var offset;
+      var sort;
 
       if (req.query.searchQuery) {
         var searchQuery = JSON.parse(req.query.searchQuery);
@@ -299,10 +315,16 @@ exports.demandes = function(req, res) {
         offset = _.isNumber(offset) && offset > 0 ? Math.floor(offset) : 0;
         limit = parseInt(searchQuery.limit);
         limit = _.isNumber(limit) ? limit : 10;
+
+        var reverse = searchQuery.reverse || false;
+        var sortQuery = searchQuery.sort || 'createdAt';
+        var sortExpression = getCorrespondingExpression(sortQuery);
+        sort = {[sortExpression]: reverse ? -1 : 1};
       } else {
         q = null;
         offset = 0;
         limit = null;
+        sort = '-createdAt';
       }
 
       var query = {etablissement: etablissement};
@@ -323,7 +345,7 @@ exports.demandes = function(req, res) {
               Demande
                 .find(query)
                 .limit(limit)
-                .sort('-createdAt')
+                .sort(sort)
                 .skip(offset)
                 .exec(waterFallCallback);
             },
