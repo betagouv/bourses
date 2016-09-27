@@ -31,7 +31,11 @@
             <i ng-if="sortType === 'enfant' && reverse" class="fa fa-sort-alpha-desc"></i>
             <a href="#" ng-click="toggleSort('enfant')">Enfant</a>
           </th>
-          <th>Demandeur</th>
+          <th>
+            <i ng-if="sortType === 'adulte' && !reverse" class="fa fa-sort-alpha-asc"></i>
+            <i ng-if="sortType === 'adulte' && reverse" class="fa fa-sort-alpha-desc"></i>
+            <a href="#" ng-click="toggleSort('adulte')">Demandeur</a>
+          </th>
           <th>Revenu fiscal</th>
           <th>Enfants mineurs</th>
           <th>Enfants majeurs</th>
