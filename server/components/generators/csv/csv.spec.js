@@ -3,8 +3,8 @@
 var expect = require('chai').expect;
 var csv = require('./csv');
 
-describe('CSV', function () {
-  it('should return the correct header', function () {
+describe('CSV', function() {
+  it('should return the correct header', function() {
     var columns = [
       {
         title: 'Col1'

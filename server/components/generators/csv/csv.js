@@ -10,7 +10,7 @@ function createHeader(columns) {
       return column.title;
     })
     .reduce(function(csv, column) {
-      return csv + column + ';'
+      return csv + column + ';';
     }, '');
 
   return header + '\n';
@@ -22,7 +22,7 @@ function createRow(columns, demande, college) {
       return column.prepare(demande, college);
     })
     .reduce(function(csv, column) {
-      return csv + column + ';'
+      return csv + column + ';';
     }, '');
 
   return row + '\n';

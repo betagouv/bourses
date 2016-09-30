@@ -18,13 +18,13 @@ exports.columns = [
   {
     title: 'Nom de l\'enfant',
     prepare: function(demande, college) {
-      return demande.data.identiteEnfant.nom
+      return demande.data.identiteEnfant.nom;
     }
   },
   {
     title: 'Prénom de l\'enfant',
     prepare: function(demande, college) {
-      return demande.data.identiteEnfant.prenom
+      return demande.data.identiteEnfant.prenom;
     }
   },
   {

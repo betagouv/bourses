@@ -33,7 +33,7 @@ exports.formatLien = function(input) {
 };
 
 exports.formatStatus = function(input) {
-  switch(input) {
+  switch (input) {
     case 'new':
     case 'pending':
       return 'Nouvelle demande';
@@ -46,4 +46,4 @@ exports.formatStatus = function(input) {
     default:
       return 'Inconnu';
   }
-}
+};
