@@ -7,6 +7,7 @@ var wkhtmltopdf = require('wkhtmltopdf');
 var tmp = require('tmp');
 var archiver = require('archiver');
 var request = require('superagent');
+var iconv = require('iconv-lite');
 
 var config = require('../../config/environment');
 
@@ -156,7 +157,7 @@ exports.listeDemandes = function(req, res) {
 
         GeneratorCsv.generate(demandes, req.etablissement, function(err, csv) {
           if (err) { return handleError(req, res, err); }
-          var iconv = require('iconv-lite');
+
           var buffer = iconv.encode(csv, 'utf16le');
 
           res.writeHead(200, {
