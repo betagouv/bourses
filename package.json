@@ -63,6 +63,7 @@
     "grunt-rev": "^0.1.0",
     "grunt-usemin": "^3.1.1",
     "grunt-wiredep": "^3.0.1",
+    "iconv-lite": "^0.4.13",
     "jasmine-core": "*",
     "jit-grunt": "^0.10.0",
     "karma": "^1.0.0",
@@ -85,8 +86,9 @@
   },
   "scripts": {
     "start": "node server/app.js",
-    "test": "grunt test",
-    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+    "test": "grunt test && npm run mocha",
+    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
+    "mocha": "mocha --reporter spec 'server/**/*.spec.js'"
   },
   "private": true
 }

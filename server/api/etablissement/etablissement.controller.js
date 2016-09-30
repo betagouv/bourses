@@ -15,7 +15,8 @@ var User = require('../user/user.model');
 var Demande = require('../demande/demande.model');
 var crypto = require('../../components/crypto/crypto');
 var duplicates = require('../../components/duplicates/duplicates');
-var Generator = require('../../components/pdf/generator');
+var GeneratorPdf = require('../../components/generators/pdf/pdf');
+var GeneratorCsv = require('../../components/generators/csv/csv');
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -24,28 +25,22 @@ function validationError(res, statusCode) {
   };
 }
 
+function toUpper(str, force) {
+  if (force) {
+    return str.toUpperCase();
+  }
+
+  return str && str.toLowerCase().replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
+
 exports.show = function(req, res) {
-  Etablissement
-    .findOne({human_id: req.params.id})
-    .exec(function(err, etablissement) {
-      if (err) { return handleError(req, res, err); }
-
-      if (!etablissement) { return res.sendStatus(404); }
-
-      return res.json(etablissement);
-    });
+  return res.json(req.etablissement);
 };
 
 exports.showById = function(req, res) {
-  Etablissement
-    .findById(req.params.id)
-    .exec(function(err, etablissement) {
-      if (err) { return handleError(req, res, err); }
-
-      if (!etablissement) { return res.sendStatus(404); }
-
-      return res.json(etablissement);
-    });
+  return res.json(req.etablissement);
 };
 
 exports.query = function(req, res) {
@@ -65,218 +60,146 @@ function decode(demandes) {
 }
 
 exports.wrongYear = function(req, res) {
-  Etablissement
-    .findOne({human_id: req.params.id})
-    .exec(function(err, etablissement) {
-      if (err) { return handleError(req, res, err); }
+  var query = {etablissement: req.etablissement, 'data.data.anneeImpots': {$ne: '2014'}};
 
-      if (!etablissement) { return res.sendStatus(404); }
-
-      var query = {etablissement: etablissement, 'data.data.anneeImpots': {$ne: '2014'}};
-      Demande
-        .find(query)
-        .exec(function(err, demandes) {
-          var decoded = decode(demandes);
-          return res.json(decoded);
-        });
+  Demande
+    .find(query)
+    .exec(function(err, demandes) {
+      var decoded = decode(demandes);
+      return res.json(decoded);
     });
 };
 
 exports.count = function(req, res) {
-  Etablissement
-    .findOne({human_id: req.params.id})
-    .exec(function(err, etablissement) {
-      if (err) { return handleError(req, res, err); }
+  // status: ... ['new', 'pending', 'pause', 'error', 'done'] ...
+  async.parallel({
+    new: function(callback) {
+      Demande.count({
+        etablissement: req.etablissement,
+        status: {$in: ['new', 'pending']}
+      }).exec(callback);
+    },
 
-      if (!etablissement) { return res.sendStatus(404); }
+    pause: function(callback) {
+      Demande.count({
+        etablissement: req.etablissement,
+        status: 'pause'
+      }).exec(callback);
+    },
 
-      // status: ... ['new', 'pending', 'pause', 'error', 'done'] ...
-      async.parallel({
-        new: function(callback) {
-          Demande.count({
-            etablissement: etablissement,
-            status: {$in: ['new', 'pending']}
-          }).exec(callback);
-        },
+    error: function(callback) {
+      Demande.count({
+        etablissement: req.etablissement,
+        status: 'error'
+      }).exec(callback);
+    },
 
-        pause: function(callback) {
-          Demande.count({
-            etablissement: etablissement,
-            status: 'pause'
-          }).exec(callback);
-        },
+    done: function(callback) {
+      Demande.count({
+        etablissement: req.etablissement,
+        status: 'done'
+      }).exec(callback);
+    }
 
-        error: function(callback) {
-          Demande.count({
-            etablissement: etablissement,
-            status: 'error'
-          }).exec(callback);
-        },
+  }, function(err, result) {
+    if (err) {
+      return handleError(req, res, err);
+    }
 
-        done: function(callback) {
-          Demande.count({
-            etablissement: etablissement,
-            status: 'done'
-          }).exec(callback);
-        }
-
-      }, function(err, result) {
-        if (err) {
-          return handleError(req, res, err);
-        }
-
-        return res.json(result);
-      });
-    });
+    return res.json(result);
+  });
 };
 
-exports.notifications = function(req, res) {
-  Etablissement
-    .findOne({human_id: req.params.id})
-    .exec(function(err, etablissement) {
+function createPdfArchive(req, res, type) {
+  Demande
+    .find({status: 'done', etablissement: req.etablissement._id})
+    .sort('-createdAt')
+    .exec(function(err, demandes) {
       if (err) { return handleError(req, res, err); }
 
-      if (!etablissement) { return res.sendStatus(404); }
+      if (req.query.csv == true) {
+        GeneratorCsv.generate(demandes, req.etablissement, function(err, csv) {
+          if (err) { return handleError(req, res, err); }
 
-      var host = req.headers.host;
-      async.waterfall([
-        function(callback) {
-          Demande
-            .find({status: 'done', etablissement: etablissement._id})
-            .sort('-createdAt')
-            .exec(callback);
-        },
+          return res.send(csv);
+        });
+      } else {
+        GeneratorPdf.createPdfArchive(demandes, req.etablissement, req.hostname, {type: type}, function(err, archive, cleanupCallback) {
+          if (err) { return handleError(req, res, err); }
 
-        function(demandes, callback) {
-          tmp.dir({unsafeCleanup: true}, function _tempDirCreated(err, path, cleanupCallback) {
-            if (err) throw err;
-
-            async.eachLimit(demandes, 8, function(demande, eachSeriesCallback) {
-              var decoded = crypto.decode(demande);
-              Generator.editNotification(decoded, etablissement, function(html) {
-                var fileName = path + '/notification_' + decoded.identiteEnfant.prenom + '_' + decoded.identiteEnfant.nom + '.pdf';
-                wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
-                  eachSeriesCallback();
-                });
-              });
-            },
-
-            function() {
-              callback(null, path, cleanupCallback);
-            });
+          archive.on('finish', function(err) {
+            cleanupCallback();
           });
-        }
 
-      ], function(err, path, cleanupCallback) {
-        var archive = archiver.create('zip', {});
-        archive.directory(path, false);
-        archive.pipe(res);
-        archive.finalize();
+          archive.on('error', function(err) {
+            res.status(500).send({error: err.message});
+          });
 
-        archive.on('finish', function(err) {
-          cleanupCallback();
+          archive.on('end', function() {
+            console.log('Archive wrote %d bytes', archive.pointer());
+          });
+
+          archive.on('error', function(err) {
+            throw err;
+          });
+
+          archive.pipe(res);
+          archive.finalize();
         });
-
-        archive.on('error', function(err) {
-          throw err;
-        });
-
-      });
+      }
     });
+}
+
+exports.notifications = function(req, res) {
+  return createPdfArchive(req, res, 'notification');
 };
 
 exports.listeDemandes = function(req, res) {
-  Etablissement
-    .findOne({human_id: req.params.id})
-    .exec(function(err, etablissement) {
-      if (err) { return handleError(req, res, err); }
+  if (req.query.csv == true) {
+    Demande
+      .find({etablissement: req.etablissement._id})
+      .sort('-createdAt')
+      .exec(function(err, demandes) {
+        if (err) { return handleError(req, res, err); }
 
-      if (!etablissement) { return res.sendStatus(404); }
+        GeneratorCsv.generate(demandes, req.etablissement, function(err, csv) {
+          if (err) { return handleError(req, res, err); }
 
-      var host = req.headers.host;
-      async.waterfall([
-        function(callback) {
-          Demande
-            .find({status: 'done', etablissement: etablissement._id})
-            .sort('-createdAt')
-            .exec(callback);
-        },
-
-        function(demandes, callback) {
-          tmp.dir({unsafeCleanup: true}, function _tempDirCreated(err, path, cleanupCallback) {
-            if (err) throw err;
-
-            async.eachLimit(demandes, 8, function(demande, eachSeriesCallback) {
-              var decoded = crypto.decode(demande);
-              Generator.toHtml(decoded, etablissement, host, function(html) {
-                var fileName = path + '/notification_' + decoded.identiteEnfant.prenom + '_' + decoded.identiteEnfant.nom + '.pdf';
-                wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
-                  eachSeriesCallback();
-                });
-              });
-            },
-
-            function() {
-              callback(null, path, cleanupCallback);
-            });
-          });
-        }
-
-      ], function(err, path, cleanupCallback) {
-        var archive = archiver.create('zip', {});
-        archive.directory(path, false);
-        archive.pipe(res);
-        archive.finalize();
-
-        archive.on('finish', function(err) {
-          cleanupCallback();
+          return res.send(csv);
         });
-
-        archive.on('error', function(err) {
-          throw err;
-        });
-
       });
-    });
+  } else {
+    return createPdfArchive(req, res, 'demande');
+  }
 };
 
-function toUpper(str, force) {
-  if (force) {
-    return str.toUpperCase();
-  }
-
-  return str && str.toLowerCase().replace(/\w\S*/g, function(txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
-
 exports.listeRIBs = function(req, res) {
-  Etablissement
-    .findOne({human_id: req.params.id})
-    .exec(function(err, etablissement) {
-      if (err) { return handleError(req, res, err); }
+  var host = req.headers.host;
+  Demande
+    .find({status: 'done', 'notification.montant': {$ne: 0}, etablissement: req.etablissement._id})
+    .sort('data.identiteAdulte.demandeur.nom')
+    .exec(function(err, demandes) {
 
-      if (!etablissement) { return res.sendStatus(404); }
+      demandes.forEach(function(demande) {
+        demande.data.identiteAdulte.demandeur.prenoms = toUpper(demande.data.identiteAdulte.demandeur.prenoms);
+        demande.data.identiteAdulte.demandeur.nom = toUpper(demande.data.identiteAdulte.demandeur.nom, true);
 
-      var host = req.headers.host;
-      Demande
-        .find({status: 'done', 'notification.montant': {$ne: 0}, etablissement: etablissement._id})
-        .sort('data.identiteAdulte.demandeur.nom')
-        .exec(function(err, demandes) {
+        demande.data.identiteEnfant.prenom = toUpper(demande.data.identiteEnfant.prenom);
+        demande.data.identiteEnfant.nom = toUpper(demande.data.identiteEnfant.nom, true);
 
-          demandes.forEach(function(demande) {
-            demande.data.identiteAdulte.demandeur.prenoms = toUpper(demande.data.identiteAdulte.demandeur.prenoms);
-            demande.data.identiteAdulte.demandeur.nom = toUpper(demande.data.identiteAdulte.demandeur.nom, true);
+        demande.data.identiteAdulte.bic = toUpper(demande.data.identiteAdulte.bic, true);
+      });
 
-            demande.data.identiteEnfant.prenom = toUpper(demande.data.identiteEnfant.prenom);
-            demande.data.identiteEnfant.nom = toUpper(demande.data.identiteEnfant.nom, true);
+      if (req.query.csv == true) {
+        GeneratorCsv.generate(demandes, req.etablissement, function(err, csv) {
+          if (err) { return handleError(req, res, err); }
 
-            demande.data.identiteAdulte.bic = toUpper(demande.data.identiteAdulte.bic, true);
-          });
-
-          var html = Generator.editRib(demandes, etablissement, host);
-          wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
+          return res.send(csv);
         });
+      } else {
+        var html = GeneratorPdf.editRib(demandes, req.etablissement, host);
+        wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
+      }
     });
 };
 
@@ -296,133 +219,109 @@ function getCorrespondingExpression(sortType) {
 }
 
 exports.demandes = function(req, res) {
-  Etablissement
-    .findOne({human_id: req.params.id})
-    .exec(function(err, etablissement) {
-      if (err) { return handleError(req, res, err); }
+  var q;
+  var limit;
+  var offset;
+  var sort;
 
-      if (!etablissement) { return res.sendStatus(404); }
+  if (req.query.searchQuery) {
+    var searchQuery = JSON.parse(req.query.searchQuery);
+    q = searchQuery.q && _.isString(searchQuery.q) && searchQuery.q.length ? searchQuery.q : null;
+    offset = parseInt(searchQuery.offset);
+    offset = _.isNumber(offset) && offset > 0 ? Math.floor(offset) : 0;
+    limit = parseInt(searchQuery.limit);
+    limit = _.isNumber(limit) ? limit : 10;
 
-      var q;
-      var limit;
-      var offset;
-      var sort;
+    var reverse = searchQuery.reverse || false;
+    var sortQuery = searchQuery.sort || 'createdAt';
+    var sortExpression = getCorrespondingExpression(sortQuery);
+    sort = {[sortExpression]: reverse ? -1 : 1};
+  } else {
+    q = null;
+    offset = 0;
+    limit = null;
+    sort = '-createdAt';
+  }
 
-      if (req.query.searchQuery) {
-        var searchQuery = JSON.parse(req.query.searchQuery);
-        q = searchQuery.q && _.isString(searchQuery.q) && searchQuery.q.length ? searchQuery.q : null;
-        offset = parseInt(searchQuery.offset);
-        offset = _.isNumber(offset) && offset > 0 ? Math.floor(offset) : 0;
-        limit = parseInt(searchQuery.limit);
-        limit = _.isNumber(limit) ? limit : 10;
+  var query = {etablissement: req.etablissement};
+  if (req.query.status) {
+    var status = req.query.status === 'new' ?  ['new', 'pending'] : [req.query.status];
+    query.status = {$in: status};
+  }
 
-        var reverse = searchQuery.reverse || false;
-        var sortQuery = searchQuery.sort || 'createdAt';
-        var sortExpression = getCorrespondingExpression(sortQuery);
-        sort = {[sortExpression]: reverse ? -1 : 1};
-      } else {
-        q = null;
-        offset = 0;
-        limit = null;
-        sort = '-createdAt';
-      }
+  // Text search
+  if (q) {
+    query.$text = { $search: q, $language: 'french' };
+  }
 
-      var query = {etablissement: etablissement};
-      if (req.query.status) {
-        var status = req.query.status === 'new' ?  ['new', 'pending'] : [req.query.status];
-        query.status = {$in: status};
-      }
+  async.parallel({
+    demandes: function(callback) {
+      async.waterfall([
+        function(waterFallCallback) {
+          Demande
+            .find(query)
+            .limit(limit)
+            .sort(sort)
+            .skip(offset)
+            .exec(waterFallCallback);
+        },
 
-      // Text search
-      if (q) {
-        query.$text = { $search: q, $language: 'french' };
-      }
+        function(demandes, waterFallCallback) {
+          duplicates.findDuplicates(demandes, req.etablissement, waterFallCallback);
+        },
 
-      async.parallel({
-        demandes: function(callback) {
-          async.waterfall([
-            function(waterFallCallback) {
-              Demande
-                .find(query)
-                .limit(limit)
-                .sort(sort)
-                .skip(offset)
-                .exec(waterFallCallback);
-            },
-
-            function(demandes, waterFallCallback) {
-              duplicates.findDuplicates(demandes, etablissement, waterFallCallback);
-            },
-
-            function(demandes, duplicates, waterFallCallback) {
-              demandes.forEach(function(demande) {
-                demande.isDuplicate = duplicates.indexOf(demande.id) > -1;
-              });
-
-              waterFallCallback(null, demandes);
-            }
-
-          ], function(err, demandes) {
-            callback(err, demandes);
+        function(demandes, duplicates, waterFallCallback) {
+          demandes.forEach(function(demande) {
+            demande.isDuplicate = duplicates.indexOf(demande.id) > -1;
           });
+
+          waterFallCallback(null, demandes);
         }
 
-      }, function(err, result) {
-        if (err) {
-          return handleError(req, res, err);
-        }
-
-        if (result.demandes) {
-          var decoded = decode(result.demandes);
-          return res.json(decoded);
-        } else {
-          return res.json([]);
-        }
+      ], function(err, demandes) {
+        callback(err, demandes);
       });
-    });
+    }
+
+  }, function(err, result) {
+    if (err) {
+      return handleError(req, res, err);
+    }
+
+    if (result.demandes) {
+      var decoded = decode(result.demandes);
+      return res.json(decoded);
+    } else {
+      return res.json([]);
+    }
+  });
 };
 
 exports.compta = function(req, res) {
-  Etablissement
-    .findOne({human_id: req.params.id})
-    .exec(function(err, etablissement) {
+  Demande
+    .find({etablissement: req.etablissement, status: 'done', 'notification.montant': {$gt: 0}})
+    .sort('data.identiteAdulte.demandeur.nom')
+    .select('data.identiteAdulte notification')
+    .exec(function(err, demandes) {
       if (err) { return handleError(req, res, err); }
 
-      if (!etablissement) { return res.sendStatus(404); }
-
-      Demande
-        .find({etablissement: etablissement, status: 'done', 'notification.montant': {$gt: 0}})
-        .sort('data.identiteAdulte.demandeur.nom')
-        .select('data.identiteAdulte notification')
-        .exec(function(err, demandes) {
-          if (err) { return handleError(req, res, err); }
-
-          if (demandes && demandes.length > 0) {
-            var decoded = decode(demandes);
-            return res.json(decoded);
-          } else {
-            return res.json([]);
-          }
-        });
+      if (demandes && demandes.length > 0) {
+        var decoded = decode(demandes);
+        return res.json(decoded);
+      } else {
+        return res.json([]);
+      }
     });
 };
 
 exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
 
-  Etablissement.findOne({
-    human_id: req.params.id
-  }, function(err, etablissement) {
+  var updated = _.merge(req.etablissement, req.body);
+  updated.save(function(err) {
     if (err) { return handleError(req, res, err); }
 
-    if (!etablissement) { return res.sendStatus(404); }
-
-    var updated = _.merge(etablissement, req.body);
-    updated.save(function(err) {
-      if (err) { return handleError(req, res, err); }
-
-      return res.status(200).json(etablissement);
-    });
+    return res.status(200).json(req.etablissement);
   });
 };
 

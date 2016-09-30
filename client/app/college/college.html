@@ -44,6 +44,9 @@
                 <a class="darker" ui-sref="layout.college.campaign">Ma campagne</a>
               </li>
               <li role="menuitem">
+                <a class="darker" ui-sref="layout.college.telechargements">Téléchargements</a>
+              </li>
+              <li role="menuitem">
                 <a class="darker" ui-sref="layout.college.edit">Mon établissement</a>
               </li>
               <li role="menuitem">
@@ -51,13 +54,6 @@
               </li>
               <li role="menuitem">
                 <a class="darker" ui-sref="layout.college.help">Aide <i class="fa fa-question-circle"></i></a>
-              </li>
-              <li class="divider"></li>
-              <li role="menuitem">
-                <a target="_blank" class="darker" download="demandes.zip" href="/api/etablissements/{{college.human_id}}/listeDemandes?access_token={{token}}">Télécharger les demandes</a>
-              </li>
-              <li role="menuitem">
-                <a target="_blank" class="darker" download="notifications.zip" href="/api/etablissements/{{college.human_id}}/notifications?access_token={{token}}">Télécharger les notifications</a>
               </li>
             </ul>
           </div>
