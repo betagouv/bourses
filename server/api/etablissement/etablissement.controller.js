@@ -156,8 +156,16 @@ exports.listeDemandes = function(req, res) {
 
         GeneratorCsv.generate(demandes, req.etablissement, function(err, csv) {
           if (err) { return handleError(req, res, err); }
+          var iconv = require('iconv-lite');
+          var buffer = iconv.encode(csv, 'utf16le');
 
-          return res.send(csv);
+          res.writeHead(200, {
+            'Content-Type': 'text/csv; charset=utf-16le; header=present;'
+          });
+
+          res.write(new Buffer([0xff, 0xfe]));
+          res.write(buffer);
+          return res.end();
         });
       });
   } else {
