@@ -90,7 +90,7 @@
     "start": "node server/app.js",
     "test": "grunt test && npm run mocha",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
-    "mocha": "mocha --reporter spec 'server/**/*.spec.js'"
+    "mocha": "NODE_ENV=test mocha --reporter spec 'server/**/*.spec.js'"
   },
   "private": true
 }
