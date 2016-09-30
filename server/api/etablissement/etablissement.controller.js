@@ -117,36 +117,28 @@ function createPdfArchive(req, res, type) {
     .exec(function(err, demandes) {
       if (err) { return handleError(req, res, err); }
 
-      if (req.query.csv == true) {
-        GeneratorCsv.generate(demandes, req.etablissement, function(err, csv) {
-          if (err) { return handleError(req, res, err); }
+      GeneratorPdf.createPdfArchive(demandes, req.etablissement, req.hostname, {type: type}, function(err, archive, cleanupCallback) {
+        if (err) { return handleError(req, res, err); }
 
-          return res.send(csv);
+        archive.on('finish', function(err) {
+          cleanupCallback();
         });
-      } else {
-        GeneratorPdf.createPdfArchive(demandes, req.etablissement, req.hostname, {type: type}, function(err, archive, cleanupCallback) {
-          if (err) { return handleError(req, res, err); }
 
-          archive.on('finish', function(err) {
-            cleanupCallback();
-          });
-
-          archive.on('error', function(err) {
-            res.status(500).send({error: err.message});
-          });
-
-          archive.on('end', function() {
-            console.log('Archive wrote %d bytes', archive.pointer());
-          });
-
-          archive.on('error', function(err) {
-            throw err;
-          });
-
-          archive.pipe(res);
-          archive.finalize();
+        archive.on('error', function(err) {
+          res.status(500).send({error: err.message});
         });
-      }
+
+        archive.on('end', function() {
+          console.log('Archive wrote %d bytes', archive.pointer());
+        });
+
+        archive.on('error', function(err) {
+          throw err;
+        });
+
+        archive.pipe(res);
+        archive.finalize();
+      });
     });
 }
 
@@ -155,7 +147,7 @@ exports.notifications = function(req, res) {
 };
 
 exports.listeDemandes = function(req, res) {
-  if (req.query.csv == true) {
+  if (req.query.csv) {
     Demande
       .find({etablissement: req.etablissement._id})
       .sort('-createdAt')
@@ -190,16 +182,8 @@ exports.listeRIBs = function(req, res) {
         demande.data.identiteAdulte.bic = toUpper(demande.data.identiteAdulte.bic, true);
       });
 
-      if (req.query.csv == true) {
-        GeneratorCsv.generate(demandes, req.etablissement, function(err, csv) {
-          if (err) { return handleError(req, res, err); }
-
-          return res.send(csv);
-        });
-      } else {
-        var html = GeneratorPdf.editRib(demandes, req.etablissement, host);
-        wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
-      }
+      var html = GeneratorPdf.editRib(demandes, req.etablissement, host);
+      wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
     });
 };
 

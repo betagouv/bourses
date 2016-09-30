@@ -44,7 +44,7 @@ function toHtml(demande, college, _path, done) {
     var html = mustache.render(results.template, results.formattedAnswers);
     done(html);
   });
-};
+}
 
 exports.toHtml = toHtml;
 
@@ -71,7 +71,7 @@ function editNotification(demande, college, done) {
     var html = mustache.render(results.template, results.answers);
     done(html);
   });
-};
+}
 
 exports.editNotification = editNotification;
 
@@ -87,7 +87,7 @@ function createDemandeFile(demande, etablissement, host, tempPath, callback) {
       callback();
     });
   });
-};
+}
 
 function createNotificationFile(demande, etablissement, tempPath, callback) {
   var decoded = crypto.decode(demande);
@@ -97,16 +97,16 @@ function createNotificationFile(demande, etablissement, tempPath, callback) {
       callback();
     });
   });
-};
+}
 
 exports.createPdfArchive = function(demandes, etablissement, host, options, callback) {
   tmp.dir({unsafeCleanup: true}, function _tempDirCreated(err, tempPath, cleanupCallback) {
     if (err) {
       return callback(err);
-    };
+    }
 
     async.eachLimit(demandes, 8, function(demande, eachSeriesCallback) {
-      if (options.type == 'notification') {
+      if (options.type === 'notification') {
         createNotificationFile(demande, etablissement, tempPath, eachSeriesCallback);
       } else {
         createDemandeFile(demande, etablissement, host, tempPath, eachSeriesCallback);
