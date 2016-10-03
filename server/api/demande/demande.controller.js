@@ -37,7 +37,8 @@ function sendNotificationToUser(demande, etablissement, stream, req, cb) {
    '<br>et compte tenu des éléments figurants sur votre avis d\'impôt sur le revenu:' +
    '<ul><li>revenu fiscal de référence: ' + demande.rfr + ' EUR</li>' +
    '<li>nombre d\'enfants mineurs ou infirmes: ' + demande.data.foyer.nombreEnfantsACharge + '</li>' +
-   '<li>nombre d\'enfants majeurs ou célibataires: ' + demande.data.foyer.nombreEnfantsAdultes + '</li></ul></p>';
+   '<li>nombre d\'enfants majeurs ou célibataires: ' + demande.data.foyer.nombreEnfantsAdultes + '</li></ul></p> <br>' +
+   '<p>En cas de questions, vous pouvez contacter votre établissement directement à l\'adresse <b>' + etablissement.contact + '</b>';
 
   if (demande.notification.montant === 0) {
     body += '<br><p>la bourse de collège que vous avez sollicitée au titre de l\'année scolaire 2016-2017 ne peut pas vous être accordée.</p>';
