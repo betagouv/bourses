@@ -47,3 +47,12 @@ exports.formatStatus = function(input) {
       return 'Inconnu';
   }
 };
+
+exports.formatDeductibilie = function(input) {
+  switch (input) {
+    case 'externe':
+      return 'Non';
+    default:
+      return 'Oui';
+  }
+};

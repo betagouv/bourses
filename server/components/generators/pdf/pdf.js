@@ -17,8 +17,19 @@ var crypto = require('../../../components/crypto/crypto');
 
 var templateNotification = String(fs.readFileSync(path.join(__dirname, 'notification.html')));
 var templateRib = String(fs.readFileSync(path.join(__dirname, 'rib.html')));
+var templateSiecle = String(fs.readFileSync(path.join(__dirname, 'siecle.html')));
 var templateRefus = String(fs.readFileSync(path.join(__dirname, 'refus.html')));
 var template = String(fs.readFileSync(path.join(__dirname, 'template.html')));
+
+function toUpper(str, force) {
+  if (force) {
+    return str.toUpperCase();
+  }
+
+  return str && str.toLowerCase().replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
 
 function toHtml(demande, college, _path, done) {
   async.series({
@@ -75,7 +86,33 @@ function editNotification(demande, college, done) {
 
 exports.editNotification = editNotification;
 
+exports.editSiecle = function(demandes, college, host) {
+  demandes.forEach(function(demande) {
+    demande.data.identiteAdulte.demandeur.prenoms = toUpper(demande.data.identiteAdulte.demandeur.prenoms);
+    demande.data.identiteAdulte.demandeur.nom = toUpper(demande.data.identiteAdulte.demandeur.nom, true);
+
+    demande.data.identiteEnfant.prenom = toUpper(demande.data.identiteEnfant.prenom);
+    demande.data.identiteEnfant.nom = toUpper(demande.data.identiteEnfant.nom, true);
+    demande.status = formatters.formatStatus(demande.status);
+    demande.nombrePersonnesAcharge = demande.data.foyer.nombreEnfantsACharge + demande.data.foyer.nombreEnfantsAdultes;
+    demande.deductibilite = formatters.formatDeductibilie(demande.data.identiteEnfant.regime);
+  });
+
+  return mustache.render(templateSiecle, {demandes: demandes, college: college});
+};
+
 exports.editRib = function(demandes, college, host) {
+
+  demandes.forEach(function(demande) {
+    demande.data.identiteAdulte.demandeur.prenoms = toUpper(demande.data.identiteAdulte.demandeur.prenoms);
+    demande.data.identiteAdulte.demandeur.nom = toUpper(demande.data.identiteAdulte.demandeur.nom, true);
+
+    demande.data.identiteEnfant.prenom = toUpper(demande.data.identiteEnfant.prenom);
+    demande.data.identiteEnfant.nom = toUpper(demande.data.identiteEnfant.nom, true);
+
+    demande.data.identiteAdulte.bic = toUpper(demande.data.identiteAdulte.bic, true);
+  });
+
   return mustache.render(templateRib, {demandes: demandes, college: college, host: host});
 };
 

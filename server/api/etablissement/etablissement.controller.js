@@ -26,16 +26,6 @@ function validationError(res, statusCode) {
   };
 }
 
-function toUpper(str, force) {
-  if (force) {
-    return str.toUpperCase();
-  }
-
-  return str && str.toLowerCase().replace(/\w\S*/g, function(txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
-
 exports.show = function(req, res) {
   return res.json(req.etablissement);
 };
@@ -180,18 +170,18 @@ exports.listeRIBs = function(req, res) {
     .find({status: 'done', 'notification.montant': {$ne: 0}, etablissement: req.etablissement._id})
     .sort('data.identiteAdulte.demandeur.nom')
     .exec(function(err, demandes) {
-
-      demandes.forEach(function(demande) {
-        demande.data.identiteAdulte.demandeur.prenoms = toUpper(demande.data.identiteAdulte.demandeur.prenoms);
-        demande.data.identiteAdulte.demandeur.nom = toUpper(demande.data.identiteAdulte.demandeur.nom, true);
-
-        demande.data.identiteEnfant.prenom = toUpper(demande.data.identiteEnfant.prenom);
-        demande.data.identiteEnfant.nom = toUpper(demande.data.identiteEnfant.nom, true);
-
-        demande.data.identiteAdulte.bic = toUpper(demande.data.identiteAdulte.bic, true);
-      });
-
       var html = GeneratorPdf.editRib(demandes, req.etablissement, host);
+      wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
+    });
+};
+
+exports.aideSiecle = function(req, res) {
+  var host = req.headers.host;
+  Demande
+    .find({etablissement: req.etablissement._id})
+    .sort('data.identiteAdulte.demandeur.nom')
+    .exec(function(err, demandes) {
+      var html = GeneratorPdf.editSiecle(demandes, req.etablissement, host);
       wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
     });
 };

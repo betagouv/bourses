@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <style type="text/css">
+
+      .table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          empty-cells: show;
+          border: 1px solid #cbcbcb;
+      }
+
+      .table td,
+      .table th {
+          border-left: 1px solid #cbcbcb;/*  inner column border */
+          border-width: 0 0 0 1px;
+          font-size: inherit;
+          margin: 0;
+          overflow: visible; /*to make ths where the title is really long work*/
+          padding: 0.5em 1em; /* cell padding */
+      }
+
+      .table td:first-child,
+      .table th:first-child {
+          border-left-width: 0;
+      }
+
+      .table thead {
+        background-color: #e0e0e0;
+        color: #000;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      .table-striped tr:nth-child(2n-1) td {
+          background-color: #f2f2f2;
+      }
+
+      .table-bordered td {
+          border-bottom: 1px solid #cbcbcb;
+      }
+
+      .table-bordered tbody > tr:last-child > td {
+          border-bottom-width: 0;
+      }
+
+      table, tr, td, th, tbody, thead, tfoot {
+        page-break-inside: avoid !important;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Extraction pour saisie dans SIECLE pour le collège {{college.nom}} - 2016-2017</h1>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>Statut de la demande</th>
+        <th>Enfant</th>
+        <th>Responsable</th>
+        <th>Revenu fiscal</th>
+        <th>Enfants à charge</th>
+        <th>Déductibilité</th>
+        <th>Observations</th>
+      </thead>
+      {{#demandes}}
+        <tr>
+          <td>{{status}}</td>
+          <td>{{data.identiteEnfant.prenom}} {{data.identiteEnfant.nom}}</td>
+          <td>{{data.identiteAdulte.demandeur.prenoms}} {{data.identiteAdulte.demandeur.nom}}</td>
+          <td>{{rfr}} €</td>
+          <td>{{nombrePersonnesAcharge}}</td>
+          <td>{{deductibilite}}</td>
+          <td>{{observations}}</td>
+        </tr>
+      {{/demandes}}
+    </table>
+  </body>
+</html>

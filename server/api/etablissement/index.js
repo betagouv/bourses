@@ -17,6 +17,7 @@ router.put('/:human_id/password', auth.isAuthenticated(), controller.changePassw
 router.get('/:human_id/notifications', auth.isAuthenticated(), controller.notifications);
 router.get('/:human_id/listeDemandes', auth.isAuthenticated(), controller.listeDemandes);
 router.get('/:human_id/listeRIBs', auth.isAuthenticated(), controller.listeRIBs);
+router.get('/:human_id/aideSiecle', auth.isAuthenticated(), controller.aideSiecle);
 
 router.get('/:human_id/wrongYear', auth.isAuthenticated(), controller.wrongYear);
 router.get('/:human_id/count', auth.isAuthenticated(), controller.count);
