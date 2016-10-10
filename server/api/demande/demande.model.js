@@ -47,6 +47,7 @@ function getExpression(sortType, demande) {
     case 'taux':
       return demande.notification.montant;
     case 'enfant':
+      return demande.data.identiteEnfant.nom;
     default:
       return demande.data.identiteEnfant.nom;
   }
