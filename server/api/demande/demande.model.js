@@ -58,7 +58,7 @@ DemandeSchema.methods.compare = function(otherDemande, sortType) {
   var otherValue = getExpression(sortType, otherDemande);
 
   return thisValue.localeCompare(otherValue, 'fr');
-}
+};
 
 DemandeSchema.index(textIndexDefinition, textIndexOptions);
 
