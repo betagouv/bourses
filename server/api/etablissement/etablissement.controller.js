@@ -141,7 +141,7 @@ exports.listeDemandes = function(req, res) {
   if (req.query.csv) {
     Demande
       .find({etablissement: req.etablissement._id})
-      .sort('-createdAt')
+      .sort('data.identiteEnfant.nom')
       .exec(function(err, demandes) {
         if (err) { return handleError(req, res, err); }
 
