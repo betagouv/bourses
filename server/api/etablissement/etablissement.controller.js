@@ -141,7 +141,7 @@ exports.listeDemandes = function(req, res) {
   if (req.query.csv) {
     Demande
       .find({etablissement: req.etablissement._id})
-      .sort('data.identiteEnfant.nom')
+      .sort('-createdAt')
       .exec(function(err, demandes) {
         if (err) { return handleError(req, res, err); }
 
@@ -168,9 +168,13 @@ exports.listeRIBs = function(req, res) {
   var host = req.headers.host;
   Demande
     .find({status: 'done', 'notification.montant': {$ne: 0}, etablissement: req.etablissement._id})
-    .sort('data.identiteAdulte.demandeur.nom')
     .exec(function(err, demandes) {
-      var html = GeneratorPdf.editRib(demandes, req.etablissement, host);
+
+      var sortedDemandes = demandes.sort(function(a, b) {
+        return a.compare(b, 'adulte');
+      });
+
+      var html = GeneratorPdf.editRib(sortedDemandes, req.etablissement, host);
       wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
     });
 };
@@ -179,9 +183,13 @@ exports.aideSiecle = function(req, res) {
   var host = req.headers.host;
   Demande
     .find({etablissement: req.etablissement._id})
-    .sort('data.identiteAdulte.demandeur.nom')
     .exec(function(err, demandes) {
-      var html = GeneratorPdf.editSiecle(demandes, req.etablissement, host);
+
+      var sortedDemandes = demandes.sort(function(a, b) {
+        return a.compare(b, 'enfant');
+      });
+
+      var html = GeneratorPdf.editSiecle(sortedDemandes, req.etablissement, host);
       wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4'}).pipe(res);
     });
 };

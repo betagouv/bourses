@@ -38,6 +38,27 @@ var textIndexDefinition = {
   'data.identiteAdulte.demandeur.prenoms': 'text'
 };
 
+function getExpression(sortType, demande) {
+  switch (sortType) {
+    case 'adulte':
+      return demande.data.identiteAdulte.demandeur.nom;
+    case 'email':
+      return demande.data.identiteAdulte.email;
+    case 'taux':
+      return demande.notification.montant;
+    case 'enfant':
+    default:
+      return demande.data.identiteEnfant.nom;
+  }
+}
+
+DemandeSchema.methods.compare = function(otherDemande, sortType) {
+  var thisValue = getExpression(sortType, this);
+  var otherValue = getExpression(sortType, otherDemande);
+
+  return thisValue.localeCompare(otherValue, 'fr');
+}
+
 DemandeSchema.index(textIndexDefinition, textIndexOptions);
 
 module.exports = mongoose.model('Demande', DemandeSchema);
