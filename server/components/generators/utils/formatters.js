@@ -21,6 +21,18 @@ exports.formatRegime = function(input) {
   }
 };
 
+exports.formatMontant = function(input) {
+  if (typeof input === 'undefined') {
+    return 'Aucune';
+  }
+
+  if (input === 0) {
+    return 'Refus';
+  }
+
+  return input;
+};
+
 exports.formatLien = function(input) {
   switch (input) {
     case 'pere':

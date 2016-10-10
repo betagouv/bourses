@@ -94,6 +94,9 @@ exports.editSiecle = function(demandes, college, host) {
     demande.data.identiteEnfant.prenom = toUpper(demande.data.identiteEnfant.prenom);
     demande.data.identiteEnfant.nom = toUpper(demande.data.identiteEnfant.nom, true);
     demande.status = formatters.formatStatus(demande.status);
+
+    demande.montant = formatters.formatMontant(demande.notification.montant);
+
     demande.nombrePersonnesAcharge = demande.data.foyer.nombreEnfantsACharge + demande.data.foyer.nombreEnfantsAdultes;
     demande.deductibilite = formatters.formatDeductibilie(demande.data.identiteEnfant.regime);
   });
