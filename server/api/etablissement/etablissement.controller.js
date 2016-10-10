@@ -170,8 +170,8 @@ exports.listeRIBs = function(req, res) {
     .find({status: 'done', 'notification.montant': {$ne: 0}, etablissement: req.etablissement._id})
     .exec(function(err, demandes) {
 
-      var sortedDemandes = demandes.sort(function(a, b) {
-        return a.compare(b, 'adulte');
+      var sortedDemandes = demandes.sort(function(demandeA, demandeB) {
+        return demandeA.compare(demandeB, 'adulte');
       });
 
       var html = GeneratorPdf.editRib(sortedDemandes, req.etablissement, host);
@@ -185,8 +185,8 @@ exports.aideSiecle = function(req, res) {
     .find({etablissement: req.etablissement._id})
     .exec(function(err, demandes) {
 
-      var sortedDemandes = demandes.sort(function(a, b) {
-        return a.compare(b, 'enfant');
+      var sortedDemandes = demandes.sort(function(demandeA, demandeB) {
+        return demandeA.compare(demandeB, 'enfant');
       });
 
       var html = GeneratorPdf.editSiecle(sortedDemandes, req.etablissement, host);
