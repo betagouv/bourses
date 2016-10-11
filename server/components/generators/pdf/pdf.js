@@ -122,7 +122,7 @@ exports.editRib = function(demandes, college, host) {
 function createDemandeFile(demande, etablissement, host, tempPath, callback) {
   var decoded = crypto.decode(demande);
   toHtml(decoded, etablissement, host, function(html) {
-    var fileName = tempPath + '/demande_' + decoded.identiteEnfant.prenom + '_' + decoded.identiteEnfant.nom + '.pdf';
+    var fileName = tempPath + '/demande_' + decoded.identiteEnfant.nom + '_' + decoded.identiteEnfant.prenom + '.pdf';
     wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
       callback();
     });
@@ -132,7 +132,7 @@ function createDemandeFile(demande, etablissement, host, tempPath, callback) {
 function createNotificationFile(demande, etablissement, tempPath, callback) {
   var decoded = crypto.decode(demande);
   editNotification(decoded, etablissement, function(html) {
-    var fileName = tempPath + '/notification_' + decoded.identiteEnfant.prenom + '_' + decoded.identiteEnfant.nom + '.pdf';
+    var fileName = tempPath + '/notification_' + decoded.identiteEnfant.nom + '_' + decoded.identiteEnfant.prenom + '.pdf';
     wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
       callback();
     });
