@@ -24,8 +24,6 @@ test:
   - 'karma'
 
 build:
-  - 'jshint'
-  - 'jscs'
   - 'clean:dist'
   - 'injector:sass'
   - 'concurrent:dist'

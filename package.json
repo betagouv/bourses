@@ -88,7 +88,7 @@
   },
   "scripts": {
     "start": "node server/app.js",
-    "build": "grunt build",
+    "build": "npm run test && grunt build",
     "dev": "grunt serve",
     "test": "npm run lint && npm run karma && npm run mocha",
     "lint": "eslint client server",
