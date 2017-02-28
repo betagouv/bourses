@@ -13,27 +13,29 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'client/bower_components/jquery/dist/jquery.js',
-      'client/bower_components/angular/angular.js',
-      'client/bower_components/angular-resource/angular-resource.js',
-      'client/bower_components/angular-cookies/angular-cookies.js',
-      'client/bower_components/angular-sanitize/angular-sanitize.js',
-      'client/bower_components/angular-messages/angular-messages.js',
-      'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'client/bower_components/angular-mocks/angular-mocks.js',
-      'client/bower_components/lodash/lodash.js',
-      'client/bower_components/a0-angular-storage/dist/angular-storage.js',
-      'client/bower_components/angular-ui-router/release/angular-ui-router.js',
-      'client/bower_components/angular-capitalize-filter/capitalize.js',
-      'client/bower_components/spin.js/spin.js',
-      'client/bower_components/ladda/dist/ladda.min.js',
-      'client/bower_components/angular-ladda/dist/angular-ladda.min.js',
-      'client/bower_components/ng-iban/dist/ng-iban.js',
-      'client/bower_components/moment/moment.js',
-      'client/bower_components/moment/locale/fr.js',
-      'client/bower_components/Chart.js/Chart.js',
-      'client/bower_components/angular-chart.js/dist/angular-chart.js',
-      'client/bower_components/angular-xeditable/dist/js/xeditable.js',
+      'client/lib/angular/angular.min.js',
+      'client/lib/angular/angular-locale_fr-fr.js',
+      'client/lib/angular/angular-aria.min.js',
+      'client/lib/angular/angular-cookies.min.js',
+      'client/lib/angular/angular-messages.min.js',
+      'client/lib/angular/angular-resource.min.js',
+      'client/lib/angular/angular-sanitize.min.js',
+      'client/lib/angular-ui-router/angular-ui-router.min.js',
+      'client/lib/a0-angular-storage/angular-storage.min.js',
+      'client/lib/ui-bootstrap/ui-bootstrap-custom-tpls-2.1.3.min.js',
+      'client/lib/angular-chart.js/Chart.min.js',
+      'client/lib/angular-chart.js/angular-chart.min.js',
+      'client/lib/jquery/jquery.min.js',
+      'client/lib/lodash/lodash.min.js',
+      'client/lib/moment/moment.min.js',
+      'client/lib/moment/fr.js',
+      'client/lib/ladda/angular-ladda.min.js',
+      'client/lib/ladda/ladda.min.js',
+      'client/lib/ladda/spin.min.js',
+      'client/lib/angular-xeditable/xeditable.min.js',
+      'client/lib/angular-capitalize-filter/capitalize.min.js',
+      'client/lib/ng-iban/ng-iban.min.js',
+      'client/lib/angular/angular-mocks.js',
       'client/app/app.js',
       'client/app/**/*.js',
       'client/components/**/*.js',
@@ -46,10 +48,6 @@ module.exports = function(config) {
     },
 
     ngHtml2JsPreprocessor: {
-      stripPrefix: 'client/'
-    },
-
-    ngJade2JsPreprocessor: {
       stripPrefix: 'client/'
     },
 
@@ -78,6 +76,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: true
   });
 };

@@ -29,14 +29,14 @@ angular.module('boursesApp')
       } else {
         var taux;
         switch (group) {
-          case '84':
-            taux = '1';
-            break;
-          case '231':
-            taux = '2';
-            break;
-          case '360':
-            taux = '3';
+        case '84':
+          taux = '1';
+          break;
+        case '231':
+          taux = '2';
+          break;
+        case '360':
+          taux = '3';
         }
         str += ' de taux ' + taux + ' (' + group + '€)';
       }

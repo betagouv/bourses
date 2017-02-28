@@ -73,11 +73,6 @@ module.exports = function(app) {
     next();
   };
 
-  var errorLogger = function(err, req, res, next) {
-    logger.error({ req: req, res: res, error: err }, err.stack);
-    next(err);
-  };
-
   if (env === 'production') {
     app.use(favicon(path.join(config.root, 'dist', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'dist')));

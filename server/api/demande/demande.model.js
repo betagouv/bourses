@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var crypto = require('crypto');
 
 var DemandeSchema = new Schema({
   createdAt:      { type: Date, default: Date.now },
@@ -40,16 +39,16 @@ var textIndexDefinition = {
 
 function getExpression(sortType, demande) {
   switch (sortType) {
-    case 'adulte':
-      return demande.data.identiteAdulte.demandeur.nom;
-    case 'email':
-      return demande.data.identiteAdulte.email;
-    case 'taux':
-      return demande.notification.montant;
-    case 'enfant':
-      return demande.data.identiteEnfant.nom;
-    default:
-      return demande.data.identiteEnfant.nom;
+  case 'adulte':
+    return demande.data.identiteAdulte.demandeur.nom;
+  case 'email':
+    return demande.data.identiteAdulte.email;
+  case 'taux':
+    return demande.notification.montant;
+  case 'enfant':
+    return demande.data.identiteEnfant.nom;
+  default:
+    return demande.data.identiteEnfant.nom;
   }
 }
 

@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('lodash');
-var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
 var config = require('../../config/environment');

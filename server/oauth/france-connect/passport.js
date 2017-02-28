@@ -4,14 +4,14 @@ var request = require('superagent');
 
 exports.setup = function(config) {
   var strategy = new OAuth2Strategy({
-      authorizationURL: 'https://app.franceconnect.gouv.fr/api/v1/authorize',
-      tokenURL: 'https://app.franceconnect.gouv.fr/api/v1/token',
-      clientID: config.fc.clientId,
-      clientSecret: config.fc.clientSecret,
-      callbackURL: config.domain + '/oauth/fc/callback',
-      scope: ['openid', 'profile', 'email', 'address', 'phone', 'dgfip_rfr', 'dgfip_nbpac', 'dgfip_sitfam', 'dgfip_nbpart'],
-      state: 'foobar'
-    },
+    authorizationURL: 'https://app.franceconnect.gouv.fr/api/v1/authorize',
+    tokenURL: 'https://app.franceconnect.gouv.fr/api/v1/token',
+    clientID: config.fc.clientId,
+    clientSecret: config.fc.clientSecret,
+    callbackURL: config.domain + '/oauth/fc/callback',
+    scope: ['openid', 'profile', 'email', 'address', 'phone', 'dgfip_rfr', 'dgfip_nbpac', 'dgfip_sitfam', 'dgfip_nbpart'],
+    state: 'foobar'
+  },
     function(accessToken, refreshToken, profile, done) {
       var user = profile;
       user.accessToken = accessToken;

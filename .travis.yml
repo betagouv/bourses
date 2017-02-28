@@ -2,8 +2,7 @@ language: node_js
 node_js:
   - v4.4.4
 before_script:
-  - npm install -g bower grunt-cli
+  - npm install -g grunt-cli
   - gem install sass
-  - bower install
 services: mongodb
 sudo: false

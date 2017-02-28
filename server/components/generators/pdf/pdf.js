@@ -3,7 +3,6 @@
 /* jshint multistr: true */
 
 var _ = require('lodash');
-var os = require('os');
 var fs = require('fs');
 var tmp = require('tmp');
 var path = require('path');
@@ -86,7 +85,7 @@ function editNotification(demande, college, done) {
 
 exports.editNotification = editNotification;
 
-exports.editSiecle = function(demandes, college, host) {
+exports.editSiecle = function(demandes, college) {
   demandes.forEach(function(demande) {
     demande.data.identiteAdulte.demandeur.prenoms = toUpper(demande.data.identiteAdulte.demandeur.prenoms);
     demande.data.identiteAdulte.demandeur.nom = toUpper(demande.data.identiteAdulte.demandeur.nom, true);

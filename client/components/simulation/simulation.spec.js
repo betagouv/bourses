@@ -11,10 +11,10 @@ describe('Service: simulation', function() {
     simulation = _simulation_;
   }));
 
-  it('should return 84 for 18253 and 2 children', function() {
-    var montant = simulation(18253, 2);
+  it('should return 84 for 18253 and 2 children', inject(function(_simulation_) {
+    var montant = _simulation_(18253, 2);
     expect(montant).toBe(84);
-  });
+  }));
 
   it('should return 84 for 14831 and 1 children', function() {
     var montant = simulation(14831, 1);

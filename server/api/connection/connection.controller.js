@@ -18,7 +18,7 @@ if (config.dgfip.cert && config.dgfip.key) {
 
 var boris = new https.Agent(agentOptions);
 
-exports.svair = function(req, res, next) {
+exports.svair = function(req, res) {
 
   apiParticulier(req.query.numeroFiscal, req.query.referenceAvis, function(err, result) {
     if (err) {

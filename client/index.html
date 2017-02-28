@@ -12,11 +12,9 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
-      <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
-      <link rel="stylesheet" href="bower_components/ladda/dist/ladda.min.css" />
-      <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
-      <!-- endbower -->
+    <link rel="stylesheet" href="lib/angular-chart.js/angular-chart.min.css" />
+    <link rel="stylesheet" href="lib/ladda/ladda.min.css" />
+    <link rel="stylesheet" href="lib/angular-xeditable/xeditable.min.css" />
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
@@ -39,11 +37,6 @@
 
     <div ui-view=""></div>
 
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
-
     <!-- Piwik -->
     <script type="text/javascript">
       var _paq = _paq || [];
@@ -62,33 +55,29 @@
     <!-- End Piwik Code -->
 
     <!-- build:js({.tmp,client}) app/vendor.js -->
-      <!-- bower:js -->
-      <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
-      <script src="bower_components/angular-aria/angular-aria.js"></script>
-      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-      <script src="bower_components/angular-capitalize-filter/capitalize.js"></script>
-      <script src="bower_components/Chart.js/Chart.js"></script>
-      <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
-      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-      <script src="bower_components/spin.js/spin.js"></script>
-      <script src="bower_components/ladda/dist/ladda.min.js"></script>
-      <script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
-      <script src="bower_components/angular-messages/angular-messages.js"></script>
-      <script src="bower_components/angular-mocks/angular-mocks.js"></script>
-      <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/lodash/lodash.js"></script>
-      <script src="bower_components/moment/moment.js"></script>
-      <script src="bower_components/ng-iban/dist/ng-iban.js"></script>
-      <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-      <!-- endbower -->
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-locale_fr-fr.js"></script>
+    <script src="lib/angular/angular-aria.min.js"></script>
+    <script src="lib/angular/angular-cookies.min.js"></script>
+    <script src="lib/angular/angular-messages.min.js"></script>
+    <script src="lib/angular/angular-resource.min.js"></script>
+    <script src="lib/angular/angular-sanitize.min.js"></script>
+    <script src="lib/angular-ui-router/angular-ui-router.min.js"></script>
+    <script src="lib/a0-angular-storage/angular-storage.min.js"></script>
+    <script src="lib/ui-bootstrap/ui-bootstrap-custom-tpls-2.1.3.min.js"></script>
+    <script src="lib/angular-chart.js/Chart.min.js"></script>
+    <script src="lib/angular-chart.js/angular-chart.min.js"></script>
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/lodash/lodash.min.js"></script>
+    <script src="lib/moment/moment.min.js"></script>
+    <script src="lib/moment/fr.js"></script>
+    <script src="lib/ladda/angular-ladda.min.js"></script>
+    <script src="lib/ladda/ladda.min.js"></script>
+    <script src="lib/ladda/spin.min.js"></script>
+    <script src="lib/angular-xeditable/xeditable.min.js"></script>
+    <script src="lib/angular-capitalize-filter/capitalize.min.js"></script>
+    <script src="lib/ng-iban/ng-iban.min.js"></script>
     <!-- endbuild -->
-
-    <script src="bower_components/angular-i18n/angular-locale_fr-fr.js"></script>
-    <script src="bower_components/moment/locale/fr.js"></script>
 
     <!-- build:js({.tmp,client}) app/app.js -->
     <script src="app/app.js"></script>

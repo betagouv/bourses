@@ -3,7 +3,6 @@
 var _ = require('lodash');
 var async = require('async');
 var Etablissement = require('../etablissement/etablissement.model');
-var User = require('../user/user.model');
 var Demande = require('../demande/demande.model');
 var moment = require('moment');
 

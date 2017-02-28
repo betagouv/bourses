@@ -12,12 +12,12 @@ exports.formatCreatedAt = function(createdAt) {
 
 exports.formatRegime = function(input) {
   switch (input) {
-    case 'externe':
-      return 'Externe';
-    case 'interne':
-      return 'Interne';
-    default:
-      return 'Demi-pensionnaire';
+  case 'externe':
+    return 'Externe';
+  case 'interne':
+    return 'Interne';
+  default:
+    return 'Demi-pensionnaire';
   }
 };
 
@@ -35,36 +35,36 @@ exports.formatMontant = function(input) {
 
 exports.formatLien = function(input) {
   switch (input) {
-    case 'pere':
-      return 'Père';
-    case 'mere':
-      return 'Mère';
-    default:
-      return 'Responsable légal';
+  case 'pere':
+    return 'Père';
+  case 'mere':
+    return 'Mère';
+  default:
+    return 'Responsable légal';
   }
 };
 
 exports.formatStatus = function(input) {
   switch (input) {
-    case 'new':
-    case 'pending':
-      return 'Nouvelle demande';
-    case 'pause':
-      return 'En attente';
-    case 'error':
-      return 'En erreur';
-    case 'done':
-      return 'Traitée';
-    default:
-      return 'Inconnu';
+  case 'new':
+  case 'pending':
+    return 'Nouvelle demande';
+  case 'pause':
+    return 'En attente';
+  case 'error':
+    return 'En erreur';
+  case 'done':
+    return 'Traitée';
+  default:
+    return 'Inconnu';
   }
 };
 
 exports.formatDeductibilie = function(input) {
   switch (input) {
-    case 'externe':
-      return 'Non';
-    default:
-      return 'Oui';
+  case 'externe':
+    return 'Non';
+  default:
+    return 'Oui';
   }
 };

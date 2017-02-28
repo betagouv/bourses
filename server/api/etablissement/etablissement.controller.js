@@ -1,15 +1,9 @@
 'use strict';
 
 var _ = require('lodash');
-var mongoose = require('mongoose');
 var async = require('async');
 var wkhtmltopdf = require('wkhtmltopdf');
-var tmp = require('tmp');
-var archiver = require('archiver');
-var request = require('superagent');
 var iconv = require('iconv-lite');
-
-var config = require('../../config/environment');
 
 var Etablissement = require('./etablissement.model');
 var User = require('../user/user.model');
@@ -111,16 +105,12 @@ function createPdfArchive(req, res, type) {
       GeneratorPdf.createPdfArchive(demandes, req.etablissement, req.hostname, {type: type}, function(err, archive, cleanupCallback) {
         if (err) { return handleError(req, res, err); }
 
-        archive.on('finish', function(err) {
+        archive.on('finish', function() {
           cleanupCallback();
         });
 
         archive.on('error', function(err) {
           res.status(500).send({error: err.message});
-        });
-
-        archive.on('end', function() {
-          console.log('Archive wrote %d bytes', archive.pointer());
         });
 
         archive.on('error', function(err) {
@@ -196,16 +186,16 @@ exports.aideSiecle = function(req, res) {
 
 function getCorrespondingExpression(sortType) {
   switch (sortType) {
-    case 'enfant':
-      return 'data.identiteEnfant.nom';
-    case 'adulte':
-      return 'data.identiteAdulte.demandeur.nom';
-    case 'email':
-      return 'data.identiteAdulte.email';
-    case 'taux':
-      return 'notification.montant';
-    default:
-      return sortType;
+  case 'enfant':
+    return 'data.identiteEnfant.nom';
+  case 'adulte':
+    return 'data.identiteAdulte.demandeur.nom';
+  case 'email':
+    return 'data.identiteAdulte.email';
+  case 'taux':
+    return 'notification.montant';
+  default:
+    return sortType;
   }
 }
 

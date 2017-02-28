@@ -19,9 +19,9 @@ module.exports = {
     host: '',
     secure: true,
     auth: {
-        user: '',
-        pass: ''
-      }
+      user: '',
+      pass: ''
+    }
   },
 
   port: 5000

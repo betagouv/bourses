@@ -8,7 +8,6 @@ var fs = require('fs');
 var moment = require('moment');
 var async = require('async');
 var tmp = require('tmp');
-var request = require('superagent');
 var Promise = require('bluebird');
 
 var config = require('../../config/environment');
@@ -29,7 +28,7 @@ function logMail(logger, error, info) {
   }
 }
 
-function sendNotificationToUser(demande, etablissement, stream, req, cb) {
+function sendNotificationToUser(demande, etablissement, stream, req) {
   var subject = 'Notification demande de bourse';
 
   var body = '<html><body><p>Merci d\'avoir passé votre demande avec notre service.</p>' +
@@ -251,7 +250,6 @@ exports.editPublic = function(req, res) {
   Demande
     .findById(id)
     .exec(function(err, demande) {
-      var montant = req.body.montant;
       var newData = req.body.data;
       var msg = 'Dossier placé en erreur car relevé fiscal de ' + demande.data.data.anneeImpots;
       msg += ' , modification effectuée par l\'utilisateur.';
@@ -281,8 +279,6 @@ exports.show = function(req, res) {
 
       if (!demande) { return res.sendStatus(404); }
 
-      var data = demande.data.data;
-
       async.series([
         function(callback) {
           if (demande.status === 'new') {
@@ -294,7 +290,7 @@ exports.show = function(req, res) {
           }
         },
 
-        function(callback) {
+        function() {
           duplicates.findDuplicates([demande], demande.etablissement, function(err, demandes, duplicates) {
             var decoded = crypto.decode(demande);
 
@@ -402,7 +398,7 @@ exports.save = function(req, res) {
     });
 };
 
-exports.saveNotification = function(req, res, next) {
+exports.saveNotification = function(req, res) {
   var id = req.params.id;
 
   Demande

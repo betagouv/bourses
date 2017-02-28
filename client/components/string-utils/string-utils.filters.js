@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('boursesApp')
+angular
+  .module('boursesApp')
   .filter('capitalize', function() {
     return function(input, each) {
       if (each) {
@@ -15,10 +16,10 @@ angular.module('boursesApp')
   .filter('sexe', function() {
     return function(input) {
       switch (input) {
-        case 'feminin':
-          return 'Fille';
-        default:
-          return 'Garçon';
+      case 'feminin':
+        return 'Fille';
+      default:
+        return 'Garçon';
       }
     };
   })
@@ -36,74 +37,74 @@ angular.module('boursesApp')
   .filter('regime', function() {
     return function(input) {
       switch (input) {
-        case 'externe':
-          return 'Externe';
-        case 'interne':
-          return 'Interne';
-        default:
-          return 'Demi-pensionnaire';
+      case 'externe':
+        return 'Externe';
+      case 'interne':
+        return 'Interne';
+      default:
+        return 'Demi-pensionnaire';
       }
     };
   })
   .filter('deductibilite', function() {
     return function(input) {
       switch (input) {
-        case 'externe':
-          return 'Non';
-        default:
-          return 'Oui';
+      case 'externe':
+        return 'Non';
+      default:
+        return 'Oui';
       }
     };
   })
   .filter('lien', function() {
     return function(input, lowercase) {
       switch (input) {
-        case 'pere':
-          return lowercase ? 'le père' : 'Père';
-        case 'mere':
-          return lowercase ? 'la mère' : 'Mère';
-        default:
-          return lowercase ? 'le responsable légal' : 'Responsable légal';
+      case 'pere':
+        return lowercase ? 'le père' : 'Père';
+      case 'mere':
+        return lowercase ? 'la mère' : 'Mère';
+      default:
+        return lowercase ? 'le responsable légal' : 'Responsable légal';
       }
     };
   })
   .filter('montant', function() {
     return function(input) {
       switch (input) {
-        case null:
-          return 'Pas de résultat';
-        case 0:
-          return 'Vous n\'avez pas droit à une bourse';
-        default:
-          return input + ' euros';
+      case null:
+        return 'Pas de résultat';
+      case 0:
+        return 'Vous n\'avez pas droit à une bourse';
+      default:
+        return input + ' euros';
       }
     };
   })
   .filter('status', function() {
     return function(input) {
       switch (input) {
-        case 'new':
-          return 'Nouvelle demande';
-        case 'pending':
-          return 'En cours';
-        case 'pause':
-          return 'En attente';
-        case 'error':
-          return 'En erreur';
-        case 'done':
-          return 'Traitée';
+      case 'new':
+        return 'Nouvelle demande';
+      case 'pending':
+        return 'En cours';
+      case 'pause':
+        return 'En attente';
+      case 'error':
+        return 'En erreur';
+      case 'done':
+        return 'Traitée';
       }
     };
   })
   .filter('descriptionMontant', function() {
     return function(input) {
       switch (input) {
-        case null:
-          return 'Résultat de votre simulation';
-        case 0:
-          return 'D\'après les informations saisies, votre enfant ne pourra pas bénéficier d\'une bourse de collège.';
-        default:
-          return 'D\'après les informations saisies, ' +
+      case null:
+        return 'Résultat de votre simulation';
+      case 0:
+        return 'D\'après les informations saisies, votre enfant ne pourra pas bénéficier d\'une bourse de collège.';
+      default:
+        return 'D\'après les informations saisies, ' +
             'votre enfant pourra bénéficier d\'une bourse de collège d\'un montant annuel de:';
       }
     };

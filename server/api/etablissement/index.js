@@ -23,7 +23,7 @@ router.get('/:human_id/wrongYear', auth.isAuthenticated(), controller.wrongYear)
 router.get('/:human_id/count', auth.isAuthenticated(), controller.count);
 router.get('/', controller.query);
 
-router.param('human_id', function(req, res, next, id) {
+router.param('human_id', function(req, res, next) {
   Etablissement
     .findOne({human_id: req.params.human_id})
     .exec(function(err, etablissement) {
@@ -35,7 +35,7 @@ router.param('human_id', function(req, res, next, id) {
     });
 });
 
-router.param('id', function(req, res, next, id) {
+router.param('id', function(req, res, next) {
   Etablissement
     .findById(req.params.id)
     .exec(function(err, etablissement) {

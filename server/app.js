@@ -21,11 +21,9 @@ require('./config/express')(app);
 require('./routes')(app);
 
 // Start server
-server.listen(config.port, config.ip, function() {
-  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-});
+server.listen(config.port, config.ip);
 
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   if (err.name === 'UnauthorizedError') {
     res.status(401).send('Invalid token');
   }

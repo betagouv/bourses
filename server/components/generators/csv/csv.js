@@ -2,7 +2,6 @@
 
 var columns = require('./columns').columns;
 var extraColumns = require('./columns').extraColumns;
-var crypto = require('../../../components/crypto/crypto');
 
 function createHeader(columns) {
   var header = columns

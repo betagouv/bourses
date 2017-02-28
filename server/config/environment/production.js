@@ -28,9 +28,9 @@ module.exports = {
     host: 'in.mailjet.com',
     secure: true,
     auth: {
-        user: process.env.MAILJET_API_KEY,
-        pass: process.env.MAILJET_SECRET_KEY
-      }
+      user: process.env.MAILJET_API_KEY,
+      pass: process.env.MAILJET_SECRET_KEY
+    }
   }
 
 };

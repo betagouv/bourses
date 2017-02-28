@@ -5,31 +5,31 @@ var formatters = require('../utils/formatters');
 exports.columns = [
   {
     title: 'Date de création de la demande',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return formatters.formatCreatedAt(demande.createdAt);
     }
   },
   {
     title: 'Statut de la demande',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return formatters.formatStatus(demande.status);
     }
   },
   {
     title: 'Nom de l\'enfant',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.identiteEnfant.nom;
     }
   },
   {
     title: 'Prénom de l\'enfant',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.identiteEnfant.prenom;
     }
   },
   {
     title: 'Date de naissance de l\'enfant',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return formatters.formatDate(demande.data.identiteEnfant.dateNaissance);
     }
   },
@@ -41,49 +41,49 @@ exports.columns = [
   },
   {
     title: 'Revenu fiscal de référence',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.rfr;
     }
   },
   {
     title: 'Nombre d\'enfants mineurs ou infirmes',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.foyer.nombreEnfantsACharge;
     }
   },
   {
     title: 'Nombre d\'enfants majeurs célibataires',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.foyer.nombreEnfantsAdultes;
     }
   },
   {
     title: 'Nom du demandeur',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.identiteAdulte.demandeur.nom;
     }
   },
   {
     title: 'Prénom(s) du demandeur',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.identiteAdulte.demandeur.prenoms;
     }
   },
   {
     title: 'Lien avec l\'enfant',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return formatters.formatLien(demande.data.identiteAdulte.lien);
     }
   },
   {
     title: 'E-mail',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.identiteAdulte.email;
     }
   },
   {
     title: 'Téléphone',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.data.identiteAdulte.phone) {
         return '';
       }
@@ -93,43 +93,43 @@ exports.columns = [
   },
   {
     title: 'IBAN',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.identiteAdulte.iban;
     }
   },
   {
     title: 'BIC',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.identiteAdulte.bic;
     }
   },
   {
     title: 'Nombre de parts',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.data.nombreParts;
     }
   },
   {
     title: 'Situation familiale',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.data.situationFamille;
     }
   },
   {
     title: 'Numéro fiscal',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.data.credentials.numeroFiscal;
     }
   },
   {
     title: 'Référence de l\'avis',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       return demande.data.data.credentials.referenceAvis;
     }
   },
   {
     title: 'Nombre de parts - Conjoint',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.data.data_concubin) {
         return '';
       }
@@ -139,7 +139,7 @@ exports.columns = [
   },
   {
     title: 'Revenu fiscal de référence - Conjoint',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.data.data_concubin) {
         return '';
       }
@@ -149,7 +149,7 @@ exports.columns = [
   },
   {
     title: 'Situation familiale - Conjoint',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.data.data_concubin) {
         return '';
       }
@@ -159,7 +159,7 @@ exports.columns = [
   },
   {
     title: 'Numéro fiscal - Conjoint',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.data.data_concubin) {
         return '';
       }
@@ -169,7 +169,7 @@ exports.columns = [
   },
   {
     title: 'Référence de l\'avis - Conjoint',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.data.data_concubin) {
         return '';
       }
@@ -179,7 +179,7 @@ exports.columns = [
   },
   {
     title: 'Vos observations',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.data.observations) {
         return '';
       }
@@ -189,7 +189,7 @@ exports.columns = [
   },
   {
     title: 'Notification d\'un montant de',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.notification || typeof demande.notification.montant === 'undefined') {
         return '';
       }
@@ -199,7 +199,7 @@ exports.columns = [
   },
   {
     title: 'Notification envoyée le',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.notification || !demande.notification.createdAt) {
         return '';
       }
@@ -209,7 +209,7 @@ exports.columns = [
   },
   {
     title: 'Notification envoyée à',
-    prepare: function(demande, college) {
+    prepare: function(demande) {
       if (!demande.notification || !demande.notification.email) {
         return '';
       }
