@@ -40,6 +40,23 @@ exports.query = function(req, res) {
     });
 };
 
+exports.create = function(req, res) {
+  Etablissement
+    .create(_.omit(req.body, 'password'), function(err, etablissement) {
+      if (err) { return handleError(req, res, err); }
+
+      User.create({email: etablissement.contact, password: req.body.password, etablissement: etablissement._id}, function(userError) {
+        if (userError) {
+          Etablissement.remove(etablissement._id);
+
+          return handleError(req, res, userError);
+        }
+
+        return res.json(etablissement);
+      });
+    });
+};
+
 function decode(demandes) {
   return _.map(demandes, crypto.decode);
 }

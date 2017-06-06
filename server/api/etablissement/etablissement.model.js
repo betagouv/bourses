@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var EtablissementSchema = new Schema({
-  human_id: String,
+  human_id: {type: String, unique: true},
   nom: String,
   type: String,
   contact: String,

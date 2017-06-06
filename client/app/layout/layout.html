@@ -9,7 +9,8 @@
   <div class="container">
     <img src="assets/images/sgmap-horiz.png" alt="Logo du Secrétariat Général pour la Modernisation de l'Action Publique">
     <ul class="nav navbar-nav navbar-right">
-      <li ui-sref-active="active"><a ui-sref="layout.login">Espace établissement</a></li>
+      <li ng-if="!isLoggedIn() || !isAdmin()" ui-sref-active="active"><a ui-sref="layout.login">Espace établissement</a></li>
+      <li ng-if="isLoggedIn() && isAdmin()" ui-sref-active="active"><a ui-sref="layout.admin">Espace établissement</a></li>
     </ul>
   </div>
 </nav>
