@@ -307,13 +307,12 @@ exports.update = function(req, res) {
 };
 
 exports.changePassword = function(req, res) {
-  var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  return User.findById(userId).select('+salt +hashedPassword').exec()
+  return User.findOne({ etablissement: req.etablissement }).select('+salt +hashedPassword').exec()
     .then(user => {
-      if (user.authenticate(oldPass)) {
+      if (user.authenticate(oldPass) || req.user.role === 'admin') {
         user.password = newPass;
         return user.save()
           .then(() => {
