@@ -45,7 +45,7 @@ function decode(demandes) {
 }
 
 exports.wrongYear = function(req, res) {
-  var query = {etablissement: req.etablissement, 'data.data.anneeImpots': {$ne: '2014'}};
+  var query = {etablissement: req.etablissement, 'data.data.anneeImpots': {$ne: '2016'}};
 
   Demande
     .find(query)

@@ -88,7 +88,7 @@ exports.historyTotal = function(req, res) {
   async.parallel({
     demandes: function(callback) {
       Demande.find({
-        createdAt: {$gte: new Date(2015, 8, 1)}
+        createdAt: {$gte: new Date(2017, 8, 1)}
       }).sort('createdAt').exec(callback);
     },
 
