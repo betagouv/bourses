@@ -105,3 +105,16 @@ section#simulation {
     }
   }
 }
+
+footer {
+  margin-top: 40px;
+  font-size: 1.8em;
+  color: white;
+  text-align: center;
+  background-color: $blue;
+  padding: 2em;
+
+  a {
+    color: white;
+  }
+}
