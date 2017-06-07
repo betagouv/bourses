@@ -6,16 +6,6 @@ angular.module('boursesApp')
     $scope.etablissements = Etablissement.query();
 
     $scope.college = new Etablissement();
-    $scope.college.human_id = 'foo_baz';
-    $scope.college.nom = 'College de Foo Baz';
-    $scope.college.chef_etablissement = 'Mr Foobaz';
-    $scope.college.contact = 'foo@baz.com';
-    $scope.college.telephone = '123453252';
-    $scope.college.adresse = '13, rue de foo, baz';
-    $scope.college.ville = {};
-    $scope.college.ville.nom = 'Paris';
-    $scope.college.ville.codePostal = '75001';
-    $scope.college.password = '12345678';
 
     $scope.createEtablissement = function(form) {
       $scope.message = '';
