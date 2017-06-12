@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:4.8.2
+      - image: circleci/mongo:3.4.2
+    working_directory: ~/bourse
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: bourse-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Dependencies
+          command: yarn install
+
+      - save_cache:
+          key: bourse-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - "/root/.cache/yarn"
+
+      - run:
+          name: Run unit tests
+          command: yarn test
