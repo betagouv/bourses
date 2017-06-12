@@ -98,7 +98,7 @@ exports.generateTokenForPassword = function(req, res, next) {
 
 exports.newPassword = function(req, res) {
   User.findById(req.params.id, '+newPasswordToken', function(err, user) {
-    if (err) return handleError(req, res, err);
+    if (err) return res.sendStatus(400);
     if (!user) return res.sendStatus(404);
     if (!req.params.secret) return res.sendStatus(400);
     if (req.params.secret !== user.newPasswordToken) return res.sendStatus(400);
