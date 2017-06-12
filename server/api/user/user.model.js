@@ -14,7 +14,8 @@ var UserSchema = new Schema({
   hashedPassword: { type: String, select: false },
   etablissement: { type: Schema.Types.ObjectId, ref: 'Etablissement' },
   provider: String,
-  salt: { type: String, select: false }
+  salt: { type: String, select: false },
+  newPasswordToken: { type: String, select: false },
 });
 
 /**

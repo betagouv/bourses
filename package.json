@@ -32,6 +32,7 @@
     "request": "^2.72.0",
     "sendgrid": "^1.9.2",
     "serve-favicon": "^2.2.1",
+    "shortid": "^2.2.8",
     "superagent": "^2.0.0",
     "tmp": "0.0.28",
     "wkhtmltopdf": "^0.3.1"

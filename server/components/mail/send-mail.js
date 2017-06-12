@@ -21,5 +21,9 @@ exports.sendMail = function(to, replyto, subject, body, filepath, done) {
     });
   }
 
-  sendgrid.send(email, done);
+  if (config.env === 'production') {
+    sendgrid.send(email, done);
+  } else {
+    console.log(email);
+  }
 };

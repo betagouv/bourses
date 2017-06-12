@@ -10,6 +10,13 @@ angular.module('boursesApp').factory('User', function($resource) {
         params: {
           id:'me'
         }
+      },
+
+      generateToken: {
+        method: 'POST',
+        params: {
+          id: 'generate_token'
+        }
       }
     });
 });

@@ -3,6 +3,8 @@
 var User = require('./user.model');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var shortid = require('shortid');
+var sendMail = require('../../components/mail/send-mail').sendMail;
 
 var validationError = function(res, err) {
   return res.status(422).json(err);
@@ -66,4 +68,45 @@ exports.me = function(req, res, next) {
  */
 exports.authCallback = function(req, res) {
   res.redirect('/');
+};
+
+/**
+ * Post to check if email exists
+ */
+exports.generateTokenForPassword = function(req, res, next) {
+  let email = req.body.email;
+
+  User.findOne({
+    email: email
+  }, function(err, user) {
+    if (err) return next(err);
+    if (!user) return res.sendStatus(200);
+    user.newPasswordToken = shortid.generate();
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+
+      let confirmationUrl = 'http://' + req.headers.host + '/nouveau_mot_de_passe/' + user._id + '/' + user.newPasswordToken;
+      let subject = 'Nouveau mot de passe';
+      let body = 'Veuillez cliquer ici pour continuer votre changement de mot de passe :<br>' + confirmationUrl;
+
+      sendMail(user.email, 'contact@bourse.beta.gouv.fr', subject, body);
+
+      res.sendStatus(200);
+    });
+  });
+};
+
+exports.newPassword = function(req, res) {
+  User.findById(req.params.id, '+newPasswordToken', function(err, user) {
+    if (err) return handleError(req, res, err);
+    if (!user) return res.sendStatus(404);
+    if (!req.params.secret) return res.sendStatus(400);
+    if (req.params.secret !== user.newPasswordToken) return res.sendStatus(400);
+    user.password = req.body.newPassword;
+    user.newPasswordToken = '';
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      return res.sendStatus(200);
+    });
+  });
 };
