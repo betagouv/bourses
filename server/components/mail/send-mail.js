@@ -23,7 +23,8 @@ exports.sendMail = function(to, replyto, subject, body, filepath, done) {
 
   if (config.env === 'production') {
     sendgrid.send(email, done);
-  } else {
-    console.log(email);
   }
+  // else {
+  //   console.log(email);
+  // }
 };
