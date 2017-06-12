@@ -43,4 +43,12 @@
       display: block;
     }
   }
+
+  .input-group-btn .btn-action {
+    padding: 5px 10px;
+    line-height: 1.4em;
+    font-size: 18px;
+    margin-left: 5px;
+    border-radius: 4px;
+  }
 }

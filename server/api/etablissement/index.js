@@ -9,6 +9,8 @@ var router = express.Router();
 
 router.post('/', auth.hasRole('admin'), controller.create);
 router.get('/byId/:id', controller.showById);
+router.get('/byRne/:rne', controller.showByRne);
+
 router.get('/:human_id', auth.isAuthenticated(), controller.show);
 router.put('/:human_id', auth.isAuthenticated(), controller.update);
 router.get('/:human_id/demandes', auth.isAuthenticated(), controller.demandes);
