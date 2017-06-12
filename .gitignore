@@ -8,6 +8,8 @@ ecosystem.json
 processes.json
 server/config/local.env.js
 server/config/seed
+server/import_etablissements.js
+server/send_email.js
 
 #OSX
 .DS_Store
