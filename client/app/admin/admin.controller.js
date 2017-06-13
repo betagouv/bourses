@@ -14,8 +14,11 @@ angular.module('boursesApp')
       if (form.$valid) {
         $http
           .post('/api/etablissements', $scope.college)
-          .then(function() {
+          .then(function success(created) {
             $scope.message = 'Sauvegarde effectuée';
+            $scope.etablissements.push(created.data);
+            form.$setPristine();
+            form.$setUntouched();
             $scope.college = new Etablissement();
           })
           .catch(function(err) {
