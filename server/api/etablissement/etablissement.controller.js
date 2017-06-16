@@ -162,11 +162,14 @@ exports.count = function(req, res) {
 function createPdfArchive(req, res, type) {
   Demande
     .find({status: 'done', etablissement: req.etablissement._id})
-    .sort('-createdAt')
     .exec(function(err, demandes) {
       if (err) { return handleError(req, res, err); }
 
-      GeneratorPdf.createPdfArchive(demandes, req.etablissement, req.hostname, {type: type}, function(err, archive, cleanupCallback) {
+      var sortedDemandes = demandes.sort(function(demandeA, demandeB) {
+        return demandeA.compare(demandeB, 'adulte');
+      });
+
+      GeneratorPdf.createPdfArchive(sortedDemandes, req.etablissement, req.hostname, {type: type}, function(err, archive, cleanupCallback) {
         if (err) { return handleError(req, res, err); }
 
         archive.on('finish', function() {
@@ -189,6 +192,10 @@ function createPdfArchive(req, res, type) {
 
 exports.notifications = function(req, res) {
   return createPdfArchive(req, res, 'notification');
+};
+
+exports.campagne = function(req, res) {
+  return createPdfArchive(req, res, 'campagne');
 };
 
 exports.listeDemandes = function(req, res) {

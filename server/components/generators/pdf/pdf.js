@@ -103,7 +103,7 @@ exports.editSiecle = function(demandes, college) {
   return mustache.render(templateSiecle, {demandes: demandes, college: college});
 };
 
-exports.editRib = function(demandes, college, host) {
+function editRib(demandes, college, host) {
 
   demandes.forEach(function(demande) {
     demande.data.identiteAdulte.demandeur.prenoms = toUpper(demande.data.identiteAdulte.demandeur.prenoms);
@@ -116,22 +116,32 @@ exports.editRib = function(demandes, college, host) {
   });
 
   return mustache.render(templateRib, {demandes: demandes, college: college, host: host});
-};
+}
+
+exports.editRib = editRib;
 
 function createDemandeFile(demande, etablissement, host, tempPath, callback) {
   var decoded = crypto.decode(demande);
   toHtml(decoded, etablissement, host, function(html) {
-    var fileName = tempPath + '/demande_' + decoded.identiteEnfant.nom + '_' + decoded.identiteEnfant.prenom + '.pdf';
+    var fileName = tempPath + '/' + decoded.identiteEnfant.nom + '_' + decoded.identiteEnfant.prenom + '_demande.pdf';
     wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
       callback();
     });
   });
 }
 
+function createRibFile(demandes, etablissement, tempPath, host, callback) {
+  var html = editRib(demandes, etablissement, host);
+  var fileName = tempPath + '/__liste_ribs.pdf';
+  wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4', output: fileName }, function() {
+    callback();
+  });
+}
+
 function createNotificationFile(demande, etablissement, tempPath, callback) {
   var decoded = crypto.decode(demande);
   editNotification(decoded, etablissement, function(html) {
-    var fileName = tempPath + '/notification_' + decoded.identiteEnfant.nom + '_' + decoded.identiteEnfant.prenom + '.pdf';
+    var fileName = tempPath + '/' + decoded.identiteEnfant.nom + '_' + decoded.identiteEnfant.prenom + '_notification.pdf';
     wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
       callback();
     });
@@ -144,20 +154,26 @@ exports.createPdfArchive = function(demandes, etablissement, host, options, call
       return callback(err);
     }
 
-    async.eachLimit(demandes, 8, function(demande, eachSeriesCallback) {
-      if (options.type === 'notification') {
-        createNotificationFile(demande, etablissement, tempPath, eachSeriesCallback);
-      } else {
-        createDemandeFile(demande, etablissement, host, tempPath, eachSeriesCallback);
-      }
-    },
+    createRibFile(demandes, etablissement, tempPath, host, function() {
+      async.eachLimit(demandes, 8, function(demande, eachSeriesCallback) {
+        if (options.type === 'campagne') {
+          createNotificationFile(demande, etablissement, tempPath, function () {
+            createDemandeFile(demande, etablissement, host, tempPath, eachSeriesCallback);
+          });
+        } else if (options.type === 'notification') {
+          createNotificationFile(demande, etablissement, tempPath, eachSeriesCallback);
+        } else {
+          createDemandeFile(demande, etablissement, host, tempPath, eachSeriesCallback);
+        }
+      },
 
-    function() {
-      var archive = archiver.create('zip', {});
+      function() {
+        var archive = archiver.create('zip', {});
 
-      archive.directory(tempPath, false);
+        archive.directory(tempPath, false);
 
-      callback(null, archive, cleanupCallback);
+        callback(null, archive, cleanupCallback);
+      });
     });
   });
 };

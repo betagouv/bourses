@@ -18,6 +18,7 @@ router.get('/:human_id/compta', auth.isAuthenticated(), controller.compta);
 
 router.put('/:human_id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:human_id/notifications', auth.isAuthenticated(), controller.notifications);
+router.get('/:human_id/campagne', auth.isAuthenticated(), controller.campagne);
 router.get('/:human_id/listeDemandes', auth.isAuthenticated(), controller.listeDemandes);
 router.get('/:human_id/listeRIBs', auth.isAuthenticated(), controller.listeRIBs);
 router.get('/:human_id/aideSiecle', auth.isAuthenticated(), controller.aideSiecle);
