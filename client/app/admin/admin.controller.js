@@ -10,9 +10,9 @@ angular.module('boursesApp')
     $scope.search = function() {
       $scope.searchError = null;
       $http
-        .get(`api/etablissements/byRne/${$scope.college.human_id}`)
-        .then(response => {
-          const etablissement = response.data;
+        .get('api/etablissements/byRne/' + $scope.college.human_id)
+        .then(function success(response) {
+          var etablissement = response.data;
 
           $scope.college.human_id = etablissement.human_id;
           $scope.college.nom = etablissement.nom;
@@ -23,7 +23,7 @@ angular.module('boursesApp')
             codePostal: etablissement.ville.codePostal
           };
         })
-        .catch(() => {
+        .catch(function() {
           $scope.searchError = 'Collège introuvable.';
         });
     }
