@@ -31,8 +31,27 @@
         <tr ng-repeat="demande in demandes | filter:searchText" ng-class="{duplicate: demande.isDuplicate, 'warning-demande': isWarning(demande), 'new': demande.status === 'new'}">
           <td><a class="detail" ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteAdulte.demandeur.nom | capitalize}}, {{demande.identiteAdulte.demandeur.prenoms | capitalize:true}}</a></td>
           <td class="text-center">{{demande.notification.montant}} €</td>
-          <td><a href="#" onaftersave="update(demande, 'iban')" editable-text="demande.identiteAdulte.iban">{{demande.identiteAdulte.iban}}</a></td>
-          <td><a href="#" onaftersave="update(demande, 'bic')" editable-text="demande.identiteAdulte.bic">{{demande.identiteAdulte.bic}}</a></td>
+          <td>
+            <table>
+              <tr>
+                <td><input type="text" size="35" ng-model="demande.identiteAdulte.iban"></td>
+                <td>
+                  <button class="btn btn-link btn-sm" ng-if="!demande.savingIban" type="button" ng-click="update(demande, 'iban')"><i class="fa fa-save"></i></button>
+                  <button class="btn btn-link btn-sm" ng-if="demande.savingIban" type="button"><i class="fa fa-spin fa-spinner"></i></button>
+                </td>
+              </tr>
+            </table>
+            <!-- <a href="#" onaftersave="update(demande, 'iban')" editable-text="demande.identiteAdulte.iban">{{demande.identiteAdulte.iban}}</a></td> -->
+          <td>
+            <table>
+              <tr>
+                <td><input type="text" size="15" ng-model="demande.identiteAdulte.bic"></td>
+                <td>
+                  <button class="btn btn-link btn-sm" ng-if="!demande.savingBic" type="button" ng-click="update(demande, 'bic')"><i class="fa fa-save"></i></button>
+                  <button class="btn btn-link btn-sm" ng-if="demande.savingBic" type="button"><i class="fa fa-spin fa-spinner"></i></button>
+                </td>
+              </tr>
+            </table>
           <td><button class="btn btn-link" ng-click="search(demande.identiteAdulte.bic)"><i class="fa fa-search"></i> Chercher</button></td>
         </tr>
       </tbody>

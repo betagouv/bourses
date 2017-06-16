@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('ComptaCollegeCtrl', function($scope, $http, $window, Auth, id, college) {
+  .controller('ComptaCollegeCtrl', function($scope, $http, $window, $timeout, Auth, id, college) {
     $scope.token = Auth.getToken();
     $scope.college = college;
 
@@ -19,6 +19,22 @@ angular.module('boursesApp')
     };
 
     $scope.update = function(demande, attr) {
-      return $http.put('/api/demandes/' + demande._id, {attr: 'data.identiteAdulte.' + attr, value: demande.identiteAdulte[attr]});
+      if (attr == 'bic') {
+        demande.savingBic = true;
+      } else {
+        demande.savingIban = true;
+      }
+
+      return $http
+        .put('/api/demandes/' + demande._id, {attr: 'data.identiteAdulte.' + attr, value: demande.identiteAdulte[attr]})
+        .then(function success() {
+          $timeout(function () {
+            if (attr == 'bic') {
+              demande.savingBic = false;
+            } else {
+              demande.savingIban = false;
+            }
+          }, 600);
+        });
     };
   });
