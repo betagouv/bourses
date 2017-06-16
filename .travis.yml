@@ -1,8 +1,0 @@
-language: node_js
-node_js:
-  - v6.9.5
-before_script:
-  - npm install -g grunt-cli
-  - gem install sass
-services: mongodb
-sudo: false
