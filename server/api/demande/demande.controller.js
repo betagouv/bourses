@@ -42,7 +42,7 @@ function sendNotificationToUser(demande, etablissement, stream, req) {
   if (demande.notification.montant === 0) {
     body += '<br><p>la bourse de collège que vous avez sollicitée au titre de l\'année scolaire 2017-2018 ne peut pas vous être accordée.</p>';
   } else {
-    body += '<br><p>une bourse de collège d\'un montant annuel de <strong>' + demande.notification.montant + ' EUR</strong> vous est accordée au titre de l\'année scolaire 2017-2018.</p>';
+    body += '<br><p>une bourse de collège d\'un montant trimestriel de <strong>' + demande.notification.montant + ' EUR</strong> vous est accordée au titre de l\'année scolaire 2017-2018.</p>';
   }
 
   body += '<br><p>La bourse est versée en 3 parts égales, à chaque trimestre, déduction faite des éventuels frais de demi-pension, sur le compte bancaire suivant (le compte bancaire est obligatoirement celui d\'un responsable légal de l\'enfant) :</p>';

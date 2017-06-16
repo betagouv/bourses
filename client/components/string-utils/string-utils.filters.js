@@ -105,7 +105,7 @@ angular
         return 'D\'après les informations saisies, votre enfant ne pourra pas bénéficier d\'une bourse de collège.';
       default:
         return 'D\'après les informations saisies, ' +
-            'votre enfant pourra bénéficier d\'une bourse de collège d\'un montant annuel de:';
+            'votre enfant pourra bénéficier d\'une bourse de collège d\'un montant trimestriel de:';
       }
     };
   });
