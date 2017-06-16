@@ -5,6 +5,7 @@ var async = require('async');
 var wkhtmltopdf = require('wkhtmltopdf');
 var iconv = require('iconv-lite');
 
+var data = require('./DEPP-etab.json');
 var Etablissement = require('./etablissement.model');
 var User = require('../user/user.model');
 var Demande = require('../demande/demande.model');
@@ -26,6 +27,52 @@ exports.show = function(req, res) {
 
 exports.showById = function(req, res) {
   return res.json(req.etablissement);
+};
+
+exports.showByRne = function(req, res) {
+  // Sample data
+  // {
+  //   "numero_uai": "0010002X",
+  //   "appellation_officielle": "Collège Saint-Exupéry",
+  //   "denomination_principale": "COLLEGE",
+  //   "patronyme_uai": "SAINT-EXUPERY",
+  //   "secteur_public_prive_libe": "Public",
+  //   "adresse_uai": "6  RUE AGUETANT",
+  //   "lieu_dit_uai": "",
+  //   "boite_postale_uai": "508",
+  //   "code_postal_uai": "1500",
+  //   "localite_acheminement_uai": "AMBERIEU EN BUGEY",
+  //   "coordonnee_x": "882408,3",
+  //   "coordonnee_y": "6543019,6",
+  //   "appariement": "MANUEL",
+  //   "localisation": "BATIMENT",
+  //   "nature_uai": "340",
+  //   "nature_uai_libe": "Collège",
+  //   "etat_etablissement": "1"
+  // },
+
+  const etablissementId = req.params.rne ? req.params.rne.toUpperCase() : null;
+
+  const etablissement = _.find(data, function(current) {
+    return etablissementId == current.numero_uai.toUpperCase();
+  });
+
+  if (etablissement) {
+    const college = new Etablissement();
+
+    college.human_id = etablissement.numero_uai;
+    college.nom = etablissement.appellation_officielle;
+    college.type = etablissement.nature_uai_libe;
+    college.adresse = etablissement.adresse_uai;
+    college.ville = {
+      nom: etablissement.localite_acheminement_uai,
+      codePostal: etablissement.code_postal_uai
+    };
+
+    return res.json(college);
+  } else {
+    return res.sendStatus(404);
+  }
 };
 
 exports.query = function(req, res) {
