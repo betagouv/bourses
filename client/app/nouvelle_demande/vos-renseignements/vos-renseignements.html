@@ -73,10 +73,10 @@
   </div>
 
   <div class="final-send">
-    <p>En envoyant cette demande, vous attestez que vous êtes bien <b>{{getLabel(identite.demandeur)}}</b>, <b>{{identite.lien | lien:true}}</b> de <b>{{identiteEnfant.prenom}} {{identiteEnfant.nom}}</b><span ng-if="identite.iban">, <b>titulaire du compte {{identite.iban}}</b></span>.</p>
+    <p>Je soussigné, <b>{{getLabel(identite.demandeur)}}</b>, <b>{{identite.lien | lien:true}}</b> de <b>{{identiteEnfant.prenom}} {{identiteEnfant.nom}}</b> <span ng-if="identite.iban">et <b>titulaire du compte {{identite.iban}}</b></span>, certifie sur l'honneur que les renseignements portés sur cette déclaration sont exacts. La loi punit quiconque se rend coupable de fraude ou de fausses déclarations (loi N° 68-690 du 31 juillet 1968, article 22).</p>
 
     <button type="submit" ladda="loading" data-style="expand-right" name="submit" alt="Valider" class="btn btn-lg btn-success">
-        Envoyer votre demande
+        Envoyer ma demande
     </button>
   </div>
 

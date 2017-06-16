@@ -45,13 +45,20 @@ function sendNotificationToUser(demande, etablissement, stream, req) {
     body += '<br><p>une bourse de collège d\'un montant annuel de <strong>' + demande.notification.montant + ' EUR</strong> vous est accordée au titre de l\'année scolaire 2017-2018.</p>';
   }
 
+  body += '<br><p>La bourse est versée en 3 parts égales, à chaque trimestre, déduction faite des éventuels frais de demi-pension, sur le compte bancaire suivant (le compte bancaire est obligatoirement celui d\'un responsable légal de l\'enfant) :</p>';
+
+  body += '<ul><li>IBAN : ' + demande.identiteAdulte.iban + '</li>';
+  body += '<li>BIC : ' + demande.identiteAdulte.bic + '</li></ul>';
+
   body += '<h4>Pour votre information :</h4><ol type="a">' +
   '<li>En cas d\'erreur dans les données ci-dessus indiquées, je vous prie de bien vouloir m\'en informer le plus rapidement possible.</li>' +
   '<li>Si vous contestez cette décision, vous pouvez former dans les deux mois de sa notification :' +
   '<ul><li>soit un recours administratif que vous m\'adresserez;</li>' +
   '<li>soit un recours contentieux devant le tribunal administratif.</li></ul>' +
   'En cas de recours administratif, vous disposerez à compter de la notification de la réponse, d\'un délai de deux mois pour vous pourvoir devant le tribunal administratif. Ce délai est porté à ' +
-  'quatre mois à compter de l\'introduction du recours administratif, si ce dernier est resté sans réponse.</li></ol></div></body></html>';
+  'quatre mois à compter de l\'introduction du recours administratif, si ce dernier est resté sans réponse.</li>' +
+  '<li>La loi punit quiconque se rend coupable de fraude ou de fausses déclarations (loi N° 68-690 du 31 juillet 1968, article 22).</li>' +
+  '</ol></div></body></html>';
 
   sendMail(demande.notification.email, etablissement.contact, subject, body, stream, function(error, info) {
     if (error) {

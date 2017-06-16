@@ -28,7 +28,7 @@ var all = {
 
   apiParticulier: {
     token: process.env.API_PARTICULIER_TOKEN || 'test-token',
-    url: process.env.API_PARTICULIER_URL || 'https://particulier-test.api.gouv.fr/api/impots/svair'
+    url: process.env.API_PARTICULIER_URL || 'https://particulier-sandbox.api.gouv.fr/api/impots/svair'
   },
 
   dgfip: {
