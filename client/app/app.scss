@@ -263,12 +263,13 @@ select.form-control-flat {
 
 @mixin primary-action {
   border-radius: 5px;
-  color: $red;
+  color: white;
+  background-color: $red;
 
   &:hover {
-    color: white;
+    color: $red;
     text-decoration: none;
-    background-color: $red;
+    background-color: white;
   }
 }
 

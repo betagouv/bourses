@@ -9,11 +9,9 @@ section#nouvelle_demande {
     font-weight: 200;
   }
 
-  p.lead {
-    font-size: 1.6em;
-  }
-
   .action {
+    text-align: right;
+    margin-top: 2em;
     font-size: 1.7em;
     a {
       @include primary-action;
