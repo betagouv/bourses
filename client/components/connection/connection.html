@@ -58,9 +58,19 @@
           <p class="text-danger">{{error}}</p>
         </div>
 
-        <div class="alert alert-warning" ng-if="!forAgent && !demande">Si vous n'avez pas de numéro fiscal, vous pouvez recourir au <strong>
-          <a href="http://vosdroits.service-public.fr/particuliers/F1025.xhtml" target="_blank" title="Détail sur le fonds social collégien">fonds social collégien</a>.
-        </strong></div>
+        <div class="alert alert-warning" ng-if="!forAgent && !demande">
+          <ul>
+            <li>
+              Si vous n'avez pas de numéro fiscal, vous pouvez recourir au
+              <strong><a href="http://vosdroits.service-public.fr/particuliers/F1025.xhtml" target="_blank" title="Détail sur le fonds social collégien">fonds social collégien</a></strong>.
+            </li>
+            <li>
+              Si vos revenus ont considérablement diminué depuis l'année dernière. Nous vous remercions
+              de bien vouloir prendre l'attache de votre établissement afin que votre dossier soit traité
+              directement par le service concerné.
+            </li>
+          </ul>
+        </div>
 
         <div class="text-right">
           <a ng-if="status" class="action-cancel" ng-click="cancelCredentials()">Annuler</a>
