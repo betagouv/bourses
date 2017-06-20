@@ -383,7 +383,7 @@ exports.update = function(req, res) {
         }
 
         found.email = newEmail;
-        found.save(function(err, saved) {
+        found.save(function() {
           return res.status(200).json(req.etablissement);
         })
       });
