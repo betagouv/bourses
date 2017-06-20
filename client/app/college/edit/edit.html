@@ -65,19 +65,19 @@
 
   <h2>Changer mon mot de passe</h2>
 
-  <form name="infoForm" ng-submit="changePassword(infoForm)" novalidate>
-    <div class="form-group required" ng-class="{'has-error': infoForm.oldPassword.$invalid && infoForm.$submitted}">
+  <form name="newPasswordForm" ng-submit="changePassword(newPasswordForm)" novalidate>
+    <div class="form-group required" ng-class="{'has-error': newPasswordForm.oldPassword.$invalid && newPasswordForm.$submitted}">
       <label for="oldPassword" class="control-label-flat">Ancien mot de passe</label>
       <input id="oldPassword" type="password" name="oldPassword" class="form-control-flat" ng-model="oldPassword" required>
-      <div ng-messages="infoForm.oldPassword.$error" ng-if="infoForm.$submitted">
+      <div ng-messages="newPasswordForm.oldPassword.$error" ng-if="newPasswordForm.$submitted">
         <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
       </div>
     </div>
 
-    <div class="form-group required" ng-class="{'has-error': infoForm.newPassword.$invalid && infoForm.$submitted}">
+    <div class="form-group required" ng-class="{'has-error': newPasswordForm.newPassword.$invalid && newPasswordForm.$submitted}">
       <label for="newPassword" class="control-label-flat">Nouveau mot de passe</label>
       <input id="newPassword" type="password" ng-minlength="8" name="newPassword" class="form-control-flat" ng-model="newPassword" required>
-      <div ng-messages="infoForm.newPassword.$error" ng-if="infoForm.$submitted">
+      <div ng-messages="newPasswordForm.newPassword.$error" ng-if="newPasswordForm.$submitted">
         <p class="help-block-inverted" ng-message='required'><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
         <p class="help-block-inverted" ng-message='minlength'><i class="fa fa-warning"></i> Ce champ doit être au moins de 8 caractères.</p>
       </div>
