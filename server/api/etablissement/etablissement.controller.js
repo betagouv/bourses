@@ -369,11 +369,29 @@ exports.compta = function(req, res) {
 exports.update = function(req, res) {
   if (req.body._id) { delete req.body._id; }
 
+  var oldEmail = req.etablissement.contact;
+  var newEmail = req.body.contact;
+
   var updated = _.merge(req.etablissement, req.body);
   updated.save(function(err) {
     if (err) { return handleError(req, res, err); }
 
-    return res.status(200).json(req.etablissement);
+    if (oldEmail !== newEmail) {
+      User.findOne({email: oldEmail}, function(err, found) {
+        if (err) {
+          return res.status(200).json(req.etablissement);
+        }
+
+        found.email = newEmail;
+        found.save(function(err, saved) {
+          return res.status(200).json(req.etablissement);
+        })
+      });
+    } else {
+      return res.status(200).json(req.etablissement);
+    }
+
+
   });
 };
 
