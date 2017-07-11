@@ -75,33 +75,3 @@ fieldset {
 body {
   background-color: $dark-blue;
 }
-
-
-.intro {
-  width: 100%;
-  z-index: 10000;
-  background: $blue;
-  padding: 14px;
-  color: white;
-  cursor: pointer;
-
-  .content {
-    text-align: center;
-    font-weight: 200;
-  }
-
-  strong {
-    font-weight: 400;
-  }
-
-  a {
-    color: white;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  span {
-    margin: 0 10px;
-  }
-}
