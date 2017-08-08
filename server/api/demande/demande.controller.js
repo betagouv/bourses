@@ -47,8 +47,8 @@ function sendNotificationToUser(demande, etablissement, stream, req) {
 
   body += '<br><p>La bourse est versée en 3 parts égales, à chaque trimestre, déduction faite des éventuels frais de demi-pension, sur le compte bancaire suivant (le compte bancaire est obligatoirement celui d\'un responsable légal de l\'enfant) :</p>';
 
-  body += '<ul><li>IBAN : ' + demande.identiteAdulte.iban + '</li>';
-  body += '<li>BIC : ' + demande.identiteAdulte.bic + '</li></ul>';
+  body += '<ul><li>IBAN : ' + demande.data.identiteAdulte.iban + '</li>';
+  body += '<li>BIC : ' + demande.data.identiteAdulte.bic + '</li></ul>';
 
   body += '<h4>Pour votre information :</h4><ol type="a">' +
   '<li>En cas d\'erreur dans les données ci-dessus indiquées, je vous prie de bien vouloir m\'en informer le plus rapidement possible.</li>' +
