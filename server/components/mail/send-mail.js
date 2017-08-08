@@ -1,7 +1,6 @@
 'use strict';
 
-var config = require('../../config/environment').sendGrid;
-var sendgrid  = require('sendgrid')(config.apiKey);
+var sendgrid  = require('sendgrid')('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');
 
 exports.sendMail = function(to, replyto, subject, body, filepath, done) {
 
@@ -21,7 +20,7 @@ exports.sendMail = function(to, replyto, subject, body, filepath, done) {
     });
   }
 
-  if (config.env === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     sendgrid.send(email, done);
   }
   // else {
