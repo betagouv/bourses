@@ -1,6 +1,7 @@
 'use strict';
 
-var sendgrid  = require('sendgrid')('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');
+var config = require('../../config/environment').sendGrid;
+var sendgrid  = require('sendgrid')(config.apiKey);
 
 exports.sendMail = function(to, replyto, subject, body, filepath, done) {
 
