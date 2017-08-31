@@ -1,6 +1,7 @@
 const request = require('superagent');
 const config = require('../../config/environment');
 const Promise = require('bluebird');
+const Svair = require('svair-api');
 
 const incorrect = {
   code: 400,
@@ -14,27 +15,48 @@ const notFound = {
   explaination: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
 };
 
+
+// module.exports = function(numeroFiscal, referenceAvis, done) {
+//   if (!numeroFiscal || !referenceAvis) {
+//     return done ? done(incorrect) : Promise.reject(incorrect);
+//   } else {
+//     request
+//       .get(config.apiParticulier.url)
+//       .query({numeroFiscal: numeroFiscal, referenceAvis: referenceAvis})
+//       .set('X-API-Key', config.apiParticulier.token)
+//       .set('Accept', 'application/json')
+//       .end(function(err, result) {
+//         if (err && err.message === 'Invalid credentials') {
+//           return done(notFound);
+//         } else if (err) {
+//           return done(notFound);
+//         } else {
+//           if (!result.body.declarant2.nom) {
+//             delete result.body.declarant2;
+//           }
+//
+//           return done(null, result.body);
+//         }
+//       });
+//   }
+// };
+
 module.exports = function(numeroFiscal, referenceAvis, done) {
   if (!numeroFiscal || !referenceAvis) {
     return done ? done(incorrect) : Promise.reject(incorrect);
   } else {
-    request
-      .get(config.apiParticulier.url)
-      .query({numeroFiscal: numeroFiscal, referenceAvis: referenceAvis})
-      .set('X-API-Key', config.apiParticulier.token)
-      .set('Accept', 'application/json')
-      .end(function(err, result) {
-        if (err && err.message === 'Invalid credentials') {
-          return done(notFound);
-        } else if (err) {
-          return done(notFound);
-        } else {
-          if (!result.body.declarant2.nom) {
-            delete result.body.declarant2;
-          }
-
-          return done(null, result.body);
+    Svair('https://cfsmsp.impots.gouv.fr')(numeroFiscal, referenceAvis, function(err, result) {
+      if (err && err.message === 'Invalid credentials') {
+        return done(notFound);
+      } else if (err) {
+        return done(notFound);
+      } else {
+        if (!result.declarant2.nom) {
+          delete result.declarant2;
         }
-      });
+
+        return done(null, result);
+      }
+    });
   }
 };
