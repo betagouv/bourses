@@ -1,5 +1,5 @@
-const request = require('superagent');
-const config = require('../../config/environment');
+// const request = require('superagent');
+// const config = require('../../config/environment');
 const Promise = require('bluebird');
 const Svair = require('svair-api');
 
