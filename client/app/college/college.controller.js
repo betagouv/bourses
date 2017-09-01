@@ -5,6 +5,7 @@ angular.module('boursesApp')
     $scope.count = count;
     $scope.college = college;
     $scope.token = Auth.getToken();
+    $scope.$state = $state;
 
     $scope.hideHelpCampaign = store.get('hideHelpCampaign');
 

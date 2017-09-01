@@ -2,75 +2,42 @@
   <div class="header">
     <div class="container">
       <h1>{{college.nom}}</h1>
-      <span>{{college.contact}}</span>
-      <div class="text-right">
-        <a href="" class="btn btn-action-invert" ng-click="logout()">
-          Se déconnecter
-        </a>
-      </div>
-      <br>
-      <div class="alert alert-warning" ng-hide="hideHelpCampaign">
+
+      <!-- <div class="alert alert-warning" ng-hide="hideHelpCampaign">
         <i class="fa fa-warning"></i> Vous pouvez ouvrir ou fermer le service à tout moment dans le menu <a ui-sref="layout.college.campaign">Ma campagne</a>
         <div class="pull-right" ng-click="hideHelp()">
           <i class="fa fa-close"></i>
         </div>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
-  <div class="nav-sections">
-    <div class="container">
-      <ul class="nav nav-pills">
-        <li role="presentation" ui-sref-active="active">
-          <a ui-sref="layout.college.demandes.new">
-            Liste des demandes <span class="badge">{{count.new}}</span>
-          </a>
+      </div> -->
+
+      <ul class="nav nav-pills" role="menu">
+        <li ng-class="{ active: $state.includes('layout.college.demandes') }" role="menuitem">
+          <a ui-sref="layout.college.demandes.new">Mes demandes</a>
         </li>
-        <li role="presentation" ui-sref-active="active">
-          <a ui-sref="layout.college.demandes.paused">
-            En attente <span class="badge">{{count.pause}}</span>
-          </a>
+        <li ui-sref-active="active" role="menuitem">
+          <a ui-sref="layout.college.campaign">Ma campagne</a>
         </li>
-        <li role="presentation" ui-sref-active="active">
-          <a ui-sref="layout.college.demandes.done">
-            Traitées <span class="badge">{{count.done}}</span>
-          </a>
+        <li ui-sref-active="active" role="menuitem">
+          <a ui-sref="layout.college.telechargements">Téléchargements</a>
         </li>
-        <li role="presentation" ui-sref-active="active">
-          <a ui-sref="layout.college.demandes.error">
-            En erreur <span class="badge">{{count.error}}</span>
-          </a>
+        <li ui-sref-active="active" role="menuitem">
+          <a ui-sref="layout.college.edit">Mon établissement</a>
         </li>
-        <li role="presentation" class="pull-right">
-          <div uib-dropdown is-open="status.isopen">
-            <button id="single-button" type="button" class="btn btn-action-menu" uib-dropdown-toggle>
-              Menu <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-              <li role="menuitem">
-                <a class="darker" ui-sref="layout.college.campaign">Ma campagne</a>
-              </li>
-              <li role="menuitem">
-                <a class="darker" ui-sref="layout.college.telechargements">Téléchargements</a>
-              </li>
-              <li role="menuitem">
-                <a class="darker" ui-sref="layout.college.edit">Mon établissement</a>
-              </li>
-              <li role="menuitem">
-                <a class="darker" ui-sref="layout.college.compta">Gestion des RIBs</a>
-              </li>
-              <li role="menuitem">
-                <a class="darker" ui-sref="layout.college.help">Aide <i class="fa fa-question-circle"></i></a>
-              </li>
-            </ul>
-          </div>
+        <li ui-sref-active="active" role="menuitem">
+          <a ui-sref="layout.college.compta">Gestion des RIBs</a>
+        </li>
+        <li ui-sref-active="active" role="menuitem">
+          <a ui-sref="layout.college.help">Aide <i class="fa fa-question-circle"></i></a>
+        </li>
+        <li role="menuitem" class="pull-right">
+          <a href="" ng-click="logout()">
+            Me déconnecter
+          </a>
         </li>
       </ul>
     </div>
   </div>
   <div class="content-box">
-    <div class="container-fluid">
-      <ui-view></ui-view>
-    </div>
+    <ui-view></ui-view>
   </div>
 </div>

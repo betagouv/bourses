@@ -1,40 +1,42 @@
-<div id="college-form" class="container">
-  <h2>Téléchargements</h2>
+<div class="college-container">
+  <div id="college-form">
+    <h2>Téléchargements</h2>
 
-  <h3>Archives PDF</h3>
+    <h3>Archives PDF</h3>
 
-  <a target="_blank" download="campagne_2017_2018.zip" href="/api/etablissements/{{college.human_id}}/campagne?access_token={{token}}">
-    <i class="fa fa-2x fa-file-zip-o"></i> &nbsp;Télécharger l'ensemble de la campagne 2017-2018
-  </a>
+    <a target="_blank" download="campagne_2017_2018.zip" href="/api/etablissements/{{college.human_id}}/campagne?access_token={{token}}">
+      <i class="fa fa-2x fa-file-zip-o"></i> &nbsp;Télécharger l'ensemble de la campagne 2017-2018
+    </a>
 
-  <br>
+    <br>
 
-  <a target="_blank" download="demandes.zip" href="/api/etablissements/{{college.human_id}}/listeDemandes?access_token={{token}}&pdf=1">
-    <i class="fa fa-2x fa-file-pdf-o"></i> &nbsp;Liste des demandes
-  </a>
+    <a target="_blank" download="demandes.zip" href="/api/etablissements/{{college.human_id}}/listeDemandes?access_token={{token}}&pdf=1">
+      <i class="fa fa-2x fa-file-pdf-o"></i> &nbsp;Liste des demandes
+    </a>
 
-  <br>
+    <br>
 
-  <a target="_blank" download="notifications.zip" href="/api/etablissements/{{college.human_id}}/notifications?access_token={{token}}&pdf=1">
-    <i class="fa fa-2x fa-file-pdf-o"></i> &nbsp;Liste des notifications
-  </a>
+    <a target="_blank" download="notifications.zip" href="/api/etablissements/{{college.human_id}}/notifications?access_token={{token}}&pdf=1">
+      <i class="fa fa-2x fa-file-pdf-o"></i> &nbsp;Liste des notifications
+    </a>
 
-  <br>
+    <br>
 
-  <a target="_blank" download="liste_ribs.pdf" href="/api/etablissements/{{college.human_id}}/listeRibs?access_token={{token}}&pdf=1">
-    <i class="fa fa-2x fa-file-pdf-o"></i> &nbsp;Liste des RIBs
-  </a>
+    <a target="_blank" download="liste_ribs.pdf" href="/api/etablissements/{{college.human_id}}/listeRibs?access_token={{token}}&pdf=1">
+      <i class="fa fa-2x fa-file-pdf-o"></i> &nbsp;Liste des RIBs
+    </a>
 
-  <br>
+    <br>
 
-  <a target="_blank" download="aide_siecle.pdf" href="/api/etablissements/{{college.human_id}}/aideSiecle?access_token={{token}}&pdf=1">
-    <i class="fa fa-2x fa-file-pdf-o"></i> &nbsp;Aide à la saisie SIECLE
-  </a>
+    <a target="_blank" download="aide_siecle.pdf" href="/api/etablissements/{{college.human_id}}/aideSiecle?access_token={{token}}&pdf=1">
+      <i class="fa fa-2x fa-file-pdf-o"></i> &nbsp;Aide à la saisie SIECLE
+    </a>
 
-  <br>
+    <br>
 
-  <h3>Document Excel</h3>
-  <a target="_blank" download="campagne.csv" href="/api/etablissements/{{college.human_id}}/listeDemandes?access_token={{token}}&csv=1">
-    <i class="fa fa-2x fa-file-excel-o"></i> &nbsp;Extraction de la campagne au format CSV (demandes + ribs + notifications)
-  </a>
+    <h3>Document Excel</h3>
+    <a target="_blank" download="campagne.csv" href="/api/etablissements/{{college.human_id}}/listeDemandes?access_token={{token}}&csv=1">
+      <i class="fa fa-2x fa-file-excel-o"></i> &nbsp;Extraction de la campagne au format CSV (demandes + ribs + notifications)
+    </a>
+  </div>
 </div>

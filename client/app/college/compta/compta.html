@@ -1,60 +1,61 @@
-<div id="compta-college">
-
-  <div ng-if="demandes.length === 0 && demandes.$resolved" class="finished">
-    <i class="fa fa-thumbs-up"></i>
-  </div>
-
-  <div ng-if="demandes.length !== 0">
-
-    <div class="row">
-      <div class="col-sm-5">
-        <input type="text" class="form-control" placeholder="Recherche" ng-model="searchText">
-      </div>
-      <div class="col-sm-7 text-right">
-        <a target="_blank" class="btn btn-action" download="liste_ribs.pdf" href="/api/etablissements/{{college.human_id}}/listeRibs?access_token={{token}}">Télécharger la liste des RIBs</a>
-      </div>
+<div class="college-container">
+  <div id="compta-college">
+    <div ng-if="demandes.length === 0 && demandes.$resolved" class="finished">
+      <i class="fa fa-thumbs-up"></i>
     </div>
 
-    <br>
+    <div ng-if="demandes.length !== 0">
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Demandeur</th>
-          <th>Taux accordé</th>
-          <th>IBAN</th>
-          <th>BIC</th>
-          <th>Domiciliation</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="demande in demandes | filter:searchText" ng-class="{duplicate: demande.isDuplicate, 'warning-demande': isWarning(demande), 'new': demande.status === 'new'}">
-          <td><a class="detail" ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteAdulte.demandeur.nom | capitalize}}, {{demande.identiteAdulte.demandeur.prenoms | capitalize:true}}</a></td>
-          <td class="text-center">{{demande.notification.montant}} €</td>
-          <td>
-            <table>
-              <tr>
-                <td><input type="text" size="35" ng-model="demande.identiteAdulte.iban"></td>
-                <td>
-                  <button class="btn btn-link btn-sm" ng-if="!demande.savingIban" type="button" ng-click="update(demande, 'iban')"><i class="fa fa-save"></i></button>
-                  <button class="btn btn-link btn-sm" ng-if="demande.savingIban" type="button"><i class="fa fa-spin fa-spinner"></i></button>
-                </td>
-              </tr>
-            </table>
-            <!-- <a href="#" onaftersave="update(demande, 'iban')" editable-text="demande.identiteAdulte.iban">{{demande.identiteAdulte.iban}}</a></td> -->
-          <td>
-            <table>
-              <tr>
-                <td><input type="text" size="15" ng-model="demande.identiteAdulte.bic"></td>
-                <td>
-                  <button class="btn btn-link btn-sm" ng-if="!demande.savingBic" type="button" ng-click="update(demande, 'bic')"><i class="fa fa-save"></i></button>
-                  <button class="btn btn-link btn-sm" ng-if="demande.savingBic" type="button"><i class="fa fa-spin fa-spinner"></i></button>
-                </td>
-              </tr>
-            </table>
-          <td><button class="btn btn-link" ng-click="search(demande.identiteAdulte.bic)"><i class="fa fa-search"></i> Chercher</button></td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="row">
+        <div class="col-sm-5">
+          <input type="text" class="form-control" placeholder="Recherche" ng-model="searchText">
+        </div>
+        <div class="col-sm-7 text-right">
+          <a target="_blank" class="btn btn-action" download="liste_ribs.pdf" href="/api/etablissements/{{college.human_id}}/listeRibs?access_token={{token}}">Télécharger la liste des RIBs</a>
+        </div>
+      </div>
+
+      <br>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Demandeur</th>
+            <th>Taux accordé</th>
+            <th>IBAN</th>
+            <th>BIC</th>
+            <th>Domiciliation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="demande in demandes | filter:searchText" ng-class="{duplicate: demande.isDuplicate, 'warning-demande': isWarning(demande), 'new': demande.status === 'new'}">
+            <td><a class="detail" ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteAdulte.demandeur.nom | capitalize}}, {{demande.identiteAdulte.demandeur.prenoms | capitalize:true}}</a></td>
+            <td class="text-center">{{demande.notification.montant}} €</td>
+            <td>
+              <table>
+                <tr>
+                  <td><input type="text" size="35" ng-model="demande.identiteAdulte.iban"></td>
+                  <td>
+                    <button class="btn btn-link btn-sm" ng-if="!demande.savingIban" type="button" ng-click="update(demande, 'iban')"><i class="fa fa-save"></i></button>
+                    <button class="btn btn-link btn-sm" ng-if="demande.savingIban" type="button"><i class="fa fa-spin fa-spinner"></i></button>
+                  </td>
+                </tr>
+              </table>
+              <!-- <a href="#" onaftersave="update(demande, 'iban')" editable-text="demande.identiteAdulte.iban">{{demande.identiteAdulte.iban}}</a></td> -->
+            <td>
+              <table>
+                <tr>
+                  <td><input type="text" size="15" ng-model="demande.identiteAdulte.bic"></td>
+                  <td>
+                    <button class="btn btn-link btn-sm" ng-if="!demande.savingBic" type="button" ng-click="update(demande, 'bic')"><i class="fa fa-save"></i></button>
+                    <button class="btn btn-link btn-sm" ng-if="demande.savingBic" type="button"><i class="fa fa-spin fa-spinner"></i></button>
+                  </td>
+                </tr>
+              </table>
+            <td><button class="btn btn-link" ng-click="search(demande.identiteAdulte.bic)"><i class="fa fa-search"></i> Chercher</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

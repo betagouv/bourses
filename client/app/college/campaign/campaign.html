@@ -1,80 +1,82 @@
-<div id="college-form" class="container">
-  <h2>Ma campagne</h2>
+<div class="college-container">
+  <div id="college-form">
+    <h2>Ma campagne</h2>
 
-  <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
+    <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
 
-    <div class="form-group required">
-      <fieldset>
-        <legend class="control-label-flat">Ouverture du service</legend>
-        <div class="btn-group">
-          <button type="button" class="btn btn-select btn-select-success" role="radio" ng-model="college.ouverture_service" uib-btn-radio="true">Le service est ouvert</button>
-          <button type="button" class="btn btn-select btn-select-danger" role="radio" ng-model="college.ouverture_service" uib-btn-radio="false">Le service est fermé</button>
-        </div>
-      </fieldset>
-    </div>
-
-    <div class="form-group">
-      <fieldset>
-        <legend class="control-label-flat">Activer la gestion des demandes d'aide départementale pour la demi-pension <br><small class="text-muted">Si vous activez cette gestion, nous rajoutons une nouvelle question lors du remplissage de la demande pour votre collège.<br>Cette question est: "Souhaitez-vous également faire une demande d'aide départementale pour la demi-pension ? Oui / Non"</small></legend>
-
-        <div class="btn-group">
-          <button type="button" class="btn btn-select btn-select-success" role="radio" ng-model="college.gestion_cantine" uib-btn-radio="true">Oui</button>
-          <button type="button" class="btn btn-select btn-select-danger" role="radio" ng-model="college.gestion_cantine" uib-btn-radio="false">Non</button>
-        </div>
-      </fieldset>
-    </div>
-
-    <div class="text-right">
-      <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action-invert">
-          Valider
-      </button>
-    </div>
-  </form>
-
-  <hr>
-
-  <div ng-if="total > 0">
-    <h1>Statistiques</h1>
-
-    <p class="lead">Demandes par taux <small>(Total des demandes: {{total}})</small></p>
-
-    <div class="row">
-      <div class="col-sm-4 col-sm-offset-4">
-        <canvas id="pie" class="chart chart-pie" chart-data="count" chart-labels="['Refus', 'Taux 1', 'Taux 2', 'Taux 3']" chart-legend="true"></canvas>
+      <div class="form-group required">
+        <fieldset>
+          <legend class="control-label-flat">Ouverture du service</legend>
+          <div class="btn-group">
+            <button type="button" class="btn btn-select btn-select-success" role="radio" ng-model="college.ouverture_service" uib-btn-radio="true">Le service est ouvert</button>
+            <button type="button" class="btn btn-select btn-select-danger" role="radio" ng-model="college.ouverture_service" uib-btn-radio="false">Le service est fermé</button>
+          </div>
+        </fieldset>
       </div>
-    </div>
 
-    <uib-accordion>
-      <div uib-accordion-group ng-repeat="(group, demandes) in groups" heading="{{getLabel(group, demandes)}}">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>
-                <i ng-if="type === 'enfant' && !reverse" class="fa fa-sort-alpha-asc"></i>
-                <i ng-if="type === 'enfant' && reverse" class="fa fa-sort-alpha-desc"></i>
-                <a href="#" ng-click="toggleSort('enfant')">Enfant</a>
-              </th>
-              <th>
-                <i ng-if="type === 'adulte' && !reverse" class="fa fa-sort-alpha-asc"></i>
-                <i ng-if="type === 'adulte' && reverse" class="fa fa-sort-alpha-desc"></i>
-                <a href="#" ng-click="toggleSort('adulte')">Demandeur</a>
-              </th>
-              <th>
-                <i ng-if="type === 'email' && !reverse" class="fa fa-sort-alpha-asc"></i>
-                <i ng-if="type === 'email' && reverse" class="fa fa-sort-alpha-desc"></i>
-                <a href="#" ng-click="toggleSort('email')">Email</a>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="demande in demandes | orderBy: expression: reverse track by demande._id">
-              <td>{{demande.identiteEnfant.prenom | capitalize}}, {{demande.identiteEnfant.nom | capitalize}}</td>
-              <td>{{demande.identiteAdulte.demandeur.prenoms | capitalize}}, {{demande.identiteAdulte.demandeur.nom | capitalize}}</td>
-              <td>{{demande.identiteAdulte.email}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="form-group">
+        <fieldset>
+          <legend class="control-label-flat">Activer la gestion des demandes d'aide départementale pour la demi-pension <br><small class="text-muted">Si vous activez cette gestion, nous rajoutons une nouvelle question lors du remplissage de la demande pour votre collège.<br>Cette question est: "Souhaitez-vous également faire une demande d'aide départementale pour la demi-pension ? Oui / Non"</small></legend>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-select btn-select-success" role="radio" ng-model="college.gestion_cantine" uib-btn-radio="true">Oui</button>
+            <button type="button" class="btn btn-select btn-select-danger" role="radio" ng-model="college.gestion_cantine" uib-btn-radio="false">Non</button>
+          </div>
+        </fieldset>
       </div>
-    </uib-accordion>
+
+      <div class="text-right">
+        <button type="submit" name="submit" alt="Valider" class="btn btn-lg btn-action-invert">
+            Valider
+        </button>
+      </div>
+    </form>
+
+    <hr>
+
+    <div ng-if="total > 0">
+      <h1>Statistiques</h1>
+
+      <p class="lead">Demandes par taux <small>(Total des demandes: {{total}})</small></p>
+
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <canvas id="pie" class="chart chart-pie" chart-data="count" chart-labels="['Refus', 'Taux 1', 'Taux 2', 'Taux 3']" chart-legend="true"></canvas>
+        </div>
+      </div>
+
+      <uib-accordion>
+        <div uib-accordion-group ng-repeat="(group, demandes) in groups" heading="{{getLabel(group, demandes)}}">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  <i ng-if="type === 'enfant' && !reverse" class="fa fa-sort-alpha-asc"></i>
+                  <i ng-if="type === 'enfant' && reverse" class="fa fa-sort-alpha-desc"></i>
+                  <a href="#" ng-click="toggleSort('enfant')">Enfant</a>
+                </th>
+                <th>
+                  <i ng-if="type === 'adulte' && !reverse" class="fa fa-sort-alpha-asc"></i>
+                  <i ng-if="type === 'adulte' && reverse" class="fa fa-sort-alpha-desc"></i>
+                  <a href="#" ng-click="toggleSort('adulte')">Demandeur</a>
+                </th>
+                <th>
+                  <i ng-if="type === 'email' && !reverse" class="fa fa-sort-alpha-asc"></i>
+                  <i ng-if="type === 'email' && reverse" class="fa fa-sort-alpha-desc"></i>
+                  <a href="#" ng-click="toggleSort('email')">Email</a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="demande in demandes | orderBy: expression: reverse track by demande._id">
+                <td>{{demande.identiteEnfant.prenom | capitalize}}, {{demande.identiteEnfant.nom | capitalize}}</td>
+                <td>{{demande.identiteAdulte.demandeur.prenoms | capitalize}}, {{demande.identiteAdulte.demandeur.nom | capitalize}}</td>
+                <td>{{demande.identiteAdulte.email}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </uib-accordion>
+    </div>
   </div>
 </div>
