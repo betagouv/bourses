@@ -58,6 +58,15 @@
           <p class="text-danger">{{error}}</p>
         </div>
 
+        <div class="text-right">
+          <a ng-if="status" class="action-cancel" ng-click="cancelCredentials()">Annuler</a>
+          <button type="button" ladda="loading" ng-click="validateSvair(svairForm)" data-style="expand-right" data-color="white" name="submit" alt="Valider" class="btn btn-lg btn-action">
+            Valider
+          </button>
+        </div>
+
+        <br>
+
         <div class="alert alert-warning" ng-if="!forAgent && !demande">
           <ul>
             <li>
@@ -70,13 +79,6 @@
               directement par le service concerné.
             </li>
           </ul>
-        </div>
-
-        <div class="text-right">
-          <a ng-if="status" class="action-cancel" ng-click="cancelCredentials()">Annuler</a>
-          <button type="button" ladda="loading" ng-click="validateSvair(svairForm)" data-style="expand-right" data-color="white" name="submit" alt="Valider" class="btn btn-action">
-            Valider
-          </button>
         </div>
       </ng-form>
     </div>
