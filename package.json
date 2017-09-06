@@ -34,7 +34,7 @@
     "serve-favicon": "^2.2.1",
     "shortid": "^2.2.8",
     "superagent": "^2.0.0",
-    "svair-api": "0.5.1",
+    "svair-api": "0.5.0",
     "tmp": "0.0.28",
     "wkhtmltopdf": "^0.3.1"
   },
