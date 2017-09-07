@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('boursesApp')
-  .controller('IdentiteEnfantCtrl', function($scope, $state, $http, $timeout, store, etablissements) {
+  .controller('IdentiteEnfantCtrl', function($scope, $state, $http, $timeout, store) {
 
     if (!String.prototype.startsWith) {
       String.prototype.startsWith = function(searchString, position) {
@@ -9,15 +9,6 @@ angular.module('boursesApp')
         return this.substr(position, searchString.length) === searchString;
       };
     }
-
-    $scope.etablissements = etablissements;
-    $scope.etablissementsById = _.indexBy(etablissements, '_id');
-    $scope.identite = store.get('identite-enfant') || {};
-
-    var etablissement = $scope.identite.college ? _.find($scope.etablissements, {_id: $scope.identite.college}) : null;
-
-    $scope.selectedCollege = etablissement;
-    $scope.selectedCollegeLabel = etablissement && etablissement.label;
 
     var steps = store.get('steps');
 
@@ -44,6 +35,7 @@ angular.module('boursesApp')
     $scope.select = function(item) {
       $scope.identite.college = item._id;
       $scope.selectedCollege = item;
+      $scope.$parent.selectedCollege = item;
     };
 
     $scope.submit = function(form) {

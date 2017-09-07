@@ -31,3 +31,16 @@
     <ui-view></ui-view>
   </div>
 </div>
+
+<footer>
+  <div ng-if="identite.college && selectedCollege.ouverture_service">
+    <h2 class="info-title">Vous avez des questions sur votre dossier de demande de bourse ?</h2>
+    <p>
+      Vous pouvez joindre le collège <span class="text-muted">{{etablissementsById[identite.college].nom}}</span>:
+      <ul>
+        <li ng-if="etablissementsById[identite.college].telephone"><span class="text-muted">Par téléphone :</span>{{etablissementsById[identite.college].telephone}}</li>
+        <li><span class="text-muted">Par e-mail :</span><a href="mailto:{{etablissementsById[identite.college].contact}}">{{etablissementsById[identite.college].contact}}</a></li>
+      </ul>
+    </p>
+  </div>
+</footer>

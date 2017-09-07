@@ -105,7 +105,6 @@ section#simulation {
 }
 
 footer {
-  margin-top: 40px;
   font-size: 1.8em;
   color: white;
   text-align: center;
@@ -114,5 +113,14 @@ footer {
 
   a {
     color: white;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .text-muted {
+    margin-right: 4px;
+    color: lighten($blue, 30%);
   }
 }

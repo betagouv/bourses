@@ -7,12 +7,7 @@ angular.module('boursesApp')
         url: '/nouvelle_demande?college',
         templateUrl: 'app/nouvelle_demande/form_layout.html',
         controller: 'FormLayoutCtrl',
-        abstract: true
-      })
-      .state('layout.nouvelle_demande.identite-enfant', {
-        url: '',
-        templateUrl: 'app/nouvelle_demande/identite-enfant/identite-enfant.html',
-        controller: 'IdentiteEnfantCtrl',
+        abstract: true,
         resolve: {
           etablissements: function($http) {
             return $http.get('/api/etablissements').then(function(result) {
@@ -28,6 +23,11 @@ angular.module('boursesApp')
             });
           }
         }
+      })
+      .state('layout.nouvelle_demande.identite-enfant', {
+        url: '',
+        templateUrl: 'app/nouvelle_demande/identite-enfant/identite-enfant.html',
+        controller: 'IdentiteEnfantCtrl'
       })
       .state('layout.nouvelle_demande.vos-ressources', {
         url: '/vos-ressources',
