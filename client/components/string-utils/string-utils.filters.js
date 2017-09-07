@@ -96,6 +96,18 @@ angular
       }
     };
   })
+  .filter('descriptionMontantAnnuel', function() {
+    return function(input) {
+      switch (input) {
+      case null:
+      case 0:
+        return null;
+      default:
+        return 'Soit ' + input * 3 + ' euros annuel';
+      }
+
+    }
+  })
   .filter('descriptionMontant', function() {
     return function(input) {
       switch (input) {

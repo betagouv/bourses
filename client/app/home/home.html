@@ -63,6 +63,7 @@
               {{montant | montant}}
           </p>
           <div class="text-center">
+            <p>{{ montant | descriptionMontantAnnuel }}</p>
             <a class="link-action" ng-if="montant > 0" ui-sref="layout.nouvelle_demande.identite-enfant">
               Déposez votre demande maintenant !
             </a>
