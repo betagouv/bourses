@@ -1,0 +1,8 @@
+Bonjour,
+
+Vous nous avez demandé de réinitialiser l'accès à bourse.beta.gouv.fr, vos nouveaux identifiants sont:
+ - email: xxxxx
+ - mot de passe: xxxxx
+
+Cordialement,
+Équipe bourse.beta.gouv.fr
