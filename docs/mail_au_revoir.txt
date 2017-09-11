@@ -1,0 +1,13 @@
+Bonjour,
+
+Nous sommes navrés de vous voir partir !
+
+Pour votre parfaite information, sachez que nous travaillons pour le SGMAP. Au sein de beta.gouv.fr nous tentons de moderniser l'action de l'administration en proposant des services plus fluides aux utilisateurs de collèges et une nouvelle façon d'appréhender le numérique.
+
+Nous avons réalisé bourse.beta.gouv.fr en collaboration avec des intendants de collèges, en nous basant sur des principes d'ouverture  (une demande de bourse chez nous ne nécessite pas de créer un compte, notre code est open source) et de simplification (récupération des données fiscales automatique - utilisé désormais également par le service du ministère).
+
+Nous pensons que chaque collège devrait être libre de choisir quel service utiliser (nous ne proposons par exemple pas de remplissage automatique de Siecle, cela peut paraître bloquant pour certains).
+
+Cordialement,
+Florian Delezenne
+Équipe bourse.beta.gouv.fr

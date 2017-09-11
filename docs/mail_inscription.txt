@@ -4,9 +4,9 @@ Nous avons bien pris en compte votre demande d'inscription au service bourse.bet
 
 Votre identifiant est : xxxxxx
 et votre mot de passe : xxxxxx
-Vous pouvez le modifier dans l'espace établissement (voir pièce jointe).
 
-Pour ouvrir le service aux familles, vous devez vous rendre dans le menu "Ma campagne" (voir pièce jointe).
+Vous pouvez le modifier dans l'espace établissement, onglet "Mon établissement".
+Pour ouvrir le service aux familles, vous devez vous rendre dans l'onglet "Ma campagne".
 
 Pour toute question, n'hésitez pas à nous contacter à contact@bourse.beta.gouv.fr.
 
