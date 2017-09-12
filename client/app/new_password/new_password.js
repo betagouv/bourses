@@ -17,7 +17,7 @@ angular.module('boursesApp').config(function($stateProvider) {
               .then(function() {
                 $scope.passwordMessage = 'Votre mot de passe a été modifié.';
                 $interval(function() {
-                  $state.go('layout.login');
+                  $state.go('login');
                 }, 3000, 1);
               })
               .catch(function() {

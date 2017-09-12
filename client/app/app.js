@@ -65,7 +65,7 @@ angular
       Auth.isLoggedInAsync(function(loggedIn) {
         if (toState.authenticate && !loggedIn) {
           event.preventDefault();
-          $state.go('layout.login');
+          $state.go('login');
         }
       });
     });

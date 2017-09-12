@@ -24,6 +24,6 @@ angular.module('boursesApp')
 
     $scope.logout = function() {
       Auth.logout();
-      $state.go('layout.login');
+      $state.go('login');
     };
   });
