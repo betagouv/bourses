@@ -96,6 +96,30 @@ angular
       }
     };
   })
+  .filter('descriptionMontantTrimestriel', function() {
+    return function(input) {
+      switch (input) {
+      case null:
+      case 0:
+        return null;
+      default:
+        return 'Soit ' + input + ' euros par trimestre';
+      }
+
+    }
+  })
+  .filter('montantHome', function() {
+    return function(input) {
+      switch (input) {
+      case null:
+        return 'Pas de résultat';
+      case 0:
+        return 'Vous n\'avez pas droit à une bourse';
+      default:
+        return (input * 3) + ' euros';
+      }
+    };
+  })
   .filter('descriptionMontantAnnuel', function() {
     return function(input) {
       switch (input) {
@@ -117,7 +141,7 @@ angular
         return 'D\'après les informations saisies, votre enfant ne pourra pas bénéficier d\'une bourse de collège.';
       default:
         return 'D\'après les informations saisies, ' +
-            'votre enfant pourra bénéficier d\'une bourse de collège d\'un montant trimestriel de:';
+            'votre enfant pourra bénéficier d\'une bourse de collège d\'un montant annuel de:';
       }
     };
   });

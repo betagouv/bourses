@@ -58,6 +58,7 @@ section#simulation {
       font-size: 20px;
       margin: 0;
       font-weight: 200;
+      text-align: justify;
     }
 
     p.maxi {
@@ -68,11 +69,6 @@ section#simulation {
       &.text-muted {
         color: $blue;
       }
-    }
-
-    a {
-      text-align: center;
-      color: white;
     }
   }
 
