@@ -1,6 +1,8 @@
-Bonjour,
+﻿Bonjour,
 
-Notre service bourse.beta.gouv.fr ne concerne que les bourses de collège, votre lycée doit utiliser un service différent.
+Le service bourse.beta.gouv.fr ne concerne que les bourses de collège de certains établissements pilotes.
+
+Nous vous invitons à vous rapprocher du secrétariat de votre lycée pour effectuer votre demande de bourse.
 
 Cordialement,
 Équipe bourse.beta.gouv.fr
