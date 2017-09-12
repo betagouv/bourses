@@ -57,15 +57,15 @@
         </p>
         <div ng-if="!computing">
           <h3>
-            {{montant | descriptionMontant}}
+            {{montant | descriptionMontant }}
           </h3>
           <p ng-if="montant > 0" class="maxi" ng-class="{'text-muted': montant === null}">
-              {{montant | montant}}
+              {{ montant | montantHome  }}
           </p>
           <div class="text-center">
-            <p>{{ montant | descriptionMontantAnnuel }}</p>
-            <a class="link-action" ng-if="montant > 0" ui-sref="layout.nouvelle_demande.identite-enfant">
-              Déposez votre demande maintenant !
+            <p>{{montant | descriptionMontantTrimestriel}}</p>
+            <a class="btn btn-lg btn-action-red" ng-if="montant > 0" ui-sref="layout.nouvelle_demande.identite-enfant">
+              Déposez votre demande !
             </a>
           </div>
         </div>

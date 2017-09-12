@@ -129,6 +129,18 @@ select.form-control-flat {
   }
 }
 
+.btn-action-red {
+  background-color: $red;
+  box-shadow: 0 2px $dark-red;
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background-color: $white;
+    color: $red;
+  }
+}
+
 .btn-action-invert {
   background-color: $blue;
   color: $white;
