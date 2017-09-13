@@ -1,13 +1,13 @@
 <section id="nouvelle_demande">
   <div class="container">
     <p>
-      À la rentrée, votre collège lance un service en ligne pour faciliter vos demandes de bourse.
+      Votre collège a rejoint un projet innovant pour faciliter vos demandes de bourses.
     </p>
     <p>
-      Pour cette démarche, vous aurez besoin de vos numéros de télédéclarant aux impôts (ou de vos derniers avis d'imposition).
+      Vous n’avez plus besoin de photocopies ni de pièces justificatives : la démarche se passe entièrement en ligne.
     </p>
     <p>
-      Plus besoin de photocopies ni de pièces justificatives !
+      Munissez-vous de vos derniers avis d’imposition ou de vos numéros de télédéclarant aux impôts avant de continuer.
     </p>
     <div class="action">
       Simple, rapide, sécurisé,
@@ -26,7 +26,7 @@
         <form name="infoForm" ng-submit="submit(infoForm)" novalidate>
           <div class="form-group">
             <label for="rfr" class="control-label-flat">Revenu fiscal de référence de votre avis d’imposition 2016 sur les revenus 2015</label>
-            <input id="rfr" type="number" placeholder="0" min="0" name="rfr" ng-model="rfr" ng-model-options="{ debounce: 1000 }"
+            <input id="rfr" type="number" step="1000" placeholder="0" min="0" name="rfr" ng-model="rfr" ng-model-options="{ debounce: 1000 }"
               required class="form-control-flat" ng-change="submit(infoForm)">
           </div>
           <div class="form-group">
@@ -75,5 +75,5 @@
 </section>
 
 <footer>
-  <p>Une question ? Écrivez-nous à <a href="mailto:contact@bourse.beta.gouv.fr">contact@bourse.beta.gouv.fr</a></p>
+  <p>Une question ? Écrivez-nous à <a href="mailto:contact@bourse.beta.gouv.fr?subject=Ma%20demande%20de%20bourse">contact@bourse.beta.gouv.fr</a></p>
 </footer>

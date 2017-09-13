@@ -1,6 +1,8 @@
-Bonjour,
+﻿Bonjour,
 
-Le plus facile est de refaire une nouvelle demande de bourse, votre intendance sera avertie que vous en avez fait deux et pourra rectifier votre taux de bourse en ne gardant que la dernière.
+Le plus simple est d'effectuer une nouvelle demande de bourse.
+
+L'intendance de votre collège sera avertie de votre nouveau dossier. Elle pourra rectifier votre taux en se basant sur la demande la plus récente.
 
 Cordialement,
 Équipe bourse.beta.gouv.fr

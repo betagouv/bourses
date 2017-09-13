@@ -1,12 +1,12 @@
-Bonjour,
+﻿Bonjour,
 
-Nous sommes navrés de vous voir partir !
+Votre demande de retrait a été reçue et est en cours de traitement.
 
-Pour votre parfaite information, sachez que nous travaillons pour le SGMAP. Au sein de beta.gouv.fr nous tentons de moderniser l'action de l'administration en proposant des services plus fluides aux utilisateurs de collèges et une nouvelle façon d'appréhender le numérique.
+Le service bourse.beta.gouv.fr est affilié au Secrétariat Général pour la Modernisation de l'Action Publique (SGMAP), sous l'autorité du Premier ministre. Ce produit appartient à l'incubateur beta.gouv.fr. Notre objectif est de moderniser l'administration en proposant des services plus fluides aux utilisateurs de collèges et une nouvelle façon d'appréhender le numérique.
 
-Nous avons réalisé bourse.beta.gouv.fr en collaboration avec des intendants de collèges, en nous basant sur des principes d'ouverture  (une demande de bourse chez nous ne nécessite pas de créer un compte, notre code est open source) et de simplification (récupération des données fiscales automatique - utilisé désormais également par le service du ministère).
+Nous avons réalisé bourse.beta.gouv.fr en collaboration avec des intendants de collèges en nous basant sur des principes d'ouverture et de simplification. C'est pour cela que la demande de bourse ne nécessite pas de créer un compte spécifique sur notre site dont le code est libre et ouvert. Les données fiscales sont récupérées automatiquement afin de ne pas avoir à les renseigner. Enfin, nous laissons à chaque collège le choix de quel service utiliser : c'est pour cela que le remplissage sur SIECLE n'est pas automatique car certains établissements peuvent bloquer à cette étape.
 
-Nous pensons que chaque collège devrait être libre de choisir quel service utiliser (nous ne proposons par exemple pas de remplissage automatique de Siecle, cela peut paraître bloquant pour certains).
+Je reste à votre disposition si vous souhaitez obtenir des informations supplémentaires dans l'attente du retrait dans les prochains jours de votre établissement sur notre site.
 
 Cordialement,
 Florian Delezenne

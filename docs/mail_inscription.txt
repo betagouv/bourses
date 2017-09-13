@@ -1,16 +1,17 @@
-Bonjour,
+﻿Bonjour,
 
-Nous avons bien pris en compte votre demande d'inscription au service bourse.beta.gouv.fr et nous avons créé un compte à votre établissement.
+Votre demande d'inscription au service bourse.beta.gouv.fr a été prise en compte. Votre établissement est maintenant renseigné sur notre site.
 
 Votre identifiant est : xxxxxx
 et votre mot de passe : xxxxxx
 
 Vous pouvez le modifier dans l'espace établissement, onglet "Mon établissement".
+
 Pour ouvrir le service aux familles, vous devez vous rendre dans l'onglet "Ma campagne".
 
-Pour toute question, n'hésitez pas à nous contacter à contact@bourse.beta.gouv.fr.
+Nos équipes sont à votre disposition pour répondre à vos questions en nous envoyant un mail à contact@bourse.beta.gouv.fr .
 
-En vous souhaitant une belle campagne d'inscription aux bourses de collège,
+En vous souhaitant une campagne d'inscription aux bourses de collège réussie,
 
 Bien à vous,
 Équipe bourse.beta.gouv.fr

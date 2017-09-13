@@ -1,6 +1,12 @@
-Bonjour,
+﻿Bonjour,
 
-Notre service bourse.beta.gouv.fr ne concerne que les bourses de collège qui se sont portés volontaire, votre collège n'est pas inscrit chez nous et doit donc utiliser un service différent.
+Nous vous remercions de l'intérêt que vous portez au service bourse.beta.gouv.fr.
+
+Actuellement, notre service n'est en place que dans les collèges volontaires pour participer à ce programme pilote.
+
+Votre établissement n'est actuellement pas inscrit à notre service et doit certainement en utiliser un autre. Je vous invite à contacter le secrétariat de votre collège afin de vous renseigner sur la procédure de demande de bourse.
+
+Vous pouvez également les informer de l'existence de notre service et de votre intérêt pour celui-ci : nous sommes toujours à la recherche de nouveaux établissements partenaires.
 
 Cordialement,
 Équipe bourse.beta.gouv.fr

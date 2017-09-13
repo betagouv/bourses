@@ -1,7 +1,8 @@
-Bonjour,
+﻿Bonjour,
 
-Il est préférable pour vous de contacter directement l'intendance de votre collège, qui saura traiter votre dossier en vous accompagnant.
-Le numéro de téléphone et email de votre intendance devrait être affiché sur notre site lors de la sélection du collège.
+Dans votre situation, nous vous conseillons de contacter directement l'intendance de votre collège qui saura traiter votre dossier en vous accompagnant.
+
+Vous pouvez retrouver le téléphone et l'adresse mail de l'intendance de votre collège sur le formulaire de demande de bourse de notre site : en entrant son nom dans la case associée, les coordonnées s'affichent en pied de page.
 
 Cordialement,
 Équipe bourse.beta.gouv.fr

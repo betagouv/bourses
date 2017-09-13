@@ -1,9 +1,10 @@
-Bonjour,
+﻿Bonjour,
 
-Vous avez fait une demande d'inscription au service bourse.beta.gouv.fr, cependant nous ne pouvons accepter que des demandes émanant d'adresse officielle (intendant.rne@ac-paris.fr par exemple).
+Nous avons reçu votre demande d'inscription au service bourse.beta.gouv.fr.
 
-Pouvez-vous remplir le formulaire d'inscription, en utilisant ce type d'adresse?
-Pour rappel: http://goo.gl/forms/RuVXSTIWQ6M3X3Xt2
+Nous avons rencontré un problème avec l'adresse mail que vous avez renseignée. En effet, nous ne pouvons accepter que des demandes émanant d'adresses officielles, comme intendant.rne@ac-paris.fr , afin d'éviter les fraudes.
+
+Pouvez-vous remplir à nouveau le formulaire d'inscription au http://goo.gl/forms/RuVXSTIWQ6M3X3Xt2 avec votre adresse mail académique ?
 
 Cordialement,
 Équipe bourse.beta.gouv.fr
