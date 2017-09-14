@@ -1,0 +1,10 @@
+Bonjour,
+
+Nous n'avons malheureusement pas encore réussi à développer un système de saisie automatique dans SIECLE. Pour le moment nous facilitons cette re-saisie en vous imprimant un document "Aide SIECLE" que vous pouvez trouver ici: https://bourse.beta.gouv.fr/college/7200612c/telechargements (Onglet téléchargement).
+
+Cette fiche reprend les différents champs pour une recopie facilitée.
+Vous pouvez trouver plus d'informations ici: https://github.com/sgmap/bourses/wiki/faq#comment-g%C3%A9rer-ma-campagne-sur-siecle-
+
+Cordialement,
+Florian Delezenne
+Équipe bourse.beta.gouv.fr
