@@ -6,7 +6,5 @@ Vos nouveaux identifiants sont:
  - email: xxxxx
  - mot de passe: xxxxx
 
-Merci de garder ces informations confidentielles.
-
 Cordialement,
 Équipe bourse.beta.gouv.fr
