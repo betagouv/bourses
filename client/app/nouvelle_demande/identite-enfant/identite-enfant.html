@@ -41,8 +41,8 @@
   </div>
 
   <div class="form-group required" ng-class="{'has-error': !identite.college && infoForm.$submitted}">
-    <label for="select-college" class="control-label-flat">Dans quel collège est-il inscrit</label>
-    <input type="text" ng-model="selectedCollegeLabel" placeholder="ex: Collège Paul Klee, Thiais, 94" typeahead-on-select="select($item)" typeahead-editable="false" uib-typeahead="college as college.label for college in etablissements | filter:search($viewValue)" class="form-control">
+    <label for="select-college" class="control-label-flat">Dans quel collège est-il inscrit ? Recherchez votre collège, par exemple "paul klee", "75017"</label>
+    <input type="text" ng-model="selectedCollegeLabel" typeahead-on-select="select($item)" typeahead-editable="false" uib-typeahead="college as college.label for college in etablissements | filter:search($viewValue)" class="form-control">
     <div ng-if="!identite.college && infoForm.$submitted">
       <p class="help-block"><i class="fa fa-warning"></i> Ce champ est obligatoire.</p>
     </div>
