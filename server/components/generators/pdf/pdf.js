@@ -64,6 +64,7 @@ function editNotification(demande, college, done) {
       if (demande.notification.montant === 0) {
         callback(null, templateRefus);
       } else {
+        demande.notification.montantAnnuel = demande.notification.montant * 3;
         callback(null, templateNotification);
       }
     },

@@ -32,22 +32,24 @@ function sendNotificationToUser(demande, etablissement, stream, req) {
   var subject = 'Notification demande de bourse';
 
   var body = '<html><body><p>Merci d\'avoir passé votre demande avec notre service.</p>' +
-   '<p>Le chef d\'établissement vous informe qu\'après examen du dossier de demande de bourse de collège concernant <strong>' + demande.data.identiteEnfant.prenom + ' ' +  demande.data.identiteEnfant.nom + '</strong>,' +
-   '<br>et compte tenu des éléments figurants sur votre avis d\'impôt sur le revenu:' +
-   '<ul><li>revenu fiscal de référence: ' + demande.rfr + ' EUR</li>' +
-   '<li>nombre d\'enfants mineurs ou infirmes: ' + demande.data.foyer.nombreEnfantsACharge + '</li>' +
-   '<li>nombre d\'enfants majeurs ou célibataires: ' + demande.data.foyer.nombreEnfantsAdultes + '</li></ul></p> <br>';
+   '<p>Le chef d\'établissement vous informe qu\'après examen du dossier de demande de bourse de collège concernant l\'élève <strong>' + demande.data.identiteEnfant.prenom + ' ' +  demande.data.identiteEnfant.nom + '</strong>,' +
+   '<br>et compte tenu des éléments figurants sur votre avis d\'impôt sur le revenu :' +
+   '<ul><li>revenu fiscal de référence : ' + demande.rfr + ' EUR</li>' +
+   '<li>nombre d\'enfants mineurs ou infirmes : ' + demande.data.foyer.nombreEnfantsACharge + '</li>' +
+   '<li>nombre d\'enfants majeurs ou célibataires : ' + demande.data.foyer.nombreEnfantsAdultes + '</li></ul></p> <br>';
 
   if (demande.notification.montant === 0) {
     body += '<br><p>la bourse de collège que vous avez sollicitée au titre de l\'année scolaire 2017-2018 ne peut pas vous être accordée.</p>';
   } else {
-    body += '<br><p>une bourse de collège d\'un montant trimestriel de <strong>' + demande.notification.montant + ' EUR</strong> (soit ' + demande.notification.montant + 'EUR annuel) vous est accordée au titre de l\'année scolaire 2017-2018.</p>';
+    body += '<br><p>une bourse de collège d\'un montant trimestriel de <strong>' + demande.notification.montant + ' EUR</strong> (soit ' + (demande.notification.montant * 3) + 'EUR annuel) vous est accordée au titre de l\'année scolaire 2017-2018.</p>';
   }
 
-  body += '<br><p>La bourse est versée en 3 parts égales, à chaque trimestre, déduction faite des éventuels frais de demi-pension, sur le compte bancaire que vous avez saisi (le compte bancaire est obligatoirement celui d\'un responsable légal de l\'enfant) :</p>';
+  body += '<br><p>La bourse est versée en 3 parts égales, à la fin de chaque trimestre, déduction faite des éventuels frais de demi-pension, sur le compte bancaire que vous avez saisi (le compte bancaire est obligatoirement celui d\'un responsable légal de l\'enfant) :</p>';
 
-  body += '<ul><li>IBAN : ' + demande.data.identiteAdulte.iban + '</li>';
-  body += '<li>BIC : ' + demande.data.identiteAdulte.bic + '</li></ul>';
+  body += '<ul>';
+  body += '<li>IBAN : ' + demande.data.identiteAdulte.iban + '</li>';
+  body += '<li>BIC : ' + demande.data.identiteAdulte.bic + '</li>'
+  body += '</ul>';
   body += '<p>En cas de questions, vous pouvez contacter votre établissement directement à l\'adresse <b>' + etablissement.contact + '</b>';
   body += '<h4>Pour votre information :</h4><ol type="a">' +
   '<li>En cas d\'erreur dans les données ci-dessus indiquées, je vous prie de bien vouloir m\'en informer le plus rapidement possible.</li>' +
