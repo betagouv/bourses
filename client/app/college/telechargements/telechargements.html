@@ -4,6 +4,8 @@
 
     <h3>Archives PDF</h3>
 
+    <div class="alert alert-warning">Ces téléchargements tiennent uniquement compte des demandes de statut "Traitée".</div>
+
     <a target="_blank" download="campagne_2017_2018.zip" href="/api/etablissements/{{college.human_id}}/campagne?access_token={{token}}">
       <i class="fa fa-2x fa-file-zip-o"></i> &nbsp;Télécharger l'ensemble de la campagne 2017-2018
     </a>
@@ -35,6 +37,9 @@
     <br>
 
     <h3>Document Excel</h3>
+
+    <div class="alert alert-warning">Ce téléchargement tient compte de toutes les demandes ("En cours", "En attente", "Traitées", "En erreur").</div>
+
     <a target="_blank" download="campagne.csv" href="/api/etablissements/{{college.human_id}}/listeDemandes?access_token={{token}}&csv=1">
       <i class="fa fa-2x fa-file-excel-o"></i> &nbsp;Extraction de la campagne au format CSV (demandes + ribs + notifications)
     </a>

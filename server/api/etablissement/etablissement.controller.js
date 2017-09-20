@@ -169,7 +169,7 @@ function createPdfArchive(req, res, type) {
         return demandeA.compare(demandeB, 'adulte');
       });
 
-      GeneratorPdf.createPdfArchive(sortedDemandes, req.etablissement, req.hostname, {type: type}, function(err, archive, cleanupCallback) {
+      GeneratorPdf.createPdfArchive(sortedDemandes, req.etablissement, req.hostname, {type}, function(err, archive, cleanupCallback) {
         if (err) { return handleError(req, res, err); }
 
         archive.on('finish', function() {
@@ -199,7 +199,9 @@ exports.campagne = function(req, res) {
 };
 
 exports.listeDemandes = function(req, res) {
-  if (req.query.csv) {
+  if (!req.query.csv) {
+    return createPdfArchive(req, res, 'demande');
+  } else {
     Demande
       .find({etablissement: req.etablissement._id})
       .sort('-createdAt')
@@ -220,8 +222,6 @@ exports.listeDemandes = function(req, res) {
           return res.end();
         });
       });
-  } else {
-    return createPdfArchive(req, res, 'demande');
   }
 };
 

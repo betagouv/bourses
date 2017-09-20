@@ -125,7 +125,7 @@ function createDemandeFile(demande, etablissement, host, tempPath, callback) {
   var decoded = crypto.decode(demande);
   toHtml(decoded, etablissement, host, function(html) {
     var fileName = tempPath + '/' + decoded.identiteEnfant.nom + '_' + decoded.identiteEnfant.prenom + '_demande.pdf';
-    wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
+    wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4', output: fileName }, function() {
       callback();
     });
   });
@@ -143,7 +143,7 @@ function createNotificationFile(demande, etablissement, tempPath, callback) {
   var decoded = crypto.decode(demande);
   editNotification(decoded, etablissement, function(html) {
     var fileName = tempPath + '/' + decoded.identiteEnfant.nom + '_' + decoded.identiteEnfant.prenom + '_notification.pdf';
-    wkhtmltopdf(html, {encoding: 'UTF-8', output: fileName }, function() {
+    wkhtmltopdf(html, {encoding: 'UTF-8', 'page-size': 'A4', output: fileName }, function() {
       callback();
     });
   });
@@ -168,7 +168,7 @@ exports.createPdfArchive = function(demandes, etablissement, host, options, call
         }
       },
 
-      function() {
+      function createArchive() {
         var archive = archiver.create('zip', {});
 
         archive.directory(tempPath, false);
