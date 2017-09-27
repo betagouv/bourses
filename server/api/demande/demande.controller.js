@@ -127,7 +127,7 @@ function sendNotificationToAgent(identite, college, req) {
 }
 
 function isDifferentAvis(data, data_concubin) {
-  return data.credentials.referenceAvis != data_concubin.credentials.referenceAvis;
+  return data && data_concubin && data.credentials && data_concubin.credentials && data.credentials.referenceAvis != data_concubin.credentials.referenceAvis;
 }
 
 function saveDemande(req, college, done) {
