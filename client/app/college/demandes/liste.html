@@ -77,8 +77,8 @@
             <th>Déductibilité</th>
             <th>Enfants mineurs</th>
             <th>Enfants majeurs</th>
-            <th class="bg-white">Nb de parts</th>
             <th class="bg-white">Nb personnes à charge</th>
+            <th class="bg-white">Nb de parts <a href="https://www.service-public.fr/particuliers/vosdroits/F2705" target="_blank" title="Définition"><i class="fa fa-question"></i></a></th>
             <th class="bg-white">Revenu fiscal</th>
             <th class="bg-blue" ng-if="status === 'done'">
               <i ng-if="sortType === 'taux' && !reverse" class="fa fa-sort-alpha-asc"></i>
@@ -96,8 +96,8 @@
             <td class="text-center">{{demande.identiteEnfant.regime | deductibilite}}</td>
             <td class="text-center">{{demande.foyer.nombreEnfantsACharge}}</td>
             <td class="text-center">{{demande.foyer.nombreEnfantsAdultes}}</td>
-            <td class="text-right">{{demande.data.nombreParts + (demande.data_concubin.nombreParts ? demande.data_concubin.nombreParts : 0)}}</td>
             <td class="text-right">{{demande.data.nombrePersonnesCharge + (demande.data_concubin.nombrePersonnesCharge ? demande.data_concubin.nombrePersonnesCharge : 0)}}</td>
+            <td class="text-right">{{demande.data.nombreParts + (demande.data_concubin.nombreParts ? demande.data_concubin.nombreParts : 0)}}</td>
             <td class="text-right">{{demande.rfr}} €</td>
             <td class="text-center" ng-if="status === 'done'">{{demande.notification.montant}} €</td>
             <td>
