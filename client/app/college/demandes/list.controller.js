@@ -39,6 +39,14 @@ angular.module('boursesApp')
       });
     };
 
+    $scope.showWarning = function(type, demande) {
+      if (type == 'nombreParts') {
+        return demande.data.nombreParts + (demande.data_concubin && demande.data_concubin.nombreParts ? demande.data_concubin.nombreParts : 0) <= 1;
+      }
+
+      return demande.data.nombrePersonnesCharge + (demande.data_concubin && demande.data_concubin.nombrePersonnesCharge ? demande.data_concubin.nombrePersonnesCharge : 0) <= 0;
+    }
+
     $scope.toggleSort = function(sortType) {
       if (sortType === $scope.sortType) {
         $scope.reverse = !$scope.reverse;
