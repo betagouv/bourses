@@ -53,6 +53,17 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th class="text-center text-muted" colspan="6">Informations provenant de la famille</th>
+            <th class="text-center text-muted bg-white" colspan="3">Informations provenant des Impôts</th>
+            <th class="text-center bg-blue">&nbsp;</th>
+            <th ng-if="status === 'done'" class="text-center bg-blue">&nbsp;</th>
+          </tr>
+          <tr>
+            <th>
+              <i ng-if="sortType === 'createdAt' && !reverse" class="fa fa-sort-alpha-asc"></i>
+              <i ng-if="sortType === 'createdAt' && reverse" class="fa fa-sort-alpha-desc"></i>
+              <a href="#" ng-click="toggleSort('createdAt')">Date de création</a>
+            </th>
             <th>
               <i ng-if="sortType === 'enfant' && !reverse" class="fa fa-sort-alpha-asc"></i>
               <i ng-if="sortType === 'enfant' && reverse" class="fa fa-sort-alpha-desc"></i>
@@ -63,32 +74,31 @@
               <i ng-if="sortType === 'adulte' && reverse" class="fa fa-sort-alpha-desc"></i>
               <a href="#" ng-click="toggleSort('adulte')">Demandeur</a>
             </th>
-            <th>Revenu fiscal</th>
+            <th>Déductibilité</th>
             <th>Enfants mineurs</th>
             <th>Enfants majeurs</th>
-            <th>Déductibilité</th>
-            <th>
-              <i ng-if="sortType === 'createdAt' && !reverse" class="fa fa-sort-alpha-asc"></i>
-              <i ng-if="sortType === 'createdAt' && reverse" class="fa fa-sort-alpha-desc"></i>
-              <a href="#" ng-click="toggleSort('createdAt')">Date de création</a>
-            </th>
-            <th ng-if="status === 'done'">
+            <th class="bg-white">Nb de parts</th>
+            <th class="bg-white">Nb personnes à charge</th>
+            <th class="bg-white">Revenu fiscal</th>
+            <th class="bg-blue" ng-if="status === 'done'">
               <i ng-if="sortType === 'taux' && !reverse" class="fa fa-sort-alpha-asc"></i>
               <i ng-if="sortType === 'taux' && reverse" class="fa fa-sort-alpha-desc"></i>
               <a href="#" ng-click="toggleSort('taux')">Taux accordé</a>
             </th>
-            <th>Notification</th>
+            <th class="bg-blue">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="demande in demandes" ng-class="{duplicate: demande.isDuplicate, 'new': demande.status === 'new'}">
+            <td>{{demande.createdAt | date}}</td>
             <td><a class="detail" ui-sref="layout.college.demandes.edit({demandeId: demande._id})"><i class="fa fa-search"></i> {{demande.identiteEnfant.prenom | capitalize}} {{demande.identiteEnfant.nom | capitalize}}</a></td>
             <td>{{demande.identiteAdulte.demandeur.prenoms | capitalize}} {{demande.identiteAdulte.demandeur.nom | capitalize}}</td>
-            <td class="text-right">{{demande.rfr}} €</td>
+            <td class="text-center">{{demande.identiteEnfant.regime | deductibilite}}</td>
             <td class="text-center">{{demande.foyer.nombreEnfantsACharge}}</td>
             <td class="text-center">{{demande.foyer.nombreEnfantsAdultes}}</td>
-            <td class="text-center">{{demande.identiteEnfant.regime | deductibilite}}</td>
-            <td>{{demande.createdAt | date}}</td>
+            <td class="text-right">{{demande.data.nombreParts + (demande.data_concubin.nombreParts ? demande.data_concubin.nombreParts : 0)}}</td>
+            <td class="text-right">{{demande.data.nombrePersonnesCharge + (demande.data_concubin.nombrePersonnesCharge ? demande.data_concubin.nombrePersonnesCharge : 0)}}</td>
+            <td class="text-right">{{demande.rfr}} €</td>
             <td class="text-center" ng-if="status === 'done'">{{demande.notification.montant}} €</td>
             <td>
               <div ng-if="status !== 'done'">
