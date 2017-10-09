@@ -51,9 +51,17 @@ angular
 
   .run(function($rootScope, $state, $window, $location, Auth, editableOptions) {
     editableOptions.theme = 'bs3';
-    $rootScope.$on('$stateChangeSuccess', function() {
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toStateParams) {
       if ($window._paq) {
-        $window._paq.push(['setCustomUrl', $location.path()]);
+        var anonymousParams = Object.keys(toStateParams)
+          .reduce(function (acc, key) {
+            acc[key] = '_' + key + '_';
+            return acc;
+          }, {});
+
+        var withoutParamsUrl = $state.href(toState.name, anonymousParams, {absolute: true, inherit: false});
+
+        $window._paq.push(['setCustomUrl', withoutParamsUrl]);
         $window._paq.push(['trackPageView']);
       }
 
