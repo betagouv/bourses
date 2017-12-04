@@ -13,23 +13,23 @@ angular.module('boursesApp')
           email: $scope.user.email,
           password: $scope.user.password
         })
-        .then(function() {
-          if ($rootScope.returnToState) {
-            return $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
-          }
-
-          Auth.getCurrentUser().$promise.then(function(user) {
-            if (user.etablissement) {
-              $state.go('layout.college.demandes.new', {id: user.etablissement.human_id});
-            } else {
-              $state.go('layout.admin');
+          .then(function() {
+            if ($rootScope.returnToState) {
+              return $state.go($rootScope.returnToState.name, $rootScope.returnToStateParams);
             }
-          });
 
-        })
-        .catch(function(err) {
-          $scope.errors.other = err.message;
-        });
+            Auth.getCurrentUser().$promise.then(function(user) {
+              if (user.etablissement) {
+                $state.go('layout.college.demandes.new', {id: user.etablissement.human_id});
+              } else {
+                $state.go('layout.admin');
+              }
+            });
+
+          })
+          .catch(function(err) {
+            $scope.errors.other = err.message;
+          });
       }
     };
 
