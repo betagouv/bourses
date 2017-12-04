@@ -16,11 +16,11 @@ exports.sendMail = function(to, replyto, subject, body, filepath, done) {
   };
 
   if (filepath) {
-    email.addFile({
+    email.attachments = [{
       filename: 'notification.pdf',
       path: filepath,
-      contentType: 'application/pdf'
-    });
+      type: 'application/pdf'
+    }];
   }
 
   if (process.env.NODE_ENV === 'production') {
