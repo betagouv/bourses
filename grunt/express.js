@@ -4,8 +4,7 @@ module.exports = {
   },
   dev: {
     options: {
-      script: 'server/app.js',
-      debug: true
+      script: 'server/app.js'
     }
   },
   prod: {

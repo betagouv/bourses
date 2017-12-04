@@ -100,39 +100,39 @@ angular.module('boursesApp').directive('connection', function($http, $window, $l
         scope.credentials.numeroFiscal = trimNumeroFiscal(scope.credentials.numeroFiscal);
 
         $http.get('/api/connection/svair', {params: scope.credentials})
-        .success(function(data) {
-          if (data.anneeImpots !== '2016' && !scope.forAgent) {
-            scope.error = buildErrorMsg(data);
+          .success(function(data) {
+            if (data.anneeImpots !== '2016' && !scope.forAgent) {
+              scope.error = buildErrorMsg(data);
+              setStatus('error');
+              return;
+            }
+
+            data.identites = [data.declarant1];
+
+            if (data.declarant2) {
+              data.identites.push(data.declarant2);
+            }
+
+            data.credentials = scope.credentials;
+            scope.svair = data;
+            store.set('svair_' + scope.connectionId, scope.svair);
+
+            oldStatus = 'success';
+            setStatus('success');
+            scope.onSuccess(data, scope.connectionId);
+          })
+          .error(function(err) {
+            scope.error = err.message;
             setStatus('error');
-            return;
-          }
-
-          data.identites = [data.declarant1];
-
-          if (data.declarant2) {
-            data.identites.push(data.declarant2);
-          }
-
-          data.credentials = scope.credentials;
-          scope.svair = data;
-          store.set('svair_' + scope.connectionId, scope.svair);
-
-          oldStatus = 'success';
-          setStatus('success');
-          scope.onSuccess(data, scope.connectionId);
-        })
-        .error(function(err) {
-          scope.error = err.message;
-          setStatus('error');
-          if (scope.onError) {
-            scope.onError();
-          } else {
-            scope.onSuccess();
-          }
-        })
-        .finally(function() {
-          scope.loading = false;
-        });
+            if (scope.onError) {
+              scope.onError();
+            } else {
+              scope.onSuccess();
+            }
+          })
+          .finally(function() {
+            scope.loading = false;
+          });
       }
 
       function cancelCredentials() {

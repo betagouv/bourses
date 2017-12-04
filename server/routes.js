@@ -20,7 +20,7 @@ module.exports = function(app) {
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|oauth|components|app|lib|assets)/*')
-   .get(errors[404]);
+    .get(errors[404]);
 
   // All other routes should redirect to the index.html
   app.route('/*')

@@ -12,11 +12,11 @@ exports.setup = function(config) {
     scope: ['openid', 'profile', 'email', 'address', 'phone', 'dgfip_rfr', 'dgfip_nbpac', 'dgfip_sitfam', 'dgfip_nbpart'],
     state: 'foobar'
   },
-    function(accessToken, refreshToken, profile, done) {
-      var user = profile;
-      user.accessToken = accessToken;
-      done(null, user);
-    }
+  function(accessToken, refreshToken, profile, done) {
+    var user = profile;
+    user.accessToken = accessToken;
+    done(null, user);
+  }
 
   );
   strategy.authorizationParams = function() {

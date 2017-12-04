@@ -1,17 +1,19 @@
 'use strict';
 
 var config = require('../../config/environment').sendGrid;
-var sendgrid  = require('sendgrid')(config.apiKey);
+var sgMail = require('@sendgrid/mail');
+
+sgMail.setApiKey(config.apiKey);
 
 exports.sendMail = function(to, replyto, subject, body, filepath, done) {
 
-  var email = new sendgrid.Email({
+  var email = {
     from: 'contact@bourse.beta.gouv.fr',
     to: to,
     replyto: replyto,
     subject: 'Bourse - ' + subject,
     html: body
-  });
+  };
 
   if (filepath) {
     email.addFile({
@@ -22,7 +24,7 @@ exports.sendMail = function(to, replyto, subject, body, filepath, done) {
   }
 
   if (process.env.NODE_ENV === 'production') {
-    sendgrid.send(email, done);
+    sgMail.send(email, done);
   }
   // else {
   //   console.log(email);

@@ -1,6 +1,6 @@
 'use strict';
 
-var INTEGER_REGEXP = /^\-?\d+$/;
+var INTEGER_REGEXP = /^-?\d+$/;
 
 angular.module('boursesApp')
   .controller('VosRessourcesCtrl', function($scope, $http, $window, $state, $location, $anchorScroll, $timeout, $uibModal, store) {
