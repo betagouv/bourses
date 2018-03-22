@@ -44,7 +44,7 @@ exports.etablissement = function(req, res) {
       });
     });
 
-    var dataByVille = _.indexBy(data, '_id');
+    var dataByVille = _.keyBy(data, '_id');
     countRequests(dataByVille, etablissements, function() {
       res.json(data);
     });
