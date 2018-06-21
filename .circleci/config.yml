@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:8
-      - image: circleci/mongo:3.4.2
+      - image: circleci/mongo:3.4
     working_directory: ~/bourse
     steps:
       - checkout
