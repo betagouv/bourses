@@ -25,6 +25,10 @@ angular.module('boursesApp')
 
     $scope.search = function(query) {
       return function(college) {
+        if (!college.ouverture_service) {
+          return ''
+        }
+
         return !query ||
           (clean(college.ville.nom).indexOf(clean(query)) !== -1) ||
           (clean(college.nom).indexOf(clean(query)) !== -1) ||
