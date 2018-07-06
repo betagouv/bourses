@@ -88,12 +88,12 @@ exports.historyTotal = function(req, res) {
   async.parallel({
     demandes: function(callback) {
       Demande.find({
-        createdAt: {$gte: new Date(2017, 8, 1)}
+        createdAt: {$gte: new Date(2018, 6, 1)}
       }).sort('createdAt').exec(callback);
     },
 
     etablissements: function(callback) {
-      Etablissement.find().sort('zipcode').exec(callback);
+      Etablissement.find({ouverture_service: true}).sort('zipcode').exec(callback);
     }
   }, function(err, result) {
     var demandes = result.demandes;
