@@ -1,11 +1,13 @@
 'use strict';
 
 var config = require('../../config/environment').sendGrid;
-var sgMail = require('@sendgrid/mail');
+const {callbackify, promisify} = require('util');
+const sgMail = require('@sendgrid/mail');
+const readFile = promisify(require('fs').readFile);
 
 sgMail.setApiKey(config.apiKey);
 
-exports.sendMail = function(to, replyto, subject, body, filepath, done) {
+async function sendMail(to, replyto, subject, body, filepath) {
 
   var email = {
     from: 'contact@bourse.beta.gouv.fr',
@@ -18,15 +20,17 @@ exports.sendMail = function(to, replyto, subject, body, filepath, done) {
   if (filepath) {
     email.attachments = [{
       filename: 'notification.pdf',
-      path: filepath,
+      content: await readFile(filepath, 'base64'),
       type: 'application/pdf'
     }];
   }
 
   if (process.env.NODE_ENV === 'production') {
-    sgMail.send(email, done);
+    return sgMail.send(email);
   }
   // else {
   //   console.log(email);
   // }
 };
+
+exports.sendMail = callbackify(sendMail)
