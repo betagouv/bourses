@@ -31,6 +31,6 @@ async function sendMail(to, replyto, subject, body, filepath) {
   // else {
   //   console.log(email);
   // }
-};
+}
 
 exports.sendMail = callbackify(sendMail)
