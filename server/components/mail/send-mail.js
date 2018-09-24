@@ -12,7 +12,7 @@ async function sendMail(to, replyto, subject, body, filepath) {
   var email = {
     from: 'contact@bourse.beta.gouv.fr',
     to: to,
-    replyto: replyto,
+    replyTo: replyto,
     subject: 'Bourse - ' + subject,
     html: body
   };
