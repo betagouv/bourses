@@ -35,7 +35,7 @@ angular.module('boursesApp')
         case '96':
           taux = '2';
           break;
-        case '150':
+        case '151':
           taux = '3';
         }
         str += ' de taux ' + taux + ' (' + group + '€)';
